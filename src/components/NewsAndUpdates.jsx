@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CodeBlock2, Github, NewsAndUpdatesBg, Tablet } from "../assets/images";
+import { CodeBlock2, Github, Logo2, NewsAndUpdatesBg, Tablet } from "../assets/images";
 
 const NewsAndUpdates = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -100,6 +100,8 @@ const NewsAndUpdates = () => {
       <div className="text-[128px] uppercase tracking-tight leading-30 bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text z-2 mt-50">
         Programmable <br /> <span className="text-white">+ </span> Gas Free
       </div>
+
+      <img src={Logo2} className="z-2 mt-30" />
     </div>
   );
 };

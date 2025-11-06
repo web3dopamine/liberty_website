@@ -53,8 +53,16 @@ import FollowArrow from "./follow_arrow.svg";
 import Cat from "./cat.svg";
 import Chat from "./chat.svg";
 import X2 from "./x.svg";
+import ConnectWallet from "./connectwallet.svg";
+import WalletConnect from "./walletconnect.svg";
+import Cross from "./cross.svg";
+import Logo2 from "./logo2.png";
 
 export {
+  Logo2,
+  Cross,
+  WalletConnect,
+  ConnectWallet,
   Cat,
   Chat,
   X2,

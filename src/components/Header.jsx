@@ -1,7 +1,11 @@
 import { FullLogo, Wallet } from "../assets/images";
 import { motion } from "motion/react";
+import ConnectWalletModal from "../modals/ConnectWalletModal";
+import { useRef } from "react";
 
 const Header = () => {
+  const connectModalRef = useRef(null);
+
   return (
     <div className=" w-full bg-black/99 flex flex-row items-center justify-between px-80 h-[89px] z-2">
       <img src={FullLogo} className="h-[45px]" />
@@ -18,11 +22,15 @@ const Header = () => {
             scale: 1.0,
           }}
           className="flex flex-row gap-2 border-[#448986] border px-3 py-1 rounded-2xl cursor-pointer hover:bg-white/10"
+          onClick={() => {
+            connectModalRef.current.showModal();
+          }}
         >
           <img src={Wallet} />
           <div>CONNECT WALLET</div>
         </motion.button>
       </div>
+      <ConnectWalletModal ref={connectModalRef} />
     </div>
   );
 };
