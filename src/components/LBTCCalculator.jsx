@@ -16,7 +16,7 @@ const LBTCCalculator = () => {
       <div className="text-[#4A5565] text-[24px] mt-4">
         Calculate how many L-BTC tokens you'll receive at the 1:10 ratio
       </div>
-      <div className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-10 rounded-4xl mt-16 shadow-lg">
+      <div className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-10 rounded-4xl mt-16 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
         <div className="text-[14px] text-[#4A5565] text-start tracking-widest">YOU SEND</div>
         <div className="flex flex-row items-center gap-2 mt-3">
           <input
