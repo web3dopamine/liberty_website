@@ -14,25 +14,54 @@ import StayUpdated from "./components/StayUpdated";
 import TopSection from "./components/TopSection";
 import Treasury from "./components/Treasury";
 import WhyLiberty from "./components/WhyLiberty";
+import ParallaxSection from "./components/ParallaxSection";
 
 function App() {
   return (
     <div>
       <TopSection />
-      <LaunchCountdown />
-      <MarqueeText />
-      <LBTCCalculator />
-      <CheckYourEligibility />
-      <ProjectPhases />
-      <WhyLiberty />
-      <ClaimYourLBTC />
-      <Treasury />
-      <DeveloperGrantsProgram />
-      <GrantApplicationProcess />
-      <NewsAndUpdates />
-      <StayUpdated />
-      <JoinTheRevolution />
-      <Footer />
+      <ParallaxSection offset={30}>
+        <LaunchCountdown />
+      </ParallaxSection>
+      <ParallaxSection offset={40}>
+        <MarqueeText />
+      </ParallaxSection>
+      <ParallaxSection offset={50}>
+        <LBTCCalculator />
+      </ParallaxSection>
+      <ParallaxSection offset={35}>
+        <CheckYourEligibility />
+      </ParallaxSection>
+      <ParallaxSection offset={45}>
+        <ProjectPhases />
+      </ParallaxSection>
+      <ParallaxSection offset={40}>
+        <WhyLiberty />
+      </ParallaxSection>
+      <ParallaxSection offset={50}>
+        <ClaimYourLBTC />
+      </ParallaxSection>
+      <ParallaxSection offset={55}>
+        <Treasury />
+      </ParallaxSection>
+      <ParallaxSection offset={40}>
+        <DeveloperGrantsProgram />
+      </ParallaxSection>
+      <ParallaxSection offset={45}>
+        <GrantApplicationProcess />
+      </ParallaxSection>
+      <ParallaxSection offset={35}>
+        <NewsAndUpdates />
+      </ParallaxSection>
+      <ParallaxSection offset={40}>
+        <StayUpdated />
+      </ParallaxSection>
+      <ParallaxSection offset={30}>
+        <JoinTheRevolution />
+      </ParallaxSection>
+      <ParallaxSection offset={20}>
+        <Footer />
+      </ParallaxSection>
     </div>
   );
 }
