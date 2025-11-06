@@ -1,7 +1,20 @@
 import { GrayCircle, GreenTickCircle, OrangleClockCircle } from "../assets/images";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 
 const ProjectPhases = () => {
+  const phase1Ref = useRef(null);
+  const phase2Ref = useRef(null);
+  const phase3Ref = useRef(null);
+  const phase4Ref = useRef(null);
+  const footerRef = useRef(null);
+
+  const phase1InView = useInView(phase1Ref, { once: true, margin: "-50px" });
+  const phase2InView = useInView(phase2Ref, { once: true, margin: "-50px" });
+  const phase3InView = useInView(phase3Ref, { once: true, margin: "-50px" });
+  const phase4InView = useInView(phase4Ref, { once: true, margin: "-50px" });
+  const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
+
   return (
     <div className="text-center pt-40 pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
       <div className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-[14px]">
@@ -18,10 +31,13 @@ const ProjectPhases = () => {
       <div className="flex flex-row mt-16 gap-10">
         {/* Awareness & Anticipation */}
         <motion.div
+          ref={phase1Ref}
+          initial={{ opacity: 0, y: 100 }}
+          animate={phase1InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           whileHover={{
             scale: 1.03,
           }}
-          transition={{ duration: 0.2 }}
           className="border group border-[#4A9390]/30 p-6 rounded-3xl flex flex-col relative text-start max-w-[612px] bg-linear-to-br from-[#2D5F5D]/20 via-[#000000] to-[#3A7875]/10 hover:to-[#3A7875]/20 hover:from-[#2D5F5D]/30  hover:shadow-2xl transition-all duration-300  ease-in-out select-none "
         >
           <div className="absolute top-6 right-6 bg-[#376e6d] text-white text-[12px] px-4 py-[4px] rounded-2xl">
@@ -51,10 +67,13 @@ const ProjectPhases = () => {
 
         {/* Snapshot + Claim */}
         <motion.div
+          ref={phase2Ref}
+          initial={{ opacity: 0, y: 100 }}
+          animate={phase2InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           whileHover={{
             scale: 1.03,
           }}
-          transition={{ duration: 0.2 }}
           className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
           <div className="text-[#FFFFFF]/10 text-[128px] ">2</div>
@@ -82,10 +101,13 @@ const ProjectPhases = () => {
       <div className="flex flex-row mt-10 gap-10">
         {/* Genesis Launch */}
         <motion.div
+          ref={phase3Ref}
+          initial={{ opacity: 0, y: 100 }}
+          animate={phase3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           whileHover={{
             scale: 1.03,
           }}
-          transition={{ duration: 0.2 }}
           className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
           <div className="text-[#FFFFFF]/10 text-[128px] ">3</div>
@@ -111,10 +133,13 @@ const ProjectPhases = () => {
 
         {/* Expansion */}
         <motion.div
+          ref={phase4Ref}
+          initial={{ opacity: 0, y: 100 }}
+          animate={phase4InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           whileHover={{
             scale: 1.03,
           }}
-          transition={{ duration: 0.2 }}
           className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
           <div className="text-[#FFFFFF]/10 text-[128px] ">4</div>
@@ -139,10 +164,16 @@ const ProjectPhases = () => {
         </motion.div>
       </div>
 
-      <div className="text-[#4A5565] text-[24px] mt-26 leading-6">
+      <motion.div
+        ref={footerRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={footerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="text-[#4A5565] text-[24px] mt-26 leading-6"
+      >
         Follow our journey as we build the future of Bitcoin DeFi. <br />
         <span className="underline cursor-pointer hover:text-[#4A9390]">Join our community</span> to stay updated.
-      </div>
+      </motion.div>
     </div>
   );
 };
