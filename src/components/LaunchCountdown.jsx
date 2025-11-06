@@ -11,7 +11,7 @@ const LaunchCountdown = () => {
 
   return (
     <div className="bg-black text-white text-center pt-25 flex flex-col items-center pb-38 bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
-      <div className="text-[#99A1AF] text-[36px] pb-2">TOKEN LAUNCH IN</div>
+      <div className="text-[#99A1AF] text-[36px] pb-2">SNAPSHOT IN</div>
       <div className="flex flex-row items-center justify-center gap-4">
         <div className="flex flex-col">
           <div className="text-[96px] min-w-32">{countdownData.days ?? "00"}</div>
