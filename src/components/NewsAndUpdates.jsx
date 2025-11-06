@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CodeBlock2, Github, Logo2, NewsAndUpdatesBg, Tablet } from "../assets/images";
+import { motion } from "motion/react";
 
 const NewsAndUpdates = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
@@ -101,7 +102,19 @@ const NewsAndUpdates = () => {
         Programmable <br /> <span className="text-white">+ </span> Gas Free
       </div>
 
-      <img src={Logo2} className="z-2 mt-30" />
+      <motion.img
+        animate={{
+          y: [-10, 10],
+          transition: {
+            duration: 1,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
+          },
+        }}
+        src={Logo2}
+        className="z-2 mt-30"
+      />
     </div>
   );
 };
