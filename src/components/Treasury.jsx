@@ -11,8 +11,12 @@ import {
   User,
   WalletGreen,
 } from "../assets/images";
+import { motion, useInView } from "motion/react";
+import { useRef } from "react";
 
 const Treasury = () => {
+  const chartRef = useRef(null);
+  const isInView = useInView(chartRef, { once: true, margin: "-100px" });
   return (
     <div className="text-center py-10 pb-30 flex flex-col items-center bg-[#ffffff]">
       <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
@@ -29,11 +33,42 @@ const Treasury = () => {
       <div className="flex flex-col relative mt-25 bg-linear-to-b from-[#ffffff] via-black/8 to-white pt-20 px-13 rounded-4xl pb-15 shadow-[3px_6px_34px_-4px_rgba(0,0,0,0.1)]">
         <div className="flex flex-row items-center gap-25 justify-center">
           <div className="flex flex-col">
-            <div className="w-[448px] h-[448px] relative flex flex-col items-center justify-center ">
-              <img src={RoundSegment} className="absolute left-0 top-0 w-full" />
-              <div className="text-[#6A7282] text-[14px]">Total Supply</div>
-              <div className="text-[#000000] text-[48px] -mt-1">21M</div>
-              <div className="text-[#6A7282] text-[14px] -mt-2">BTC</div>
+            <div ref={chartRef} className="w-[448px] h-[448px] relative flex flex-col items-center justify-center ">
+              <motion.img
+                src={RoundSegment}
+                className="absolute left-0 top-0 w-full"
+                initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, scale: 1, rotate: 0 }
+                    : { opacity: 0, scale: 0.8, rotate: -180 }
+                }
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              />
+              <motion.div
+                className="text-[#6A7282] text-[14px]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                Total Supply
+              </motion.div>
+              <motion.div
+                className="text-[#000000] text-[48px] -mt-1"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.8, delay: 1 }}
+              >
+                21M
+              </motion.div>
+              <motion.div
+                className="text-[#6A7282] text-[14px] -mt-2"
+                initial={{ opacity: 0, y: -20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+              >
+                BTC
+              </motion.div>
             </div>
 
             <div className="flex flex-row mt-8 gap-30 ml-3">
