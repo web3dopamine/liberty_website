@@ -26,8 +26,8 @@ const MainBanner = () => {
       <Header />
 
       <VideoPlayer />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10">
-        <div className="flex flex-col mt-64">
+      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full z-10">
+        <div className="flex flex-col">
           <div className="text-[103px] text-white font-light text-center">BITCOIN IS EVOLVING</div>
           <div className="text-[103px]  text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4">
             TIME CLAIM YOUR LIBERTY
