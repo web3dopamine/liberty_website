@@ -15,39 +15,18 @@ const ProjectPhases = () => {
   const phase4InView = useInView(phase4Ref, { once: true, margin: "-50px" });
   const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
 
-  const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true });
-
   return (
     <div className="text-center pt-40 pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
-      <motion.div
-        ref={headerRef}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={headerInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.6 }}
-        className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-[14px]"
-      >
+      <div className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-[14px]">
         ROADMAP
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={headerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-[96px] text-white mt-7"
-      >
+      </div>
+      <div className="text-[96px] text-white mt-7">
         Project{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
           Phases
         </span>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={headerInView ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="text-[#8092AC] text-[24px] mt-4"
-      >
-        Track our progress from formation to global expansion
-      </motion.div>
+      </div>
+      <div className="text-[#8092AC] text-[24px] mt-4">Track our progress from formation to global expansion</div>
 
       <div className="flex flex-row mt-16 gap-10">
         {/* Awareness & Anticipation */}
@@ -57,24 +36,13 @@ const ProjectPhases = () => {
           animate={phase1InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           whileHover={{
-            scale: 1.05,
-            boxShadow: "0 25px 50px -12px rgba(74, 147, 144, 0.3)",
+            scale: 1.03,
           }}
           className="border group border-[#4A9390]/30 p-6 rounded-3xl flex flex-col relative text-start max-w-[612px] bg-linear-to-br from-[#2D5F5D]/20 via-[#000000] to-[#3A7875]/10 hover:to-[#3A7875]/20 hover:from-[#2D5F5D]/30  hover:shadow-2xl transition-all duration-300  ease-in-out select-none "
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={phase1InView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="absolute top-6 right-6 bg-[#376e6d] text-white text-[12px] px-4 py-[4px] rounded-2xl"
-          >
-            <motion.div
-              animate={{ opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              ACTIVE
-            </motion.div>
-          </motion.div>
+          <div className="absolute top-6 right-6 bg-[#376e6d] text-white text-[12px] px-4 py-[4px] rounded-2xl">
+            ACTIVE
+          </div>
           <div className="text-[#3A7875] text-[128px]">1</div>
           <div className="text-[#ffffff] text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
             Awareness & Anticipation
@@ -104,8 +72,7 @@ const ProjectPhases = () => {
           animate={phase2InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           whileHover={{
-            scale: 1.05,
-            boxShadow: "0 25px 50px -12px rgba(74, 147, 144, 0.2)",
+            scale: 1.03,
           }}
           className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
@@ -139,8 +106,7 @@ const ProjectPhases = () => {
           animate={phase3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           whileHover={{
-            scale: 1.05,
-            boxShadow: "0 25px 50px -12px rgba(74, 147, 144, 0.2)",
+            scale: 1.03,
           }}
           className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
@@ -172,8 +138,7 @@ const ProjectPhases = () => {
           animate={phase4InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           whileHover={{
-            scale: 1.05,
-            boxShadow: "0 25px 50px -12px rgba(74, 147, 144, 0.2)",
+            scale: 1.03,
           }}
           className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
