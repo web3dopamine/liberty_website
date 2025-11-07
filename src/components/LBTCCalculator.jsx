@@ -53,13 +53,13 @@ const LBTCCalculator = () => {
   return (
     <div className="text-center py-35 flex flex-col items-center bg-white">
       <div className="text-[96px] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
-        L-BTC{" "}
+        LBTY{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
           Calculator
         </span>
       </div>
       <div className="text-[#4A5565] text-[24px] mt-4">
-        Calculate how many L-BTC tokens you'll receive at the 1:10 ratio
+        Calculate how many LBTY tokens you'll receive at the 1:10 ratio
       </div>
       <div className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-10 rounded-4xl mt-16 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
         <div className="text-[14px] text-[#4A5565] text-start tracking-widest">YOU SEND</div>

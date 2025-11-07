@@ -115,7 +115,7 @@ const ProjectPhases = () => {
             Genesis Launch
           </div>
           <div className="text-[#99A1AF] text-[18px] mt-2">
-            EVM L2 on Celestia goes live. L-BTC token launch with full DeFi ecosystem.
+            EVM L2 on Celestia goes live. LBTY token launch with full DeFi ecosystem.
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />

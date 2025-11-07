@@ -23,7 +23,7 @@ const ClaimYourLBTC = () => {
         <div className="text-[#2D5F5D] text-[14px]">Token Claim</div>
       </div>
       <div className="text-[96px] tracking-tight leading-30 mt-6 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
-        Claim your L-BTC. <br />
+        Claim your LBTY. <br />
         <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">It's seamless.</span>
       </div>
       <div className="text-[#4A5565] text-[24px] mt-8">

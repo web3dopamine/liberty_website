@@ -28,7 +28,7 @@ const Treasury = () => {
         <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Treasury</span>
       </div>
       <div className="text-[#4A5565] text-[24px] mt-8">
-        Conceptual treasury based on dormant BTC (5-10 years) and unclaimed L-BTC tokens
+        Conceptual treasury based on dormant BTC (5-10 years) and unclaimed LBTY tokens
       </div>
       <div className="flex flex-col relative mt-25 bg-linear-to-b from-[#ffffff] via-black/8 to-white pt-20 px-13 rounded-4xl pb-15 shadow-[3px_6px_34px_-4px_rgba(0,0,0,0.1)]">
         <div className="flex flex-row items-center gap-25 justify-center">
@@ -190,7 +190,7 @@ const Treasury = () => {
           <div>
             <div className="text-[#6A7282] text-[12px]">Note</div>
             <div className="text-[#4A5565] text-[14px]">
-              Treasury represents dormant Bitcoin (5-10 years) and potentially unclaimed L-BTC tokens that could
+              Treasury represents dormant Bitcoin (5-10 years) and potentially unclaimed LBTY tokens that could
               contribute to the Liberty ecosystem development fund.
             </div>
           </div>
