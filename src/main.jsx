@@ -9,7 +9,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       queryFn: async ({ queryKey }) => {
-        const res = await fetch(queryKey[0] as string);
+        const res = await fetch(queryKey[0]);
         if (!res.ok) {
           if (res.status >= 500) {
             throw new Error(`${res.status}: ${res.statusText}`);

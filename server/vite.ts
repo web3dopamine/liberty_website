@@ -20,44 +20,24 @@ export function log(message: string, source = "express") {
 }
 
 export async function setupVite(app: Express, server: Server) {
-  const serverOptions = {
-    middlewareMode: true,
-    hmr: { server },
-    allowedHosts: true as const,
-  };
-
   const vite = await createViteServer({
     ...viteConfig,
     configFile: false,
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        viteLogger.error(msg, options);
-        process.exit(1);
-      },
+    server: {
+      middlewareMode: true,
+      hmr: { server }
     },
-    server: serverOptions,
     appType: "custom",
   });
 
   app.use(vite.middlewares);
-  app.get("/*path", async (req, res, next) => {
-    const url = req.originalUrl;
-
+  
+  app.get("{/*path}", async (req, res, next) => {
     try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "index.html",
-      );
-
-      let template = await fs.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(
-        `src="/src/main.jsx"`,
-        `src="/src/main.jsx?v=${nanoid()}"`,
-      );
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
+      const indexPath = path.resolve(import.meta.dirname, "..", "index.html");
+      let html = await fs.promises.readFile(indexPath, "utf-8");
+      html = await vite.transformIndexHtml(req.originalUrl, html);
+      res.status(200).set({ "Content-Type": "text/html" }).send(html);
     } catch (e) {
       vite.ssrFixStacktrace(e as Error);
       next(e);
@@ -76,7 +56,7 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  app.get("/*path", (_req, res) => {
+  app.get("{/*path}", (_req, res) => {
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
