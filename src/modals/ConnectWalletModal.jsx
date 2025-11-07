@@ -1,8 +1,10 @@
 import { useImperativeHandle, useState } from "react";
 import { ConnectWallet, Cross, MetaMask, Phantom, WalletConnect } from "../assets/images";
+import { useWallet } from "../contexts/WalletContext";
 
 const ConnectWalletModal = ({ ref }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { connectMetaMask, isConnecting } = useWallet();
 
   useImperativeHandle(
     ref,
@@ -15,6 +17,13 @@ const ConnectWalletModal = ({ ref }) => {
     },
     []
   );
+
+  const handleMetaMaskClick = async () => {
+    const success = await connectMetaMask();
+    if (success) {
+      setIsOpen(false);
+    }
+  };
 
   return (
     <div
@@ -41,14 +50,23 @@ const ConnectWalletModal = ({ ref }) => {
           </div>
           <div className="text-[#99A1AF] text-[16px] mt-3">Choose your preferred wallet to connect to Liberty</div>
 
-          <div className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-12 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10">
+          <div 
+            className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-12 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10"
+            onClick={handleMetaMaskClick}
+          >
             <div className="bg-white/10 p-2 rounded-2xl pr-1 pb-1">
               <img src={MetaMask} className="w-[40px] h-[40px] " />
             </div>
             <div className="flex flex-col">
               <div className="text-[18px]">MetaMask</div>
               <div className="text-[#99A1AF] text-[14px] mt-1 mb-1">Connect using MetaMask browser extension</div>
-              <div className="text-[#FF8904] text-[12px]">Not installed</div>
+              {typeof window !== 'undefined' && typeof window.ethereum === 'undefined' ? (
+                <div className="text-[#FF8904] text-[12px]">Not installed</div>
+              ) : isConnecting ? (
+                <div className="text-[#4A9390] text-[12px]">Connecting...</div>
+              ) : (
+                <div className="text-[#4A9390] text-[12px]">Click to connect</div>
+              )}
             </div>
           </div>
 

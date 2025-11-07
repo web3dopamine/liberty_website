@@ -2,9 +2,22 @@ import { FullLogo, Wallet } from "../assets/images";
 import { motion } from "motion/react";
 import ConnectWalletModal from "../modals/ConnectWalletModal";
 import { useRef } from "react";
+import { useWallet } from "../contexts/WalletContext";
 
 const Header = () => {
   const connectModalRef = useRef(null);
+  const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
+
+  const handleWalletClick = () => {
+    if (isConnected) {
+      const confirmDisconnect = window.confirm('Do you want to disconnect your wallet?');
+      if (confirmDisconnect) {
+        disconnectWallet();
+      }
+    } else {
+      connectModalRef.current.showModal();
+    }
+  };
 
   return (
     <>
@@ -23,12 +36,10 @@ const Header = () => {
               scale: 1.0,
             }}
             className="flex flex-row gap-2 border-[#448986] border px-3 py-1 rounded-2xl cursor-pointer hover:bg-white/10"
-            onClick={() => {
-              connectModalRef.current.showModal();
-            }}
+            onClick={handleWalletClick}
           >
             <img src={Wallet} />
-            <div>CONNECT WALLET</div>
+            <div>{isConnected ? truncateAddress(account) : 'CONNECT WALLET'}</div>
           </motion.button>
         </div>
       </div>

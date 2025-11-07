@@ -21,6 +21,7 @@ The website serves as the main landing page for Liberty Bitcoin with a full-stac
 - **Animation**: Motion 12.23.24
 - **Data Fetching**: TanStack React Query
 - **Form Handling**: React Hook Form + Zod validation
+- **Wallet Integration**: ethers.js 6.x for MetaMask connection
 - **Additional Tools**: 
   - vite-plugin-svgr for SVG imports
   - ESLint for code quality
@@ -51,8 +52,8 @@ The website serves as the main landing page for Liberty Bitcoin with a full-stac
 │   │   ├── images/        # Image assets
 │   │   └── video/         # Video assets
 │   ├── components/        # React components
-│   ├── modals/            # Modal components (e.g., GrantApplicationModal)
-│   ├── contexts/          # React contexts (AuthContext, QueryProvider)
+│   ├── modals/            # Modal components (ConnectWalletModal, GrantApplicationModal)
+│   ├── contexts/          # React contexts (WalletContext, AuthContext, QueryProvider)
 │   ├── utils/             # Utility functions
 │   ├── App.jsx            # Main App component
 │   └── main.tsx           # Entry point
@@ -92,6 +93,15 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 7, 2025**: MetaMask Wallet Integration
+  - Installed ethers.js 6.x for Web3 functionality
+  - Created WalletContext for global wallet state management
+  - Implemented MetaMask connection with address truncation (first 5 + last 5 digits)
+  - Updated Header to display connected wallet address
+  - Updated ConnectWalletModal to handle MetaMask connection flow
+  - Added automatic account change detection and chain change handling
+  - Wallet connection persists across page reloads via localStorage
+
 - **November 7, 2025**: Full-stack transformation & Admin Panel
   - Converted from frontend-only to Express + PostgreSQL backend
   - Integrated Drizzle ORM with PostgreSQL database

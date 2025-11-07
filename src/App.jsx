@@ -16,6 +16,7 @@ import TopSection from "./components/TopSection";
 import Treasury from "./components/Treasury";
 import WhyLiberty from "./components/WhyLiberty";
 import AdminPanel from "./components/AdminPanel";
+import { WalletProvider } from "./contexts/WalletContext";
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -34,23 +35,25 @@ function App() {
   }
 
   return (
-    <div>
-      <TopSection />
-      <LaunchCountdown />
-      <MarqueeText />
-      <LBTCCalculator />
-      <CheckYourEligibility />
-      <ProjectPhases />
-      <WhyLiberty />
-      <ClaimYourLBTC />
-      <Treasury />
-      <DeveloperGrantsProgram />
-      <GrantApplicationProcess />
-      <NewsAndUpdates />
-      <StayUpdated />
-      <JoinTheRevolution />
-      <Footer />
-    </div>
+    <WalletProvider>
+      <div>
+        <TopSection />
+        <LaunchCountdown />
+        <MarqueeText />
+        <LBTCCalculator />
+        <CheckYourEligibility />
+        <ProjectPhases />
+        <WhyLiberty />
+        <ClaimYourLBTC />
+        <Treasury />
+        <DeveloperGrantsProgram />
+        <GrantApplicationProcess />
+        <NewsAndUpdates />
+        <StayUpdated />
+        <JoinTheRevolution />
+        <Footer />
+      </div>
+    </WalletProvider>
   );
 }
 
