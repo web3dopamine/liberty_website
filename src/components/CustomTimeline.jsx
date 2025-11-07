@@ -8,6 +8,7 @@ const CustomTimeline = () => {
       title: "Snapshot On",
       date: "Dec 25, 2025",
       completed: true,
+      isLive: true,
     },
     {
       icon: LightningIcon,
@@ -19,7 +20,6 @@ const CustomTimeline = () => {
       icon: RocketIcon,
       title: "Token Launch",
       date: "Jan 15, 2026",
-      isLive: true,
       completed: false,
     },
     {
