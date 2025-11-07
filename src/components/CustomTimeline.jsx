@@ -6,13 +6,13 @@ const CustomTimeline = () => {
     {
       icon: CalendarIcon,
       title: "Snapshot Completed",
-      date: "Oct 1, 2025",
+      date: "Dec 25, 2025",
       completed: true,
     },
     {
       icon: LightningIcon,
       title: "Eligibility Check Open",
-      date: "Nov 1, 2025",
+      date: "Jan 1, 2026",
       completed: true,
     },
     {
