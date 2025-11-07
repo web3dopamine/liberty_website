@@ -7,7 +7,7 @@ const Header = () => {
   const connectModalRef = useRef(null);
 
   return (
-    <div className=" w-full bg-black/99 flex flex-row items-center justify-between px-80 h-[89px] z-2">
+    <div className=" w-full bg-black flex flex-row items-center justify-between px-80 h-[89px] z-2">
       <img src={FullLogo} className="h-[45px]" />
       <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
         <button>ELIGIBILITY</button>
