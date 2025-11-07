@@ -59,7 +59,7 @@ const Treasury = () => {
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                21M
+                210M
               </motion.div>
               <motion.div
                 className="text-[#6A7282] text-[14px] -mt-2"
