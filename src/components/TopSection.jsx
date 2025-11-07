@@ -1,20 +1,18 @@
-import { Logo, MainBannerBg } from "../assets/images";
+import { Logo } from "../assets/images";
 import Header from "./Header";
-import Video from "./../assets/video/video.mp4"; // <-- your local video path
 import { motion } from "motion/react";
 
 const VideoPlayer = () => {
   return (
-    <div className="relative group w-full mx-auto  overflow-hidden">
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       <video
-        src={Video}
-        className="w-full h-auto object-cover"
+        src="/videos/hero-video.webm"
+        className="w-full h-full object-cover"
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        controls
         disablePictureInPicture
         onCanPlay={(e) => e.currentTarget.play()}
       />
@@ -24,12 +22,11 @@ const VideoPlayer = () => {
 
 const MainBanner = () => {
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex flex-col min-h-screen">
       <Header />
 
-      <img src={MainBannerBg} />
-      {/* <VideoPlayer /> */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full">
+      <VideoPlayer />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full z-10">
         <div className="flex flex-col">
           <img src={Logo} className="h-[152px]" />
           <div className="text-[103px] text-white mt-12 font-light text-center">BITCOIN IS EVOLVING</div>
