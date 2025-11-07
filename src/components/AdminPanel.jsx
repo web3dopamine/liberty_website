@@ -358,7 +358,7 @@ function ApplicationDetailModal({ application, onClose, onStatusUpdate }) {
       const response = await fetch(`/api/admin/grant-applications/${application.id}/messages`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: newMessage })
+        body: JSON.stringify({ body: newMessage })
       });
 
       if (response.ok) {
