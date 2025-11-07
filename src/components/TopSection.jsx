@@ -74,7 +74,7 @@ const MainBanner = () => {
             className="text-[83px] text-white font-light text-center"
           />
           <Typewriter 
-            text="TIME CLAIM YOUR LIBERTY" 
+            text="TIME TO CLAIM YOUR LIBERTY" 
             delay={80}
             className="text-[83px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4"
           />
