@@ -114,7 +114,7 @@ const NewsAndUpdates = () => {
           },
         }}
         src={Logo2}
-        className="z-2 mt-30"
+        className="z-20 mt-30"
       />
     </div>
   );
