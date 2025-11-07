@@ -1,6 +1,6 @@
 const StayUpdated = () => {
   return (
-    <div className="flex flex-col bg-black py-20 pb-40 text-center items-center">
+    <div className="flex flex-col bg-black py-20 text-center items-center">
       <div className="text-[96px] text-white z-2">Stay Updated</div>
       <div className="text-[#99A1AF] text-[24px] mt-8 z-2">
         Get notified about snapshot dates, claim periods, and major announcements.
