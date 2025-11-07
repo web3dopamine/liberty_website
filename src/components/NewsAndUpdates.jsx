@@ -28,7 +28,7 @@ const NewsAndUpdates = () => {
   };
 
   return (
-    <div className="relative text-center flex flex-col items-center h-[1787px]">
+    <div className="relative text-center flex flex-col items-center h-[1720px] overflow-hidden">
       <img src={NewsAndUpdatesBg} className="w-full absolute min-h-[1787px] object-cover" />
       <div className="text-[96px] tracking-tight leading-30 mt-8 text-white z-2 mt-50">
         News <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">& updates</span>
