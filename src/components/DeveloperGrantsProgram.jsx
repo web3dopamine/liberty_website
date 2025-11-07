@@ -143,9 +143,9 @@ const DeveloperGrantsProgram = () => {
                 <div className="text-[#4A5565] text-[16px] mt-4 mb-4">{item.description}</div>
                 <div className="text-[#6A7282] text-[14px]">Requirements:</div>
                 <div className="flex flex-col mt-2">
-                  {item.requirements.map((itm) => {
+                  {item.requirements.map((itm, reqIndex) => {
                     return (
-                      <div className="flex flex-row items-center gap-2 mb-1">
+                      <div key={reqIndex} className="flex flex-row items-center gap-2 mb-1">
                         <img src={GreenTickCircle} className="w-[13.33px] h-[13.33px]" />
                         <div className="text-[#364153] text-[14px]">{itm}</div>
                       </div>

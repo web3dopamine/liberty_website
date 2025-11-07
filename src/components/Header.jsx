@@ -1,12 +1,23 @@
 import { FullLogo, Wallet } from "../assets/images";
 import { motion } from "motion/react";
 import ConnectWalletModal from "../modals/ConnectWalletModal";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useWallet } from "../contexts/WalletContext";
 
 const Header = () => {
   const connectModalRef = useRef(null);
   const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 50;
+      setScrolled(isScrolled);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleWalletClick = () => {
     if (isConnected) {
@@ -21,7 +32,9 @@ const Header = () => {
 
   return (
     <>
-      <div className=" w-full bg-black flex flex-row items-center justify-between px-80 h-[89px] z-2">
+      <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-80 h-[89px] z-50 transition-all duration-300 ${
+        scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
+      }`}>
         <img src={FullLogo} className="h-[45px]" />
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
           <button>ELIGIBILITY</button>
