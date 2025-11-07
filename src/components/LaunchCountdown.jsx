@@ -163,33 +163,54 @@ const LaunchCountdown = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={timelineInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 1, ease: "easeOut" }}
-        className="relative w-[1024px] mt-17"
+        className="w-[1024px] mt-17"
       >
-        <img src={Timeline} className="w-full" />
-        
-        {/* Timeline Milestone Overlays */}
-        <div className="absolute top-[50%] left-0 right-0 flex items-start justify-between px-[10%] -translate-y-1/2">
+        {/* Custom Clean Timeline */}
+        <div className="relative flex items-center justify-between px-8 py-12">
+          {/* Timeline Line */}
+          <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2D5F5D] via-[#3A7875] to-[#6A7282]/30 -translate-y-1/2" />
+          
           {/* Snapshot at Dec 25, 2025 - ACTIVE */}
-          <div className="flex flex-col items-center w-[180px]">
+          <div className="relative flex flex-col items-center z-10">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-b from-[#2D5F5D] to-[#3A7875] flex items-center justify-center shadow-lg mb-4">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
             <div className="text-[#99A1AF] text-[14px] mb-1 text-center font-medium">Snapshot at Dec 25, 2025</div>
-            <div className="text-[#6A7282] text-[12px]">Dec 25, 2025</div>
-            <div className="bg-[#376e6d] text-white text-[10px] px-3 py-1 rounded-full mt-2">LIVE</div>
+            <div className="text-[#6A7282] text-[12px] mb-2">Dec 25, 2025</div>
+            <div className="bg-[#376e6d] text-white text-[10px] px-3 py-1 rounded-full">LIVE</div>
           </div>
           
           {/* Eligibility Check Open - INACTIVE */}
-          <div className="flex flex-col items-center w-[180px] opacity-40">
+          <div className="relative flex flex-col items-center z-10 opacity-40">
+            <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Eligibility Check Open</div>
             <div className="text-[#6A7282] text-[12px]">Nov 1, 2025</div>
           </div>
           
           {/* Token Launch - INACTIVE */}
-          <div className="flex flex-col items-center w-[180px] opacity-40">
+          <div className="relative flex flex-col items-center z-10 opacity-40">
+            <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+            </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Token Launch</div>
             <div className="text-[#6A7282] text-[12px]">Jan 15, 2026</div>
           </div>
           
           {/* Claim Period Opens - INACTIVE */}
-          <div className="flex flex-col items-center w-[180px] opacity-40">
+          <div className="relative flex flex-col items-center z-10 opacity-40">
+            <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
+              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Claim Period Opens</div>
             <div className="text-[#6A7282] text-[12px]">Feb 1, 2026</div>
           </div>
