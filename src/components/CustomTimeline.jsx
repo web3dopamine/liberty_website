@@ -5,7 +5,7 @@ const CustomTimeline = () => {
   const timelineSteps = [
     {
       icon: CalendarIcon,
-      title: "Snapshot Completed",
+      title: "Snapshot On",
       date: "Dec 25, 2025",
       completed: true,
     },
