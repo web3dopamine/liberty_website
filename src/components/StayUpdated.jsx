@@ -1,25 +1,35 @@
 import { useState } from "react";
+import SubscriptionModal from "./SubscriptionModal";
 
 const StayUpdated = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [modal, setModal] = useState({ isOpen: false, type: '', message: '' });
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
+  const showModal = (type, message) => {
+    setModal({ isOpen: true, type, message });
+  };
+
+  const closeModal = () => {
+    setModal({ isOpen: false, type: '', message: '' });
+  };
+
   const handleSubscribe = async () => {
     setError("");
 
     if (!email.trim()) {
-      alert("⚠️ Please enter your email address");
+      showModal('warning', 'Please enter your email address to stay updated on Liberty Bitcoin news.');
       return;
     }
 
     if (!validateEmail(email)) {
-      alert("⚠️ Please enter a valid email address");
+      showModal('warning', 'Please enter a valid email address (e.g., example@email.com).');
       return;
     }
 
@@ -37,18 +47,18 @@ const StayUpdated = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("✅ Successfully subscribed! You'll receive updates about snapshot dates, claim periods, and major announcements.");
+        showModal('success', "You'll receive updates about snapshot dates, claim periods, and major announcements straight to your inbox!");
         setEmail("");
       } else {
         if (data.message === "Email already subscribed") {
-          alert("ℹ️ This email is already subscribed to our newsletter!");
+          showModal('info', "This email is already on our list! You'll continue to receive all Liberty Bitcoin updates.");
         } else {
-          alert("❌ " + (data.message || "Failed to subscribe. Please try again."));
+          showModal('error', data.message || "Failed to subscribe. Please try again later.");
         }
       }
     } catch (error) {
       console.error("Subscription error:", error);
-      alert("❌ An error occurred. Please try again later.");
+      showModal('error', "An error occurred while processing your subscription. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -88,6 +98,13 @@ const StayUpdated = () => {
       {error && (
         <div className="text-red-400 mt-4 text-[14px]">{error}</div>
       )}
+      
+      <SubscriptionModal
+        isOpen={modal.isOpen}
+        onClose={closeModal}
+        type={modal.type}
+        message={modal.message}
+      />
     </div>
   );
 };

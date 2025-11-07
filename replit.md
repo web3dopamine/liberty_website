@@ -97,10 +97,12 @@ The application uses PostgreSQL with the following tables:
   - **Functional Email Newsletter**: Made StayUpdated component fully functional
     - Email validation with regex pattern
     - Database integration via `/api/subscribe` endpoint
-    - Popup notifications for success/error/duplicate subscriptions
+    - **Beautiful custom modal notifications** for success/error/duplicate subscriptions
+    - Four modal types: Success (green), Error (red), Info (blue), Warning (orange)
     - Loading state with "SUBSCRIBING..." indicator
     - Enter key support for quick submission
     - Stores emails in PostgreSQL `email_subscriptions` table
+    - Modal auto-closes on backdrop click
   - **Transparent Header with Scroll Effect**: 
     - Header is transparent at top of page
     - Fades to semi-transparent black (80% opacity) with backdrop blur when scrolling
