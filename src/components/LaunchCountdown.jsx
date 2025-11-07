@@ -168,29 +168,29 @@ const LaunchCountdown = () => {
         <img src={Timeline} className="w-full" />
         
         {/* Timeline Milestone Overlays */}
-        <div className="absolute top-[50%] left-0 right-0 flex items-start justify-between px-16 -translate-y-1/2">
-          {/* Snapshot at Dec 25, 2025 */}
-          <div className="flex flex-col items-center w-[200px]">
-            <div className="text-[#99A1AF] text-[14px] mb-1 text-center">Snapshot at Dec 25, 2025</div>
+        <div className="absolute top-[50%] left-0 right-0 flex items-start justify-between px-[10%] -translate-y-1/2">
+          {/* Snapshot at Dec 25, 2025 - ACTIVE */}
+          <div className="flex flex-col items-center w-[180px]">
+            <div className="text-[#99A1AF] text-[14px] mb-1 text-center font-medium">Snapshot at Dec 25, 2025</div>
             <div className="text-[#6A7282] text-[12px]">Dec 25, 2025</div>
             <div className="bg-[#376e6d] text-white text-[10px] px-3 py-1 rounded-full mt-2">LIVE</div>
           </div>
           
-          {/* Eligibility Check Open */}
-          <div className="flex flex-col items-center w-[200px]">
-            <div className="text-[#99A1AF] text-[14px] mb-1 text-center">Eligibility Check Open</div>
+          {/* Eligibility Check Open - INACTIVE */}
+          <div className="flex flex-col items-center w-[180px] opacity-40">
+            <div className="text-[#6A7282] text-[14px] mb-1 text-center">Eligibility Check Open</div>
             <div className="text-[#6A7282] text-[12px]">Nov 1, 2025</div>
           </div>
           
-          {/* Token Launch */}
-          <div className="flex flex-col items-center w-[200px]">
-            <div className="text-[#99A1AF] text-[14px] mb-1 text-center">Token Launch</div>
+          {/* Token Launch - INACTIVE */}
+          <div className="flex flex-col items-center w-[180px] opacity-40">
+            <div className="text-[#6A7282] text-[14px] mb-1 text-center">Token Launch</div>
             <div className="text-[#6A7282] text-[12px]">Jan 15, 2026</div>
           </div>
           
-          {/* Claim Period Opens */}
-          <div className="flex flex-col items-center w-[200px]">
-            <div className="text-[#99A1AF] text-[14px] mb-1 text-center">Claim Period Opens</div>
+          {/* Claim Period Opens - INACTIVE */}
+          <div className="flex flex-col items-center w-[180px] opacity-40">
+            <div className="text-[#6A7282] text-[14px] mb-1 text-center">Claim Period Opens</div>
             <div className="text-[#6A7282] text-[12px]">Feb 1, 2026</div>
           </div>
         </div>

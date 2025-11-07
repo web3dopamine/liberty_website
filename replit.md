@@ -93,6 +93,13 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 7, 2025**: Timeline Updates
+  - Updated "Snapshot Completed" to "Snapshot at Dec 25, 2025"
+  - Added LIVE badge under Snapshot milestone
+  - Removed LIVE badge from Token Launch
+  - Made all milestones except Snapshot inactive (grayed out with 40% opacity)
+  - Removed duplicate "Oct 1, 2025" reference
+
 - **November 7, 2025**: Enhanced Animations
   - Added Motion animations to countdown timer section
     - Title slides down with fade-in
