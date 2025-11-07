@@ -18,7 +18,7 @@ const ConnectWalletModal = ({ ref }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-[#011817]/96 flex items-center justify-center transition-opacity duration-300  ${
+      className={`fixed inset-0 bg-[#011817]/96 flex items-center justify-center transition-opacity duration-300 z-50 ${
         isOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       }`}
       onClick={() => setIsOpen(false)}
