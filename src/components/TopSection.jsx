@@ -24,17 +24,33 @@ const VideoPlayer = () => {
 const Typewriter = ({ text, delay = 100, className }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
+    let timeout;
+
+    if (!isDeleting && currentIndex < text.length) {
+      timeout = setTimeout(() => {
         setDisplayedText((prev) => prev + text[currentIndex]);
         setCurrentIndex((prev) => prev + 1);
       }, delay);
-
-      return () => clearTimeout(timeout);
+    } else if (!isDeleting && currentIndex === text.length) {
+      timeout = setTimeout(() => {
+        setIsDeleting(true);
+      }, 2000);
+    } else if (isDeleting && currentIndex > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev.slice(0, -1));
+        setCurrentIndex((prev) => prev - 1);
+      }, delay / 2);
+    } else if (isDeleting && currentIndex === 0) {
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+      }, 500);
     }
-  }, [currentIndex, text, delay]);
+
+    return () => clearTimeout(timeout);
+  }, [currentIndex, isDeleting, text, delay]);
 
   return (
     <div className={className}>
@@ -55,12 +71,12 @@ const MainBanner = () => {
           <Typewriter 
             text="BITCOIN IS EVOLVING" 
             delay={80}
-            className="text-[52px] text-white font-light text-center"
+            className="text-[83px] text-white font-light text-center"
           />
           <Typewriter 
             text="TIME CLAIM YOUR LIBERTY" 
             delay={80}
-            className="text-[52px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4"
+            className="text-[83px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4"
           />
           <div className="text-[#D1D5DC] text-center leading-[48px] mt-5 px-5 text-[24px]">
             The next chapter of Bitcoin - L2, scalable, programmable, gas free and <br />
