@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Timeline } from "../assets/images";
+import TimelineComponent from "./TimelineComponent";
 import CountdownTimer from "../utils/CountdownTimer";
 
 const LaunchCountdown = () => {
@@ -44,7 +44,7 @@ const LaunchCountdown = () => {
       </div>
       <div className="text-[#8092AC] text-[16px] mt-10">January 15, 2026 — 00:00 UTC</div>
 
-      <img src={Timeline} className="w-[1024px] mt-17" />
+      <TimelineComponent />
 
       <div className="text-[#8092AC] text-[18px] mt-7">Check your eligibility now and be ready for launch day.</div>
       <div className="text-[#3DDED7] text-[18px] mt-3 font-bold">Over 50 million addresses are eligible.</div>
