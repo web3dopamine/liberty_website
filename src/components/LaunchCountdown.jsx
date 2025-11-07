@@ -46,7 +46,8 @@ const LaunchCountdown = () => {
     <div className="bg-black text-white text-center pt-25 flex flex-col items-center pb-38 bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-[#99A1AF] text-[36px] pb-2"
       >
@@ -56,7 +57,8 @@ const LaunchCountdown = () => {
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true }}
         className="flex flex-row items-center justify-center gap-4"
       >
         <motion.div variants={itemVariants} className="flex flex-col">
@@ -73,7 +75,8 @@ const LaunchCountdown = () => {
           </AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="text-[14px] text-[#99A1AF] -mt-3"
           >
@@ -83,7 +86,8 @@ const LaunchCountdown = () => {
 
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
           className="flex flex-col gap-5"
         >
@@ -128,7 +132,8 @@ const LaunchCountdown = () => {
           </AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="text-[14px] text-[#99A1AF] -mt-3"
           >
@@ -138,7 +143,8 @@ const LaunchCountdown = () => {
 
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
           className="flex flex-col gap-5"
         >
@@ -183,7 +189,8 @@ const LaunchCountdown = () => {
           </AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="text-[14px] text-[#99A1AF] -mt-3"
           >
@@ -193,7 +200,8 @@ const LaunchCountdown = () => {
 
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.5 }}
           className="flex flex-col gap-5"
         >
@@ -238,7 +246,8 @@ const LaunchCountdown = () => {
           </AnimatePresence>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.3 }}
             className="text-[14px] text-[#99A1AF] -mt-3"
           >
@@ -249,7 +258,8 @@ const LaunchCountdown = () => {
 
       <motion.div
         initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: 0.8, duration: 0.6 }}
         className="text-[#8092AC] text-[16px] mt-10"
       >
@@ -260,13 +270,15 @@ const LaunchCountdown = () => {
         src={Timeline}
         className="w-[1024px] mt-17"
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
       />
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: 1.3, duration: 0.6 }}
         className="text-[#8092AC] text-[18px] mt-7"
       >
@@ -274,7 +286,8 @@ const LaunchCountdown = () => {
       </motion.div>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ delay: 1.5, duration: 0.6 }}
         className="text-[#3DDED7] text-[18px] mt-3 font-bold"
       >
