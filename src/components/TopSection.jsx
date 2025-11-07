@@ -23,11 +23,11 @@ const VideoPlayer = () => {
 
 const LogoOverlay = () => {
   return (
-    <div className="flex justify-center mb-16">
+    <div className="flex justify-center mb-8">
       <video
         src="/videos/logo-overlay.webm"
         className="w-full h-auto"
-        style={{ maxWidth: '800px' }}
+        style={{ maxWidth: '1200px' }}
         autoPlay
         muted
         loop
