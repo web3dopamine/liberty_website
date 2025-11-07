@@ -33,17 +33,16 @@ const CustomTimeline = () => {
   return (
     <div className="w-full max-w-[900px] py-16">
       <div className="relative flex items-start justify-center">
-        {/* Background line - full width */}
-        <div className="absolute top-8 left-0 right-0 h-[2px] bg-[#2D5F5D]/30" />
+        {/* Background line - full width, dim */}
+        <div className="absolute top-8 left-0 right-0 h-[2px] bg-[#2D5F5D]/20" />
         
-        {/* Animated progress line */}
+        {/* Animated progress line - fills from left to right */}
         <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
+          initial={{ width: "0%" }}
+          whileInView={{ width: "100%" }}
           viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute top-8 left-0 right-0 h-[2px] bg-[#2D5F5D] origin-left"
-          style={{ transformOrigin: "left" }}
+          transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
+          className="absolute top-8 left-0 h-[2px] bg-[#2D5F5D]"
         />
 
         {timelineSteps.map((step, index) => (
@@ -53,7 +52,7 @@ const CustomTimeline = () => {
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.3 + 0.5, duration: 0.5 }}
+                transition={{ delay: 0.5 + index * 0.4, duration: 0.5 }}
                 className={`w-16 h-16 rounded-full flex items-center justify-center relative z-10 ${
                   step.completed || step.isLive
                     ? "bg-[#2D5F5D]"
@@ -68,7 +67,7 @@ const CustomTimeline = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.3 + 0.7, duration: 0.5 }}
+              transition={{ delay: 0.7 + index * 0.4, duration: 0.5 }}
               className="text-center mt-4 w-full"
             >
               <div className={`text-[14px] font-medium ${
@@ -82,7 +81,7 @@ const CustomTimeline = () => {
                   initial={{ opacity: 0, scale: 0 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.3 + 0.9, duration: 0.3 }}
+                  transition={{ delay: 0.9 + index * 0.4, duration: 0.3 }}
                   className="mt-2 inline-block px-3 py-1 bg-[#2D5F5D] text-white text-[10px] font-bold rounded-full"
                 >
                   LIVE
