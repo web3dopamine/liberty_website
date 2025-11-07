@@ -23,11 +23,11 @@ const VideoPlayer = () => {
 
 const LogoOverlay = () => {
   return (
-    <div className="flex justify-center mb-8">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
       <video
         src="/videos/logo-overlay.webm"
         className="w-full h-auto"
-        style={{ maxWidth: '1200px' }}
+        style={{ maxWidth: '3600px' }}
         autoPlay
         muted
         loop
@@ -85,9 +85,9 @@ const MainBanner = () => {
       <Header />
 
       <VideoPlayer />
+      <LogoOverlay />
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
-          <LogoOverlay />
           <Typewriter 
             text="BITCOIN IS EVOLVING" 
             delay={80}
