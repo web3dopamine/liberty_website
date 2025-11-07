@@ -28,8 +28,9 @@ const NewsAndUpdates = () => {
   };
 
   return (
-    <div className="relative text-center flex flex-col items-center h-[1787px]">
-      <img src={NewsAndUpdatesBg} className="w-full absolute min-h-[1787px] object-cover" style={{ clipPath: "inset(0 0 30px 0)" }} />
+    <div className="relative text-center flex flex-col items-center min-h-[1787px] pb-20 overflow-hidden">
+      <img src={NewsAndUpdatesBg} className="w-full absolute min-h-[1787px] object-cover" />
+      <div className="absolute bottom-0 left-0 w-full h-[50px] bg-black z-10"></div>
       <div className="text-[96px] tracking-tight leading-30 mt-8 text-white z-2 mt-50">
         News <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">& updates</span>
       </div>
