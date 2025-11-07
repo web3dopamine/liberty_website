@@ -92,7 +92,7 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
-- **November 7, 2025**: Full-stack transformation
+- **November 7, 2025**: Full-stack transformation & Admin Panel
   - Converted from frontend-only to Express + PostgreSQL backend
   - Integrated Drizzle ORM with PostgreSQL database
   - Created complete API for grant application management
@@ -100,6 +100,11 @@ The application uses PostgreSQL with the following tables:
   - Implemented Express 5.x routing with path-to-regexp v8 syntax (`{/*path}`)
   - Added React Query for data fetching
   - Integrated grant application form with backend API
+  - **Built admin panel UI at `/admin` for managing grant applications**
+    - View all applications with status filtering
+    - View detailed application information
+    - Update application status (received, in-review, granted, rejected)
+    - Clean, lightweight implementation using only React + Tailwind CSS
   - Configured authentication system (Replit OAuth - disabled in dev)
   - Added email notifications via SendGrid
   - Development mode includes automatic database seeding
@@ -137,12 +142,19 @@ The project is a fully functional full-stack application:
 - ✅ PostgreSQL database integrated with Drizzle ORM
 - ✅ API endpoints for grant applications working
 - ✅ Grant application form submits to backend
+- ✅ **Admin panel complete and accessible at `/admin`**
 - ✅ Development seeding for testing
 - ✅ Production build configured
-- ⚠️ Admin panel deferred (incompatible dependencies - backend API routes functional)
+
+## Admin Panel Access
+Visit `/admin` to access the grant application management interface:
+- View all submitted applications in a table format
+- Filter applications by status (all, received, in-review, granted, rejected)
+- Click "View Details" to see full application information
+- Update application status directly from the detail modal
+- In development mode, authentication is disabled for easy testing
 
 ## Known Issues
 - Minor React warning: Missing keys in DeveloperGrantsProgram list rendering (non-critical)
-- Admin UI not implemented (backend admin API routes functional for future implementation)
 - SendGrid API key not configured (email notifications disabled)
 - Authentication disabled in development mode (OAuth requires production environment variables)
