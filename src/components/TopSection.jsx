@@ -1,6 +1,7 @@
 import { Logo } from "../assets/images";
 import Header from "./Header";
 import { motion } from "motion/react";
+import { useState, useEffect } from "react";
 
 const VideoPlayer = () => {
   return (
@@ -20,6 +21,29 @@ const VideoPlayer = () => {
   );
 };
 
+const Typewriter = ({ text, delay = 100, className }) => {
+  const [displayedText, setDisplayedText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentIndex < text.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedText((prev) => prev + text[currentIndex]);
+        setCurrentIndex((prev) => prev + 1);
+      }, delay);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [currentIndex, text, delay]);
+
+  return (
+    <div className={className}>
+      {displayedText}
+      <span className="animate-pulse">|</span>
+    </div>
+  );
+};
+
 const MainBanner = () => {
   return (
     <div className="relative flex flex-col min-h-screen">
@@ -28,10 +52,16 @@ const MainBanner = () => {
       <VideoPlayer />
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
-          <div className="text-[103px] text-white font-light text-center">BITCOIN IS EVOLVING</div>
-          <div className="text-[103px]  text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4">
-            TIME CLAIM YOUR LIBERTY
-          </div>
+          <Typewriter 
+            text="BITCOIN IS EVOLVING" 
+            delay={80}
+            className="text-[52px] text-white font-light text-center"
+          />
+          <Typewriter 
+            text="TIME CLAIM YOUR LIBERTY" 
+            delay={80}
+            className="text-[52px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4"
+          />
           <div className="text-[#D1D5DC] text-center leading-[48px] mt-5 px-5 text-[24px]">
             The next chapter of Bitcoin - L2, scalable, programmable, gas free and <br />
             community-first. 1:10 ratio claim for all BTC holders at snapshot.
