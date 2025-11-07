@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { UpDownArrow } from "../assets/images";
+import { UpDownArrow, Logo } from "../assets/images";
 import { motion } from "motion/react";
 
 const LBTCCalculator = () => {
@@ -45,7 +45,9 @@ const LBTCCalculator = () => {
             {input * 10}
           </div>
           <div className="text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-[160px] h-[78px] gap-4 border border-[#2D5F5D]/50 bg-[#3A7875]/10">
-            <div className="w-[40px] h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg" />
+            <div className="w-[40px] h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg flex items-center justify-center">
+              <img src={Logo} className="w-[24px] h-[24px]" alt="Liberty Logo" />
+            </div>
             <div className="min-w-8 text-[20px]">LBTY</div>
           </div>
         </div>
