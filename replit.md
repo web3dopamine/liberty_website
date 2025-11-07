@@ -93,6 +93,21 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 7, 2025**: Email Subscription System & UI Enhancements
+  - **Functional Email Newsletter**: Made StayUpdated component fully functional
+    - Email validation with regex pattern
+    - Database integration via `/api/subscribe` endpoint
+    - Popup notifications for success/error/duplicate subscriptions
+    - Loading state with "SUBSCRIBING..." indicator
+    - Enter key support for quick submission
+    - Stores emails in PostgreSQL `email_subscriptions` table
+  - **Transparent Header with Scroll Effect**: 
+    - Header is transparent at top of page
+    - Fades to semi-transparent black (80% opacity) with backdrop blur when scrolling
+    - Fixed position stays at top while scrolling
+    - Smooth 300ms transition animation
+  - **Bug Fix**: Added missing React keys in DeveloperGrantsProgram component
+
 - **November 7, 2025**: MetaMask Wallet Integration
   - Installed ethers.js 6.x for Web3 functionality
   - Created WalletContext for global wallet state management
