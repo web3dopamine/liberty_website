@@ -26,7 +26,8 @@ const LogoOverlay = () => {
     <div className="flex justify-center mb-8">
       <video
         src="/videos/logo-overlay.webm"
-        className="max-w-md w-full h-auto"
+        className="w-full h-auto"
+        style={{ maxWidth: '1200px' }}
         autoPlay
         muted
         loop
