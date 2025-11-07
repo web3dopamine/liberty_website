@@ -57,8 +57,16 @@ import ConnectWallet from "./connectwallet.svg";
 import WalletConnect from "./walletconnect.svg";
 import Cross from "./cross.svg";
 import Logo2 from "./logo2.png";
+import CalendarIcon from "./calendar-icon.png";
+import LightningIcon from "./lightning-icon.png";
+import RocketIcon from "./rocket-icon.png";
+import TrophyIcon from "./trophy-icon.png";
 
 export {
+  CalendarIcon,
+  LightningIcon,
+  RocketIcon,
+  TrophyIcon,
   Logo2,
   Cross,
   WalletConnect,

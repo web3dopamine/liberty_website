@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { Timeline } from "../assets/images";
 import CountdownTimer from "../utils/CountdownTimer";
+import CustomTimeline from "./CustomTimeline";
 import { motion, AnimatePresence } from "motion/react";
 
 const LaunchCountdown = () => {
@@ -266,14 +266,15 @@ const LaunchCountdown = () => {
         January 15, 2026 — 00:00 UTC
       </motion.div>
 
-      <motion.img
-        src={Timeline}
-        className="w-[1024px] mt-17"
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-      />
+        className="mt-17"
+      >
+        <CustomTimeline />
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
