@@ -32,10 +32,10 @@ const CustomTimeline = () => {
 
   return (
     <div className="w-full max-w-[900px] py-16">
-      <div className="relative flex items-start justify-center gap-0">
+      <div className="relative flex items-start justify-center">
         {timelineSteps.map((step, index) => (
-          <div key={index} className="relative flex flex-col items-center" style={{ width: index === timelineSteps.length - 1 ? 'auto' : '250px' }}>
-            <div className="relative flex items-center w-full">
+          <div key={index} className="flex flex-col items-center">
+            <div className="relative flex items-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -56,8 +56,7 @@ const CustomTimeline = () => {
                   whileInView={{ scaleX: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 + 0.3, duration: 0.5 }}
-                  className="flex-1 h-[2px] bg-[#2D5F5D]/30 origin-left"
-                  style={{ marginLeft: '0px', marginRight: '0px' }}
+                  className="h-[2px] bg-[#2D5F5D]/30 origin-left w-[150px]"
                 />
               )}
             </div>
@@ -67,8 +66,7 @@ const CustomTimeline = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 + 0.4, duration: 0.5 }}
-              className="text-center mt-4 absolute top-16"
-              style={{ whiteSpace: 'nowrap' }}
+              className="text-center mt-4"
             >
               <div className={`text-[14px] font-medium ${
                 step.completed || step.isLive ? "text-white" : "text-[#6B7280]"
