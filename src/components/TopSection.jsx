@@ -88,16 +88,12 @@ const MainBanner = () => {
       <LogoOverlay />
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
-          <Typewriter 
-            text="BITCOIN IS EVOLVING" 
-            delay={80}
-            className="text-[83px] text-white font-light text-center"
-          />
-          <Typewriter 
-            text="TIME TO CLAIM YOUR LIBERTY" 
-            delay={80}
-            className="text-[83px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4"
-          />
+          <div className="text-[83px] text-white font-light text-center pt-8">
+            BITCOIN IS EVOLVING
+          </div>
+          <div className="text-[83px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4">
+            TIME TO CLAIM YOUR LIBERTY
+          </div>
           <div className="text-[#D1D5DC] text-center leading-[48px] mt-5 px-5 text-[24px]">
             The next chapter of Bitcoin - L2, scalable, programmable, gas free and <br />
             community-first. 1:10 ratio claim for all BTC holders at snapshot.
