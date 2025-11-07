@@ -13,9 +13,9 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
-      const isPastSnapshot = window.scrollY > 1200;
+      const isPastTimeline = window.scrollY > 1600;
       setScrolled(isScrolled);
-      setFadeOut(isPastSnapshot);
+      setFadeOut(isPastTimeline);
     };
 
     window.addEventListener('scroll', handleScroll);
