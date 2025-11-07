@@ -117,7 +117,7 @@ const DeveloperGrantsProgram = () => {
           </div>
         </button>
       </div>
-      <div class="grid grid-cols-2 gap-8 auto-rows-fr mt-15 min-h-[500px]">
+      <div className="grid grid-cols-2 gap-8 auto-rows-fr mt-15 min-h-[500px]">
         {GrantsData.map((item, index) => {
           if (currentTab == TABS.DEFI_PROJECTS && item.category != TABS.DEFI_PROJECTS) return null;
           if (currentTab == TABS.INFRA && item.category != TABS.INFRA) return null;
