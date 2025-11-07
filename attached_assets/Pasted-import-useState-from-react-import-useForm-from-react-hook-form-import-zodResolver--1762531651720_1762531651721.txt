@@ -1,0 +1,377 @@
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { useToast } from "@/hooks/use-toast";
+
+const grantApplicationSchema = z.object({
+  applicantName: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Please enter a valid email address"),
+  organization: z.string().optional(),
+  grantCategory: z.string().min(1, "Please select a grant category"),
+  projectTitle: z.string().min(3, "Project title must be at least 3 characters"),
+  fundingAmount: z.string().min(1, "Please specify funding amount"),
+  projectDescription: z.string().min(50, "Project description must be at least 50 characters"),
+  technicalDetails: z.string().min(30, "Please provide technical details (minimum 30 characters)"),
+  timeline: z.string().min(20, "Please provide a development timeline"),
+  teamExperience: z.string().min(30, "Please describe your team's experience"),
+  githubRepo: z.string().url("Please enter a valid GitHub URL").optional().or(z.literal("")),
+  additionalInfo: z.string().optional(),
+});
+
+type GrantApplicationData = z.infer<typeof grantApplicationSchema>;
+
+interface GrantApplicationFormProps {
+  onClose: () => void;
+}
+
+export default function GrantApplicationForm({ onClose }: GrantApplicationFormProps) {
+  const { toast } = useToast();
+  
+  const form = useForm<GrantApplicationData>({
+    resolver: zodResolver(grantApplicationSchema),
+    defaultValues: {
+      applicantName: "",
+      email: "",
+      organization: "",
+      grantCategory: "",
+      projectTitle: "",
+      fundingAmount: "",
+      projectDescription: "",
+      technicalDetails: "",
+      timeline: "",
+      teamExperience: "",
+      githubRepo: "",
+      additionalInfo: "",
+    },
+  });
+
+  const submitGrantApplication = useMutation({
+    mutationFn: async (data: GrantApplicationData) => {
+      const response = await fetch("/api/grant-applications", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        throw new Error("Failed to submit application");
+      }
+      
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Application Submitted!",
+        description: "Your grant application has been submitted successfully. We'll review it within 2 weeks.",
+      });
+      form.reset();
+      onClose();
+    },
+    onError: (error) => {
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your application. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Grant application error:", error);
+    },
+  });
+
+  const onSubmit = (data: GrantApplicationData) => {
+    submitGrantApplication.mutate(data);
+  };
+
+  const grantCategories = [
+    { value: "defi", label: "DeFi Protocol Development ($50K - $200K)" },
+    { value: "infrastructure", label: "Node Infrastructure ($25K - $100K)" },
+    { value: "developer-tools", label: "Developer Tooling & SDKs ($20K - $75K)" },
+    { value: "community", label: "Community Growth ($10K - $50K)" },
+    { value: "bridge", label: "Bridge & Interoperability ($100K - $300K)" },
+    { value: "trading-tools", label: "Institutional Trading Tools ($75K - $250K)" },
+  ];
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50 overflow-y-auto">
+      <Card className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-zinc-950 via-black to-zinc-950 border-zinc-800 relative">
+        {/* Background dot pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:24px_24px] pointer-events-none rounded-lg" />
+        
+        <CardHeader className="border-b border-zinc-800 relative">
+          <div className="flex justify-between items-center">
+            <div>
+              <CardTitle className="text-2xl text-white">Grant Application Form</CardTitle>
+              <p className="text-zinc-400 mt-1">Submit your project for Bitcoin Liberty ecosystem funding</p>
+            </div>
+            <Button variant="outline" onClick={onClose} className="bg-black border-zinc-800 text-zinc-300 hover:bg-zinc-900 hover:text-white">
+              <i className="fas fa-times"></i>
+            </Button>
+          </div>
+        </CardHeader>
+        
+        <CardContent className="p-6 relative">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              {/* Applicant Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-zinc-200 border-b border-zinc-700 pb-2">Applicant Information</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="applicantName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-zinc-300">Full Name *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your full name" {...field} className="bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-zinc-300">Email Address *</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="your@email.com" {...field} className="bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <FormField
+                  control={form.control}
+                  name="organization"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Organization / Company (Optional)</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Your organization name" {...field} className="bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Project Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-zinc-200 border-b border-zinc-700 pb-2">Project Information</h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="grantCategory"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-zinc-300">Grant Category *</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="bg-zinc-900 border-zinc-800 text-white">
+                              <SelectValue placeholder="Select grant category" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent className="bg-zinc-900 border-zinc-800 text-white">
+                            {grantCategories.map((category) => (
+                              <SelectItem key={category.value} value={category.value}>
+                                {category.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="fundingAmount"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-zinc-300">Requested Funding Amount *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., $75,000" {...field} className="bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <FormField
+                  control={form.control}
+                  name="projectTitle"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Project Title *</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Name of your project" {...field} className="bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="projectDescription"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Project Description * (minimum 50 characters)</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Describe your project, its goals, and how it benefits the Bitcoin Liberty ecosystem..."
+                          className="min-h-[120px] bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Technical Details */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-zinc-200 border-b border-zinc-700 pb-2">Technical Details</h3>
+                
+                <FormField
+                  control={form.control}
+                  name="technicalDetails"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Technical Implementation *</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Describe the technical approach, architecture, technologies used, security considerations..."
+                          className="min-h-[100px] bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="timeline"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Development Timeline *</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Provide a timeline with key milestones and deliverables..."
+                          className="min-h-[80px] bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="teamExperience"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Team Experience *</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Describe your team's relevant experience, previous projects, credentials..."
+                          className="min-h-[80px] bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Additional Information */}
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-zinc-200 border-b border-zinc-700 pb-2">Additional Information</h3>
+                
+                <FormField
+                  control={form.control}
+                  name="githubRepo"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">GitHub Repository (Optional)</FormLabel>
+                      <FormControl>
+                        <Input placeholder="https://github.com/username/project" {...field} className="bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <FormField
+                  control={form.control}
+                  name="additionalInfo"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-zinc-300">Additional Information (Optional)</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Any additional information that would help us evaluate your application..."
+                          className="min-h-[80px] bg-zinc-900 border-zinc-800 text-white placeholder:text-zinc-500"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              {/* Submit Button */}
+              <div className="flex justify-end space-x-4 pt-6 border-t border-zinc-800">
+                <Button type="button" variant="outline" onClick={onClose} className="bg-black border-zinc-800 text-zinc-300 hover:bg-zinc-900 hover:text-white">
+                  Cancel
+                </Button>
+                <Button 
+                  type="submit" 
+                  className="bg-white text-black hover:bg-zinc-200"
+                  disabled={submitGrantApplication.isPending}
+                >
+                  {submitGrantApplication.isPending ? (
+                    <>
+                      <i className="fas fa-spinner fa-spin mr-2"></i>
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-paper-plane mr-2"></i>
+                      Submit Application
+                    </>
+                  )}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}

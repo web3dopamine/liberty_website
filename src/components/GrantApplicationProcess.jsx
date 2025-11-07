@@ -1,7 +1,11 @@
 import { Handshake, Magnify, Note, NoteGreen, Rocket } from "../assets/images";
 import { motion } from "motion/react";
+import GrantApplicationModal from "../modals/GrantApplicationModal";
+import { useRef } from "react";
 
 const GrantApplicationProcess = () => {
+  const grantModalRef = useRef(null);
+
   return (
     <div className="text-center pb-35 flex flex-col items-center bg-[#f6f8f8]">
       <div className="flex flex-row gap-2 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
@@ -48,6 +52,7 @@ const GrantApplicationProcess = () => {
           whileTap={{
             scale: 1.0,
           }}
+          onClick={() => grantModalRef.current.showModal()}
           className="flex flex-row cursor-pointer gap-3 items-center justify-center mt-8 bg-white w-fit px-3 py-2.5 rounded-3xl mb-10 shadow-2xl hover:bg-[#dbf1f3]"
         >
           <img src={NoteGreen} className="w-4 h-4" />
@@ -68,6 +73,8 @@ const GrantApplicationProcess = () => {
           </div>
         </div>
       </div>
+      
+      <GrantApplicationModal ref={grantModalRef} />
     </div>
   );
 };
