@@ -16,6 +16,7 @@ import TopSection from "./components/TopSection";
 import Treasury from "./components/Treasury";
 import WhyLiberty from "./components/WhyLiberty";
 import AdminPanel from "./components/AdminPanel";
+import BTCOwnership from "./components/BTCOwnership";
 import { WalletProvider } from "./contexts/WalletContext";
 
 function App() {
@@ -32,6 +33,14 @@ function App() {
 
   if (currentPath === '/admin') {
     return <AdminPanel />;
+  }
+
+  if (currentPath === '/ownership') {
+    return (
+      <WalletProvider>
+        <BTCOwnership />
+      </WalletProvider>
+    );
   }
 
   return (

@@ -93,6 +93,14 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 7, 2025**: Bitcoin Address Ownership Page
+  - Created new `/ownership` page for BTC address verification
+  - Professional UI matching Liberty Bitcoin design system
+  - Two-step process: Create Self-Send PSBT and Verify Signed PSBT
+  - No broadcast functionality - everything happens locally
+  - Integrated with WalletProvider for wallet connection display
+  - Clean, modern interface with numbered steps and teal accents
+
 - **November 7, 2025**: Email Subscription System & UI Enhancements
   - **Functional Email Newsletter**: Made StayUpdated component fully functional
     - Email validation with regex pattern
