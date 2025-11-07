@@ -88,17 +88,37 @@ const MainBanner = () => {
       <LogoOverlay />
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
-          <div className="text-[48px] text-white font-light text-center">
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-[48px] text-white font-light text-center"
+          >
             BITCOIN IS EVOLVING
-          </div>
-          <div className="text-[48px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-2">
+          </motion.div>
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="text-[48px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-2"
+          >
             TIME TO CLAIM YOUR LIBERTY
-          </div>
-          <div className="text-[#D1D5DC] text-center leading-[32px] mt-4 px-5 text-[18px]">
+          </motion.div>
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            className="text-[#D1D5DC] text-center leading-[32px] mt-4 px-5 text-[18px]"
+          >
             The next chapter of Bitcoin - L2, scalable, programmable, gas free and <br />
             community-first. 1:10 ratio claim for all BTC holders at snapshot.
-          </div>
-          <div className="flex flex-row text-white justify-center gap-5 mt-8 text-[18px]">
+          </motion.div>
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+            className="flex flex-row text-white justify-center gap-5 mt-8 text-[18px]"
+          >
             <motion.button
               whileHover={{
                 scale: 1.07,
@@ -122,7 +142,7 @@ const MainBanner = () => {
             >
               READ WHITEPAPER
             </motion.button>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
