@@ -50,9 +50,21 @@ const GrantApplicationModal = ({ ref }) => {
     setIsSubmitting(true);
     
     try {
-      console.log("Grant Application Data:", data);
-      
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("/api/grant-applications", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || "Failed to submit application");
+      }
+
+      const result = await response.json();
+      console.log("Application submitted successfully:", result);
       
       setSubmitSuccess(true);
       reset();
@@ -63,7 +75,7 @@ const GrantApplicationModal = ({ ref }) => {
       }, 3000);
     } catch (error) {
       console.error("Submission error:", error);
-      alert("Failed to submit application. Please try again.");
+      alert(error.message || "Failed to submit application. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "./App.css";
 import CheckYourEligibility from "./components/CheckYourEligibility";
 import ClaimYourLBTC from "./components/ClaimYourLBTC";
@@ -14,8 +15,24 @@ import StayUpdated from "./components/StayUpdated";
 import TopSection from "./components/TopSection";
 import Treasury from "./components/Treasury";
 import WhyLiberty from "./components/WhyLiberty";
+import AdminPanel from "./admin/AdminPanel";
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  if (currentPath === "/admin") {
+    return <AdminPanel />;
+  }
+
   return (
     <div>
       <TopSection />
