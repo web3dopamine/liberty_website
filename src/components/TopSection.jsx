@@ -21,6 +21,24 @@ const VideoPlayer = () => {
   );
 };
 
+const LogoOverlay = () => {
+  return (
+    <div className="flex justify-center mb-8">
+      <video
+        src="/videos/logo-overlay.webm"
+        className="max-w-md w-full h-auto"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        disablePictureInPicture
+        onCanPlay={(e) => e.currentTarget.play()}
+      />
+    </div>
+  );
+};
+
 const Typewriter = ({ text, delay = 100, className }) => {
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,6 +86,7 @@ const MainBanner = () => {
       <VideoPlayer />
       <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
+          <LogoOverlay />
           <Typewriter 
             text="BITCOIN IS EVOLVING" 
             delay={80}
