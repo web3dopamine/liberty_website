@@ -185,8 +185,8 @@ const LaunchCountdown = () => {
           {/* Eligibility Check Open - INACTIVE */}
           <div className="relative flex flex-col items-center z-10 opacity-40">
             <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M7 2v11h3v9l7-12h-4l4-8z"/>
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11 21h-1l1-7H7.5c-.58 0-.57-.32-.38-.66.19-.34.05-.08.07-.12C8.48 10.94 10.42 7.54 13 3h1l-1 7h3.5c.49 0 .56.33.47.51l-.07.15C12.96 17.55 11 21 11 21z"/>
               </svg>
             </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Eligibility Check Open</div>
@@ -196,8 +196,8 @@ const LaunchCountdown = () => {
           {/* Token Launch - INACTIVE */}
           <div className="relative flex flex-col items-center z-10 opacity-40">
             <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M2.81 14.12L5.64 3.49c.28-.86 1.44-.86 1.72 0l1.03 3.09 2.84-6.35c.21-.47.72-.63 1.14-.38.42.25.58.79.38 1.26L9.21 9.59l3.58 1.79c.38.19.58.63.48 1.05l-1 4c-.1.42-.5.72-.94.72H3.47c-.53 0-.97-.43-.97-.96 0-.03.01-.06.01-.09.1-.38.37-.67.75-.76l7.08-1.77-4.43-2.21-2.09 6.25c-.1.28.06.59.34.69.28.1.59-.06.69-.34z"/>
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2c0 .74.4 1.39 1 1.73V7h1V3.73c.6-.34 1-.99 1-1.73h-3zM9 7h6v3H9V7zm3 11l-5 3 1.09-6.36L4 10.5l5.5-.8L12 4.5l2.5 5.2 5.5.8-4.09 4.14L17 21l-5-3z"/>
               </svg>
             </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Token Launch</div>
@@ -207,8 +207,8 @@ const LaunchCountdown = () => {
           {/* Claim Period Opens - INACTIVE */}
           <div className="relative flex flex-col items-center z-10 opacity-40">
             <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 5h-2V3H7v2H5c-1.1 0-1.99.9-1.99 2L3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm-7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/>
               </svg>
             </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Claim Period Opens</div>
