@@ -166,15 +166,15 @@ const LaunchCountdown = () => {
         className="w-[1024px] mt-17"
       >
         {/* Custom Clean Timeline */}
-        <div className="relative flex items-center justify-between px-8 py-12">
-          {/* Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-[2px] bg-gradient-to-r from-[#2D5F5D] via-[#3A7875] to-[#6A7282]/30 -translate-y-1/2" />
+        <div className="relative flex items-start justify-between px-8 py-12">
+          {/* Timeline Line - Goes through center of circles */}
+          <div className="absolute top-[80px] left-0 right-0 h-[2px] bg-gradient-to-r from-[#2D5F5D] via-[#3A7875] to-[#6A7282]/30" />
           
           {/* Snapshot at Dec 25, 2025 - ACTIVE */}
           <div className="relative flex flex-col items-center z-10">
             <div className="w-16 h-16 rounded-full bg-gradient-to-b from-[#2D5F5D] to-[#3A7875] flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="text-[#99A1AF] text-[14px] mb-1 text-center font-medium">Snapshot at Dec 25, 2025</div>
@@ -185,8 +185,8 @@ const LaunchCountdown = () => {
           {/* Eligibility Check Open - INACTIVE */}
           <div className="relative flex flex-col items-center z-10 opacity-40">
             <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Eligibility Check Open</div>
@@ -196,8 +196,8 @@ const LaunchCountdown = () => {
           {/* Token Launch - INACTIVE */}
           <div className="relative flex flex-col items-center z-10 opacity-40">
             <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clipRule="evenodd" />
               </svg>
             </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Token Launch</div>
@@ -207,8 +207,8 @@ const LaunchCountdown = () => {
           {/* Claim Period Opens - INACTIVE */}
           <div className="relative flex flex-col items-center z-10 opacity-40">
             <div className="w-16 h-16 rounded-full bg-[#3A7875]/30 flex items-center justify-center shadow-lg mb-4">
-              <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
             </div>
             <div className="text-[#6A7282] text-[14px] mb-1 text-center">Claim Period Opens</div>
