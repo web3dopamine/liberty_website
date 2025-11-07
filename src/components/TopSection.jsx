@@ -86,19 +86,19 @@ const MainBanner = () => {
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 w-full z-10">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
-          <div className="text-[83px] text-white font-light text-center pt-8">
+          <div className="text-[48px] text-white font-light text-center">
             BITCOIN IS EVOLVING
           </div>
-          <div className="text-[83px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-4">
+          <div className="text-[48px] text-center bg-linear-to-b from-[#348783] to-[#3FD1CB] text-transparent bg-clip-text -mt-2">
             TIME TO CLAIM YOUR LIBERTY
           </div>
-          <div className="text-[#D1D5DC] text-center leading-[48px] mt-5 px-5 text-[24px]">
+          <div className="text-[#D1D5DC] text-center leading-[32px] mt-4 px-5 text-[18px]">
             The next chapter of Bitcoin - L2, scalable, programmable, gas free and <br />
             community-first. 1:10 ratio claim for all BTC holders at snapshot.
           </div>
-          <div className="flex flex-row text-white justify-center gap-5 mt-14 text-[20px]">
+          <div className="flex flex-row text-white justify-center gap-5 mt-8 text-[18px]">
             <motion.button
               whileHover={{
                 scale: 1.07,
@@ -107,7 +107,7 @@ const MainBanner = () => {
                 scale: 1.0,
               }}
               transition={{ duration: 0.2 }}
-              className="rounded-4xl bg-linear-to-b from-[#2D5F5D] to-[#3A7875] hover:to-[#94bbb9]/50 px-10 py-4 cursor-pointer shadow-2xl"
+              className="rounded-4xl bg-linear-to-b from-[#2D5F5D] to-[#3A7875] hover:to-[#94bbb9]/50 px-8 py-3 cursor-pointer shadow-2xl"
             >
               CLAIM YOUR LIBERTY
             </motion.button>
@@ -118,7 +118,7 @@ const MainBanner = () => {
               whileTap={{
                 scale: 1.0,
               }}
-              className="rounded-4xl border border-white/30 px-10 py-4 shadow-2xl hover:bg-white/10"
+              className="rounded-4xl border border-white/30 px-8 py-3 shadow-2xl hover:bg-white/10"
             >
               READ WHITEPAPER
             </motion.button>
