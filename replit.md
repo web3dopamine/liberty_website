@@ -147,12 +147,28 @@ The project is a fully functional full-stack application:
 - ✅ Production build configured
 
 ## Admin Panel Access
-Visit `/admin` to access the grant application management interface:
-- View all submitted applications in a table format
-- Filter applications by status (all, received, in-review, granted, rejected)
-- Click "View Details" to see full application information
-- Update application status directly from the detail modal
+Visit `/admin` to access the professional grant application management interface:
+
+### Features
+- **Search & Filters**: Search by title/description, filter by category and status
+- **Tabbed Status View**: Quick status overview with counts (Received, In Review, Granted, Rejected)
+- **Application Table**: Clean table showing applicant info, project details, funding amount, and submission date
+- **Quick Status Updates**: "Move to..." dropdown for each application
+- **Detailed Application View**: Click "View Details" to see complete application information
+- **Integrated Chat**: Real-time messaging between admin and applicants
+  - Auto-refresh every 5 seconds
+  - Applicants use unique chat token to respond
+  - Chat history visible to both parties
+  - Professional message interface with send/receive indicators
+- **Status Management**: One-click status updates (Received → In Review → Granted/Rejected)
 - In development mode, authentication is disabled for easy testing
+
+### Chat System
+Each grant application has a unique chat token that applicants can use to communicate with admins:
+- Admins see all messages in the application detail modal
+- Messages update automatically every 5 seconds
+- Applicants can respond using their chat token at `/chat/:token`
+- All message history is preserved in the database
 
 ## Known Issues
 - Minor React warning: Missing keys in DeveloperGrantsProgram list rendering (non-critical)

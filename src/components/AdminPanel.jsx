@@ -12,15 +12,11 @@ export default function AdminPanel() {
   const [searchQuery, setSearchQuery] = useState('');
   const { user } = useAuth();
 
-  // Fetch categories on mount
+  // Fetch data on mount only
   useEffect(() => {
     fetchCategories();
-  }, []);
-
-  // Fetch applications when filters change
-  useEffect(() => {
     fetchApplications();
-  }, [statusFilter]);
+  }, []);
 
   const fetchCategories = async () => {
     try {
@@ -37,11 +33,8 @@ export default function AdminPanel() {
   const fetchApplications = async () => {
     try {
       setLoading(true);
-      const url = statusFilter === 'all' 
-        ? '/api/admin/grant-applications'
-        : `/api/admin/grant-applications?status=${statusFilter}`;
-      
-      const response = await fetch(url);
+      // Always fetch ALL applications for accurate counts
+      const response = await fetch('/api/admin/grant-applications');
       if (!response.ok) throw new Error('Failed to fetch applications');
       
       const data = await response.json();
@@ -103,7 +96,7 @@ export default function AdminPanel() {
     return labels[status] || status;
   };
 
-  // Filter applications by search and category
+  // Filter applications by search, category, and status
   const filteredApplications = applications.filter(app => {
     const matchesSearch = searchQuery === '' || 
       app.projectTitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -112,7 +105,9 @@ export default function AdminPanel() {
     
     const matchesCategory = categoryFilter === 'all' || app.grantCategory === categoryFilter;
     
-    return matchesSearch && matchesCategory;
+    const matchesStatus = statusFilter === 'all' || app.status === statusFilter;
+    
+    return matchesSearch && matchesCategory && matchesStatus;
   });
 
   // Calculate status counts
