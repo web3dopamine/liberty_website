@@ -93,6 +93,23 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 7, 2025**: Enhanced Animations
+  - Added Motion animations to countdown timer section
+    - Title slides down with fade-in
+    - Countdown numbers scale in with stagger effect
+    - Numbers flip when they update
+    - Pulsing animation on separator dots
+    - Timeline image slides up
+    - Bottom text fades in sequentially
+  - Enhanced roadmap (Project Phases) animations
+    - "ROADMAP" badge scales in
+    - Title and subtitle slide up with fade
+    - Phase cards have enhanced hover effects with teal glow
+    - Better scale (1.05x) and shadow on card hover
+    - "ACTIVE" badge pulses on Phase 1
+  - Added Bitcoin logo to L-BTC Calculator (white ₿ in orange circle)
+  - Added Liberty torch logo to LBTY output (white torch in teal circle)
+
 - **November 7, 2025**: Bitcoin Address Ownership Page
   - Created new `/ownership` page for BTC address verification
   - Professional UI matching Liberty Bitcoin design system
