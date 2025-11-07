@@ -8,11 +8,14 @@ const Header = () => {
   const connectModalRef = useRef(null);
   const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
   const [scrolled, setScrolled] = useState(false);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
+      const isPastSnapshot = window.scrollY > 1200;
       setScrolled(isScrolled);
+      setFadeOut(isPastSnapshot);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -32,9 +35,9 @@ const Header = () => {
 
   return (
     <>
-      <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-80 h-[89px] z-50 transition-all duration-300 ${
+      <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-80 h-[89px] z-50 transition-all duration-500 ${
         scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      }`}>
+      } ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <img src={FullLogo} className="h-[45px]" />
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
           <button>ELIGIBILITY</button>
