@@ -67,7 +67,7 @@ const Treasury = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
               >
-                LBTC
+                LBTY
               </motion.div>
             </div>
 
@@ -116,7 +116,7 @@ const Treasury = () => {
               </div>
             </div>
             <div className="px-3 text-[72px] -mt-3">15,470,000</div>
-            <div className="px-3 text-[20px] text-[#4A5565] -mt-2">LBTC</div>
+            <div className="px-3 text-[20px] text-[#4A5565] -mt-2">LBTY</div>
 
             <div className="px-3 text-[14px] text-[#6A7282] mt-10">Estimated USD Value</div>
             <div>
