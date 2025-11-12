@@ -43,10 +43,8 @@ const Header = () => {
   return (
     <>
       <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-80 h-[89px] z-50 transition-all duration-500 ${
-        scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      } ${fadeOut ? 'opacity-0 pointer-events-none' : ''} ${
-        showHeader ? 'opacity-100' : 'opacity-0 pointer-events-none'
-      }`}>
+        showHeader && scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
+      } ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
         <img src={FullLogo} className="h-[45px]" />
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
           <button>ELIGIBILITY</button>
