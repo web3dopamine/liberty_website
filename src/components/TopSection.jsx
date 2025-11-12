@@ -96,24 +96,28 @@ const MainBanner = () => {
           >
             <motion.button
               whileHover={{
-                scale: 1.07,
+                scale: 1.05,
+                boxShadow: "0 25px 50px -12px rgba(45, 95, 93, 0.5)",
               }}
               whileTap={{
-                scale: 1.0,
+                scale: 0.98,
               }}
-              transition={{ duration: 0.2 }}
-              className="rounded-4xl bg-linear-to-b from-[#2D5F5D] to-[#3A7875] hover:to-[#94bbb9]/50 px-8 py-3 cursor-pointer shadow-2xl"
+              transition={{ duration: 0.3 }}
+              className="rounded-4xl bg-linear-to-b from-[#2D5F5D] to-[#3A7875] hover:from-[#2D5F5D]/90 hover:to-[#3A7875]/90 px-10 py-4 cursor-pointer shadow-[0_20px_40px_rgba(0,0,0,0.4)] tracking-widest font-medium"
             >
               CLAIM YOUR LIBERTY
             </motion.button>
             <motion.button
               whileHover={{
-                scale: 1.07,
+                scale: 1.05,
+                backgroundColor: "rgba(255, 255, 255, 0.1)",
+                borderColor: "rgba(255, 255, 255, 0.6)",
               }}
               whileTap={{
-                scale: 1.0,
+                scale: 0.98,
               }}
-              className="rounded-4xl border border-white/30 px-8 py-3 shadow-2xl hover:bg-white/10"
+              transition={{ duration: 0.3 }}
+              className="rounded-4xl border-2 border-white/40 bg-white/5 backdrop-blur-sm px-10 py-4 shadow-[0_20px_40px_rgba(0,0,0,0.3)] tracking-widest font-medium hover:shadow-[0_25px_50px_rgba(255,255,255,0.1)]"
             >
               READ WHITEPAPER
             </motion.button>
