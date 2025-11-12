@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { UpDownArrow, Logo } from "../assets/images";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 
 const LBTCCalculator = () => {
   const [input, setInput] = useState(1);
   const [isSwapped, setIsSwapped] = useState(false);
+  const [displayedOutput, setDisplayedOutput] = useState(10);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const handleSwap = () => {
     setIsSwapped(!isSwapped);
@@ -13,6 +16,26 @@ const LBTCCalculator = () => {
   const sendCurrency = isSwapped ? "LBTY" : "BTC";
   const receiveCurrency = isSwapped ? "BTC" : "LBTY";
   const calculatedOutput = isSwapped ? input / 10 : input * 10;
+
+  // Animated number counter
+  useEffect(() => {
+    const duration = 500; // milliseconds
+    const steps = 30;
+    const stepValue = (calculatedOutput - displayedOutput) / steps;
+    let currentStep = 0;
+
+    const timer = setInterval(() => {
+      currentStep++;
+      if (currentStep <= steps) {
+        setDisplayedOutput((prev) => prev + stepValue);
+      } else {
+        setDisplayedOutput(calculatedOutput);
+        clearInterval(timer);
+      }
+    }, duration / steps);
+
+    return () => clearInterval(timer);
+  }, [calculatedOutput]);
 
   const SendIcon = () => (
     isSwapped ? (
@@ -51,17 +74,32 @@ const LBTCCalculator = () => {
     : "";
 
   return (
-    <div className="text-center py-35 flex flex-col items-center bg-white">
-      <div className="text-[96px] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
+    <div ref={sectionRef} className="text-center py-35 flex flex-col items-center bg-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="text-[96px] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
+      >
         LBTY{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
           Calculator
         </span>
-      </div>
-      <div className="text-[#4A5565] text-[24px] mt-4">
+      </motion.div>
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        className="text-[#4A5565] text-[24px] mt-4"
+      >
         Calculate how many LBTY tokens you'll receive at the 1:10 ratio
-      </div>
-      <div className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-10 rounded-4xl mt-16 shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+      </motion.div>
+      <motion.div 
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+        transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+        className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-10 rounded-4xl mt-16 shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+      >
         <div className="text-[14px] text-[#4A5565] text-start tracking-widest">YOU SEND</div>
         <div className="flex flex-row items-center gap-2 mt-3">
           <input
@@ -90,9 +128,15 @@ const LBTCCalculator = () => {
         </motion.div>
         <div className="text-[14px] text-[#4A5565] text-start mt-8 mb-4 tracking-widest">YOU RECEIVE</div>
         <div className="flex flex-row items-center gap-2 ">
-          <div className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-[78px] w-[300px] text-[14px] flex items-center">
-            {calculatedOutput}
-          </div>
+          <motion.div 
+            key={displayedOutput}
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-[78px] w-[300px] text-[14px] flex items-center"
+          >
+            {displayedOutput.toFixed(isSwapped ? 8 : 2)}
+          </motion.div>
           <div className={`text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-[160px] h-[78px] gap-4 ${receiveBorderClass}`}>
             <div className={`w-[40px] h-[40px] ${receiveIconBgClass} rounded-4xl shadow-lg flex items-center justify-center`}>
               <ReceiveIcon />
@@ -100,16 +144,31 @@ const LBTCCalculator = () => {
             <div className="min-w-8 text-[20px]">{receiveCurrency}</div>
           </div>
         </div>
-        <div className="border border-[#3A7875]/20 rounded-3xl mt-7 p-8 text-[16px] bg-linear-to-b from-[#2D5F5D]/10 to-[#3A7875]/10">
-          <div className="flex flex-row justify-between">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="border border-[#3A7875]/20 rounded-3xl mt-7 p-8 text-[16px] bg-linear-to-b from-[#2D5F5D]/10 to-[#3A7875]/10"
+        >
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.4, delay: 0.7 }}
+            className="flex flex-row justify-between"
+          >
             <div className="text-[#4A5565]">Exchange Rate</div>
             <div className="font-medium">1 BTC = 10 LBTY</div>
-          </div>
-          <div className="flex flex-row justify-between mt-3">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.4, delay: 0.8 }}
+            className="flex flex-row justify-between mt-3"
+          >
             <div className="text-[#4A5565]">Network Fee</div>
             <div className="text-[#3A7875] font-semibold">FREE</div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
         <motion.button
           whileHover={{
             scale: 1.07,
@@ -124,7 +183,7 @@ const LBTCCalculator = () => {
         >
           CALCULATE ELIGIBILITY
         </motion.button>
-      </div>
+      </motion.div>
     </div>
   );
 };
