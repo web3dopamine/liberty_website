@@ -76,11 +76,6 @@ export const WalletProvider = ({ children }) => {
       window.ethereum.on('chainChanged', () => {
         window.location.reload();
       });
-
-      const wasConnected = localStorage.getItem('walletConnected');
-      if (wasConnected === 'true') {
-        connectMetaMask();
-      }
     }
 
     return () => {
