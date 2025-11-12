@@ -93,6 +93,26 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 12, 2025**: PSBT Backend Integration
+  - **Secure Bitcoin Core RPC Proxy**: Added admin-authenticated endpoints for PSBT operations
+    - `/api/bitcoin/rpc` - Secure RPC proxy with method allowlist
+    - `/api/bitcoin/createSelfSend` - Create self-send PSBT for ownership verification
+    - Method allowlist: createpsbt, utxoupdatepsbt, finalizepsbt, decodepsbt, getblockchaininfo, getblockcount, scantxoutset, sendrawtransaction
+    - Requires explicit environment variables (BITCOIN_RPC_URL, BITCOIN_RPC_USER, BITCOIN_RPC_PASS)
+  - **Bitcoin Wallet Integration**: Created `useBitcoinWallet` hook
+    - Support for XVerse, Unisat, and OKX Bitcoin wallets
+    - Wallet detection, connection, and signing capabilities
+    - PSBT and message signing support
+  - **PSBT Utility Functions**: Created `src/utils/bitcoinPSBT.ts`
+    - Create self-send PSBT, finalize and broadcast transactions
+    - Get address UTXOs, address validation
+  - **Updated Claim Component**: ClaimYourLBTC.tsx now supports
+    - Real-time Bitcoin wallet detection (XVerse, Unisat, OKX)
+    - Wallet connection with visual status indicators
+    - Eligibility checking with live balance display
+  - **Environment Configuration**: Added `.env.example` with Bitcoin RPC documentation
+  - **Security**: All Bitcoin RPC endpoints require admin authentication
+
 - **November 7, 2025**: Bitcoin Address Ownership Page
   - Created new `/ownership` page for BTC address verification
   - Professional UI matching Liberty Bitcoin design system
