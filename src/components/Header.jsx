@@ -43,7 +43,7 @@ const Header = () => {
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
           <button>ELIGIBILITY</button>
           <button>DEVELOPERS</button>
-          <button>DEVELOPERS</button>
+          <button>RESOURCES</button>
           <button>COMMUNITY</button>
           <motion.button
             whileHover={{

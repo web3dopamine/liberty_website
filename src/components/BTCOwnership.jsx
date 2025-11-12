@@ -126,7 +126,7 @@ const BTCOwnership = () => {
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white">
           <a href="/" className="hover:text-[#4A9390] transition-colors">ELIGIBILITY</a>
           <a href="/" className="hover:text-[#4A9390] transition-colors">DEVELOPERS</a>
-          <a href="/" className="hover:text-[#4A9390] transition-colors">BEGINNINGS</a>
+          <a href="/" className="hover:text-[#4A9390] transition-colors">RESOURCES</a>
           <a href="/" className="hover:text-[#4A9390] transition-colors">COMMUNITY</a>
           <button className="flex flex-row gap-2 border-[#448986] border px-4 py-2 rounded-2xl cursor-pointer hover:bg-white/10 transition-all">
             {isConnected ? truncateAddress(account) : "CONNECT WALLET"}
