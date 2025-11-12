@@ -747,6 +747,108 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     }
   });
 
+  // Bitcoin Core RPC Proxy for PSBT functionality
+  // SECURITY: Only safe methods are allowed (admin-authenticated)
+  // Note: scantxoutset is resource-intensive; sendrawtransaction broadcasts transactions
+  const ALLOWED_RPC_METHODS = [
+    'createpsbt',
+    'utxoupdatepsbt',
+    'finalizepsbt',
+    'decodepsbt',
+    'getblockchaininfo',
+    'getblockcount',
+    'scantxoutset',
+    'sendrawtransaction'
+  ];
+
+  async function coreRpc(method: string, params: any[] = []) {
+    // SECURITY: Require explicit Bitcoin RPC credentials
+    const RPC_URL = process.env.BITCOIN_RPC_URL;
+    const RPC_USER = process.env.BITCOIN_RPC_USER;
+    const RPC_PASS = process.env.BITCOIN_RPC_PASS;
+
+    if (!RPC_URL || !RPC_USER || !RPC_PASS) {
+      throw new Error('Bitcoin RPC credentials not configured. Set BITCOIN_RPC_URL, BITCOIN_RPC_USER, and BITCOIN_RPC_PASS environment variables.');
+    }
+
+    // SECURITY: Method allowlist check
+    if (!ALLOWED_RPC_METHODS.includes(method)) {
+      throw new Error(`RPC method '${method}' is not allowed for security reasons`);
+    }
+
+    const res = await fetch(RPC_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain",
+        Authorization: "Basic " + Buffer.from(`${RPC_USER}:${RPC_PASS}`).toString("base64"),
+      },
+      body: JSON.stringify({ jsonrpc: "1.0", id: "proxy", method, params }),
+    });
+
+    const text = await res.text();
+    let json;
+    try {
+      json = JSON.parse(text);
+    } catch {
+      throw new Error(`HTTP ${res.status} — ${text}`);
+    }
+    if (json.error) {
+      throw new Error(`RPC ${json.error.code}: ${json.error.message}`);
+    }
+    return json.result;
+  }
+
+  // Secure RPC endpoint with method allowlist (for advanced users only)
+  app.post("/api/bitcoin/rpc", requireAdmin, async (req, res) => {
+    try {
+      const { method, params = [] } = req.body || {};
+      if (!method) {
+        return res.status(400).json({ error: "Method is required" });
+      }
+      const result = await coreRpc(method, params);
+      res.json({ result });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // Helper: build a self-send PSBT for a given UTXO (for ownership verification)
+  // SECURITY: This endpoint requires admin authentication
+  app.post("/api/bitcoin/createSelfSend", requireAdmin, async (req, res) => {
+    try {
+      const { txid, vout, address, amountBtc, feeSats = 0 } = req.body || {};
+      
+      if (!txid || vout === undefined || !address || amountBtc === undefined) {
+        return res.status(400).json({ 
+          error: "txid, vout, address, and amountBtc are required" 
+        });
+      }
+
+      // Basic address validation
+      const btcAddressRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,87}$/;
+      if (!btcAddressRegex.test(address)) {
+        return res.status(400).json({ error: "Invalid Bitcoin address format" });
+      }
+
+      // Optionally subtract a tiny fee
+      const amt = Number(amountBtc);
+      const adj = feeSats && feeSats > 0 ? Math.max(0, amt - feeSats / 1e8) : amt;
+
+      // 1) Build PSBT: spend UTXO → send back to same address
+      const psbt = await coreRpc("createpsbt", [
+        [{ txid, vout }],
+        { [address]: Number(adj.toFixed(8)) },
+      ]);
+
+      // 2) Attach UTXO details so hardware/software can sign
+      const updated = await coreRpc("utxoupdatepsbt", [psbt]);
+      
+      res.json({ psbt: updated });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
