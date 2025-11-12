@@ -88,36 +88,39 @@ const MainBanner = () => {
       <LogoOverlay />
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            className="flex flex-row text-white justify-center gap-5 mt-8 text-[18px]"
-          >
+          <div className="flex flex-row text-white justify-center gap-5 mt-8 text-[18px]">
             <motion.button
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
               whileHover={{
                 scale: 1.07,
+                boxShadow: "0 25px 50px -12px rgba(58, 120, 117, 0.5)",
               }}
               whileTap={{
-                scale: 1.0,
+                scale: 0.98,
               }}
-              transition={{ duration: 0.2 }}
-              className="rounded-4xl bg-linear-to-b from-[#2D5F5D] to-[#3A7875] hover:to-[#94bbb9]/50 px-8 py-3 cursor-pointer shadow-2xl"
+              className="rounded-4xl bg-linear-to-b from-[#2D5F5D] to-[#3A7875] px-8 py-3 cursor-pointer shadow-2xl hover:shadow-[0_20px_60px_rgba(58,120,117,0.4)] transition-all"
             >
               CLAIM YOUR LIBERTY
             </motion.button>
             <motion.button
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
               whileHover={{
                 scale: 1.07,
+                borderColor: "rgba(74, 147, 144, 0.8)",
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
               }}
               whileTap={{
-                scale: 1.0,
+                scale: 0.98,
               }}
-              className="rounded-4xl border border-white/30 px-8 py-3 shadow-2xl hover:bg-white/10"
+              className="rounded-4xl border border-white/30 px-8 py-3 shadow-2xl hover:shadow-[0_20px_60px_rgba(255,255,255,0.2)] transition-all"
             >
               READ WHITEPAPER
             </motion.button>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
