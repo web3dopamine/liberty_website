@@ -1,0 +1,92 @@
+// server.js — minimal local proxy + helpers for Bitcoin Core RPC
+// DEMO ONLY: Do not expose real RPC creds or ports publicly.
+
+import express from "express";
+import cors from "cors";
+import fetch from "node-fetch";
+
+const app = express();
+app.use(express.json());
+
+// Allow your local frontend (e.g., VS Code Live Server)
+app.use(
+  cors({
+    origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
+    methods: ["POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+// ---- CONFIG: point to your node ----
+// const RPC_URL = "http://37.27.97.175:8332";
+const RPC_URL = "http://127.0.0.1:8332";
+const RPC_USER = "user";
+const RPC_PASS = "pass";
+// -------------------------------------
+
+async function coreRpc(method, params = []) {
+  const res = await fetch(RPC_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain",
+      Authorization:
+        "Basic " + Buffer.from(`${RPC_USER}:${RPC_PASS}`).toString("base64"),
+    },
+    body: JSON.stringify({ jsonrpc: "1.0", id: "proxy", method, params }),
+  });
+  const text = await res.text();
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    throw new Error(`HTTP ${res.status} — ${text}`);
+  }
+  if (json.error)
+    throw new Error(`RPC ${json.error.code}: ${json.error.message}`);
+  return json.result;
+}
+
+// Generic pass-through RPC (frontend sends {method, params})
+app.post("/rpc", async (req, res) => {
+  try {
+    const { method, params = [] } = req.body || {};
+    const result = await coreRpc(method, params);
+    res.json({ result });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// Helper: build a self-send PSBT for a given UTXO (so wallets will sign)
+app.post("/createSelfSend", async (req, res) => {
+  try {
+    const { txid, vout, address, amountBtc, feeSats = 0 } = req.body || {};
+    if (!txid || vout === undefined || !address || amountBtc === undefined) {
+      return res
+        .status(400)
+        .json({ error: "txid, vout, address, amountBtc are required" });
+    }
+
+    // Optionally subtract a tiny fee to appease picky wallets
+    const amt = Number(amountBtc);
+    const adj = feeSats && feeSats > 0 ? Math.max(0, amt - feeSats / 1e8) : amt;
+
+    // 1) Build PSBT: spend UTXO → send back to same address
+    const psbt = await coreRpc("createpsbt", [
+      [{ txid, vout }],
+      { [address]: Number(adj.toFixed(8)) },
+    ]);
+
+    // 2) Attach UTXO details so hardware/software can sign
+    const updated = await coreRpc("utxoupdatepsbt", [psbt]);
+    res.json({ psbt: updated });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.listen(8787, () =>
+  console.log(
+    "✅ Proxy running at http://127.0.0.1:8787 (endpoints: /rpc, /createSelfSend)"
+  )
+);
