@@ -9,13 +9,20 @@ const Header = () => {
   const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
   const [scrolled, setScrolled] = useState(false);
   const [fadeOut, setFadeOut] = useState(false);
+  const [showHeader, setShowHeader] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
+      const firstSectionHeight = window.innerHeight; // Full viewport height
+      const scrollThreshold = firstSectionHeight * 0.8; // 80% of first section
+      
       const isScrolled = window.scrollY > 50;
       const isPastTimeline = window.scrollY > 1600;
+      const shouldShowHeader = window.scrollY > scrollThreshold;
+      
       setScrolled(isScrolled);
       setFadeOut(isPastTimeline);
+      setShowHeader(shouldShowHeader);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -37,7 +44,9 @@ const Header = () => {
     <>
       <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-80 h-[89px] z-50 transition-all duration-500 ${
         scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
-      } ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
+      } ${fadeOut ? 'opacity-0 pointer-events-none' : ''} ${
+        showHeader ? 'opacity-100' : 'opacity-0 pointer-events-none'
+      }`}>
         <img src={FullLogo} className="h-[45px]" />
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
           <button>ELIGIBILITY</button>
