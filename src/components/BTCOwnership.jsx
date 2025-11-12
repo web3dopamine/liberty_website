@@ -6,7 +6,49 @@ const BTCOwnership = () => {
   const [bitcoinAddress, setBitcoinAddress] = useState("");
   const [unsignedPsbt, setUnsignedPsbt] = useState("");
   const [signedPsbt, setSignedPsbt] = useState("");
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [utxoInfo, setUtxoInfo] = useState(null);
   const { account, isConnected, truncateAddress } = useWallet();
+
+  const handleGeneratePsbt = async () => {
+    if (!bitcoinAddress.trim()) {
+      alert("Please enter a Bitcoin address");
+      return;
+    }
+
+    setIsGenerating(true);
+    setUnsignedPsbt("");
+    setUtxoInfo(null);
+
+    try {
+      const response = await fetch("/api/bitcoin/createPsbtFromAddress", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ address: bitcoinAddress }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to generate PSBT");
+      }
+
+      setUnsignedPsbt(data.psbt);
+      setUtxoInfo({
+        utxoCount: data.utxoCount,
+        amountBtc: data.amountBtc,
+        txid: data.txid,
+        vout: data.vout,
+      });
+    } catch (error) {
+      alert(error.message || "Failed to generate PSBT. Make sure Bitcoin Core RPC is configured.");
+      console.error("PSBT generation error:", error);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   const handleCopy = () => {
     if (unsignedPsbt) {
@@ -74,13 +116,27 @@ const BTCOwnership = () => {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Bitcoin Address
               </label>
-              <input
-                type="text"
-                value={bitcoinAddress}
-                onChange={(e) => setBitcoinAddress(e.target.value)}
-                placeholder="bc1q8h03x5f8ny6gk1lm9qfg0vkg8s4bsdl3kg0..."
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent"
-              />
+              <div className="flex gap-3">
+                <input
+                  type="text"
+                  value={bitcoinAddress}
+                  onChange={(e) => setBitcoinAddress(e.target.value)}
+                  placeholder="bc1q8h03x5f8ny6gk1lm9qfg0vkg8s4bsdl3kg0..."
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent"
+                />
+                <button
+                  onClick={handleGeneratePsbt}
+                  disabled={isGenerating || !bitcoinAddress.trim()}
+                  className="px-6 py-3 bg-[#4A9390] text-white rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                >
+                  {isGenerating ? "Generating..." : "Generate PSBT"}
+                </button>
+              </div>
+              {utxoInfo && (
+                <div className="mt-2 text-sm text-gray-600">
+                  ✓ Found {utxoInfo.utxoCount} UTXO(s). Using {utxoInfo.amountBtc.toFixed(8)} BTC from txid: {utxoInfo.txid.slice(0, 16)}...
+                </div>
+              )}
             </div>
 
             <div>

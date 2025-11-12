@@ -849,6 +849,58 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     }
   });
 
+  // Simplified endpoint: Create self-send PSBT from address (auto-fetch UTXOs)
+  // SECURITY: This endpoint requires admin authentication
+  app.post("/api/bitcoin/createPsbtFromAddress", requireAdmin, async (req, res) => {
+    try {
+      const { address } = req.body || {};
+      
+      if (!address) {
+        return res.status(400).json({ error: "Bitcoin address is required" });
+      }
+
+      // Basic address validation
+      const btcAddressRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,87}$/;
+      if (!btcAddressRegex.test(address)) {
+        return res.status(400).json({ error: "Invalid Bitcoin address format" });
+      }
+
+      // 1) Scan for UTXOs at this address
+      const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${address})`]]);
+      
+      if (!utxoResult || !utxoResult.unspents || utxoResult.unspents.length === 0) {
+        return res.status(404).json({ 
+          error: "No UTXOs found for this address. Address may have no balance or no transaction history." 
+        });
+      }
+
+      // 2) Use the first UTXO
+      const utxo = utxoResult.unspents[0];
+      const amountBtc = utxo.amount;
+      const feeSats = 1000; // 1000 satoshis fee (0.00001 BTC)
+      const adj = Math.max(0, amountBtc - feeSats / 1e8);
+
+      // 3) Build PSBT: spend UTXO → send back to same address
+      const psbt = await coreRpc("createpsbt", [
+        [{ txid: utxo.txid, vout: utxo.vout }],
+        { [address]: Number(adj.toFixed(8)) },
+      ]);
+
+      // 4) Attach UTXO details so hardware/software can sign
+      const updated = await coreRpc("utxoupdatepsbt", [psbt]);
+      
+      res.json({ 
+        psbt: updated,
+        utxoCount: utxoResult.unspents.length,
+        amountBtc: amountBtc,
+        txid: utxo.txid,
+        vout: utxo.vout
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
