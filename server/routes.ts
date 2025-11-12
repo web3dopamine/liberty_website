@@ -901,6 +901,42 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     }
   });
 
+  // Verify Bitcoin message signature
+  // Public endpoint - anyone can verify signatures
+  app.post("/api/bitcoin/verifyMessage", async (req, res) => {
+    try {
+      const { address, message, signature } = req.body || {};
+      
+      if (!address || !message || !signature) {
+        return res.status(400).json({ 
+          error: "Address, message, and signature are required" 
+        });
+      }
+
+      // Basic address validation
+      const btcAddressRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,87}$/;
+      if (!btcAddressRegex.test(address)) {
+        return res.status(400).json({ error: "Invalid Bitcoin address format" });
+      }
+
+      // Use Bitcoin Core RPC to verify the message signature
+      const isValid = await coreRpc("verifymessage", [address, signature, message]);
+      
+      res.json({ 
+        valid: isValid,
+        message: isValid 
+          ? "Signature is valid! You own this Bitcoin address." 
+          : "Signature verification failed. The signature does not match the address or message."
+      });
+    } catch (e: any) {
+      res.status(500).json({ 
+        valid: false,
+        error: e.message,
+        message: "Failed to verify signature. Make sure Bitcoin Core RPC is configured correctly."
+      });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }
