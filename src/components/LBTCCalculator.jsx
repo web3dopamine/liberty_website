@@ -79,7 +79,7 @@ const LBTCCalculator = () => {
             type="number"
             min={minClaim}
             step="0.0001"
-            className="text-[#717182] outline-none border-none px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full md:w-[300px] text-sm md:text-[14px]"
+            className="text-[#717182] outline-none border-none px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full text-sm md:text-[14px]"
           />
           <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[160px] h-16 md:h-[78px] gap-3 md:gap-4">
             <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#FF8904] to-[#F54900] rounded-4xl shadow-lg flex items-center justify-center">
@@ -138,7 +138,7 @@ const LBTCCalculator = () => {
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full md:w-[300px] text-sm md:text-[14px] flex items-center"
+            className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full text-sm md:text-[14px] flex items-center"
           >
             {displayedOutput.toFixed(2)}
           </motion.div>
