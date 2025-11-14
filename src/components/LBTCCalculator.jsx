@@ -8,7 +8,7 @@ const LBTCCalculator = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
-  const minClaim = 0.0003;
+  const minClaim = 0.003;
   const calculatedOutput = input * 10;
 
   const handleQuickSelect = (amount) => {

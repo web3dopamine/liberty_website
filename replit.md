@@ -96,7 +96,7 @@ The application uses PostgreSQL with the following tables:
 - **November 14, 2025**: LBTY Calculator Improvements
   - **Non-switchable Mode**: Removed swap functionality - calculator now only converts BTC to LBTY
   - **Quick Select Buttons**: Added convenient quick select options (0.1 BTC, 0.5 BTC, 1 BTC, 2 BTC)
-  - **Minimum Claim**: Set minimum claim amount to 0.0003 BTC with validation
+  - **Minimum Claim**: Set minimum claim amount to 0.003 BTC with validation
   - **Updated Labels**: 
     - Changed "YOU SEND" to "YOU HAVE BTC"
     - Changed "YOU RECEIVE" to "YOU CAN CLAIM LBTY"
