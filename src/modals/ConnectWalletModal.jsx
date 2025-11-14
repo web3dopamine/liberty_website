@@ -1,5 +1,5 @@
 import { useImperativeHandle, useState } from "react";
-import { ConnectWallet, Cross, MetaMask, Phantom, WalletConnect } from "../assets/images";
+import { ConnectWallet, Cross, MetaMask, Phantom, Magnify } from "../assets/images";
 import { useWallet } from "../contexts/WalletContext";
 import { useAppKit } from '@reown/appkit/react';
 
@@ -108,8 +108,8 @@ const ConnectWalletModal = ({ ref }) => {
             className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-4 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10"
             onClick={handleWalletConnectClick}
           >
-            <div className="bg-white/10 p-1.5 rounded-2xl ">
-              <img src={WalletConnect} className="w-[40px] h-[40px] p-1" />
+            <div className="bg-white/10 p-3 rounded-2xl ">
+              <img src={Magnify} className="w-[34px] h-[34px]" />
             </div>
             <div className="flex flex-col">
               <div className="text-[18px]">500+ Wallets</div>
