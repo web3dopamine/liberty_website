@@ -86,14 +86,13 @@ const MainBanner = () => {
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 w-full z-10">
-        <div className="flex flex-col">
-          <motion.div
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-            className="flex flex-row text-white justify-center gap-4 mt-8 text-[16px]"
-          >
+      <div className="absolute bottom-32 left-0 right-0 z-10 flex justify-center items-center">
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          className="flex flex-row text-white justify-center gap-4 text-[16px]"
+        >
             <motion.button
               whileHover={{
                 scale: 1.05,
@@ -122,8 +121,7 @@ const MainBanner = () => {
             >
               READ WHITEPAPER
             </motion.button>
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
