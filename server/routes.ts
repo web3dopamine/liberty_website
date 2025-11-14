@@ -40,7 +40,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Bitcoin RPC balance check endpoint using user's Bitcoin Core node
+  // Bitcoin balance check endpoint using Blockstream.info API (fast and reliable)
   app.post("/api/check-btc-balance", async (req, res) => {
     try {
       const { address } = req.body;
@@ -55,59 +55,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "Invalid Bitcoin address format" });
       }
 
-      // Get Bitcoin RPC credentials from environment
-      const rpcUrl = process.env.BITCOIN_RPC_URL;
-      const rpcUser = process.env.BITCOIN_RPC_USER;
-      const rpcPass = process.env.BITCOIN_RPC_PASS;
-
-      if (!rpcUrl || !rpcUser || !rpcPass) {
-        console.error("Missing Bitcoin RPC credentials in environment");
-        return res.status(500).json({ message: "Bitcoin RPC not configured" });
-      }
-
       try {
-        // Call Bitcoin RPC scantxoutset method (standard Bitcoin Core method)
-        // This scans the UTXO set for outputs belonging to the address
-        const rpcResponse = await fetch(rpcUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'Basic ' + Buffer.from(`${rpcUser}:${rpcPass}`).toString('base64')
-          },
-          body: JSON.stringify({
-            jsonrpc: '1.0',
-            id: 'check-balance',
-            method: 'scantxoutset',
-            params: ['start', [`addr(${address})`]]
-          })
-        });
-
-        if (!rpcResponse.ok) {
-          console.error(`Bitcoin RPC error: ${rpcResponse.status}`);
-          return res.status(503).json({ 
-            message: "Unable to connect to Bitcoin node",
-            error: "Bitcoin RPC service unavailable"
-          });
-        }
-
-        const rpcData = await rpcResponse.json();
+        // Use Blockstream.info API for instant balance lookup
+        const response = await fetch(`https://blockstream.info/api/address/${address}`);
         
-        if (rpcData.error) {
-          console.error("Bitcoin RPC returned error:", rpcData.error);
-          return res.status(400).json({ 
-            message: "Error fetching balance from Bitcoin node",
-            error: rpcData.error.message
-          });
+        if (!response.ok) {
+          if (response.status === 404) {
+            // Address exists but has no transactions - balance is 0
+            return res.json({
+              success: true,
+              address,
+              btcBalance: 0,
+              lbtyClaimable: 0,
+              eligible: false,
+              message: "Insufficient balance. Minimum 0.003 BTC required."
+            });
+          }
+          throw new Error(`Blockstream API error: ${response.status}`);
         }
 
-        // Get balance from scantxoutset result
-        // scantxoutset returns total_amount in BTC (not satoshis)
-        const balanceBTC = rpcData.result?.total_amount || 0;
+        const data = await response.json();
+        
+        // Get confirmed + unconfirmed balance from chain_stats
+        const fundedSatoshis = data.chain_stats?.funded_txo_sum || 0;
+        const spentSatoshis = data.chain_stats?.spent_txo_sum || 0;
+        const balanceSatoshi = fundedSatoshis - spentSatoshis;
+        const balanceBTC = balanceSatoshi / 100000000;
         
         // Calculate LBTY claimable (1:10 ratio)
         const lbtyClaimable = balanceBTC * 10;
         
-        // Check minimum requirement (0.003 BTC as per your calculator)
+        // Check minimum requirement (0.003 BTC)
         const minBalance = 0.003;
         const isEligible = balanceBTC >= minBalance;
 
@@ -122,11 +100,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
             : `Insufficient balance. Minimum ${minBalance} BTC required.`
         });
 
-      } catch (rpcError) {
-        console.error("Bitcoin RPC fetch error:", rpcError);
+      } catch (apiError) {
+        console.error("Blockstream API error:", apiError);
         return res.status(503).json({ 
-          message: "Unable to fetch balance from Bitcoin node",
-          error: "Connection error"
+          message: "Unable to fetch balance. Please try again.",
+          error: "Balance lookup service temporarily unavailable"
         });
       }
 
