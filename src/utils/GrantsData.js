@@ -31,7 +31,7 @@ export const GrantsData = [
   },
   {
     category: "Infrastructure",
-    tag: "FEATURED",
+    tag: "OPEN",
     title: "On-Chain Analytics Agent",
     amount: "$10,000 - $50,000",
     description: "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
