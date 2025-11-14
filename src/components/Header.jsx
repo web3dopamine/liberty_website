@@ -37,7 +37,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1024 && isMobileMenuOpen) {
+      if (window.innerWidth >= 1280 && isMobileMenuOpen) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -67,12 +67,12 @@ const Header = () => {
 
   return (
     <>
-      <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-6 md:px-20 lg:px-40 xl:px-80 h-[70px] md:h-[89px] z-50 transition-all duration-500 ${
+      <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-4 md:px-8 lg:px-16 xl:px-40 2xl:px-80 h-[70px] md:h-[89px] z-50 transition-all duration-500 ${
         showBackground ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
       }`}>
         <img src={FullLogo} className="h-[35px] md:h-[45px]" />
         
-        <div className="hidden lg:flex flex-row font-bold items-center gap-7 text-[16px] text-white mt-1">
+        <div className="hidden xl:flex flex-row font-bold items-center gap-4 lg:gap-5 xl:gap-7 text-sm lg:text-[15px] xl:text-[16px] text-white mt-1">
           <button onClick={() => scrollToSection('hero')} className="hover:text-[#3A7875] transition-colors duration-200">About</button>
           <button onClick={() => scrollToSection('calculator')} className="hover:text-[#3A7875] transition-colors duration-200">Calculator</button>
           <button onClick={() => scrollToSection('claim-tokens')} className="hover:text-[#3A7875] transition-colors duration-200">Claim Tokens</button>
@@ -90,7 +90,7 @@ const Header = () => {
           </motion.button>
         </div>
 
-        <div className="lg:hidden flex items-center gap-4">
+        <div className="xl:hidden flex items-center gap-4">
           <motion.button
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 1.0 }}
@@ -129,7 +129,7 @@ const Header = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'tween', duration: 0.3 }}
-            className="fixed top-0 right-0 w-full h-screen bg-black/95 backdrop-blur-lg z-40 lg:hidden"
+            className="fixed top-0 right-0 w-full h-screen bg-black/95 backdrop-blur-lg z-40 xl:hidden"
           >
             <div className="flex flex-col items-center justify-center h-full gap-8 text-white text-xl font-bold">
               <button onClick={() => scrollToSection('hero')} className="hover:text-[#3A7875] transition-colors duration-200">About</button>
