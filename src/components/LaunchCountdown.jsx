@@ -263,7 +263,7 @@ const LaunchCountdown = () => {
         transition={{ delay: 0.8, duration: 0.6 }}
         className="text-[#8092AC] text-[16px] mt-10"
       >
-        January 15, 2026 — 00:00 UTC
+        December 8, 2025 — 00:00 UTC
       </motion.div>
 
       <motion.div
