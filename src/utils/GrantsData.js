@@ -11,7 +11,7 @@ export const GrantsData = [
   },
   {
     category: "Developer Tools",
-    tag: "OPEN",
+    tag: "FEATURED",
     title: "Smart Contract AI Auditor",
     amount: "$30,000 - $75,000",
     description: "Develop AI-powered agents that automatically audit smart contracts, detect vulnerabilities, and suggest optimizations",
@@ -21,7 +21,7 @@ export const GrantsData = [
   },
   {
     category: "AI/ML Projects",
-    tag: "HIGH PRIORITY",
+    tag: "FEATURED",
     title: "Autonomous Portfolio Manager",
     amount: "$60,000 - $100,000",
     description: "Create intelligent agents that manage crypto portfolios, rebalance assets, and execute trades based on market conditions and user preferences",
@@ -31,7 +31,7 @@ export const GrantsData = [
   },
   {
     category: "Infrastructure",
-    tag: "OPEN",
+    tag: "FEATURED",
     title: "On-Chain Analytics Agent",
     amount: "$10,000 - $50,000",
     description: "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
