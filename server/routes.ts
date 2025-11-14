@@ -66,7 +66,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       try {
-        // Call Bitcoin RPC getaddressbalance method
+        // Call Bitcoin RPC scantxoutset method (standard Bitcoin Core method)
+        // This scans the UTXO set for outputs belonging to the address
         const rpcResponse = await fetch(rpcUrl, {
           method: 'POST',
           headers: {
@@ -76,8 +77,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           body: JSON.stringify({
             jsonrpc: '1.0',
             id: 'check-balance',
-            method: 'getaddressbalance',
-            params: [{ addresses: [address] }]
+            method: 'scantxoutset',
+            params: ['start', [`addr(${address})`]]
           })
         });
 
@@ -99,9 +100,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           });
         }
 
-        // Get balance in satoshis and convert to BTC
-        const balanceSatoshi = rpcData.result?.balance || 0;
-        const balanceBTC = balanceSatoshi / 100000000;
+        // Get balance from scantxoutset result
+        // scantxoutset returns total_amount in BTC (not satoshis)
+        const balanceBTC = rpcData.result?.total_amount || 0;
         
         // Calculate LBTY claimable (1:10 ratio)
         const lbtyClaimable = balanceBTC * 10;
