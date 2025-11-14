@@ -99,7 +99,7 @@ const NewsAndUpdates = () => {
         </div>
       </div>
 
-      <div className="text-[128px] uppercase tracking-tight leading-30 bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text z-2 mt-50">
+      <div className="text-4xl md:text-6xl lg:text-7xl xl:text-[128px] uppercase tracking-tight leading-tight md:leading-30 bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text z-2 mt-16 md:mt-30 lg:mt-50 px-4">
         Programmable <br /> <span className="text-white">+ </span> Gas Free
       </div>
 
