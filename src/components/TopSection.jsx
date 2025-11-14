@@ -86,12 +86,12 @@ const MainBanner = () => {
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-48 left-0 right-0 z-10 flex justify-center items-center">
+      <div className="absolute bottom-48 left-1/2 -translate-x-1/2 z-10">
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-          className="flex flex-row text-white justify-center gap-4 text-[16px]"
+          className="flex flex-row text-white justify-center items-center gap-4 text-[16px]"
         >
             <motion.button
               whileHover={{
