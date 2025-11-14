@@ -85,12 +85,12 @@ const MainBanner = () => {
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-16 md:bottom-32 lg:bottom-48 left-1/2 -translate-x-1/2 z-10 w-full px-6">
+      <div className="absolute bottom-16 md:bottom-32 lg:bottom-48 left-1/2 -translate-x-1/2 z-10 w-full px-6 flex justify-center">
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
-          className="flex flex-col md:flex-row text-white justify-center items-center gap-3 md:gap-4 text-sm md:text-base"
+          className="flex flex-col md:flex-row text-white items-center gap-3 md:gap-4 text-sm md:text-base w-full md:w-auto"
         >
             <motion.button
               whileHover={{
@@ -102,7 +102,7 @@ const MainBanner = () => {
                 scale: 0.98,
               }}
               transition={{ duration: 0.3 }}
-              className="rounded-4xl border-2 border-[#3A7875]/70 bg-transparent px-6 py-2.5 md:px-8 md:py-3 cursor-pointer tracking-widest font-medium w-full md:w-auto max-w-xs"
+              className="rounded-4xl border-2 border-[#3A7875]/70 bg-transparent px-6 py-2.5 md:px-8 md:py-3 cursor-pointer tracking-widest font-medium w-full md:w-auto whitespace-nowrap"
             >
               CLAIM YOUR LIBERTY
             </motion.button>
@@ -116,7 +116,7 @@ const MainBanner = () => {
                 scale: 0.98,
               }}
               transition={{ duration: 0.3 }}
-              className="rounded-4xl border-2 border-white/40 bg-transparent px-6 py-2.5 md:px-8 md:py-3 tracking-widest font-medium w-full md:w-auto max-w-xs"
+              className="rounded-4xl border-2 border-white/40 bg-transparent px-6 py-2.5 md:px-8 md:py-3 tracking-widest font-medium w-full md:w-auto whitespace-nowrap"
             >
               READ WHITEPAPER
             </motion.button>
