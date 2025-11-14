@@ -13,7 +13,7 @@ const CustomTimeline = () => {
     {
       icon: LightningIcon,
       title: "Eligibility Check Open",
-      date: "Jan 1, 2026",
+      date: "Dec 11, 2025",
       completed: false,
     },
     {
