@@ -19,13 +19,13 @@ const CustomTimeline = () => {
     {
       icon: RocketIcon,
       title: "Token Launch",
-      date: "Jan 15, 2026",
+      date: "Feb 9, 2026",
       completed: false,
     },
     {
       icon: TrophyIcon,
       title: "Claim Period Opens",
-      date: "Feb 1, 2026",
+      date: "Feb 10, 2026",
       completed: false,
     },
   ];
