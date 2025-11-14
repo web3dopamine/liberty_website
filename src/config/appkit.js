@@ -26,7 +26,9 @@ if (projectId) {
     projectId,
     metadata,
     features: {
-      analytics: true
+      analytics: true,
+      email: false,
+      socials: false
     },
     themeMode: 'dark',
     themeVariables: {
