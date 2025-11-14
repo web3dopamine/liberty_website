@@ -17,18 +17,24 @@ The project is a full-stack application built with a clear separation of concern
     - `ethers.js 6.x` for MetaMask and Phantom direct connections
     - **Reown AppKit (formerly WalletConnect)** for 500+ wallet integrations including Binance Wallet, Trust Wallet, and more with built-in search functionality
     - Dedicated Bitcoin wallet support (`useBitcoinWallet`) for XVerse, Unisat, and OKX for PSBT and message signing
-*   **UI/UX Decisions:** Features like a transparent header with scroll effects, custom modal notifications for subscriptions, and a professional, modern design aesthetic (e.g., in the `/ownership` page and Admin Panel) are central. The "AI Agent Launchpad" and calculator UIs are designed for clarity and user-friendliness with quick select options and clear labels.
+*   **UI/UX Decisions:** Features like a transparent header with scroll effects, custom modal notifications for subscriptions, and a professional, modern design aesthetic (e.g., in the `/ownership` page and Admin Panel) are central. The "Grant Program" and calculator UIs are designed for clarity and user-friendliness with quick select options and clear labels.
+*   **Responsive Design:** Fully responsive header navbar and footer with mobile-first approach:
+    - **Header**: Desktop navigation menu transforms into animated hamburger menu on mobile/tablet (below lg breakpoint). Includes automatic menu closure on viewport resize to desktop width and scroll-lock prevention.
+    - **Footer**: Single-column stacked layout on mobile/tablet, expanding to 4-column grid on desktop (lg breakpoint and above). All spacing and typography scales responsively across breakpoints.
+    - **Breakpoints**: Mobile (default), md (768px), lg (1024px), xl (1280px)
 
 **Backend:**
 *   **Server:** Express 5.x with TypeScript provides a robust API layer.
 *   **Database:** PostgreSQL, leveraging Replit's Neon-backed database, managed by Drizzle ORM for type-safe schema definition and queries.
 *   **Authentication:** Passport.js with OAuth2 (Replit Auth in production) handles user authentication, though it's disabled in development for ease of testing.
 *   **Email Services:** SendGrid is integrated for email notifications (e.g., for grant applications).
-*   **Bitcoin RPC Integration:** Direct integration with Bitcoin Core RPC node for balance checking (`getaddressbalance`) and PSBT operations (`createpsbt`, `finalizepsbt`). Uses environment secrets (`BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, `BITCOIN_RPC_PASS`) for secure authentication.
+*   **Bitcoin Integration:** 
+    - **Balance Checking:** Uses Blockstream.info API for instant BTC address balance lookups (replaced slow Bitcoin RPC `scantxoutset` method)
+    - **PSBT Operations:** Bitcoin Core RPC integration for creating, finalizing, and broadcasting PSBTs (`createpsbt`, `finalizepsbt`). Uses environment secrets (`BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, `BITCOIN_RPC_PASS`) for secure authentication.
 
 **Core Features & Implementations:**
 *   **Grant Program:** Developer grants program for funding projects building on Bitcoin Liberty with various categories (DeFi, Infrastructure, Developer Tools, AI/ML) and customizable funding ranges.
-*   **Eligibility Checker:** Real-time BTC address balance checker using Bitcoin Core RPC (`getaddressbalance`). Displays BTC balance and potential LBTY claimable amount (1:10 ratio) directly below the input field. Minimum 0.003 BTC required for eligibility.
+*   **Eligibility Checker:** Real-time BTC address balance checker using Blockstream.info API for instant results (<1 second vs 1-5 minutes with RPC). Displays BTC balance and potential LBTY claimable amount (1:10 ratio) directly below the input field. Minimum 0.003 BTC required for eligibility.
 *   **LBTY Calculator:** Converts BTC to LBTY with quick select options and minimum claim validation.
 *   **Email Subscription:** A functional newsletter subscription system with email validation and custom modal feedback.
 *   **Admin Panel:** A comprehensive UI at `/admin` for managing grant applications, including search, filters, status updates, and an integrated real-time chat system between admins and applicants using unique tokens.
@@ -36,7 +42,8 @@ The project is a full-stack application built with a clear separation of concern
 
 ### External Dependencies
 *   **PostgreSQL (Neon-backed Replit database):** Primary database for all application data.
-*   **Bitcoin Core RPC Node:** Direct connection to user's Bitcoin node at http://37.27.97.175:8332 for address balance checks and PSBT operations. Requires `BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, and `BITCOIN_RPC_PASS` secrets.
+*   **Blockstream.info API:** Free blockchain explorer API for instant BTC address balance lookups (no API key required).
+*   **Bitcoin Core RPC Node:** Direct connection to user's Bitcoin node at http://37.27.97.175:8332 for PSBT operations. Requires `BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, and `BITCOIN_RPC_PASS` secrets.
 *   **SendGrid:** Email delivery service for notifications.
 *   **Replit OAuth:** Authentication provider for production environments.
 *   **Reown (WalletConnect):** Provides access to 500+ wallets (Trust Wallet, Binance Wallet featured) through AppKit integration with search functionality.
