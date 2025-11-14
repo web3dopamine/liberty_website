@@ -68,7 +68,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
+              className="text-4xl md:text-7xl lg:text-[96px] min-w-16 md:min-w-28 lg:min-w-32"
             >
               {countdownData.days ?? "00"}
             </motion.div>
@@ -125,7 +125,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
+              className="text-4xl md:text-7xl lg:text-[96px] min-w-16 md:min-w-28 lg:min-w-32"
             >
               {countdownData.hours ?? "00"}
             </motion.div>
@@ -182,7 +182,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
+              className="text-4xl md:text-7xl lg:text-[96px] min-w-16 md:min-w-28 lg:min-w-32"
             >
               {countdownData.minutes ?? "00"}
             </motion.div>
@@ -239,7 +239,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
+              className="text-4xl md:text-7xl lg:text-[96px] min-w-16 md:min-w-28 lg:min-w-32"
             >
               {countdownData.seconds ?? "00"}
             </motion.div>

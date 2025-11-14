@@ -32,56 +32,118 @@ const CustomTimeline = () => {
 
   return (
     <div className="w-full max-w-[900px] mx-auto py-16">
-      <div className="relative flex items-start justify-center">
-        {/* Background line - full width, dim */}
-        <div className="absolute top-8 left-0 right-0 h-[2px] bg-[#2D5F5D]/20" />
+      {/* Desktop: Horizontal layout */}
+      <div className="hidden md:block relative">
+        <div className="relative flex items-start justify-center">
+          {/* Background line - full width, dim */}
+          <div className="absolute top-8 left-0 right-0 h-[2px] bg-[#2D5F5D]/20" />
+          
+          {/* Animated progress line - fills from left to right */}
+          <motion.div
+            initial={{ width: "0%" }}
+            whileInView={{ width: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
+            className="absolute top-8 left-0 h-[2px] bg-[#2D5F5D]"
+          />
+
+          {timelineSteps.map((step, index) => (
+            <div key={index} className="relative flex flex-col items-center" style={{ width: '200px' }}>
+              <div className="relative w-full flex justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 + index * 0.4, duration: 0.5 }}
+                  className={`w-16 h-16 rounded-full flex items-center justify-center relative z-10 ${
+                    step.completed || step.isLive
+                      ? "bg-[#2D5F5D]"
+                      : "bg-[#4A5565]/50"
+                  }`}
+                >
+                  <img src={step.icon} alt={step.title} className="w-7 h-7" />
+                </motion.div>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.7 + index * 0.4, duration: 0.5 }}
+                className="text-center mt-4 w-full"
+              >
+                <div className={`text-[14px] font-medium ${
+                  step.completed || step.isLive ? "text-white" : "text-[#6B7280]"
+                }`}>
+                  {step.title}
+                </div>
+                <div className="text-[12px] text-[#8092AC] mt-1">{step.date}</div>
+                {step.isLive && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.9 + index * 0.4, duration: 0.3 }}
+                    className="mt-2 inline-block px-3 py-1 bg-[#2D5F5D] text-white text-[10px] font-bold rounded-full"
+                  >
+                    LIVE
+                  </motion.div>
+                )}
+              </motion.div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile: Vertical layout */}
+      <div className="md:hidden relative flex flex-col items-center gap-8">
+        {/* Background vertical line */}
+        <div className="absolute top-0 bottom-0 left-8 w-[2px] bg-[#2D5F5D]/20" />
         
-        {/* Animated progress line - fills from left to right */}
+        {/* Animated progress line - fills from top to bottom */}
         <motion.div
-          initial={{ width: "0%" }}
-          whileInView={{ width: "100%" }}
+          initial={{ height: "0%" }}
+          whileInView={{ height: "100%" }}
           viewport={{ once: true }}
           transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
-          className="absolute top-8 left-0 h-[2px] bg-[#2D5F5D]"
+          className="absolute top-0 left-8 w-[2px] bg-[#2D5F5D]"
         />
 
         {timelineSteps.map((step, index) => (
-          <div key={index} className="relative flex flex-col items-center" style={{ width: '200px' }}>
-            <div className="relative w-full flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + index * 0.4, duration: 0.5 }}
-                className={`w-16 h-16 rounded-full flex items-center justify-center relative z-10 ${
-                  step.completed || step.isLive
-                    ? "bg-[#2D5F5D]"
-                    : "bg-[#4A5565]/50"
-                }`}
-              >
-                <img src={step.icon} alt={step.title} className="w-7 h-7" />
-              </motion.div>
-            </div>
+          <div key={index} className="relative flex flex-row items-center gap-4 w-full">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 + index * 0.2, duration: 0.5 }}
+              className={`w-16 h-16 rounded-full flex items-center justify-center relative z-10 flex-shrink-0 ${
+                step.completed || step.isLive
+                  ? "bg-[#2D5F5D]"
+                  : "bg-[#4A5565]/50"
+              }`}
+            >
+              <img src={step.icon} alt={step.title} className="w-7 h-7" />
+            </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.7 + index * 0.4, duration: 0.5 }}
-              className="text-center mt-4 w-full"
+              transition={{ delay: 0.5 + index * 0.2, duration: 0.5 }}
+              className="text-left flex-1"
             >
-              <div className={`text-[14px] font-medium ${
+              <div className={`text-[16px] font-medium ${
                 step.completed || step.isLive ? "text-white" : "text-[#6B7280]"
               }`}>
                 {step.title}
               </div>
-              <div className="text-[12px] text-[#8092AC] mt-1">{step.date}</div>
+              <div className="text-[14px] text-[#8092AC] mt-1">{step.date}</div>
               {step.isLive && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ delay: 0.9 + index * 0.4, duration: 0.3 }}
+                  transition={{ delay: 0.7 + index * 0.2, duration: 0.3 }}
                   className="mt-2 inline-block px-3 py-1 bg-[#2D5F5D] text-white text-[10px] font-bold rounded-full"
                 >
                   LIVE
