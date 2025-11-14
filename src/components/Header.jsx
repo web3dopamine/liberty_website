@@ -41,10 +41,12 @@ const Header = () => {
       }`}>
         <img src={FullLogo} className="h-[45px]" />
         <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
-          <button>ELIGIBILITY</button>
-          <button>DEVELOPERS</button>
-          <button>RESOURCES</button>
-          <button>COMMUNITY</button>
+          <button>About</button>
+          <button>Calculator</button>
+          <button>Claim Tokens</button>
+          <button>Phases</button>
+          <button>Grants</button>
+          <button>Community</button>
           <motion.button
             whileHover={{
               scale: 1.07,
