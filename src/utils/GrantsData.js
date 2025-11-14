@@ -1,5 +1,15 @@
 export const GrantsData = [
   {
+    category: "Infrastructure",
+    tag: "OPEN",
+    title: "On-Chain Analytics Agent",
+    amount: "$10,000 - $50,000",
+    description: "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
+    requirements: ["Natural language processing capabilities", "Blockchain data indexing expertise", "Visualization and reporting tools"],
+    deadline: "Deadline: June 30, 2026",
+    cta: "ACTIVE",
+  },
+  {
     category: "DeFi Projects",
     tag: "FEATURED",
     title: "DeFi Trading Agent",
@@ -27,16 +37,6 @@ export const GrantsData = [
     description: "Create intelligent agents that manage crypto portfolios, rebalance assets, and execute trades based on market conditions and user preferences",
     requirements: ["Advanced ML algorithms for prediction", "Risk management frameworks", "Real-time blockchain data integration"],
     deadline: "Deadline: May 15, 2026",
-    cta: "ACTIVE",
-  },
-  {
-    category: "Infrastructure",
-    tag: "OPEN",
-    title: "On-Chain Analytics Agent",
-    amount: "$10,000 - $50,000",
-    description: "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
-    requirements: ["Natural language processing capabilities", "Blockchain data indexing expertise", "Visualization and reporting tools"],
-    deadline: "Deadline: June 30, 2026",
     cta: "ACTIVE",
   },
 ];
