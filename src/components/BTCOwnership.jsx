@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FullLogo } from "../assets/images";
 import { useWallet } from "../contexts/WalletContext";
 
@@ -17,6 +17,16 @@ const BTCOwnership = () => {
   const [verificationResult, setVerificationResult] = useState(null);
   
   const { account, isConnected, truncateAddress } = useWallet();
+
+  // Auto-fill address from URL parameter
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const addressFromUrl = urlParams.get('address');
+    if (addressFromUrl) {
+      setBitcoinAddress(addressFromUrl);
+      setMsgAddress(addressFromUrl);
+    }
+  }, []);
 
   const handleGeneratePsbt = async () => {
     if (!bitcoinAddress.trim()) {

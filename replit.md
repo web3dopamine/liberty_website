@@ -93,6 +93,12 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 14, 2025**: Eligibility Checker Navigation
+  - **Auto-fill Address**: "CHECK NOW" button now navigates to `/ownership` page with BTC address
+  - **URL Parameter**: Address is passed via query parameter (`?address=...`)
+  - **Auto-population**: BTCOwnership page automatically fills address in both PSBT and Message Signature tabs
+  - **Validation**: Empty address validation before navigation
+
 - **November 14, 2025**: LBTY Calculator Improvements
   - **Non-switchable Mode**: Removed swap functionality - calculator now only converts BTC to LBTY
   - **Quick Select Buttons**: Added convenient quick select options (0.1 BTC, 0.5 BTC, 1 BTC, 2 BTC)

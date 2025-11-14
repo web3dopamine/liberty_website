@@ -4,6 +4,14 @@ import { motion } from "motion/react";
 const CheckYourEligibility = () => {
   const [input, setInput] = useState("");
 
+  const handleCheckNow = () => {
+    if (!input.trim()) {
+      alert("Please enter a Bitcoin address");
+      return;
+    }
+    window.location.href = `/ownership?address=${encodeURIComponent(input)}`;
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -86,6 +94,7 @@ const CheckYourEligibility = () => {
             placeholder="Enter your Bitcoin address (bc1...)"
           />
           <motion.button
+            onClick={handleCheckNow}
             whileHover={{
               scale: 1.07,
             }}
