@@ -33,7 +33,7 @@ const Treasury = () => {
       <div className="flex flex-col relative mt-12 md:mt-20 lg:mt-25 bg-linear-to-b from-[#ffffff] via-black/8 to-white pt-8 md:pt-16 lg:pt-20 px-4 md:px-8 lg:px-13 rounded-3xl md:rounded-4xl pb-8 md:pb-12 lg:pb-15 shadow-[3px_6px_34px_-4px_rgba(0,0,0,0.1)] w-full max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-20 lg:gap-25 justify-center w-full">
           <div className="flex flex-col">
-            <div ref={chartRef} className="w-full max-w-[448px] aspect-square relative flex flex-col items-center justify-center">
+            <div ref={chartRef} className="w-full max-w-[280px] md:max-w-[380px] lg:max-w-[448px] aspect-square relative flex flex-col items-center justify-center mb-6 md:mb-8">
               <motion.img
                 src={RoundSegment}
                 className="absolute left-0 top-0 w-full"
