@@ -43,13 +43,13 @@ const LaunchCountdown = () => {
   };
 
   return (
-    <div className="bg-black text-white text-center pt-25 flex flex-col items-center pb-38 bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
+    <div className="bg-black text-white text-center pt-16 md:pt-20 lg:pt-25 flex flex-col items-center pb-20 md:pb-30 lg:pb-38 bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000] px-4">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-[#99A1AF] text-[36px] pb-2"
+        className="text-[#99A1AF] text-2xl md:text-3xl lg:text-[36px] pb-2"
       >
         SNAPSHOT IN
       </motion.div>
@@ -59,7 +59,7 @@ const LaunchCountdown = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="flex flex-row items-center justify-center gap-4"
+        className="flex flex-row items-center justify-center gap-2 md:gap-3 lg:gap-4 overflow-x-auto max-w-full"
       >
         <motion.div variants={itemVariants} className="flex flex-col">
           <AnimatePresence mode="wait">
@@ -68,7 +68,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-[96px] min-w-32"
+              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
             >
               {countdownData.days ?? "00"}
             </motion.div>
@@ -78,7 +78,7 @@ const LaunchCountdown = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-[14px] text-[#99A1AF] -mt-3"
+            className="text-xs md:text-sm lg:text-[14px] text-[#99A1AF] -mt-2 md:-mt-3"
           >
             DAYS
           </motion.div>
@@ -125,7 +125,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-[96px] min-w-32"
+              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
             >
               {countdownData.hours ?? "00"}
             </motion.div>
@@ -135,7 +135,7 @@ const LaunchCountdown = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-[14px] text-[#99A1AF] -mt-3"
+            className="text-xs md:text-sm lg:text-[14px] text-[#99A1AF] -mt-2 md:-mt-3"
           >
             HOURS
           </motion.div>
@@ -182,7 +182,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-[96px] min-w-32"
+              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
             >
               {countdownData.minutes ?? "00"}
             </motion.div>
@@ -192,7 +192,7 @@ const LaunchCountdown = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-[14px] text-[#99A1AF] -mt-3"
+            className="text-xs md:text-sm lg:text-[14px] text-[#99A1AF] -mt-2 md:-mt-3"
           >
             MINUTES
           </motion.div>
@@ -239,7 +239,7 @@ const LaunchCountdown = () => {
               variants={numberVariants}
               initial="initial"
               animate="animate"
-              className="text-[96px] min-w-32"
+              className="text-5xl md:text-7xl lg:text-[96px] min-w-20 md:min-w-28 lg:min-w-32"
             >
               {countdownData.seconds ?? "00"}
             </motion.div>
@@ -249,7 +249,7 @@ const LaunchCountdown = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-[14px] text-[#99A1AF] -mt-3"
+            className="text-xs md:text-sm lg:text-[14px] text-[#99A1AF] -mt-2 md:-mt-3"
           >
             SECONDS
           </motion.div>
@@ -261,7 +261,7 @@ const LaunchCountdown = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.8, duration: 0.6 }}
-        className="text-[#8092AC] text-[16px] mt-10"
+        className="text-[#8092AC] text-sm md:text-base lg:text-[16px] mt-8 md:mt-10"
       >
         December 8, 2025 — 00:00 UTC
       </motion.div>
@@ -271,7 +271,7 @@ const LaunchCountdown = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-        className="mt-17"
+        className="mt-12 md:mt-15 lg:mt-17 w-full overflow-x-auto px-4"
       >
         <CustomTimeline />
       </motion.div>
@@ -281,7 +281,7 @@ const LaunchCountdown = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 1.3, duration: 0.6 }}
-        className="text-[#8092AC] text-[18px] mt-7"
+        className="text-[#8092AC] text-base md:text-lg lg:text-[18px] mt-6 md:mt-7 px-4"
       >
         Check your eligibility now and be ready for launch day.
       </motion.div>
@@ -290,7 +290,7 @@ const LaunchCountdown = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 1.5, duration: 0.6 }}
-        className="text-[#3DDED7] text-[18px] mt-3 font-bold"
+        className="text-[#3DDED7] text-base md:text-lg lg:text-[18px] mt-3 font-bold px-4"
       >
         Over 50 million addresses are eligible.
       </motion.div>

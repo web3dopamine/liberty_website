@@ -71,19 +71,19 @@ const StayUpdated = () => {
   };
 
   return (
-    <div className="flex flex-col bg-black py-20 text-center items-center">
-      <div className="text-[96px] text-white z-2">Stay Updated</div>
-      <div className="text-[#99A1AF] text-[24px] mt-8 z-2">
+    <div className="flex flex-col bg-black py-16 md:py-20 text-center items-center px-4">
+      <div className="text-4xl md:text-6xl lg:text-[96px] text-white z-2">Stay Updated</div>
+      <div className="text-[#99A1AF] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 z-2 px-4">
         Get notified about snapshot dates, claim periods, and major announcements.
       </div>
 
-      <div className="bg-white flex flex-row justify-between w-[875px] h-[64px] rounded-4xl mt-20 items-center -mt-1">
+      <div className="bg-white flex flex-col md:flex-row justify-between w-full md:w-[875px] h-auto md:h-[64px] rounded-4xl mt-12 md:mt-20 items-center p-3 md:p-0 gap-3 md:gap-0">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           onKeyPress={handleKeyPress}
-          className="outline-none border-none px-15 w-[580px]"
+          className="outline-none border-none px-4 md:px-15 w-full md:w-[580px]"
           placeholder="E - M A I L"
           disabled={isSubmitting}
         />

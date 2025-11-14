@@ -16,19 +16,19 @@ const ProjectPhases = () => {
   const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
 
   return (
-    <div id="phases" className="text-center pt-40 pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
-      <div className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-[14px]">
+    <div id="phases" className="text-center pt-20 md:pt-30 lg:pt-40 pb-16 md:pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000] px-4">
+      <div className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-xs md:text-sm lg:text-[14px]">
         ROADMAP
       </div>
-      <div className="text-[96px] text-white mt-7">
+      <div className="text-4xl md:text-6xl lg:text-[96px] text-white mt-7">
         Project{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
           Phases
         </span>
       </div>
-      <div className="text-[#8092AC] text-[24px] mt-4">Track our progress from formation to global expansion</div>
+      <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">Track our progress from formation to global expansion</div>
 
-      <div className="flex flex-row mt-16 gap-10">
+      <div className="flex flex-col lg:flex-row mt-12 md:mt-16 gap-8 md:gap-10 w-full max-w-7xl">
         {/* Awareness & Anticipation */}
         <motion.div
           ref={phase1Ref}
@@ -38,16 +38,16 @@ const ProjectPhases = () => {
           whileHover={{
             scale: 1.03,
           }}
-          className="border group border-[#4A9390]/30 p-6 rounded-3xl flex flex-col relative text-start max-w-[612px] bg-linear-to-br from-[#2D5F5D]/20 via-[#000000] to-[#3A7875]/10 hover:to-[#3A7875]/20 hover:from-[#2D5F5D]/30  hover:shadow-2xl transition-all duration-300  ease-in-out select-none "
+          className="border group border-[#4A9390]/30 p-6 rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-linear-to-br from-[#2D5F5D]/20 via-[#000000] to-[#3A7875]/10 hover:to-[#3A7875]/20 hover:from-[#2D5F5D]/30  hover:shadow-2xl transition-all duration-300  ease-in-out select-none "
         >
-          <div className="absolute top-6 right-6 bg-[#376e6d] text-white text-[12px] px-4 py-[4px] rounded-2xl">
+          <div className="absolute top-6 right-6 bg-[#376e6d] text-white text-xs md:text-[12px] px-3 md:px-4 py-[4px] rounded-2xl">
             ACTIVE
           </div>
-          <div className="text-[#3A7875] text-[128px]">1</div>
-          <div className="text-[#ffffff] text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#3A7875] text-7xl md:text-8xl lg:text-[128px]">1</div>
+          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
             Awareness & Anticipation
           </div>
-          <div className="text-[#99A1AF] text-[18px] mt-2">
+          <div className="text-[#99A1AF] text-base md:text-lg lg:text-[18px] mt-2">
             Build community, ignite buzz, and set the tone of revolution. Launch campaign and prepare global snapshot
             hype.
           </div>

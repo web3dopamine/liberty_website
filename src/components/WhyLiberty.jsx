@@ -42,22 +42,22 @@ const WhyLiberty = () => {
   };
 
   return (
-    <div className="text-center pb-35 flex flex-col items-center bg-linear-to-b from-[#000000] via-[#204443] to-[#000000]">
-      <div className="text-[96px] text-white mt-7">
+    <div className="text-center pb-20 md:pb-28 lg:pb-35 flex flex-col items-center bg-linear-to-b from-[#000000] via-[#204443] to-[#000000] px-4">
+      <div className="text-4xl md:text-6xl lg:text-[96px] text-white mt-7">
         Why{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
           Liberty?
         </span>
       </div>
-      <div className="text-[#8092AC] text-[24px] mt-4">The most advanced decentralized protocol for Bitcoin</div>
-      <div className="flex flex-row mt-10 gap-8">
+      <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">The most advanced decentralized protocol for Bitcoin</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-6 md:gap-8 w-full max-w-7xl">
         <motion.div
           ref={card1Ref}
           initial={{ opacity: 0, y: 100 }}
           animate={card1InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           key={"card1"}
-          className="bg-white/5 border border-white/5 pt-6 pb-12 rounded-3xl w-[403px] transition-all duration-300 ease-out hover:bg-white/15 select-none"
+          className="bg-white/5 border border-white/5 pt-6 pb-12 rounded-3xl w-full transition-all duration-300 ease-out hover:bg-white/15 select-none"
           style={{
             perspective: "1000px",
             transform:
@@ -67,9 +67,9 @@ const WhyLiberty = () => {
           onMouseMove={(e) => handleMouseMove(e, "card1")}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={Armour} className="w-[125px]" />
-          <div className="uppercase text-white text-start text-[24px] px-8">Secure & Trustless</div>
-          <div className=" text-[#99A1AF] text-start text-[18px] mt-10 px-8">
+          <img src={Armour} className="w-20 md:w-24 lg:w-[125px]" />
+          <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Secure & Trustless</div>
+          <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">
             Built on Bitcoin's proven security model
           </div>
         </motion.div>
@@ -79,7 +79,7 @@ const WhyLiberty = () => {
           animate={card2InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           key={"card2"}
-          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-[403px] transition-all duration-300 ease-out hover:bg-white/15 select-none"
+          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-full transition-all duration-300 ease-out hover:bg-white/15 select-none"
           style={{
             perspective: "1000px",
             transform:
@@ -89,9 +89,9 @@ const WhyLiberty = () => {
           onMouseMove={(e) => handleMouseMove(e, "card2")}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={Lightening} className="w-[125px]" />
-          <div className="uppercase text-white text-start text-[24px] px-8">Gas-Free Transactions</div>
-          <div className=" text-[#99A1AF] text-start text-[18px] mt-10 px-8">No transaction fees for token claims</div>
+          <img src={Lightening} className="w-20 md:w-24 lg:w-[125px]" />
+          <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Gas-Free Transactions</div>
+          <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">No transaction fees for token claims</div>
         </motion.div>
         <motion.div
           ref={card3Ref}
@@ -99,7 +99,7 @@ const WhyLiberty = () => {
           animate={card3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
           key={"card3"}
-          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-[403px] transition-all duration-300 ease-out hover:bg-white/15 select-none"
+          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-full transition-all duration-300 ease-out hover:bg-white/15 select-none"
           style={{
             perspective: "1000px",
             transform:
@@ -109,21 +109,21 @@ const WhyLiberty = () => {
           onMouseMove={(e) => handleMouseMove(e, "card3")}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={CodeBlock} className="w-[125px]" />
-          <div className="uppercase text-white text-start text-[24px] px-8">Programmable</div>
-          <div className=" text-[#99A1AF] text-start text-[18px] mt-10 px-8">
+          <img src={CodeBlock} className="w-20 md:w-24 lg:w-[125px]" />
+          <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Programmable</div>
+          <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">
             Smart contract capabilities on Bitcoin
           </div>
         </motion.div>
       </div>
-      <div className="flex flex-row mt-8 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 md:mt-8 gap-6 md:gap-8 w-full max-w-7xl">
         <motion.div
           ref={card4Ref}
           initial={{ opacity: 0, y: 100 }}
           animate={card4InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           key={"card4"}
-          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-[403px] transition-all duration-300 ease-out hover:bg-white/15 select-none"
+          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-full transition-all duration-300 ease-out hover:bg-white/15 select-none"
           style={{
             perspective: "1000px",
             transform:
@@ -133,9 +133,9 @@ const WhyLiberty = () => {
           onMouseMove={(e) => handleMouseMove(e, "card4")}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={Lock} className="w-[125px]" />
-          <div className="uppercase text-white text-start text-[24px] px-8">Self-Custody</div>
-          <div className=" text-[#99A1AF] text-start text-[18px] mt-10 px-8">
+          <img src={Lock} className="w-20 md:w-24 lg:w-[125px]" />
+          <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Self-Custody</div>
+          <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">
             You maintain full control of your assets
           </div>
         </motion.div>
@@ -145,7 +145,7 @@ const WhyLiberty = () => {
           animate={card5InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           key={"card5"}
-          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-[403px] transition-all duration-300 ease-out hover:bg-white/15 select-none"
+          className="bg-white/5 border border-white/5 pt-6 pb-8 rounded-xl w-full transition-all duration-300 ease-out hover:bg-white/15 select-none"
           style={{
             perspective: "1000px",
             transform:
@@ -155,9 +155,9 @@ const WhyLiberty = () => {
           onMouseMove={(e) => handleMouseMove(e, "card5")}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={People} className="w-[125px]" />
-          <div className="uppercase text-white text-start text-[24px] px-8">Community Driven</div>
-          <div className=" text-[#99A1AF] text-start text-[18px] mt-10 px-8">Governed by token holders</div>
+          <img src={People} className="w-20 md:w-24 lg:w-[125px]" />
+          <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Community Driven</div>
+          <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">Governed by token holders</div>
         </motion.div>
         <motion.div
           ref={card6Ref}
@@ -165,7 +165,7 @@ const WhyLiberty = () => {
           animate={card6InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
           key={"card6"}
-          className="bg-white/5 border border-white/5 pt-6 pb-12 rounded-xl w-[403px] transition-all duration-300 ease-out hover:bg-white/15 select-none"
+          className="bg-white/5 border border-white/5 pt-6 pb-12 rounded-xl w-full transition-all duration-300 ease-out hover:bg-white/15 select-none"
           style={{
             perspective: "1000px",
             transform:
@@ -175,9 +175,9 @@ const WhyLiberty = () => {
           onMouseMove={(e) => handleMouseMove(e, "card6")}
           onMouseLeave={handleMouseLeave}
         >
-          <img src={Globe} className="w-[125px]" />
-          <div className="uppercase text-white text-start text-[24px] px-8">Global Access</div>
-          <div className=" text-[#99A1AF] text-start text-[18px] mt-10 px-8">Available to eligible users worldwide</div>
+          <img src={Globe} className="w-20 md:w-24 lg:w-[125px]" />
+          <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Global Access</div>
+          <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">Available to eligible users worldwide</div>
         </motion.div>
       </div>
     </div>

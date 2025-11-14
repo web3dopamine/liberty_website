@@ -42,12 +42,12 @@ const LBTCCalculator = () => {
   );
 
   return (
-    <div id="calculator" ref={sectionRef} className="text-center py-35 flex flex-col items-center bg-white">
+    <div id="calculator" ref={sectionRef} className="text-center py-16 md:py-25 lg:py-35 flex flex-col items-center bg-white px-4">
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-[96px] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
+        className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
       >
         LBTY{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
@@ -58,7 +58,7 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-        className="text-[#4A5565] text-[24px] mt-4"
+        className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-4 px-4"
       >
         Calculate how many LBTY tokens you'll receive at the 1:10 ratio
       </motion.div>
@@ -66,10 +66,10 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
-        className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-10 rounded-4xl mt-16 shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
+        className="bg-linear-to-tl from-[#2D5F5D]/10 via-white to-[#2D5F5D]/10 p-6 md:p-8 lg:p-10 rounded-4xl mt-10 md:mt-12 lg:mt-16 shadow-[0_20px_60px_rgba(0,0,0,0.25)] w-full max-w-2xl"
       >
-        <div className="text-[14px] text-[#4A5565] text-start tracking-widest">YOU HAVE BTC</div>
-        <div className="flex flex-row items-center gap-2 mt-3">
+        <div className="text-xs md:text-sm lg:text-[14px] text-[#4A5565] text-start tracking-widest">YOU HAVE BTC</div>
+        <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2 mt-3">
           <input
             value={input}
             onChange={(event) => {
@@ -79,24 +79,24 @@ const LBTCCalculator = () => {
             type="number"
             min={minClaim}
             step="0.0001"
-            className="text-[#717182] outline-none border-none px-4 shadow-lg rounded-3xl inset-shadow-sm h-[78px] w-[300px] text-[14px]"
+            className="text-[#717182] outline-none border-none px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full md:w-[300px] text-sm md:text-[14px]"
           />
-          <div className="text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-[160px] h-[78px] gap-4">
-            <div className="w-[40px] h-[40px] bg-linear-to-b from-[#FF8904] to-[#F54900] rounded-4xl shadow-lg flex items-center justify-center">
+          <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[160px] h-16 md:h-[78px] gap-3 md:gap-4">
+            <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#FF8904] to-[#F54900] rounded-4xl shadow-lg flex items-center justify-center">
               <BitcoinIcon />
             </div>
-            <div className="min-w-8 text-[20px]">BTC</div>
+            <div className="min-w-8 text-lg md:text-[20px]">BTC</div>
           </div>
         </div>
         
-        <div className="flex flex-row items-center gap-3 mt-5">
-          <div className="text-[12px] text-[#4A5565] tracking-wider">Quick Select:</div>
-          <div className="flex flex-row gap-2">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-3 mt-5">
+          <div className="text-xs md:text-[12px] text-[#4A5565] tracking-wider">Quick Select:</div>
+          <div className="flex flex-row gap-2 flex-wrap">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleQuickSelect(0.1)}
-              className="px-4 py-2 text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
+              className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
             >
               0.1 BTC
             </motion.button>
@@ -104,7 +104,7 @@ const LBTCCalculator = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleQuickSelect(0.5)}
-              className="px-4 py-2 text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
+              className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
             >
               0.5 BTC
             </motion.button>
@@ -112,7 +112,7 @@ const LBTCCalculator = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleQuickSelect(1)}
-              className="px-4 py-2 text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
+              className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
             >
               1 BTC
             </motion.button>
@@ -120,40 +120,40 @@ const LBTCCalculator = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleQuickSelect(2)}
-              className="px-4 py-2 text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
+              className="px-3 md:px-4 py-1.5 md:py-2 text-xs md:text-[12px] bg-white border border-[#3A7875]/30 rounded-2xl text-[#4A5565] hover:bg-[#3A7875]/10 hover:border-[#3A7875] transition-all"
             >
               2 BTC
             </motion.button>
           </div>
         </div>
 
-        <div className="text-[12px] text-[#4A5565] text-start mt-4 tracking-wider">
+        <div className="text-xs md:text-[12px] text-[#4A5565] text-start mt-4 tracking-wider">
           Conversion Rate: 1 BTC = 10 L-BTC • Minimum Claim: {minClaim} BTC
         </div>
 
-        <div className="text-[14px] text-[#4A5565] text-start mt-8 mb-4 tracking-widest">YOU CAN CLAIM LBTY</div>
-        <div className="flex flex-row items-center gap-2 ">
+        <div className="text-xs md:text-sm lg:text-[14px] text-[#4A5565] text-start mt-6 md:mt-8 mb-3 md:mb-4 tracking-widest">YOU CAN CLAIM LBTY</div>
+        <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2">
           <motion.div 
             key={displayedOutput}
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 0.3 }}
-            className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-[78px] w-[300px] text-[14px] flex items-center"
+            className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full md:w-[300px] text-sm md:text-[14px] flex items-center"
           >
             {displayedOutput.toFixed(2)}
           </motion.div>
-          <div className="text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-[160px] h-[78px] gap-4 border border-[#2D5F5D]/50 bg-[#3A7875]/10">
-            <div className="w-[40px] h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg flex items-center justify-center">
-              <img src={Logo} className="w-[24px] h-[24px]" alt="Liberty Logo" />
+          <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[160px] h-16 md:h-[78px] gap-3 md:gap-4 border border-[#2D5F5D]/50 bg-[#3A7875]/10">
+            <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg flex items-center justify-center">
+              <img src={Logo} className="w-5 h-5 md:w-[24px] md:h-[24px]" alt="Liberty Logo" />
             </div>
-            <div className="min-w-8 text-[20px]">LBTY</div>
+            <div className="min-w-8 text-lg md:text-[20px]">LBTY</div>
           </div>
         </div>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="border border-[#3A7875]/20 rounded-3xl mt-7 p-8 text-[16px] bg-linear-to-b from-[#2D5F5D]/10 to-[#3A7875]/10"
+          className="border border-[#3A7875]/20 rounded-3xl mt-6 md:mt-7 p-5 md:p-8 text-sm md:text-base lg:text-[16px] bg-linear-to-b from-[#2D5F5D]/10 to-[#3A7875]/10"
         >
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -184,7 +184,7 @@ const LBTCCalculator = () => {
           transition={{
             duration: 0.3,
           }}
-          className="bg-linear-to-b text-[18px] from-[#2D5F5D] to-[#3A7875] mt-8 text-white tracking-widest py-5 w-full rounded-4xl shadow-xl cursor-pointer hover:to-[#3A7875]/80 hover:shadow-2xl"
+          className="bg-linear-to-b text-base md:text-lg lg:text-[18px] from-[#2D5F5D] to-[#3A7875] mt-6 md:mt-8 text-white tracking-widest py-4 md:py-5 w-full rounded-4xl shadow-xl cursor-pointer hover:to-[#3A7875]/80 hover:shadow-2xl"
         >
           CALCULATE ELIGIBILITY
         </motion.button>

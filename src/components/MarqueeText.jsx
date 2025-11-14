@@ -10,14 +10,14 @@ export default function MarqueeText() {
     <div className="flex items-center justify-center bg-linear-to-b from-[#2D5F5D] to-[#3A7875]">
       <div className="w-full">
         {/* Marquee Container */}
-        <div className="relative overflow-hidden py-[13px]">
+        <div className="relative overflow-hidden py-3 md:py-[13px]">
           {/* Marquee Content */}
           <div className="flex animate-marquee whitespace-nowrap">
             {/* First set */}
             {repeatedItems.map((item, i) => (
               <div
                 key={`first-${i}`}
-                className="mx-8 text-[14px] font-extralight text-white inline-block tracking-widest"
+                className="mx-4 md:mx-8 text-xs md:text-sm lg:text-[14px] font-extralight text-white inline-block tracking-wider md:tracking-widest"
               >
                 {item}
               </div>
