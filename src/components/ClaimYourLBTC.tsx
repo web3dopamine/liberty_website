@@ -98,7 +98,7 @@ const ClaimYourLBTC = () => {
   };
 
   return (
-    <div className="text-center py-30 flex flex-col items-center bg-[#ffffff]">
+    <div id="claim-tokens" className="text-center py-30 flex flex-col items-center bg-[#ffffff]">
       <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
         <img src={WalletGreen} className="w-3" />
         <div className="text-[#2D5F5D] text-[14px]">Token Claim</div>

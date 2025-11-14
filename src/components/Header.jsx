@@ -34,19 +34,26 @@ const Header = () => {
     }
   };
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <>
       <div className={`fixed top-0 w-full flex flex-row items-center justify-between px-80 h-[89px] z-50 transition-all duration-500 ${
         showBackground ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'
       }`}>
         <img src={FullLogo} className="h-[45px]" />
-        <div className="flex flex-row font-bold items-center gap-7 text-[14px] text-white mt-1 ">
-          <button>About</button>
-          <button>Calculator</button>
-          <button>Claim Tokens</button>
-          <button>Phases</button>
-          <button>Grants</button>
-          <button>Community</button>
+        <div className="flex flex-row font-bold items-center gap-7 text-[16px] text-white mt-1 ">
+          <button className="hover:text-[#3A7875] transition-colors duration-200">About</button>
+          <button onClick={() => scrollToSection('calculator')} className="hover:text-[#3A7875] transition-colors duration-200">Calculator</button>
+          <button onClick={() => scrollToSection('claim-tokens')} className="hover:text-[#3A7875] transition-colors duration-200">Claim Tokens</button>
+          <button onClick={() => scrollToSection('phases')} className="hover:text-[#3A7875] transition-colors duration-200">Phases</button>
+          <button onClick={() => scrollToSection('grants')} className="hover:text-[#3A7875] transition-colors duration-200">Grants</button>
+          <button className="hover:text-[#3A7875] transition-colors duration-200">Community</button>
           <motion.button
             whileHover={{
               scale: 1.07,

@@ -82,7 +82,7 @@ const DeveloperGrantsProgram = () => {
   };
 
   return (
-    <div className="text-center py-40 flex flex-col items-center bg-[#f6f8f8]">
+    <div id="grants" className="text-center py-40 flex flex-col items-center bg-[#f6f8f8]">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}

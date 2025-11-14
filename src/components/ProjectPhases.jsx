@@ -16,7 +16,7 @@ const ProjectPhases = () => {
   const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
 
   return (
-    <div className="text-center pt-40 pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
+    <div id="phases" className="text-center pt-40 pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000]">
       <div className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-[14px]">
         ROADMAP
       </div>

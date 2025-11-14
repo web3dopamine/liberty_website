@@ -74,7 +74,7 @@ const LBTCCalculator = () => {
     : "";
 
   return (
-    <div ref={sectionRef} className="text-center py-35 flex flex-col items-center bg-white">
+    <div id="calculator" ref={sectionRef} className="text-center py-35 flex flex-col items-center bg-white">
       <motion.div 
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
