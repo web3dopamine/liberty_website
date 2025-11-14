@@ -93,6 +93,25 @@ The application uses PostgreSQL with the following tables:
 - `GET /api/grant-categories` - List grant categories
 
 ## Recent Changes
+- **November 14, 2025**: LBTY Calculator Improvements
+  - **Non-switchable Mode**: Removed swap functionality - calculator now only converts BTC to LBTY
+  - **Quick Select Buttons**: Added convenient quick select options (0.1 BTC, 0.5 BTC, 1 BTC, 2 BTC)
+  - **Minimum Claim**: Set minimum claim amount to 0.0003 BTC with validation
+  - **Updated Labels**: 
+    - Changed "YOU SEND" to "YOU HAVE BTC"
+    - Changed "YOU RECEIVE" to "YOU CAN CLAIM LBTY"
+  - **Enhanced UX**: Added conversion rate and minimum claim info display
+
+- **November 14, 2025**: Timeline Updates
+  - **Eligibility Check**: Updated to Dec 11, 2025 (3 days after snapshot)
+  - **Token Launch**: Updated to Feb 9, 2026 (60 days after eligibility check)
+  - **Claim Period**: Updated to Feb 10, 2026 (24 hours after token launch)
+
+- **November 14, 2025**: Hero Section Refinements
+  - Increased logo overlay video to 4800px for better text visibility
+  - Resized and repositioned CTA buttons for better visual hierarchy
+  - Improved button centering across all screen sizes
+
 - **November 12, 2025**: PSBT Backend Integration
   - **Secure Bitcoin Core RPC Proxy**: Added admin-authenticated endpoints for PSBT operations
     - `/api/bitcoin/rpc` - Secure RPC proxy with method allowlist
