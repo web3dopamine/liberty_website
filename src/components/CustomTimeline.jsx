@@ -6,7 +6,7 @@ const CustomTimeline = () => {
     {
       icon: CalendarIcon,
       title: "Snapshot On",
-      date: "Dec 25, 2025",
+      date: "Dec 2, 2025",
       completed: true,
       isLive: true,
     },
