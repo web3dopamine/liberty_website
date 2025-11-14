@@ -1,10 +1,12 @@
 import { useImperativeHandle, useState } from "react";
 import { ConnectWallet, Cross, MetaMask, Phantom, WalletConnect } from "../assets/images";
 import { useWallet } from "../contexts/WalletContext";
+import { useAppKit } from '@reown/appkit/react';
 
 const ConnectWalletModal = ({ ref }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { connectMetaMask, connectPhantom, isConnecting } = useWallet();
+  const { open } = useAppKit();
 
   useImperativeHandle(
     ref,
@@ -30,6 +32,11 @@ const ConnectWalletModal = ({ ref }) => {
     if (success) {
       setIsOpen(false);
     }
+  };
+
+  const handleWalletConnectClick = () => {
+    setIsOpen(false);
+    open();
   };
 
   return (
@@ -97,14 +104,17 @@ const ConnectWalletModal = ({ ref }) => {
             </div>
           </div>
 
-          <div className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-4 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10">
+          <div 
+            className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-4 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10"
+            onClick={handleWalletConnectClick}
+          >
             <div className="bg-white/10 p-1.5 rounded-2xl ">
               <img src={WalletConnect} className="w-[40px] h-[40px] p-1" />
             </div>
             <div className="flex flex-col">
-              <div className="text-[18px]">Wallet Connect</div>
-              <div className="text-[#99A1AF] text-[14px] mt-1 mb-1">Connect using Wallet Connect</div>
-              <div className="text-[#FF8904] text-[12px]">Not installed</div>
+              <div className="text-[18px]">500+ Wallets</div>
+              <div className="text-[#99A1AF] text-[14px] mt-1 mb-1">WalletConnect, Binance, Trust Wallet & more</div>
+              <div className="text-[#4A9390] text-[12px]">Click to search wallets</div>
             </div>
           </div>
         </div>

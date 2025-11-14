@@ -13,7 +13,10 @@ The project is a full-stack application built with a clear separation of concern
 *   **Framework:** React 19.1.1 with Vite 7.1.7 for fast development and bundling.
 *   **Styling:** Tailwind CSS 4.1.16 for utility-first styling, complemented by Motion 12.23.24 for animations.
 *   **Data Management:** TanStack React Query handles data fetching, and React Hook Form with Zod provides robust form handling and validation.
-*   **Wallet Integration:** `ethers.js 6.x` is used for MetaMask and Phantom wallet connections for EVM-compatible chains, while dedicated hooks and utilities (`useBitcoinWallet`) support Bitcoin wallets (XVerse, Unisat, OKX) for PSBT and message signing.
+*   **Wallet Integration:** 
+    - `ethers.js 6.x` for MetaMask and Phantom direct connections
+    - **Reown AppKit (formerly WalletConnect)** for 500+ wallet integrations including Binance Wallet, Trust Wallet, and more with built-in search functionality
+    - Dedicated Bitcoin wallet support (`useBitcoinWallet`) for XVerse, Unisat, and OKX for PSBT and message signing
 *   **UI/UX Decisions:** Features like a transparent header with scroll effects, custom modal notifications for subscriptions, and a professional, modern design aesthetic (e.g., in the `/ownership` page and Admin Panel) are central. The "AI Agent Launchpad" and calculator UIs are designed for clarity and user-friendliness with quick select options and clear labels.
 
 **Backend:**
@@ -37,5 +40,6 @@ The project is a full-stack application built with a clear separation of concern
 *   **SendGrid:** Email delivery service for notifications.
 *   **Replit OAuth:** Authentication provider for production environments.
 *   **Bitcoin Core RPC:** Interacted with via a secure proxy for PSBT operations and blockchain data.
+*   **Reown (WalletConnect):** Provides access to 500+ wallets through AppKit integration with search functionality.
 *   **XVerse, Unisat, OKX Wallets:** Integrated for Bitcoin wallet connectivity and signing.
-*   **MetaMask & Phantom:** Integrated for EVM-compatible wallet connectivity.
+*   **MetaMask & Phantom:** Direct integration for EVM-compatible wallet connectivity.
