@@ -86,7 +86,7 @@ const MainBanner = () => {
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-32 left-0 right-0 z-10 flex justify-center items-center">
+      <div className="absolute bottom-36 left-0 right-0 z-10 flex justify-center items-center">
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
