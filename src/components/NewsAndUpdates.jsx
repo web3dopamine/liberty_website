@@ -28,7 +28,7 @@ const NewsAndUpdates = () => {
   };
 
   return (
-    <div className="relative text-center flex flex-col items-center min-h-[1787px] pb-16 md:pb-20 overflow-hidden px-4">
+    <div className="relative text-center flex flex-col items-center min-h-[1787px] pb-16 md:pb-20 overflow-hidden px-4 bg-black lg:bg-transparent">
       <img src={NewsAndUpdatesBg} className="w-full absolute min-h-[1787px] object-cover" />
       <div className="absolute bottom-0 left-0 w-full h-[200px] bg-black z-10"></div>
       <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-30 md:mt-40 lg:mt-50 text-white z-2">
