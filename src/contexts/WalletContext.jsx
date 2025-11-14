@@ -36,6 +36,7 @@ export const WalletProvider = ({ children }) => {
       setAccount(address);
       
       localStorage.setItem('walletConnected', 'true');
+      localStorage.setItem('walletType', 'metamask');
       
       console.log('✅ MetaMask connected:', address);
       return true;
@@ -43,6 +44,41 @@ export const WalletProvider = ({ children }) => {
       console.error('❌ MetaMask connection error:', error);
       if (error.code === 4001) {
         alert('Connection request rejected. Please approve the connection request in MetaMask.');
+      }
+      return false;
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  const connectPhantom = async () => {
+    if (typeof window.phantom?.ethereum === 'undefined') {
+      alert('Phantom is not installed! Please install Phantom wallet to connect.');
+      window.open('https://phantom.app/', '_blank');
+      return false;
+    }
+
+    setIsConnecting(true);
+    try {
+      const provider = new ethers.BrowserProvider(window.phantom.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      
+      const signer = await provider.getSigner();
+      const address = await signer.getAddress();
+
+      setProvider(provider);
+      setSigner(signer);
+      setAccount(address);
+      
+      localStorage.setItem('walletConnected', 'true');
+      localStorage.setItem('walletType', 'phantom');
+      
+      console.log('✅ Phantom connected:', address);
+      return true;
+    } catch (error) {
+      console.error('❌ Phantom connection error:', error);
+      if (error.code === 4001) {
+        alert('Connection request rejected. Please approve the connection request in Phantom.');
       }
       return false;
     } finally {
@@ -64,8 +100,11 @@ export const WalletProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', (accounts) => {
+    const walletType = localStorage.getItem('walletType');
+    const walletProvider = walletType === 'phantom' ? window.phantom?.ethereum : window.ethereum;
+
+    if (walletProvider) {
+      walletProvider.on('accountsChanged', (accounts) => {
         if (accounts.length === 0) {
           disconnectWallet();
         } else {
@@ -73,14 +112,14 @@ export const WalletProvider = ({ children }) => {
         }
       });
 
-      window.ethereum.on('chainChanged', () => {
+      walletProvider.on('chainChanged', () => {
         window.location.reload();
       });
     }
 
     return () => {
-      if (window.ethereum) {
-        window.ethereum.removeAllListeners();
+      if (walletProvider) {
+        walletProvider.removeAllListeners();
       }
     };
   }, []);
@@ -91,6 +130,7 @@ export const WalletProvider = ({ children }) => {
     signer,
     isConnecting,
     connectMetaMask,
+    connectPhantom,
     disconnectWallet,
     truncateAddress,
     isConnected: !!account,

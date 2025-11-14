@@ -4,7 +4,7 @@ import { useWallet } from "../contexts/WalletContext";
 
 const ConnectWalletModal = ({ ref }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { connectMetaMask, isConnecting } = useWallet();
+  const { connectMetaMask, connectPhantom, isConnecting } = useWallet();
 
   useImperativeHandle(
     ref,
@@ -20,6 +20,13 @@ const ConnectWalletModal = ({ ref }) => {
 
   const handleMetaMaskClick = async () => {
     const success = await connectMetaMask();
+    if (success) {
+      setIsOpen(false);
+    }
+  };
+
+  const handlePhantomClick = async () => {
+    const success = await connectPhantom();
     if (success) {
       setIsOpen(false);
     }
@@ -70,14 +77,23 @@ const ConnectWalletModal = ({ ref }) => {
             </div>
           </div>
 
-          <div className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-4 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10">
+          <div 
+            className="flex flex-row items-center gap-4 bg-[#FFFFFF]/5 border border-white/5 rounded-2xl px-4 py-4 mt-4 hover:scale-104 transition-all duration-300 ease-in-out cursor-pointer active:scale-99 hover:bg-[#FFFFFF]/10"
+            onClick={handlePhantomClick}
+          >
             <div className="bg-white/10 p-1.5 rounded-2xl ">
               <img src={Phantom} className="w-[40px] h-[40px] p-1" />
             </div>
             <div className="flex flex-col">
               <div className="text-[18px]">Phantom</div>
               <div className="text-[#99A1AF] text-[14px] mt-1 mb-1">Connect using Phantom wallet</div>
-              <div className="text-[#FF8904] text-[12px]">Not installed</div>
+              {typeof window !== 'undefined' && typeof window.phantom?.ethereum === 'undefined' ? (
+                <div className="text-[#FF8904] text-[12px]">Not installed</div>
+              ) : isConnecting ? (
+                <div className="text-[#4A9390] text-[12px]">Connecting...</div>
+              ) : (
+                <div className="text-[#4A9390] text-[12px]">Click to connect</div>
+              )}
             </div>
           </div>
 
