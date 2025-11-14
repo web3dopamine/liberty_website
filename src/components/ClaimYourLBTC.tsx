@@ -127,7 +127,7 @@ const ClaimYourLBTC = () => {
           </div>
         </div>
         <div className="text-start text-[36px]">Select your wallet</div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-4 gap-4 md:gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-4 gap-4 md:gap-6 w-full">
           <motion.div
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 1.0 }}
@@ -174,7 +174,7 @@ const ClaimYourLBTC = () => {
             <div className="text-[#FF6900] text-[12px] mt-2">Not Detected</div>
           </motion.div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-6 gap-4 md:gap-6 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-6 gap-4 md:gap-6 w-full">
           <motion.div
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 1.0 }}
