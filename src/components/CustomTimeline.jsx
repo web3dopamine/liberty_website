@@ -31,7 +31,7 @@ const CustomTimeline = () => {
   ];
 
   return (
-    <div className="w-full max-w-[900px] py-16">
+    <div className="w-full max-w-[900px] mx-auto py-16">
       <div className="relative flex items-start justify-center">
         {/* Background line - full width, dim */}
         <div className="absolute top-8 left-0 right-0 h-[2px] bg-[#2D5F5D]/20" />
