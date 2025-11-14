@@ -214,29 +214,29 @@ const ClaimYourLBTC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5 mt-12 md:mt-16 lg:mt-20 w-full max-w-7xl">
-          <div className="flex flex-row border border-black/5 pt-6 w-full pb-8 rounded-3xl">
-            <img src={Armour} className="h-22" />
-            <div className="flex flex-col">
-              <div className="text-start text-[18px]">Secure connection</div>
-              <div className="flex flex-row items-center gap-2 mt-2">
-                <img src={Lock2} className="w-3" />
-                <div className="text-[#4A5565] text-[14px]">Sign a message to prove ownership</div>
+          <div className="flex flex-col md:flex-row border border-black/5 pt-6 w-full pb-8 rounded-3xl px-4 md:px-0 items-start text-left">
+            <img src={Armour} className="h-16 md:h-22 mb-4 md:mb-0" />
+            <div className="flex flex-col text-left w-full">
+              <div className="text-left text-base md:text-[18px] font-medium">Secure connection</div>
+              <div className="flex flex-row items-start gap-2 mt-3 text-left">
+                <img src={Lock2} className="w-3 mt-1 flex-shrink-0" />
+                <div className="text-[#4A5565] text-sm md:text-[14px] text-left">Sign a message to prove ownership</div>
               </div>
-              <div className="flex flex-row items-center gap-2 mt-2">
-                <img src={Lock2} className="w-3" />
-                <div className="text-[#4A5565] text-[14px]">Your keys remain private and secure</div>
+              <div className="flex flex-row items-start gap-2 mt-3 text-left">
+                <img src={Lock2} className="w-3 mt-1 flex-shrink-0" />
+                <div className="text-[#4A5565] text-sm md:text-[14px] text-left">Your keys remain private and secure</div>
               </div>
-              <div className="flex flex-row items-center gap-2 mt-2">
-                <img src={Lock2} className="w-3" />
-                <div className="text-[#4A5565] text-[14px]">No access to your funds</div>
+              <div className="flex flex-row items-start gap-2 mt-3 text-left">
+                <img src={Lock2} className="w-3 mt-1 flex-shrink-0" />
+                <div className="text-[#4A5565] text-sm md:text-[14px] text-left">No access to your funds</div>
               </div>
             </div>
           </div>
-          <div className="flex flex-row border border-black/3 pt-6 w-full pb-8 rounded-3xl bg-[#F9FAFB] gap-2">
-            <img src={Refresh} className="h-17 ml-2" />
-            <div className="flex flex-col">
-              <div className="text-start text-[18px]">Need help?</div>
-              <div className="text-start text-[14px] pr-3 text-[#4A5565] mt-2">
+          <div className="flex flex-col md:flex-row border border-black/3 pt-6 w-full pb-8 rounded-3xl bg-[#F9FAFB] px-4 md:px-2 items-start text-left gap-2 md:gap-2">
+            <img src={Refresh} className="h-16 md:h-17 mb-4 md:mb-0 md:ml-2" />
+            <div className="flex flex-col text-left w-full">
+              <div className="text-left text-base md:text-[18px] font-medium">Need help?</div>
+              <div className="text-left text-sm md:text-[14px] pr-3 text-[#4A5565] mt-3">
                 Wallet not detected? Try refreshing the page or check that your wallet extension is installed.
               </div>
               <motion.div
@@ -246,7 +246,7 @@ const ClaimYourLBTC = () => {
                 className="flex flex-row items-center gap-2 px-3 bg-white w-fit shadow-sm mt-4 py-2 rounded-2xl cursor-pointer"
               >
                 <img src={Refresh2} className="w-3 h-3" />
-                <button className="text-start text-[12px] cursor-pointer">Refresh page</button>
+                <button className="text-left text-[12px] cursor-pointer">Refresh page</button>
               </motion.div>
             </div>
           </div>
