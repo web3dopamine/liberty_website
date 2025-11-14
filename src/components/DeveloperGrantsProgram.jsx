@@ -100,8 +100,7 @@ const DeveloperGrantsProgram = () => {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="text-[96px] tracking-tight leading-30 mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
       >
-        AI Agent <br />
-        <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Launchpad</span>
+        <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Grant Program</span>
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
@@ -110,8 +109,8 @@ const DeveloperGrantsProgram = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-[#4A5565] text-[24px] mt-8"
       >
-        Launch the next generation of AI agents on Bitcoin Liberty. Get funded to build
-        <br /> intelligent, autonomous agents that revolutionize the LBTY ecosystem.
+        Accelerating innovation on Bitcoin Liberty. We fund developers and teams building
+        <br /> the future of decentralized applications on the LBTY blockchain.
       </motion.div>
       {/* TABS */}
       <motion.div
