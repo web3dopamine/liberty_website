@@ -2,7 +2,7 @@ import { Community, Discord, FollowArrow, Stack, Telegram, X } from "../assets/i
 
 const JoinTheRevolution = () => {
   return (
-    <div className="text-center py-40 pt-28 flex flex-col items-center bg-[#f6f8f8]">
+    <div id="community" className="text-center py-40 pt-28 flex flex-col items-center bg-[#f6f8f8]">
       <div className="flex flex-row gap-2 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
         <img src={Community} className="w-4" />
         <div className="text-[#2D5F5D] text-[14px]">Community</div>

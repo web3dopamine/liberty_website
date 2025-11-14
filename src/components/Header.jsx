@@ -53,7 +53,7 @@ const Header = () => {
           <button onClick={() => scrollToSection('claim-tokens')} className="hover:text-[#3A7875] transition-colors duration-200">Claim Tokens</button>
           <button onClick={() => scrollToSection('phases')} className="hover:text-[#3A7875] transition-colors duration-200">Phases</button>
           <button onClick={() => scrollToSection('grants')} className="hover:text-[#3A7875] transition-colors duration-200">Grants</button>
-          <button className="hover:text-[#3A7875] transition-colors duration-200">Community</button>
+          <button onClick={() => scrollToSection('community')} className="hover:text-[#3A7875] transition-colors duration-200">Community</button>
           <motion.button
             whileHover={{
               scale: 1.07,
