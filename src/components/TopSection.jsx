@@ -81,7 +81,7 @@ const Typewriter = ({ text, delay = 100, className }) => {
 
 const MainBanner = () => {
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div id="hero" className="relative flex flex-col min-h-screen">
       <Header />
 
       <VideoPlayer />

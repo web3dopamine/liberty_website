@@ -48,7 +48,7 @@ const Header = () => {
       }`}>
         <img src={FullLogo} className="h-[45px]" />
         <div className="flex flex-row font-bold items-center gap-7 text-[16px] text-white mt-1 ">
-          <button className="hover:text-[#3A7875] transition-colors duration-200">About</button>
+          <button onClick={() => scrollToSection('hero')} className="hover:text-[#3A7875] transition-colors duration-200">About</button>
           <button onClick={() => scrollToSection('calculator')} className="hover:text-[#3A7875] transition-colors duration-200">Calculator</button>
           <button onClick={() => scrollToSection('claim-tokens')} className="hover:text-[#3A7875] transition-colors duration-200">Claim Tokens</button>
           <button onClick={() => scrollToSection('phases')} className="hover:text-[#3A7875] transition-colors duration-200">Phases</button>
