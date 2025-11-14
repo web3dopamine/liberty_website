@@ -9,7 +9,7 @@ const CheckYourEligibility = () => {
       alert("Please enter a Bitcoin address");
       return;
     }
-    window.location.href = `/ownership?address=${encodeURIComponent(input)}`;
+    window.open(`/ownership?address=${encodeURIComponent(input)}`, '_blank');
   };
 
   const containerVariants = {
