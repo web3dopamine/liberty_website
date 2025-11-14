@@ -77,20 +77,20 @@ const StayUpdated = () => {
         Get notified about snapshot dates, claim periods, and major announcements.
       </div>
 
-      <div className="bg-white flex flex-col md:flex-row justify-between w-full md:w-[875px] h-auto md:h-[64px] rounded-4xl mt-12 md:mt-20 items-center p-3 md:p-0 gap-3 md:gap-0">
+      <div className="bg-white flex flex-col md:flex-row justify-between w-full max-w-full md:max-w-[700px] lg:max-w-[875px] h-auto md:h-[64px] rounded-4xl mt-12 md:mt-20 items-center p-3 md:p-0 gap-3 md:gap-0">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           onKeyPress={handleKeyPress}
-          className="outline-none border-none px-4 md:px-15 w-full md:w-[580px]"
+          className="outline-none border-none px-4 md:px-8 lg:px-15 w-full md:flex-1"
           placeholder="E - M A I L"
           disabled={isSubmitting}
         />
         <button
           onClick={handleSubscribe}
           disabled={isSubmitting}
-          className="bg-[#2C6468] h-[64px] rounded-4xl px-6 md:px-12 flex text-white items-center justify-center text-base md:text-[20px] cursor-pointer hover:text-black hover:bg-[#2C6468]/50 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed w-full md:w-auto whitespace-nowrap"
+          className="bg-[#2C6468] h-[64px] rounded-4xl px-6 md:px-8 lg:px-12 flex text-white items-center justify-center text-base md:text-lg lg:text-[20px] cursor-pointer hover:text-black hover:bg-[#2C6468]/50 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed w-full md:w-auto whitespace-nowrap"
         >
           {isSubmitting ? "SUBSCRIBING..." : "S U B S C R I B E"}
         </button>
