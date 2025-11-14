@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const CountdownTimer = ({ target = 1733616000000, onTick = () => {} }) => {
+const CountdownTimer = ({ target = 1765152000000, onTick = () => {} }) => {
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = Date.now();
