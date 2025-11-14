@@ -40,11 +40,11 @@ const GrantApplicationProcess = () => {
       </div>
 
       <div className="flex flex-col bg-linear-to-b from-[#0A1F20] to-[#105359] text-white items-center pt-8 md:pt-10 pb-12 md:pb-14 mt-16 md:mt-20 lg:mt-23 px-6 md:px-20 lg:px-60 rounded-4xl w-full max-w-7xl">
-        <div className="text-[60px]">Ready to build with Liberty?</div>
-        <div className="text-white/90 text-[24px] mt-2 font-light">
+        <div className="text-3xl md:text-5xl lg:text-[60px]">Ready to build with Liberty?</div>
+        <div className="text-white/90 text-base md:text-xl lg:text-[24px] mt-2 font-light">
           From proposal to deployment, we support you every step of the way.
         </div>
-        <div className="text-white/90 text-[24px] font-light">Average approval time: 2 weeks</div>
+        <div className="text-white/90 text-base md:text-xl lg:text-[24px] font-light">Average approval time: 2 weeks</div>
         <motion.div
           whileHover={{
             scale: 1.07,
@@ -58,7 +58,7 @@ const GrantApplicationProcess = () => {
           <img src={NoteGreen} className="w-4 h-4" />
           <div className="text-[#2D5F5D] text-[18px] font-medium "> Start Your Application</div>
         </motion.div>
-        <div className="flex flex-row gap-8 items-center text-white/80">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-center text-white/80 text-sm md:text-base">
           <div className="flex flex-row items-center gap-2">
             <div className="w-1.5 h-1.5 bg-white rounded-2xl" />
             <div>No application fee</div>

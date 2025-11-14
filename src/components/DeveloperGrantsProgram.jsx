@@ -107,7 +107,7 @@ const DeveloperGrantsProgram = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="text-[#4A5565] text-[24px] mt-8"
+        className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4"
       >
         Accelerating innovation on Bitcoin Liberty. We fund developers and teams building
         <br /> the future of decentralized applications on the LBTY blockchain.
@@ -118,7 +118,7 @@ const DeveloperGrantsProgram = () => {
         whileInView="visible"
         viewport={{ once: true }}
         variants={containerVariants}
-        className="flex flex-row mt-24 gap-4"
+        className="flex flex-row flex-wrap justify-center mt-12 md:mt-20 lg:mt-24 gap-3 md:gap-4 w-full max-w-7xl"
       >
         <motion.button
           variants={tabVariants}
@@ -206,7 +206,7 @@ const DeveloperGrantsProgram = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="grid grid-cols-2 gap-8 auto-rows-fr mt-15 min-h-[500px]"
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 auto-rows-fr mt-10 md:mt-15 min-h-[500px] w-full max-w-7xl"
       >
         <AnimatePresence mode="wait">
           {GrantsData.map((item, index) => {
