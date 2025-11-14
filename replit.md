@@ -18,8 +18,9 @@ The project is a full-stack application built with a clear separation of concern
     - **Reown AppKit (formerly WalletConnect)** for 500+ wallet integrations including Binance Wallet, Trust Wallet, and more with built-in search functionality
     - Dedicated Bitcoin wallet support (`useBitcoinWallet`) for XVerse, Unisat, and OKX for PSBT and message signing
 *   **UI/UX Decisions:** Features like a transparent header with scroll effects, custom modal notifications for subscriptions, and a professional, modern design aesthetic (e.g., in the `/ownership` page and Admin Panel) are central. The "Grant Program" and calculator UIs are designed for clarity and user-friendliness with quick select options and clear labels.
-*   **Responsive Design:** Fully responsive header navbar and footer with mobile-first approach:
+*   **Responsive Design:** Fully responsive header navbar, hero section, and footer with mobile-first approach:
     - **Header**: Desktop navigation menu transforms into animated hamburger menu on mobile/tablet (below lg breakpoint). Includes automatic menu closure on viewport resize to desktop width and scroll-lock prevention.
+    - **Hero Section**: Logo overlay scales from 90% width on mobile to 70% on desktop (max 1200px). Call-to-action buttons stack vertically on mobile and display side-by-side on tablet/desktop. Adaptive bottom positioning and button sizing across all breakpoints.
     - **Footer**: Single-column stacked layout on mobile/tablet, expanding to 4-column grid on desktop (lg breakpoint and above). All spacing and typography scales responsively across breakpoints.
     - **Breakpoints**: Mobile (default), md (768px), lg (1024px), xl (1280px)
 
