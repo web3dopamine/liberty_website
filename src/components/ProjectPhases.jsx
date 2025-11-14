@@ -74,10 +74,10 @@ const ProjectPhases = () => {
           whileHover={{
             scale: 1.03,
           }}
-          className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
+          className=" p-6 group rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
-          <div className="text-[#FFFFFF]/10 text-[128px] ">2</div>
-          <div className="text-[#ffffff] text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">2</div>
+          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
             Snapshot + Claim
           </div>
           <div className="text-[#99A1AF] text-[18px] mt-2">
@@ -98,7 +98,7 @@ const ProjectPhases = () => {
         </motion.div>
       </div>
 
-      <div className="flex flex-row mt-10 gap-10">
+      <div className="flex flex-col lg:flex-row mt-8 md:mt-10 gap-8 md:gap-10 w-full max-w-7xl">
         {/* Genesis Launch */}
         <motion.div
           ref={phase3Ref}
@@ -108,10 +108,10 @@ const ProjectPhases = () => {
           whileHover={{
             scale: 1.03,
           }}
-          className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
+          className=" p-6 group rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
-          <div className="text-[#FFFFFF]/10 text-[128px] ">3</div>
-          <div className="text-[#ffffff] text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">3</div>
+          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
             Genesis Launch
           </div>
           <div className="text-[#99A1AF] text-[18px] mt-2">
@@ -140,10 +140,10 @@ const ProjectPhases = () => {
           whileHover={{
             scale: 1.03,
           }}
-          className=" p-6 group rounded-3xl flex flex-col relative text-start max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
+          className=" p-6 group rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
-          <div className="text-[#FFFFFF]/10 text-[128px] ">4</div>
-          <div className="text-[#ffffff] text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">4</div>
+          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
             Expansion
           </div>
           <div className="text-[#99A1AF] text-[18px] mt-2">

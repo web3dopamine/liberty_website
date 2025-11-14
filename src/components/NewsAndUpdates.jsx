@@ -28,19 +28,19 @@ const NewsAndUpdates = () => {
   };
 
   return (
-    <div className="relative text-center flex flex-col items-center min-h-[1787px] pb-20 overflow-hidden">
+    <div className="relative text-center flex flex-col items-center min-h-[1787px] pb-16 md:pb-20 overflow-hidden px-4">
       <img src={NewsAndUpdatesBg} className="w-full absolute min-h-[1787px] object-cover" />
       <div className="absolute bottom-0 left-0 w-full h-[200px] bg-black z-10"></div>
-      <div className="text-[96px] tracking-tight leading-30 mt-8 text-white z-2 mt-50">
+      <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-30 md:mt-40 lg:mt-50 text-white z-2">
         News <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">& updates</span>
       </div>
       <div className="text-[#99A1AF] text-[24px] mt-8 z-2">
         Get notified about snapshot dates, claim periods, and major announcements.
       </div>
-      <div className="flex flex-row z-2 gap-12 mt-30">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 z-2 gap-8 md:gap-10 lg:gap-12 mt-16 md:mt-24 lg:mt-30 w-full max-w-7xl">
         <div
           key={"card1"}
-          className="flex flex-col text-start max-w-[400px] bg-white/5 rounded-4xl border border-white/5 py-5 pb-10 transition-all duration-300 ease-out hover:bg-white/15"
+          className="flex flex-col text-start w-full bg-white/5 rounded-4xl border border-white/5 py-5 pb-10 transition-all duration-300 ease-out hover:bg-white/15"
           style={{
             perspective: "1000px",
             transform:
@@ -60,7 +60,7 @@ const NewsAndUpdates = () => {
 
         <div
           key={"card2"}
-          className="flex flex-col text-start max-w-[400px] bg-white/5 rounded-4xl border border-white/5 py-5 pb-10 transition-all duration-300 ease-out hover:bg-white/15"
+          className="flex flex-col text-start w-full bg-white/5 rounded-4xl border border-white/5 py-5 pb-10 transition-all duration-300 ease-out hover:bg-white/15"
           style={{
             perspective: "1000px",
             transform:
@@ -80,7 +80,7 @@ const NewsAndUpdates = () => {
 
         <div
           key={"card3"}
-          className="flex flex-col text-start max-w-[400px] bg-white/5 rounded-4xl border border-white/5 py-5 pb-10 transition-all duration-300 ease-out hover:bg-white/15"
+          className="flex flex-col text-start w-full bg-white/5 rounded-4xl border border-white/5 py-5 pb-10 transition-all duration-300 ease-out hover:bg-white/15"
           style={{
             perspective: "1000px",
             transform:

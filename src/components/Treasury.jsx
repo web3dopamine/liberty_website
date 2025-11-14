@@ -18,12 +18,12 @@ const Treasury = () => {
   const chartRef = useRef(null);
   const isInView = useInView(chartRef, { once: true, margin: "-100px" });
   return (
-    <div className="text-center py-10 pb-30 flex flex-col items-center bg-[#ffffff]">
+    <div className="text-center py-16 md:py-20 lg:py-30 flex flex-col items-center bg-[#ffffff] px-4">
       <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
         <img src={CoinClock} className="w-4" />
-        <div className="text-[#2D5F5D] text-[14px]">Treasury Breakdown</div>
+        <div className="text-[#2D5F5D] text-xs md:text-sm lg:text-[14px]">Treasury Breakdown</div>
       </div>
-      <div className="text-[96px] tracking-tight leading-30 mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
+      <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6 md:mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
         Liberty Bitcoin <br />
         <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Treasury</span>
       </div>
@@ -31,9 +31,9 @@ const Treasury = () => {
         Conceptual treasury based on dormant BTC (5-10 years) and unclaimed LBTY tokens
       </div>
       <div className="flex flex-col relative mt-25 bg-linear-to-b from-[#ffffff] via-black/8 to-white pt-20 px-13 rounded-4xl pb-15 shadow-[3px_6px_34px_-4px_rgba(0,0,0,0.1)]">
-        <div className="flex flex-row items-center gap-25 justify-center">
+        <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-20 lg:gap-25 justify-center w-full">
           <div className="flex flex-col">
-            <div ref={chartRef} className="w-[448px] h-[448px] relative flex flex-col items-center justify-center ">
+            <div ref={chartRef} className="w-full max-w-[448px] aspect-square relative flex flex-col items-center justify-center">
               <motion.img
                 src={RoundSegment}
                 className="absolute left-0 top-0 w-full"
@@ -71,7 +71,7 @@ const Treasury = () => {
               </motion.div>
             </div>
 
-            <div className="flex flex-row mt-8 gap-30 ml-3">
+            <div className="flex flex-col md:flex-row mt-6 md:mt-8 gap-6 md:gap-18 lg:gap-30 ml-0 md:ml-3 items-start">
               <div className="flex flex-col gap-4">
                 <div className="flex flex-row items-center gap-3">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl" />
@@ -132,8 +132,8 @@ const Treasury = () => {
           <div className="text-[36px]">Treasury Summary</div>
         </div>
 
-        <div className="flex flex-row gap-6 mt-8">
-          <div className="flex flex-col w-[267.5px] text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-6 md:mt-8 w-full max-w-7xl">
+          <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#2D5F5D] absolute top-8 right-6 text-[24px]">12.5%</div>
             <img src={Building} className="w-[48px] h-[48px]" />
             <div className="text-[#4A5565] mt-3 text-[14px]">Dormant 5-10 years</div>
@@ -142,7 +142,7 @@ const Treasury = () => {
             <div className="text-[#000000] text-[30px] mt-2">2,630,000</div>
             <div className="text-[#6A7282] text-[14px]">BTC</div>
           </div>
-          <div className="flex flex-col w-[267.5px] text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
+          <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#3A7875] absolute top-8 right-6 text-[24px]">8.6%</div>
             <img src={Lock3} className="w-[48px] h-[48px]" />
             <div className="text-[#4A5565] mt-3 text-[14px]">Lost BTC (non-Satoshi)</div>
@@ -151,7 +151,7 @@ const Treasury = () => {
             <div className="text-[#000000] text-[30px] mt-2">1,800,000</div>
             <div className="text-[#6A7282] text-[14px]">BTC</div>
           </div>
-          <div className="flex flex-col w-[267.5px] text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
+          <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#4A9390] absolute top-8 right-6 text-[24px]">5.2%</div>
             <img src={User} className="w-[48px] h-[48px]" />
             <div className="text-[#4A5565] mt-3 text-[14px]">Satoshi's Coins</div>
@@ -160,7 +160,7 @@ const Treasury = () => {
             <div className="text-[#000000] text-[30px] mt-2">1,100,000</div>
             <div className="text-[#6A7282] text-[14px]">BTC</div>
           </div>
-          <div className="flex flex-col w-[267.5px] text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
+          <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#6EB5B1] absolute top-8 right-6 text-[24px]">73.7%</div>
             <img src={Lightening3} className="w-[48px] h-[48px]" />
             <div className="text-[#4A5565] mt-3 text-[14px]">Active Supply</div>

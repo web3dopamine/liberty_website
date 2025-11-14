@@ -82,7 +82,7 @@ const DeveloperGrantsProgram = () => {
   };
 
   return (
-    <div id="grants" className="text-center py-40 flex flex-col items-center bg-[#f6f8f8]">
+    <div id="grants" className="text-center py-20 md:py-30 lg:py-40 flex flex-col items-center bg-[#f6f8f8] px-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -98,7 +98,7 @@ const DeveloperGrantsProgram = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-[96px] tracking-tight leading-30 mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
+        className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6 md:mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
       >
         <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Grant Program</span>
       </motion.div>
