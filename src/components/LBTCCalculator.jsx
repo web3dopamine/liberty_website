@@ -81,7 +81,7 @@ const LBTCCalculator = () => {
             step="0.0001"
             className="text-[#717182] outline-none border-none px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full text-sm md:text-[14px]"
           />
-          <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[160px] h-16 md:h-[78px] gap-3 md:gap-4">
+          <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[220px] h-16 md:h-[78px] gap-3 md:gap-4">
             <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#FF8904] to-[#F54900] rounded-4xl shadow-lg flex items-center justify-center">
               <BitcoinIcon />
             </div>
@@ -142,7 +142,7 @@ const LBTCCalculator = () => {
           >
             {displayedOutput.toFixed(2)}
           </motion.div>
-          <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[160px] h-16 md:h-[78px] gap-3 md:gap-4 border border-[#2D5F5D]/50 bg-[#3A7875]/10">
+          <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[220px] h-16 md:h-[78px] gap-3 md:gap-4 border border-[#2D5F5D]/50 bg-[#3A7875]/10">
             <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg flex items-center justify-center">
               <img src={Logo} className="w-5 h-5 md:w-[24px] md:h-[24px]" alt="Liberty Logo" />
             </div>
