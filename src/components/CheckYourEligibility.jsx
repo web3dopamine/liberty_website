@@ -1,15 +1,45 @@
 import { useState } from "react";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const CheckYourEligibility = () => {
   const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [balanceData, setBalanceData] = useState(null);
+  const [error, setError] = useState("");
 
-  const handleCheckNow = () => {
+  const handleCheckNow = async () => {
     if (!input.trim()) {
-      alert("Please enter a Bitcoin address");
+      setError("Please enter a Bitcoin address");
       return;
     }
-    window.open(`/ownership?address=${encodeURIComponent(input)}`, '_blank');
+
+    setLoading(true);
+    setError("");
+    setBalanceData(null);
+
+    try {
+      const response = await fetch('/api/check-btc-balance', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ address: input.trim() })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message || "Failed to check balance");
+        return;
+      }
+
+      setBalanceData(data);
+    } catch (err) {
+      setError("Network error. Please try again.");
+      console.error("Balance check error:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const containerVariants = {
@@ -95,17 +125,62 @@ const CheckYourEligibility = () => {
           />
           <motion.button
             onClick={handleCheckNow}
+            disabled={loading}
             whileHover={{
-              scale: 1.07,
+              scale: loading ? 1 : 1.07,
             }}
             whileTap={{
-              scale: 1.0,
+              scale: loading ? 1 : 1.0,
             }}
-            className="bg-linear-to-b w-[204px] text-[18px] from-[#2D5F5D] to-[#3A7875] text-white tracking-widest h-[64px] rounded-4xl cursor-pointer shadow-2xl hover:to-[#3A7875]/80 hover:shadow-3xl"
+            className={`bg-linear-to-b w-[204px] text-[18px] from-[#2D5F5D] to-[#3A7875] text-white tracking-widest h-[64px] rounded-4xl cursor-pointer shadow-2xl hover:to-[#3A7875]/80 hover:shadow-3xl ${loading ? 'opacity-70 cursor-not-allowed' : ''}`}
           >
-            CHECK NOW
+            {loading ? "CHECKING..." : "CHECK NOW"}
           </motion.button>
         </motion.div>
+
+        <AnimatePresence mode="wait">
+          {error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mt-4 text-red-500 text-[14px]"
+            >
+              {error}
+            </motion.div>
+          )}
+
+          {balanceData && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="mt-6 bg-white/50 backdrop-blur-sm rounded-2xl p-6 border border-[#2D5F5D]/20"
+            >
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-left">
+                  <div className="text-[#6A7282] text-[12px] uppercase tracking-wider mb-2">BTC Balance</div>
+                  <div className="text-[32px] font-bold text-[#2D5F5D]">
+                    {balanceData.btcBalance.toFixed(8)}
+                  </div>
+                  <div className="text-[#4A5565] text-[14px] mt-1">Bitcoin</div>
+                </div>
+                <div className="text-left">
+                  <div className="text-[#6A7282] text-[12px] uppercase tracking-wider mb-2">LBTY Claimable</div>
+                  <div className="text-[32px] font-bold bg-linear-to-r from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">
+                    {balanceData.lbtyClaimable.toFixed(8)}
+                  </div>
+                  <div className="text-[#4A5565] text-[14px] mt-1">Liberty Tokens (1:10 ratio)</div>
+                </div>
+              </div>
+              {!balanceData.eligible && (
+                <div className="mt-4 text-orange-600 text-[14px] bg-orange-50 p-3 rounded-lg">
+                  ⚠️ Minimum 0.003 BTC required for eligibility
+                </div>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
         <motion.div
           variants={containerVariants}
           initial="hidden"

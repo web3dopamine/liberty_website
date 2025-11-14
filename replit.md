@@ -24,22 +24,21 @@ The project is a full-stack application built with a clear separation of concern
 *   **Database:** PostgreSQL, leveraging Replit's Neon-backed database, managed by Drizzle ORM for type-safe schema definition and queries.
 *   **Authentication:** Passport.js with OAuth2 (Replit Auth in production) handles user authentication, though it's disabled in development for ease of testing.
 *   **Email Services:** SendGrid is integrated for email notifications (e.g., for grant applications).
-*   **Bitcoin RPC Proxy:** Secure, admin-authenticated endpoints proxy Bitcoin Core RPC commands for PSBT operations (e.g., `createpsbt`, `finalizepsbt`), ensuring secure interaction with the Bitcoin network.
+*   **Bitcoin RPC Integration:** Direct integration with Bitcoin Core RPC node for balance checking (`getaddressbalance`) and PSBT operations (`createpsbt`, `finalizepsbt`). Uses environment secrets (`BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, `BITCOIN_RPC_PASS`) for secure authentication.
 
 **Core Features & Implementations:**
-*   **AI Agent Launchpad:** A rebranded and re-focused grant program for funding autonomous AI agents with specific categories (DeFi Trading, Smart Contract AI Auditor, Autonomous Portfolio Manager, On-Chain Analytics Agent) and funding ranges.
-*   **Eligibility Checker:** Allows users to check BTC address eligibility, navigating to a dedicated `/ownership` page where PSBT and message signature verification can occur.
+*   **Grant Program:** Developer grants program for funding projects building on Bitcoin Liberty with various categories (DeFi, Infrastructure, Developer Tools, AI/ML) and customizable funding ranges.
+*   **Eligibility Checker:** Real-time BTC address balance checker using Bitcoin Core RPC (`getaddressbalance`). Displays BTC balance and potential LBTY claimable amount (1:10 ratio) directly below the input field. Minimum 0.003 BTC required for eligibility.
 *   **LBTY Calculator:** Converts BTC to LBTY with quick select options and minimum claim validation.
 *   **Email Subscription:** A functional newsletter subscription system with email validation and custom modal feedback.
-*   **Admin Panel:** A comprehensive UI at `/admin` for managing AI Agent Launchpad applications, including search, filters, status updates, and an integrated real-time chat system between admins and applicants using unique tokens.
+*   **Admin Panel:** A comprehensive UI at `/admin` for managing grant applications, including search, filters, status updates, and an integrated real-time chat system between admins and applicants using unique tokens.
 *   **PSBT Integration:** The system supports creating, finalizing, and broadcasting self-send PSBTs for ownership verification, integrating with various Bitcoin wallets.
 
 ### External Dependencies
 *   **PostgreSQL (Neon-backed Replit database):** Primary database for all application data.
-*   **Blockchain.com API:** Used for BTC address eligibility checks.
+*   **Bitcoin Core RPC Node:** Direct connection to user's Bitcoin node at http://37.27.97.175:8332 for address balance checks and PSBT operations. Requires `BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, and `BITCOIN_RPC_PASS` secrets.
 *   **SendGrid:** Email delivery service for notifications.
 *   **Replit OAuth:** Authentication provider for production environments.
-*   **Bitcoin Core RPC:** Interacted with via a secure proxy for PSBT operations and blockchain data.
-*   **Reown (WalletConnect):** Provides access to 500+ wallets through AppKit integration with search functionality.
+*   **Reown (WalletConnect):** Provides access to 500+ wallets (Trust Wallet, Binance Wallet featured) through AppKit integration with search functionality.
 *   **XVerse, Unisat, OKX Wallets:** Integrated for Bitcoin wallet connectivity and signing.
 *   **MetaMask & Phantom:** Direct integration for EVM-compatible wallet connectivity.

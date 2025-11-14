@@ -40,6 +40,101 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Bitcoin RPC balance check endpoint using user's Bitcoin Core node
+  app.post("/api/check-btc-balance", async (req, res) => {
+    try {
+      const { address } = req.body;
+      
+      if (!address || typeof address !== 'string') {
+        return res.status(400).json({ message: "Bitcoin address is required" });
+      }
+
+      // Basic BTC address validation
+      const btcAddressRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,87}$/;
+      if (!btcAddressRegex.test(address)) {
+        return res.status(400).json({ message: "Invalid Bitcoin address format" });
+      }
+
+      // Get Bitcoin RPC credentials from environment
+      const rpcUrl = process.env.BITCOIN_RPC_URL;
+      const rpcUser = process.env.BITCOIN_RPC_USER;
+      const rpcPass = process.env.BITCOIN_RPC_PASS;
+
+      if (!rpcUrl || !rpcUser || !rpcPass) {
+        console.error("Missing Bitcoin RPC credentials in environment");
+        return res.status(500).json({ message: "Bitcoin RPC not configured" });
+      }
+
+      try {
+        // Call Bitcoin RPC getaddressbalance method
+        const rpcResponse = await fetch(rpcUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic ' + Buffer.from(`${rpcUser}:${rpcPass}`).toString('base64')
+          },
+          body: JSON.stringify({
+            jsonrpc: '1.0',
+            id: 'check-balance',
+            method: 'getaddressbalance',
+            params: [{ addresses: [address] }]
+          })
+        });
+
+        if (!rpcResponse.ok) {
+          console.error(`Bitcoin RPC error: ${rpcResponse.status}`);
+          return res.status(503).json({ 
+            message: "Unable to connect to Bitcoin node",
+            error: "Bitcoin RPC service unavailable"
+          });
+        }
+
+        const rpcData = await rpcResponse.json();
+        
+        if (rpcData.error) {
+          console.error("Bitcoin RPC returned error:", rpcData.error);
+          return res.status(400).json({ 
+            message: "Error fetching balance from Bitcoin node",
+            error: rpcData.error.message
+          });
+        }
+
+        // Get balance in satoshis and convert to BTC
+        const balanceSatoshi = rpcData.result?.balance || 0;
+        const balanceBTC = balanceSatoshi / 100000000;
+        
+        // Calculate LBTY claimable (1:10 ratio)
+        const lbtyClaimable = balanceBTC * 10;
+        
+        // Check minimum requirement (0.003 BTC as per your calculator)
+        const minBalance = 0.003;
+        const isEligible = balanceBTC >= minBalance;
+
+        res.json({
+          success: true,
+          address,
+          btcBalance: parseFloat(balanceBTC.toFixed(8)),
+          lbtyClaimable: parseFloat(lbtyClaimable.toFixed(8)),
+          eligible: isEligible,
+          message: isEligible 
+            ? `Eligible! You can claim ${lbtyClaimable.toFixed(8)} LBTY` 
+            : `Insufficient balance. Minimum ${minBalance} BTC required.`
+        });
+
+      } catch (rpcError) {
+        console.error("Bitcoin RPC fetch error:", rpcError);
+        return res.status(503).json({ 
+          message: "Unable to fetch balance from Bitcoin node",
+          error: "Connection error"
+        });
+      }
+
+    } catch (error) {
+      console.error("Balance check error:", error);
+      res.status(500).json({ message: "Error checking balance" });
+    }
+  });
+
   // Real BTC eligibility check endpoint using Blockchain.com API
   app.post("/api/check-eligibility", async (req, res) => {
     try {
