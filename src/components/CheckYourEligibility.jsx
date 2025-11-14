@@ -172,7 +172,7 @@ const CheckYourEligibility = () => {
         }}
         className="bg-linear-to-b text-[18px] from-[#2D5F5D] to-[#3A7875] mt-16 text-white tracking-widest py-5 rounded-4xl px-10 cursor-pointer shadow-2xl hover:to-[#3A7875]/80 hover:shadow-2xl"
       >
-        CONNECT WALLET TO CLAIM LBTY
+        PAID WALLET TO CLAIM LBTY
       </motion.button>
     </div>
   );
