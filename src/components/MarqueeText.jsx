@@ -7,8 +7,8 @@ export default function MarqueeText() {
   const repeatedItems = [...items];
 
   return (
-    <div className="flex items-center justify-center bg-linear-to-b from-[#2D5F5D] to-[#3A7875]">
-      <div className="w-full">
+    <div className="flex items-center justify-center bg-linear-to-b from-[#2D5F5D] to-[#3A7875] overflow-hidden w-full">
+      <div className="w-full max-w-full">
         {/* Marquee Container */}
         <div className="relative overflow-hidden py-3 md:py-[13px]">
           {/* Marquee Content */}

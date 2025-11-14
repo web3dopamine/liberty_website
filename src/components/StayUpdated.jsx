@@ -90,7 +90,7 @@ const StayUpdated = () => {
         <button
           onClick={handleSubscribe}
           disabled={isSubmitting}
-          className="bg-[#2C6468] h-[64px] rounded-4xl px-12 flex text-white items-center text-[20px] cursor-pointer hover:text-black hover:bg-[#2C6468]/50 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-[#2C6468] h-[64px] rounded-4xl px-6 md:px-12 flex text-white items-center justify-center text-base md:text-[20px] cursor-pointer hover:text-black hover:bg-[#2C6468]/50 transition-all duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed w-full md:w-auto whitespace-nowrap"
         >
           {isSubmitting ? "SUBSCRIBING..." : "S U B S C R I B E"}
         </button>
