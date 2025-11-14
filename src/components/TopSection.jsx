@@ -86,7 +86,7 @@ const MainBanner = () => {
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2 w-full z-10">
+      <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 w-full z-10">
         <div className="flex flex-col">
           <motion.div
             initial={{ y: 100, opacity: 0 }}
