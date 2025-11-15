@@ -20,26 +20,6 @@ const BTCOwnership = () => {
   const connectModalRef = useRef(null);
   const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
 
-  // Auto-fill address from connected wallet or URL parameter
-  useEffect(() => {
-    // Priority 1: Connected wallet account always overrides
-    if (isConnected && account && account.trim()) {
-      setBitcoinAddress(account);
-      setMsgAddress(account);
-      return;
-    }
-    
-    // Priority 2: URL parameter (only on initial load when no wallet connected)
-    if (!isConnected && !bitcoinAddress) {
-      const urlParams = new URLSearchParams(window.location.search);
-      const addressFromUrl = urlParams.get('address');
-      if (addressFromUrl && addressFromUrl.trim()) {
-        setBitcoinAddress(addressFromUrl);
-        setMsgAddress(addressFromUrl);
-      }
-    }
-  }, [account, isConnected, bitcoinAddress]);
-
   const handleGeneratePsbt = async () => {
     if (!isConnected) {
       alert("Please connect your wallet first");
@@ -47,7 +27,7 @@ const BTCOwnership = () => {
     }
     
     if (!bitcoinAddress.trim()) {
-      alert("Bitcoin address is required. Please wait for auto-fill or enter manually.");
+      alert("Bitcoin address is required. Please enter your Bitcoin address.");
       return;
     }
 
@@ -206,7 +186,7 @@ const BTCOwnership = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">Wallet Connection Required</h3>
             <p className="text-gray-300 mb-6 max-w-md mx-auto">
-              Please connect your Bitcoin wallet to verify ownership. Your wallet address will be automatically filled in the forms below.
+              Please connect your wallet to verify ownership. Your Liberty address will be displayed in the forms below.
             </p>
             <button
               onClick={() => connectModalRef.current?.showModal()}
@@ -257,6 +237,21 @@ const BTCOwnership = () => {
           </div>
 
           <div className="space-y-4">
+            {/* Liberty Address - Connected Wallet */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Liberty Address (Connected Wallet)
+              </label>
+              <input
+                type="text"
+                value={account || ""}
+                readOnly
+                placeholder="Connect wallet to see your Liberty address..."
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 font-mono text-sm cursor-not-allowed"
+              />
+            </div>
+
+            {/* Bitcoin Address - Manual Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Bitcoin Address
@@ -377,6 +372,20 @@ const BTCOwnership = () => {
                   <strong>How it works:</strong> Sign the message "I own this Bitcoin address: [your-address]" 
                   with your Bitcoin wallet (XVerse, Unisat, OKX, Ledger, etc.) and paste the signature below to verify ownership.
                 </p>
+              </div>
+
+              {/* Liberty Address - Connected Wallet */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Liberty Address (Connected Wallet)
+                </label>
+                <input
+                  type="text"
+                  value={account || ""}
+                  readOnly
+                  placeholder="Connect wallet to see your Liberty address..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 font-mono text-sm cursor-not-allowed"
+                />
               </div>
 
               {/* Bitcoin Address Input */}
