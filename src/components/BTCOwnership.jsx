@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FullLogo } from "../assets/images";
 import { useWallet } from "../contexts/WalletContext";
+import ConnectWalletModal from "../modals/ConnectWalletModal";
 
 const BTCOwnership = () => {
   const [activeTab, setActiveTab] = useState("psbt");
@@ -16,26 +17,37 @@ const BTCOwnership = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationResult, setVerificationResult] = useState(null);
   
-  const { account, isConnected, truncateAddress, connectWallet } = useWallet();
+  const connectModalRef = useRef(null);
+  const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
 
   // Auto-fill address from connected wallet or URL parameter
   useEffect(() => {
-    if (isConnected && account) {
+    // Priority 1: Connected wallet account always overrides
+    if (isConnected && account && account.trim()) {
       setBitcoinAddress(account);
       setMsgAddress(account);
-    } else {
+      return;
+    }
+    
+    // Priority 2: URL parameter (only on initial load when no wallet connected)
+    if (!isConnected && !bitcoinAddress) {
       const urlParams = new URLSearchParams(window.location.search);
       const addressFromUrl = urlParams.get('address');
-      if (addressFromUrl) {
+      if (addressFromUrl && addressFromUrl.trim()) {
         setBitcoinAddress(addressFromUrl);
         setMsgAddress(addressFromUrl);
       }
     }
-  }, [isConnected, account]);
+  }, [account, isConnected, bitcoinAddress]);
 
   const handleGeneratePsbt = async () => {
+    if (!isConnected) {
+      alert("Please connect your wallet first");
+      return;
+    }
+    
     if (!bitcoinAddress.trim()) {
-      alert("Please enter a Bitcoin address");
+      alert("Bitcoin address is required. Please wait for auto-fill or enter manually.");
       return;
     }
 
@@ -90,6 +102,11 @@ const BTCOwnership = () => {
   };
 
   const handleVerifyMessage = async () => {
+    if (!isConnected) {
+      alert("Please connect your wallet first");
+      return;
+    }
+    
     if (!msgAddress.trim() || !signature.trim()) {
       alert("Please enter both Bitcoin address and signature");
       return;
@@ -143,7 +160,19 @@ const BTCOwnership = () => {
           <a href="/" className="hover:text-[#4A9390] transition-colors">DEVELOPERS</a>
           <a href="/" className="hover:text-[#4A9390] transition-colors">RESOURCES</a>
           <a href="/" className="hover:text-[#4A9390] transition-colors">COMMUNITY</a>
-          <button className="flex flex-row gap-2 border-[#448986] border px-4 py-2 rounded-2xl cursor-pointer hover:bg-white/10 transition-all">
+          <button 
+            onClick={() => {
+              if (isConnected) {
+                const confirmDisconnect = window.confirm('Do you want to disconnect your wallet?');
+                if (confirmDisconnect) {
+                  disconnectWallet();
+                }
+              } else {
+                connectModalRef.current?.showModal();
+              }
+            }}
+            className="flex flex-row gap-2 border-[#448986] border px-4 py-2 rounded-2xl cursor-pointer hover:bg-white/10 transition-all"
+          >
             {isConnected ? truncateAddress(account) : "CONNECT WALLET"}
           </button>
         </div>
@@ -180,7 +209,7 @@ const BTCOwnership = () => {
               Please connect your Bitcoin wallet to verify ownership. Your wallet address will be automatically filled in the forms below.
             </p>
             <button
-              onClick={connectWallet}
+              onClick={() => connectModalRef.current?.showModal()}
               className="inline-flex items-center gap-2 bg-[#4A9390] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#3A7875] transition-all transform hover:scale-105"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -459,6 +488,8 @@ const BTCOwnership = () => {
           </div>
         )}
       </div>
+
+      <ConnectWalletModal ref={connectModalRef} />
     </div>
   );
 };

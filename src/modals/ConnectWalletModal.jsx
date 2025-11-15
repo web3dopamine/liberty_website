@@ -1,9 +1,9 @@
-import { useImperativeHandle, useState } from "react";
+import { useImperativeHandle, useState, forwardRef } from "react";
 import { ConnectWallet, Cross, MetaMask, Phantom, Magnify } from "../assets/images";
 import { useWallet } from "../contexts/WalletContext";
 import { useAppKit } from '@reown/appkit/react';
 
-const ConnectWalletModal = ({ ref }) => {
+const ConnectWalletModal = forwardRef((props, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const { connectMetaMask, connectPhantom, isConnecting } = useWallet();
   const { open } = useAppKit();
@@ -125,6 +125,8 @@ const ConnectWalletModal = ({ ref }) => {
       </div>
     </div>
   );
-};
+});
+
+ConnectWalletModal.displayName = 'ConnectWalletModal';
 
 export default ConnectWalletModal;
