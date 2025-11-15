@@ -16,17 +16,22 @@ const BTCOwnership = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationResult, setVerificationResult] = useState(null);
   
-  const { account, isConnected, truncateAddress } = useWallet();
+  const { account, isConnected, truncateAddress, connectWallet } = useWallet();
 
-  // Auto-fill address from URL parameter
+  // Auto-fill address from connected wallet or URL parameter
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const addressFromUrl = urlParams.get('address');
-    if (addressFromUrl) {
-      setBitcoinAddress(addressFromUrl);
-      setMsgAddress(addressFromUrl);
+    if (isConnected && account) {
+      setBitcoinAddress(account);
+      setMsgAddress(account);
+    } else {
+      const urlParams = new URLSearchParams(window.location.search);
+      const addressFromUrl = urlParams.get('address');
+      if (addressFromUrl) {
+        setBitcoinAddress(addressFromUrl);
+        setMsgAddress(addressFromUrl);
+      }
     }
-  }, []);
+  }, [isConnected, account]);
 
   const handleGeneratePsbt = async () => {
     if (!bitcoinAddress.trim()) {
@@ -162,6 +167,30 @@ const BTCOwnership = () => {
           </div>
         </div>
 
+        {/* Wallet Connection Required Notice */}
+        {!isConnected && (
+          <div className="bg-gradient-to-r from-[#4A9390]/20 to-[#2D5F5D]/20 border-2 border-[#4A9390] rounded-2xl p-8 mb-8 text-center">
+            <div className="flex justify-center mb-4">
+              <svg className="w-16 h-16 text-[#4A9390]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-3">Wallet Connection Required</h3>
+            <p className="text-gray-300 mb-6 max-w-md mx-auto">
+              Please connect your Bitcoin wallet to verify ownership. Your wallet address will be automatically filled in the forms below.
+            </p>
+            <button
+              onClick={connectWallet}
+              className="inline-flex items-center gap-2 bg-[#4A9390] text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-[#3A7875] transition-all transform hover:scale-105"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              Connect Wallet
+            </button>
+          </div>
+        )}
+
         {/* Tab Navigation */}
         <div className="flex gap-4 mb-8 border-b border-gray-700">
           <button
@@ -209,11 +238,12 @@ const BTCOwnership = () => {
                   value={bitcoinAddress}
                   onChange={(e) => setBitcoinAddress(e.target.value)}
                   placeholder="bc1q8h03x5f8ny6gk1lm9qfg0vkg8s4bsdl3kg0..."
-                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent"
+                  disabled={!isConnected}
+                  className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
                 <button
                   onClick={handleGeneratePsbt}
-                  disabled={isGenerating || !bitcoinAddress.trim()}
+                  disabled={!isConnected || isGenerating || !bitcoinAddress.trim()}
                   className="px-6 py-3 bg-[#4A9390] text-white rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                   {isGenerating ? "Generating..." : "Generate PSBT"}
@@ -235,13 +265,14 @@ const BTCOwnership = () => {
                 onChange={(e) => setUnsignedPsbt(e.target.value)}
                 placeholder="Your unsigned PSBT will appear here..."
                 rows="6"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm bg-gray-50"
+                disabled={!isConnected}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
 
             <button
               onClick={handleCopy}
-              disabled={!unsignedPsbt}
+              disabled={!isConnected || !unsignedPsbt}
               className="inline-flex items-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -273,13 +304,15 @@ const BTCOwnership = () => {
                 onChange={(e) => setSignedPsbt(e.target.value)}
                 placeholder="cPSBT..."
                 rows="6"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm"
+                disabled={!isConnected}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
             </div>
 
             <button
               onClick={handleVerifySignature}
-              className="inline-flex items-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all"
+              disabled={!isConnected}
+              className="inline-flex items-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -327,7 +360,8 @@ const BTCOwnership = () => {
                   value={msgAddress}
                   onChange={(e) => setMsgAddress(e.target.value)}
                   placeholder="bc1q... or 1... or 3..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent"
+                  disabled={!isConnected}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
 
@@ -350,8 +384,8 @@ const BTCOwnership = () => {
                         alert("Message copied to clipboard!");
                       }
                     }}
-                    disabled={!msgAddress}
-                    className="absolute top-2 right-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs font-semibold disabled:opacity-50"
+                    disabled={!isConnected || !msgAddress}
+                    className="absolute top-2 right-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded text-xs font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     COPY
                   </button>
@@ -368,14 +402,15 @@ const BTCOwnership = () => {
                   onChange={(e) => setSignature(e.target.value)}
                   placeholder="Paste signature here..."
                   rows="4"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm"
+                  disabled={!isConnected}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
                 />
               </div>
 
               {/* Verify Button */}
               <button
                 onClick={handleVerifyMessage}
-                disabled={isVerifying || !msgAddress.trim() || !signature.trim()}
+                disabled={!isConnected || isVerifying || !msgAddress.trim() || !signature.trim()}
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
