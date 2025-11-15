@@ -104,7 +104,7 @@ const BTCOwnership = () => {
         body: JSON.stringify({ 
           address: msgAddress, 
           signature: signature,
-          message: `I own this Bitcoin address: ${msgAddress}`
+          message: `I claim ${account} for Bitcoin address ${msgAddress}`
         }),
       });
 
@@ -163,10 +163,10 @@ const BTCOwnership = () => {
         {/* Page Title */}
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-4">
-            Bitcoin Address <span className="text-[#4A9390]">Ownership</span>
+            Claiming <span className="text-[#4A9390]">Liberty</span>
           </h1>
           <p className="text-gray-400 text-lg mb-6">
-            Prove ownership without broadcasting. Choose your verification method.
+            Link your Bitcoin address to your Liberty address in 3 simple steps.
           </p>
           <div className="inline-flex items-center gap-2 bg-[#4A9390]/10 border border-[#4A9390]/30 rounded-full px-4 py-2 text-[#4A9390] text-sm">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,9 +184,9 @@ const BTCOwnership = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-white mb-3">Wallet Connection Required</h3>
+            <h3 className="text-2xl font-bold text-white mb-3">Step 1: Connect Your Wallet</h3>
             <p className="text-gray-300 mb-6 max-w-md mx-auto">
-              Please connect your wallet to verify ownership. Your Liberty address will be displayed in the forms below.
+              Connect your wallet to see your Liberty address where you'll receive LBTY tokens.
             </p>
             <button
               onClick={() => connectModalRef.current?.showModal()}
@@ -231,16 +231,16 @@ const BTCOwnership = () => {
             <div className="bg-white rounded-2xl shadow-xl p-8 mb-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 bg-[#4A9390] rounded-full flex items-center justify-center text-white font-bold">
-              1
+              2
             </div>
-            <h2 className="text-2xl font-bold text-gray-900">Create Self-Send PSBT</h2>
+            <h2 className="text-2xl font-bold text-gray-900">Link Your Bitcoin Address</h2>
           </div>
 
           <div className="space-y-4">
             {/* Liberty Address - Connected Wallet */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Liberty Address (Connected Wallet)
+                Liberty Address (Where You'll Receive LBTY)
               </label>
               <input
                 type="text"
@@ -254,7 +254,7 @@ const BTCOwnership = () => {
             {/* Bitcoin Address - Manual Input */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Bitcoin Address
+                Your Bitcoin Address
               </label>
               <div className="flex gap-3">
                 <input
@@ -311,22 +311,22 @@ const BTCOwnership = () => {
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-8 h-8 bg-[#4A9390] rounded-full flex items-center justify-center text-white font-bold">
-              2
+              3
             </div>
             <h2 className="text-2xl font-bold text-gray-900">
-              Verify Signed PSBT or Raw Tx (No Broadcast)
+              Verify Your Signature
             </h2>
           </div>
 
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Paste signed PSBT (base64) starts with cPSBT or raw tx hex
+                Signed PSBT (Paste your signed PSBT here)
               </label>
               <textarea
                 value={signedPsbt}
                 onChange={(e) => setSignedPsbt(e.target.value)}
-                placeholder="cPSBT..."
+                placeholder="Paste your signed PSBT (starts with cPSBT) or raw transaction hex..."
                 rows="6"
                 disabled={!isConnected}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
@@ -335,13 +335,13 @@ const BTCOwnership = () => {
 
             <button
               onClick={handleVerifySignature}
-              disabled={!isConnected}
-              className="inline-flex items-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!isConnected || !signedPsbt.trim()}
+              className="w-full inline-flex items-center justify-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Verify Signature
+              Verify & Complete Claim
             </button>
           </div>
         </div>
@@ -349,7 +349,7 @@ const BTCOwnership = () => {
             {/* Footer Note */}
             <div className="text-center mt-8">
               <p className="text-gray-500 text-sm">
-                No transactions are broadcast to the network. Everything happens locally.
+                By verifying your signature, you're linking your Bitcoin address to your Liberty address. No transactions are broadcast to the network.
               </p>
             </div>
           </>
@@ -357,27 +357,28 @@ const BTCOwnership = () => {
 
         {/* Message Signature Tab Content */}
         {activeTab === "message" && (
+          <>
           <div className="bg-white rounded-2xl shadow-xl p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-8 bg-[#4A9390] rounded-full flex items-center justify-center text-white font-bold">
-                ✓
+                2
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Verify Message Signature</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Link Your Bitcoin Address</h2>
             </div>
 
             <div className="space-y-6">
               {/* Instructions */}
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-sm text-gray-700">
-                  <strong>How it works:</strong> Sign the message "I own this Bitcoin address: [your-address]" 
-                  with your Bitcoin wallet (XVerse, Unisat, OKX, Ledger, etc.) and paste the signature below to verify ownership.
+                  <strong>How it works:</strong> Sign a message linking your Liberty address to your Bitcoin address 
+                  using your Bitcoin wallet (XVerse, Unisat, OKX, Ledger, etc.).
                 </p>
               </div>
 
               {/* Liberty Address - Connected Wallet */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Liberty Address (Connected Wallet)
+                  Liberty Address (Where You'll Receive LBTY)
                 </label>
                 <input
                   type="text"
@@ -391,7 +392,7 @@ const BTCOwnership = () => {
               {/* Bitcoin Address Input */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Bitcoin Address
+                  Your Bitcoin Address
                 </label>
                 <input
                   type="text"
@@ -410,15 +411,15 @@ const BTCOwnership = () => {
                 </label>
                 <div className="relative">
                   <textarea
-                    value={msgAddress ? `I own this Bitcoin address: ${msgAddress}` : "Enter address first..."}
+                    value={msgAddress && account ? `I claim ${account} for Bitcoin address ${msgAddress}` : "Enter Bitcoin address and connect wallet first..."}
                     readOnly
                     rows="2"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 font-mono text-sm"
                   />
                   <button
                     onClick={() => {
-                      if (msgAddress) {
-                        navigator.clipboard.writeText(`I own this Bitcoin address: ${msgAddress}`);
+                      if (msgAddress && account) {
+                        navigator.clipboard.writeText(`I claim ${account} for Bitcoin address ${msgAddress}`);
                         alert("Message copied to clipboard!");
                       }
                     }}
@@ -430,15 +431,28 @@ const BTCOwnership = () => {
                 </div>
               </div>
 
+            </div>
+          </div>
+
+          {/* Step 3 - Verify Signature */}
+          <div className="bg-white rounded-2xl shadow-xl p-8 mt-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-8 h-8 bg-[#4A9390] rounded-full flex items-center justify-center text-white font-bold">
+                3
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Verify Your Signature</h2>
+            </div>
+
+            <div className="space-y-4">
               {/* Signature Input */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Signature (from your wallet)
+                  Signature (Paste the signature from your Bitcoin wallet)
                 </label>
                 <textarea
                   value={signature}
                   onChange={(e) => setSignature(e.target.value)}
-                  placeholder="Paste signature here..."
+                  placeholder="Paste your signature here..."
                   rows="4"
                   disabled={!isConnected}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4A9390] focus:border-transparent font-mono text-sm disabled:bg-gray-100 disabled:cursor-not-allowed"
@@ -454,7 +468,7 @@ const BTCOwnership = () => {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                {isVerifying ? "Verifying..." : "Verify Signature"}
+                {isVerifying ? "Verifying..." : "Verify & Complete Claim"}
               </button>
 
               {/* Verification Result */}
@@ -495,6 +509,7 @@ const BTCOwnership = () => {
               </div>
             </div>
           </div>
+          </>
         )}
       </div>
 
