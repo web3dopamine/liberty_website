@@ -119,25 +119,40 @@ const Treasury = () => {
                 })}
               </motion.svg>
 
-              {hoveredSegment && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="absolute -top-20 bg-white rounded-2xl shadow-lg px-4 py-3 border border-gray-200 z-20 pointer-events-none"
-                  style={{ left: '50%', transform: 'translateX(-50%)' }}
-                >
-                  <div className="text-[#6A7282] text-[11px] text-center whitespace-nowrap">
-                    {segments.find(s => s.id === hoveredSegment)?.name}
-                  </div>
-                  <div className="text-[#000000] text-[24px] font-semibold text-center -mt-0.5">
-                    {segments.find(s => s.id === hoveredSegment)?.percentage}%
-                  </div>
-                  <div className="text-[#6A7282] text-[12px] text-center -mt-0.5">
-                    {segments.find(s => s.id === hoveredSegment)?.btc.toLocaleString()} BTC
-                  </div>
-                </motion.div>
-              )}
+              {hoveredSegment && (() => {
+                const segmentIndex = segments.findIndex(s => s.id === hoveredSegment);
+                const offset = segments.slice(0, segmentIndex).reduce((sum, s) => sum + s.percentage, 0);
+                const segment = segments[segmentIndex];
+                const midAngle = (offset + segment.percentage / 2) * 3.6;
+                const radians = (midAngle - 90) * (Math.PI / 180);
+                const tooltipDistance = 140;
+                const tooltipX = Math.cos(radians) * tooltipDistance;
+                const tooltipY = Math.sin(radians) * tooltipDistance;
+                
+                return (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                    className="absolute bg-white rounded-2xl shadow-lg px-4 py-3 border border-gray-200 z-20 pointer-events-none"
+                    style={{ 
+                      left: '50%',
+                      top: '50%',
+                      transform: `translate(calc(-50% + ${tooltipX}px), calc(-50% + ${tooltipY}px))`
+                    }}
+                  >
+                    <div className="text-[#6A7282] text-[11px] text-center whitespace-nowrap">
+                      {segment.name}
+                    </div>
+                    <div className="text-[#000000] text-[24px] font-semibold text-center -mt-0.5">
+                      {segment.percentage}%
+                    </div>
+                    <div className="text-[#6A7282] text-[12px] text-center -mt-0.5">
+                      {segment.btc.toLocaleString()} BTC
+                    </div>
+                  </motion.div>
+                );
+              })()}
 
               <motion.div
                 className="text-[#6A7282] text-[14px]"
