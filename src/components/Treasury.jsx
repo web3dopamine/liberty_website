@@ -79,90 +79,112 @@ const Treasury = () => {
                 {segments.map((segment, index) => {
                   const offset = segments.slice(0, index).reduce((sum, s) => sum + s.percentage, 0);
                   const isHovered = hoveredSegment === segment.id;
+                  const midAngle = (offset + segment.percentage / 2) * 3.6;
+                  const radians = (midAngle - 90) * (Math.PI / 180);
+                  const translateX = isHovered ? Math.cos(radians) * 5 : 0;
+                  const translateY = isHovered ? Math.sin(radians) * 5 : 0;
                   
                   return (
-                    <motion.circle
-                      key={segment.id}
-                      cx="100"
-                      cy="100"
-                      r="80"
-                      fill="none"
-                      stroke={segment.color}
-                      strokeWidth={isHovered ? "36" : "32"}
-                      strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
-                      strokeDashoffset={`${-offset * 5.026}`}
-                      initial={{ strokeDasharray: `0 ${100 * 5.026}` }}
-                      animate={
-                        isInView
-                          ? {
-                              strokeDasharray: `${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`,
-                              strokeWidth: isHovered ? 36 : 32,
-                            }
-                          : { strokeDasharray: `0 ${100 * 5.026}` }
-                      }
-                      transition={{
-                        strokeDasharray: { duration: 1.5, delay: 0.3 + index * 0.2, ease: "easeOut" },
-                        strokeWidth: { duration: 0.2 }
-                      }}
-                      style={{
-                        filter: isHovered
-                          ? 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2))'
-                          : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
-                        cursor: 'pointer',
-                        transition: 'filter 0.2s ease'
-                      }}
-                      onMouseEnter={() => setHoveredSegment(segment.id)}
-                      onMouseLeave={() => setHoveredSegment(null)}
-                    />
+                    <g key={segment.id}>
+                      <motion.circle
+                        cx="100"
+                        cy="100"
+                        r="80"
+                        fill="none"
+                        stroke={segment.color}
+                        strokeWidth="32"
+                        strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
+                        strokeDashoffset={`${-offset * 5.026}`}
+                        initial={{ strokeDasharray: `0 ${100 * 5.026}` }}
+                        animate={
+                          isInView
+                            ? {
+                                strokeDasharray: `${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`,
+                                translateX,
+                                translateY,
+                              }
+                            : { strokeDasharray: `0 ${100 * 5.026}` }
+                        }
+                        transition={{
+                          strokeDasharray: { duration: 1.5, delay: 0.3 + index * 0.2, ease: "easeOut" },
+                          translateX: { duration: 0.3, ease: "easeOut" },
+                          translateY: { duration: 0.3, ease: "easeOut" }
+                        }}
+                        style={{
+                          filter: isHovered
+                            ? 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25))'
+                            : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
+                          cursor: 'pointer',
+                          transition: 'filter 0.3s ease'
+                        }}
+                        onMouseEnter={() => setHoveredSegment(segment.id)}
+                        onMouseLeave={() => setHoveredSegment(null)}
+                      />
+                      {isHovered && (
+                        <motion.circle
+                          cx="100"
+                          cy="100"
+                          r="80"
+                          fill="none"
+                          stroke="#FF4444"
+                          strokeWidth="4"
+                          strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
+                          strokeDashoffset={`${-offset * 5.026}`}
+                          initial={{ opacity: 0, translateX: 0, translateY: 0 }}
+                          animate={{ opacity: 1, translateX, translateY }}
+                          transition={{ duration: 0.3 }}
+                          style={{ pointerEvents: 'none' }}
+                        />
+                      )}
+                    </g>
                   );
                 })}
               </motion.svg>
 
-              {hoveredSegment ? (
+              {hoveredSegment && (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="flex flex-col items-center z-10"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute -top-20 bg-white rounded-2xl shadow-lg px-4 py-3 border border-gray-200 z-20 pointer-events-none"
+                  style={{ left: '50%', transform: 'translateX(-50%)' }}
                 >
-                  <div className="text-[#6A7282] text-[12px]">
+                  <div className="text-[#6A7282] text-[11px] text-center whitespace-nowrap">
                     {segments.find(s => s.id === hoveredSegment)?.name}
                   </div>
-                  <div className="text-[#000000] text-[36px] font-medium -mt-1">
+                  <div className="text-[#000000] text-[24px] font-semibold text-center -mt-0.5">
                     {segments.find(s => s.id === hoveredSegment)?.percentage}%
                   </div>
-                  <div className="text-[#6A7282] text-[14px] -mt-1">
+                  <div className="text-[#6A7282] text-[12px] text-center -mt-0.5">
                     {segments.find(s => s.id === hoveredSegment)?.btc.toLocaleString()} BTC
                   </div>
                 </motion.div>
-              ) : (
-                <>
-                  <motion.div
-                    className="text-[#6A7282] text-[14px]"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 0.6, delay: 0.8 }}
-                  >
-                    Total Supply
-                  </motion.div>
-                  <motion.div
-                    className="text-[#000000] text-[48px] -mt-1"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-                    transition={{ duration: 0.8, delay: 1 }}
-                  >
-                    {isLoading ? '21M' : `${(Math.floor((circulatingSupply / 1000000) * 2) / 2).toFixed(1)}M`}
-                  </motion.div>
-                  <motion.div
-                    className="text-[#6A7282] text-[14px] -mt-2"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                    transition={{ duration: 0.6, delay: 1.2 }}
-                  >
-                    BTC
-                  </motion.div>
-                </>
               )}
+
+              <motion.div
+                className="text-[#6A7282] text-[14px]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+              >
+                Total Supply
+              </motion.div>
+              <motion.div
+                className="text-[#000000] text-[48px] -mt-1"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+                transition={{ duration: 0.8, delay: 1 }}
+              >
+                {isLoading ? '21M' : `${(Math.floor((circulatingSupply / 1000000) * 2) / 2).toFixed(1)}M`}
+              </motion.div>
+              <motion.div
+                className="text-[#6A7282] text-[14px] -mt-2"
+                initial={{ opacity: 0, y: -20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+              >
+                BTC
+              </motion.div>
             </div>
 
             <div className="flex flex-col md:flex-row mt-12 md:mt-8 gap-6 md:gap-18 lg:gap-30 ml-0 md:ml-3 items-start">
