@@ -186,7 +186,7 @@ const LBTCCalculator = () => {
           }}
           className="bg-linear-to-b text-base md:text-lg lg:text-[18px] from-[#2D5F5D] to-[#3A7875] mt-6 md:mt-8 text-white tracking-widest py-4 md:py-5 w-full rounded-4xl shadow-xl cursor-pointer hover:to-[#3A7875]/80 hover:shadow-2xl"
         >
-          CALCULATE ELIGIBILITY
+          CHECK ELIGIBILITY
         </motion.button>
       </motion.div>
     </div>
