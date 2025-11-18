@@ -56,17 +56,62 @@ const Treasury = () => {
         <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-20 lg:gap-25 justify-center w-full">
           <div className="flex flex-col">
             <div ref={chartRef} className="w-full max-w-[220px] sm:max-w-[280px] md:max-w-[380px] lg:max-w-[448px] aspect-square relative flex flex-col items-center justify-center mb-16 md:mb-8">
-              <motion.img
-                src={RoundSegment}
-                className="absolute left-0 top-0 w-full"
-                initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
+              <motion.svg
+                className="absolute left-0 top-0 w-full h-full -rotate-90"
+                viewBox="0 0 200 200"
+                initial={{ opacity: 0, scale: 0.8 }}
                 animate={
                   isInView
-                    ? { opacity: 1, scale: 1, rotate: 0 }
-                    : { opacity: 0, scale: 0.8, rotate: -180 }
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 0, scale: 0.8 }
                 }
                 transition={{ duration: 1.5, ease: "easeOut" }}
-              />
+              >
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="80"
+                  fill="none"
+                  stroke="#6EB5B1"
+                  strokeWidth="32"
+                  strokeDasharray={`${67.2 * 5.026} ${(100 - 67.2) * 5.026}`}
+                  strokeDashoffset="0"
+                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
+                />
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="80"
+                  fill="none"
+                  stroke="#3A7875"
+                  strokeWidth="32"
+                  strokeDasharray={`${14.3 * 5.026} ${(100 - 14.3) * 5.026}`}
+                  strokeDashoffset={`${-67.2 * 5.026}`}
+                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
+                />
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="80"
+                  fill="none"
+                  stroke="#2D5F5D"
+                  strokeWidth="32"
+                  strokeDasharray={`${13.3 * 5.026} ${(100 - 13.3) * 5.026}`}
+                  strokeDashoffset={`${-(67.2 + 14.3) * 5.026}`}
+                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
+                />
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="80"
+                  fill="none"
+                  stroke="#6EB5B1"
+                  strokeWidth="32"
+                  strokeDasharray={`${5.2 * 5.026} ${(100 - 5.2) * 5.026}`}
+                  strokeDashoffset={`${-(67.2 + 14.3 + 13.3) * 5.026}`}
+                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
+                />
+              </motion.svg>
               <motion.div
                 className="text-[#6A7282] text-[14px]"
                 initial={{ opacity: 0, y: 20 }}
@@ -98,24 +143,24 @@ const Treasury = () => {
                 <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl row-span-2" />
                   <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Active Supply</div>
-                  <div className="text-[#000000] text-[18px] font-medium">67.2</div>
+                  <div className="text-[#000000] text-[18px] font-medium">67.2%</div>
                 </div>
                 <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#3A7875] rounded-3xl row-span-2" />
                   <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Lost BTC</div>
-                  <div className="text-[#000000] text-[18px] font-medium">14.3</div>
+                  <div className="text-[#000000] text-[18px] font-medium">14.3%</div>
                 </div>
               </div>
               <div className="flex flex-col gap-5">
                 <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#2D5F5D] rounded-3xl row-span-2" />
                   <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Dormant 5-10 years</div>
-                  <div className="text-[#000000] text-[18px] font-medium">13.3</div>
+                  <div className="text-[#000000] text-[18px] font-medium">13.3%</div>
                 </div>
                 <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl row-span-2" />
                   <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Satoshi's Coins</div>
-                  <div className="text-[#000000] text-[18px] font-medium">5.2</div>
+                  <div className="text-[#000000] text-[18px] font-medium">5.2%</div>
                 </div>
               </div>
             </div>
