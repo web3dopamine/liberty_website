@@ -12,12 +12,13 @@ import {
   WalletGreen,
 } from "../assets/images";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 const Treasury = () => {
   const chartRef = useRef(null);
   const isInView = useInView(chartRef, { once: true, margin: "-100px" });
+  const [hoveredSegment, setHoveredSegment] = useState(null);
 
   // Fetch Bitcoin market data from CoinGecko
   const { data: btcData, isLoading } = useQuery({
@@ -39,6 +40,14 @@ const Treasury = () => {
   const activeSupplyBTC = Math.round(circulatingSupply * 0.672); // 67.2% of circulating supply
   const totalSupply = 21000000; // Bitcoin's max supply
   const estimatedUsdValue = activeSupplyBTC * currentPrice;
+
+  // Donut chart data
+  const segments = [
+    { name: 'Active Supply', percentage: 67.2, color: '#6EB5B1', btc: activeSupplyBTC, id: 'active' },
+    { name: 'Lost BTC', percentage: 14.3, color: '#3A7875', btc: 3003000, id: 'lost' },
+    { name: 'Dormant 5-10 years', percentage: 13.3, color: '#2D5F5D', btc: 2793000, id: 'dormant' },
+    { name: 'Satoshi\'s Coins', percentage: 5.2, color: '#6EB5B1', btc: 1092000, id: 'satoshi' },
+  ];
   return (
     <div className="text-center py-16 md:py-20 lg:py-30 flex flex-col items-center bg-[#ffffff] px-4">
       <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
@@ -67,75 +76,93 @@ const Treasury = () => {
                 }
                 transition={{ duration: 1.5, ease: "easeOut" }}
               >
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="80"
-                  fill="none"
-                  stroke="#6EB5B1"
-                  strokeWidth="32"
-                  strokeDasharray={`${67.2 * 5.026} ${(100 - 67.2) * 5.026}`}
-                  strokeDashoffset="0"
-                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
-                />
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="80"
-                  fill="none"
-                  stroke="#3A7875"
-                  strokeWidth="32"
-                  strokeDasharray={`${14.3 * 5.026} ${(100 - 14.3) * 5.026}`}
-                  strokeDashoffset={`${-67.2 * 5.026}`}
-                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
-                />
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="80"
-                  fill="none"
-                  stroke="#2D5F5D"
-                  strokeWidth="32"
-                  strokeDasharray={`${13.3 * 5.026} ${(100 - 13.3) * 5.026}`}
-                  strokeDashoffset={`${-(67.2 + 14.3) * 5.026}`}
-                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
-                />
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="80"
-                  fill="none"
-                  stroke="#6EB5B1"
-                  strokeWidth="32"
-                  strokeDasharray={`${5.2 * 5.026} ${(100 - 5.2) * 5.026}`}
-                  strokeDashoffset={`${-(67.2 + 14.3 + 13.3) * 5.026}`}
-                  style={{ filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))' }}
-                />
+                {segments.map((segment, index) => {
+                  const offset = segments.slice(0, index).reduce((sum, s) => sum + s.percentage, 0);
+                  const isHovered = hoveredSegment === segment.id;
+                  
+                  return (
+                    <motion.circle
+                      key={segment.id}
+                      cx="100"
+                      cy="100"
+                      r="80"
+                      fill="none"
+                      stroke={segment.color}
+                      strokeWidth={isHovered ? "36" : "32"}
+                      strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
+                      strokeDashoffset={`${-offset * 5.026}`}
+                      initial={{ strokeDasharray: `0 ${100 * 5.026}` }}
+                      animate={
+                        isInView
+                          ? {
+                              strokeDasharray: `${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`,
+                              strokeWidth: isHovered ? 36 : 32,
+                            }
+                          : { strokeDasharray: `0 ${100 * 5.026}` }
+                      }
+                      transition={{
+                        strokeDasharray: { duration: 1.5, delay: 0.3 + index * 0.2, ease: "easeOut" },
+                        strokeWidth: { duration: 0.2 }
+                      }}
+                      style={{
+                        filter: isHovered
+                          ? 'drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2))'
+                          : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
+                        cursor: 'pointer',
+                        transition: 'filter 0.2s ease'
+                      }}
+                      onMouseEnter={() => setHoveredSegment(segment.id)}
+                      onMouseLeave={() => setHoveredSegment(null)}
+                    />
+                  );
+                })}
               </motion.svg>
-              <motion.div
-                className="text-[#6A7282] text-[14px]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
-              >
-                Total Supply
-              </motion.div>
-              <motion.div
-                className="text-[#000000] text-[48px] -mt-1"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.8, delay: 1 }}
-              >
-                {isLoading ? '21M' : `${(Math.floor((circulatingSupply / 1000000) * 2) / 2).toFixed(1)}M`}
-              </motion.div>
-              <motion.div
-                className="text-[#6A7282] text-[14px] -mt-2"
-                initial={{ opacity: 0, y: -20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-                transition={{ duration: 0.6, delay: 1.2 }}
-              >
-                BTC
-              </motion.div>
+
+              {hoveredSegment ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="flex flex-col items-center z-10"
+                >
+                  <div className="text-[#6A7282] text-[12px]">
+                    {segments.find(s => s.id === hoveredSegment)?.name}
+                  </div>
+                  <div className="text-[#000000] text-[36px] font-medium -mt-1">
+                    {segments.find(s => s.id === hoveredSegment)?.percentage}%
+                  </div>
+                  <div className="text-[#6A7282] text-[14px] -mt-1">
+                    {segments.find(s => s.id === hoveredSegment)?.btc.toLocaleString()} BTC
+                  </div>
+                </motion.div>
+              ) : (
+                <>
+                  <motion.div
+                    className="text-[#6A7282] text-[14px]"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                    transition={{ duration: 0.6, delay: 0.8 }}
+                  >
+                    Total Supply
+                  </motion.div>
+                  <motion.div
+                    className="text-[#000000] text-[48px] -mt-1"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+                    transition={{ duration: 0.8, delay: 1 }}
+                  >
+                    {isLoading ? '21M' : `${(Math.floor((circulatingSupply / 1000000) * 2) / 2).toFixed(1)}M`}
+                  </motion.div>
+                  <motion.div
+                    className="text-[#6A7282] text-[14px] -mt-2"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+                    transition={{ duration: 0.6, delay: 1.2 }}
+                  >
+                    BTC
+                  </motion.div>
+                </>
+              )}
             </div>
 
             <div className="flex flex-col md:flex-row mt-12 md:mt-8 gap-6 md:gap-18 lg:gap-30 ml-0 md:ml-3 items-start">
