@@ -258,6 +258,15 @@ const CheckYourEligibility = () => {
       >
         PAIR WALLET TO CLAIM LBTY
       </motion.button>
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+        className="mt-4 text-[#4A5565] text-sm md:text-[14px]"
+      >
+        Available on December 11th, 12:00 AM UTC
+      </motion.div>
     </div>
   );
 };
