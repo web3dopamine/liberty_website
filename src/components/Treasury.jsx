@@ -13,10 +13,32 @@ import {
 } from "../assets/images";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const Treasury = () => {
   const chartRef = useRef(null);
   const isInView = useInView(chartRef, { once: true, margin: "-100px" });
+
+  // Fetch Bitcoin market data from CoinGecko
+  const { data: btcData, isLoading } = useQuery({
+    queryKey: ['btc-market-data'],
+    queryFn: async () => {
+      const response = await fetch('/api/btc-market-data');
+      if (!response.ok) {
+        throw new Error('Failed to fetch Bitcoin market data');
+      }
+      return response.json();
+    },
+    refetchInterval: 60000, // Refetch every 60 seconds
+    staleTime: 30000, // Consider data fresh for 30 seconds
+  });
+
+  // Calculate values based on live data or use defaults
+  const circulatingSupply = btcData?.circulatingSupply || 19950000;
+  const currentPrice = btcData?.currentPrice || 95000;
+  const activeSupplyBTC = Math.round(circulatingSupply * 0.737); // 73.7% of circulating supply
+  const totalSupply = 21000000; // Bitcoin's max supply
+  const estimatedUsdValue = activeSupplyBTC * currentPrice;
   return (
     <div className="text-center py-16 md:py-20 lg:py-30 flex flex-col items-center bg-[#ffffff] px-4">
       <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
@@ -59,7 +81,7 @@ const Treasury = () => {
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                21M
+                {isLoading ? '21M' : `${(circulatingSupply / 1000000).toFixed(1)}M`}
               </motion.div>
               <motion.div
                 className="text-[#6A7282] text-[14px] -mt-2"
@@ -107,13 +129,15 @@ const Treasury = () => {
                 <div className="text-lg md:text-xl lg:text-[24px] text-start text-[#000000]">73.7% of Total Supply</div>
               </div>
             </div>
-            <div className="px-2 md:px-3 text-4xl md:text-5xl lg:text-[72px] -mt-2 md:-mt-3">1,547,000</div>
+            <div className="px-2 md:px-3 text-4xl md:text-5xl lg:text-[72px] -mt-2 md:-mt-3">
+              {isLoading ? '1,547,000' : activeSupplyBTC.toLocaleString()}
+            </div>
             <div className="px-2 md:px-3 text-base md:text-lg lg:text-[20px] text-[#4A5565] -mt-1 md:-mt-2">BTC</div>
 
             <div className="px-2 md:px-3 text-xs md:text-sm lg:text-[14px] text-[#6A7282] mt-6 md:mt-8 lg:mt-10">Estimated USD Value</div>
             <div>
               <span className="px-2 md:px-3 bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text text-2xl md:text-3xl lg:text-[36px]">
-                $696,150,000,000
+                ${isLoading ? '696,150,000,000' : Math.round(estimatedUsdValue).toLocaleString()}
               </span>
             </div>
           </div>
@@ -158,7 +182,9 @@ const Treasury = () => {
             <div className="text-[#4A5565] mt-3 text-[14px]">Active Supply</div>
             <div className="text-[#99A1AF] mt-1 text-[12px]">of total supply</div>
             <div className="bg-[#99A1AF]/15 w-full h-[1px] mt-3" />
-            <div className="text-[#000000] text-[30px] mt-2">15,470,000</div>
+            <div className="text-[#000000] text-[30px] mt-2">
+              {isLoading ? '15,470,000' : activeSupplyBTC.toLocaleString()}
+            </div>
             <div className="text-[#6A7282] text-[14px]">BTC</div>
           </div>
         </div>

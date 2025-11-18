@@ -114,6 +114,44 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // CoinGecko Bitcoin market data endpoint
+  app.get("/api/btc-market-data", async (req, res) => {
+    try {
+      // Fetch Bitcoin market data from CoinGecko API (free tier, no API key required)
+      const response = await fetch(
+        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin'
+      );
+
+      if (!response.ok) {
+        throw new Error(`CoinGecko API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const bitcoinData = data[0];
+
+      if (!bitcoinData) {
+        throw new Error('No Bitcoin data returned from CoinGecko');
+      }
+
+      res.json({
+        success: true,
+        currentPrice: bitcoinData.current_price,
+        circulatingSupply: bitcoinData.circulating_supply,
+        marketCap: bitcoinData.market_cap,
+        priceChange24h: bitcoinData.price_change_percentage_24h,
+        lastUpdated: bitcoinData.last_updated
+      });
+
+    } catch (error) {
+      console.error("CoinGecko API error:", error);
+      res.status(503).json({
+        success: false,
+        message: "Unable to fetch Bitcoin market data",
+        error: "Market data service temporarily unavailable"
+      });
+    }
+  });
+
   // Real BTC eligibility check endpoint using Blockchain.com API
   app.post("/api/check-eligibility", async (req, res) => {
     try {
