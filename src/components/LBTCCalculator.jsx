@@ -3,37 +3,28 @@ import { Logo } from "../assets/images";
 import { motion, useInView } from "motion/react";
 
 const LBTCCalculator = () => {
-  const [input, setInput] = useState(1);
-  const [displayedOutput, setDisplayedOutput] = useState(10);
+  const [btcValue, setBtcValue] = useState(1);
+  const [lbtyValue, setLbtyValue] = useState(10);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const minClaim = 0.003;
-  const calculatedOutput = input * 10;
 
-  const handleQuickSelect = (amount) => {
-    setInput(amount);
+  const handleBtcChange = (value) => {
+    const numValue = parseFloat(value) || 0;
+    setBtcValue(numValue);
+    setLbtyValue(numValue * 10);
   };
 
-  // Animated number counter
-  useEffect(() => {
-    const duration = 500; // milliseconds
-    const steps = 30;
-    const stepValue = (calculatedOutput - displayedOutput) / steps;
-    let currentStep = 0;
+  const handleLbtyChange = (value) => {
+    const numValue = parseFloat(value) || 0;
+    setLbtyValue(numValue);
+    setBtcValue(numValue / 10);
+  };
 
-    const timer = setInterval(() => {
-      currentStep++;
-      if (currentStep <= steps) {
-        setDisplayedOutput((prev) => prev + stepValue);
-      } else {
-        setDisplayedOutput(calculatedOutput);
-        clearInterval(timer);
-      }
-    }, duration / steps);
-
-    return () => clearInterval(timer);
-  }, [calculatedOutput]);
+  const handleQuickSelect = (amount) => {
+    handleBtcChange(amount);
+  };
 
   const BitcoinIcon = () => (
     <svg className="w-[24px] h-[24px]" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,10 +62,9 @@ const LBTCCalculator = () => {
         <div className="text-xs md:text-sm lg:text-[14px] text-[#4A5565] text-start tracking-widest">YOU HAVE BTC</div>
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2 mt-3">
           <input
-            value={input}
+            value={btcValue}
             onChange={(event) => {
-              const value = parseFloat(event.target.value) || 0;
-              setInput(value);
+              handleBtcChange(event.target.value);
             }}
             type="number"
             min={minClaim}
@@ -133,15 +123,16 @@ const LBTCCalculator = () => {
 
         <div className="text-xs md:text-sm lg:text-[14px] text-[#4A5565] text-start mt-6 md:mt-8 mb-3 md:mb-4 tracking-widest">YOU CAN CLAIM LBTY</div>
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2">
-          <motion.div 
-            key={displayedOutput}
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="text-[#717182] px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full text-sm md:text-[14px] flex items-center"
-          >
-            {displayedOutput.toFixed(2)}
-          </motion.div>
+          <input
+            value={lbtyValue}
+            onChange={(event) => {
+              handleLbtyChange(event.target.value);
+            }}
+            type="number"
+            min={minClaim * 10}
+            step="0.001"
+            className="text-[#717182] outline-none border-none px-4 shadow-lg rounded-3xl inset-shadow-sm h-16 md:h-[78px] w-full text-sm md:text-[14px]"
+          />
           <div className="text-xs md:text-[12px] shadow-lg rounded-3xl inset-shadow-sm flex flex-row items-center justify-center w-full md:w-[220px] h-16 md:h-[78px] gap-3 md:gap-4 border border-[#2D5F5D]/50 bg-[#3A7875]/10">
             <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg flex items-center justify-center">
               <img src={Logo} className="w-5 h-5 md:w-[24px] md:h-[24px]" alt="Liberty Logo" />
