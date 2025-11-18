@@ -34,12 +34,14 @@ The project is a full-stack application built with a clear separation of concern
     - **PSBT Operations:** Bitcoin Core RPC integration for creating, finalizing, and broadcasting PSBTs (`createpsbt`, `finalizepsbt`). Uses environment secrets (`BITCOIN_RPC_URL`, `BITCOIN_RPC_USER`, `BITCOIN_RPC_PASS`) for secure authentication.
 
 **Core Features & Implementations:**
+*   **Video Showcase:** Cinematic full-width video section positioned between the Hero and Calculator sections, featuring autoplay looping video with subtle gradient overlay. Includes scroll-triggered fade-in animation for visual impact. The video is fully responsive with rounded corners and shadow effects.
 *   **Grant Program:** Developer grants program for funding projects building on Bitcoin Liberty with various categories (DeFi, Infrastructure, Developer Tools, AI/ML) and customizable funding ranges.
 *   **Eligibility Checker:** Real-time BTC address balance checker using Blockstream.info API for instant results (<1 second vs 1-5 minutes with RPC). Displays BTC balance and potential LBTY claimable amount (1:10 ratio) directly below the input field. Minimum 0.003 BTC required for eligibility.
 *   **LBTY Calculator:** Converts BTC to LBTY with quick select options and minimum claim validation.
 *   **Email Subscription:** A functional newsletter subscription system with email validation and custom modal feedback.
 *   **Admin Panel:** A comprehensive UI at `/admin` for managing grant applications, including search, filters, status updates, and an integrated real-time chat system between admins and applicants using unique tokens.
 *   **PSBT Integration:** The system supports creating, finalizing, and broadcasting self-send PSBTs for ownership verification, integrating with various Bitcoin wallets.
+*   **Interactive Treasury Chart:** Dynamic SVG donut chart displaying Bitcoin supply distribution with exact data (Active Supply: 67.2%, Dormant 5-10yr: 13.3%, Lost BTC: 14.3%, Satoshi's Coins: 5.2%). Features cursor-following tooltips, segment hover effects with scale animations, and sequential reveal animations on scroll.
 
 ### External Dependencies
 *   **PostgreSQL (Neon-backed Replit database):** Primary database for all application data.

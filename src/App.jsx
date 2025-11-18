@@ -15,6 +15,7 @@ import StayUpdated from "./components/StayUpdated";
 import TopSection from "./components/TopSection";
 import Treasury from "./components/Treasury";
 import WhyLiberty from "./components/WhyLiberty";
+import VideoShowcase from "./components/VideoShowcase";
 import AdminPanel from "./components/AdminPanel";
 import BTCOwnership from "./components/BTCOwnership";
 import { WalletProvider } from "./contexts/WalletContext";
@@ -49,6 +50,7 @@ function App() {
         <TopSection />
         <LaunchCountdown />
         <MarqueeText />
+        <VideoShowcase />
         <LBTCCalculator />
         <CheckYourEligibility />
         <ProjectPhases />
