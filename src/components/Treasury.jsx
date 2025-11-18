@@ -73,34 +73,34 @@ const Treasury = () => {
 
             <div className="flex flex-col md:flex-row mt-12 md:mt-8 gap-6 md:gap-18 lg:gap-30 ml-0 md:ml-3 items-start">
               <div className="flex flex-col gap-4">
-                <div className="flex flex-row items-center gap-3">
-                  <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl" />
+                <div className="flex flex-row items-start gap-3">
+                  <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl mt-0.5" />
                   <div className="flex flex-col">
-                    <div className="text-[#4A5565] text-[12px]">Active Supply</div>
-                    <div className="text-[#000000] text-[16px] text-start">73.7</div>
+                    <div className="text-[#4A5565] text-[12px] leading-tight">Active Supply</div>
+                    <div className="text-[#000000] text-[16px] text-start font-medium mt-0.5">73.7</div>
                   </div>
                 </div>
-                <div className="flex flex-row items-center gap-3">
-                  <div className="w-[16px] h-[16px] shadow-sm bg-[#3A7875] rounded-3xl" />
+                <div className="flex flex-row items-start gap-3">
+                  <div className="w-[16px] h-[16px] shadow-sm bg-[#3A7875] rounded-3xl mt-0.5" />
                   <div className="flex flex-col">
-                    <div className="text-[#4A5565] text-[12px]">Lost BTC</div>
-                    <div className="text-[#000000] text-[16px] text-start">8.6</div>
+                    <div className="text-[#4A5565] text-[12px] leading-tight">Lost BTC</div>
+                    <div className="text-[#000000] text-[16px] text-start font-medium mt-0.5">8.6</div>
                   </div>
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <div className="flex flex-row items-center gap-3">
-                  <div className="w-[16px] h-[16px] shadow-sm bg-[#2D5F5D] rounded-3xl" />
+                <div className="flex flex-row items-start gap-3">
+                  <div className="w-[16px] h-[16px] shadow-sm bg-[#2D5F5D] rounded-3xl mt-0.5" />
                   <div className="flex flex-col">
-                    <div className="text-[#4A5565] text-[12px]">Dormant 5-10 years</div>
-                    <div className="text-[#000000] text-[16px] text-start">12.5</div>
+                    <div className="text-[#4A5565] text-[12px] leading-tight">Dormant 5-10 years</div>
+                    <div className="text-[#000000] text-[16px] text-start font-medium mt-0.5">12.5</div>
                   </div>
                 </div>
-                <div className="flex flex-row items-center gap-3">
-                  <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl" />
+                <div className="flex flex-row items-start gap-3">
+                  <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl mt-0.5" />
                   <div className="flex flex-col">
-                    <div className="text-[#4A5565] text-[12px]">Satoshi's Coins</div>
-                    <div className="text-[#000000] text-[16px] text-start">5.2</div>
+                    <div className="text-[#4A5565] text-[12px] leading-tight">Satoshi's Coins</div>
+                    <div className="text-[#000000] text-[16px] text-start font-medium mt-0.5">5.2</div>
                   </div>
                 </div>
               </div>
