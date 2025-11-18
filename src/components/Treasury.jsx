@@ -85,58 +85,41 @@ const Treasury = () => {
                   const translateY = isHovered ? Math.sin(radians) * 5 : 0;
                   
                   return (
-                    <g key={segment.id}>
-                      <motion.circle
-                        cx="100"
-                        cy="100"
-                        r="80"
-                        fill="none"
-                        stroke={segment.color}
-                        strokeWidth="32"
-                        strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
-                        strokeDashoffset={`${-offset * 5.026}`}
-                        initial={{ strokeDasharray: `0 ${100 * 5.026}` }}
-                        animate={
-                          isInView
-                            ? {
-                                strokeDasharray: `${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`,
-                                translateX,
-                                translateY,
-                              }
-                            : { strokeDasharray: `0 ${100 * 5.026}` }
-                        }
-                        transition={{
-                          strokeDasharray: { duration: 1.5, delay: 0.3 + index * 0.2, ease: "easeOut" },
-                          translateX: { duration: 0.3, ease: "easeOut" },
-                          translateY: { duration: 0.3, ease: "easeOut" }
-                        }}
-                        style={{
-                          filter: isHovered
-                            ? 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25))'
-                            : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
-                          cursor: 'pointer',
-                          transition: 'filter 0.3s ease'
-                        }}
-                        onMouseEnter={() => setHoveredSegment(segment.id)}
-                        onMouseLeave={() => setHoveredSegment(null)}
-                      />
-                      {isHovered && (
-                        <motion.circle
-                          cx="100"
-                          cy="100"
-                          r="80"
-                          fill="none"
-                          stroke="#FF4444"
-                          strokeWidth="4"
-                          strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
-                          strokeDashoffset={`${-offset * 5.026}`}
-                          initial={{ opacity: 0, translateX: 0, translateY: 0 }}
-                          animate={{ opacity: 1, translateX, translateY }}
-                          transition={{ duration: 0.3 }}
-                          style={{ pointerEvents: 'none' }}
-                        />
-                      )}
-                    </g>
+                    <motion.circle
+                      key={segment.id}
+                      cx="100"
+                      cy="100"
+                      r="80"
+                      fill="none"
+                      stroke={segment.color}
+                      strokeWidth="32"
+                      strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
+                      strokeDashoffset={`${-offset * 5.026}`}
+                      initial={{ strokeDasharray: `0 ${100 * 5.026}` }}
+                      animate={
+                        isInView
+                          ? {
+                              strokeDasharray: `${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`,
+                              translateX,
+                              translateY,
+                            }
+                          : { strokeDasharray: `0 ${100 * 5.026}` }
+                      }
+                      transition={{
+                        strokeDasharray: { duration: 1.5, delay: 0.3 + index * 0.2, ease: "easeOut" },
+                        translateX: { duration: 0.3, ease: "easeOut" },
+                        translateY: { duration: 0.3, ease: "easeOut" }
+                      }}
+                      style={{
+                        filter: isHovered
+                          ? 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25))'
+                          : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
+                        cursor: 'pointer',
+                        transition: 'filter 0.3s ease'
+                      }}
+                      onMouseEnter={() => setHoveredSegment(segment.id)}
+                      onMouseLeave={() => setHoveredSegment(null)}
+                    />
                   );
                 })}
               </motion.svg>
