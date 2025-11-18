@@ -79,7 +79,7 @@ const CheckYourEligibility = () => {
   };
 
   return (
-    <div className="text-center py-16 md:py-25 lg:py-30 flex flex-col items-center bg-[#f6f8f8] px-4">
+    <div id="eligibility" className="text-center py-16 md:py-25 lg:py-30 flex flex-col items-center bg-[#f6f8f8] px-4">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}

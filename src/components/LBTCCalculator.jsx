@@ -175,6 +175,12 @@ const LBTCCalculator = () => {
           </motion.div>
         </motion.div>
         <motion.button
+          onClick={() => {
+            const element = document.getElementById('eligibility');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
           whileHover={{
             scale: 1.07,
           }}
