@@ -79,10 +79,6 @@ const Treasury = () => {
                 {segments.map((segment, index) => {
                   const offset = segments.slice(0, index).reduce((sum, s) => sum + s.percentage, 0);
                   const isHovered = hoveredSegment === segment.id;
-                  const midAngle = (offset + segment.percentage / 2) * 3.6;
-                  const radians = (midAngle - 90) * (Math.PI / 180);
-                  const translateX = isHovered ? Math.cos(radians) * 5 : 0;
-                  const translateY = isHovered ? Math.sin(radians) * 5 : 0;
                   
                   return (
                     <motion.circle
@@ -92,7 +88,7 @@ const Treasury = () => {
                       r="80"
                       fill="none"
                       stroke={segment.color}
-                      strokeWidth="32"
+                      strokeWidth={isHovered ? "36" : "32"}
                       strokeLinecap="round"
                       strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
                       strokeDashoffset={`${-offset * 5.026}`}
@@ -101,22 +97,20 @@ const Treasury = () => {
                         isInView
                           ? {
                               strokeDasharray: `${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`,
-                              translateX,
-                              translateY,
                             }
                           : { strokeDasharray: `0 ${100 * 5.026}` }
                       }
                       transition={{
                         strokeDasharray: { duration: 1.5, delay: 0.3 + index * 0.2, ease: "easeOut" },
-                        translateX: { duration: 0.3, ease: "easeOut" },
-                        translateY: { duration: 0.3, ease: "easeOut" }
+                        strokeWidth: { duration: 0.2, ease: "easeOut" }
                       }}
                       style={{
                         filter: isHovered
                           ? 'drop-shadow(0px 4px 12px rgba(0, 0, 0, 0.25))'
                           : 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))',
                         cursor: 'pointer',
-                        transition: 'filter 0.3s ease'
+                        transition: 'filter 0.3s ease',
+                        transformOrigin: 'center'
                       }}
                       onMouseEnter={() => setHoveredSegment(segment.id)}
                       onMouseLeave={() => setHoveredSegment(null)}
