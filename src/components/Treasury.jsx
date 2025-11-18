@@ -93,6 +93,7 @@ const Treasury = () => {
                       fill="none"
                       stroke={segment.color}
                       strokeWidth="32"
+                      strokeLinecap="round"
                       strokeDasharray={`${segment.percentage * 5.026} ${(100 - segment.percentage) * 5.026}`}
                       strokeDashoffset={`${-offset * 5.026}`}
                       initial={{ strokeDasharray: `0 ${100 * 5.026}` }}
