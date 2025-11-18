@@ -155,8 +155,8 @@ const Treasury = () => {
             <div className="text-[#4A5565] mt-3 text-[14px]">Dormant 5-10 years</div>
             <div className="text-[#99A1AF] mt-1 text-[12px]">of total supply</div>
             <div className="bg-[#99A1AF]/15 w-full h-[1px] mt-3" />
-            <div className="text-[#000000] text-[30px] mt-2">2,800,000</div>
-            <div className="text-[#6A7282] text-[14px]">BTC</div>
+            <div className="text-[#000000] text-[30px] mt-2">2,800,000 BTC</div>
+            <div className="text-[#6A7282] text-[14px]">28,000,000 LBTY</div>
           </div>
           <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#3A7875] absolute top-8 right-6 text-[24px]">14.3%</div>
@@ -164,8 +164,8 @@ const Treasury = () => {
             <div className="text-[#4A5565] mt-3 text-[14px]">Lost BTC (non-Satoshi)</div>
             <div className="text-[#99A1AF] mt-1 text-[12px]">of total supply</div>
             <div className="bg-[#99A1AF]/15 w-full h-[1px] mt-3" />
-            <div className="text-[#000000] text-[30px] mt-2">3,000,000</div>
-            <div className="text-[#6A7282] text-[14px]">BTC</div>
+            <div className="text-[#000000] text-[30px] mt-2">3,000,000 BTC</div>
+            <div className="text-[#6A7282] text-[14px]">30,000,000 LBTY</div>
           </div>
           <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#4A9390] absolute top-8 right-6 text-[24px]">5.2%</div>
@@ -173,8 +173,8 @@ const Treasury = () => {
             <div className="text-[#4A5565] mt-3 text-[14px]">Satoshi's Coins</div>
             <div className="text-[#99A1AF] mt-1 text-[12px]">of total supply</div>
             <div className="bg-[#99A1AF]/15 w-full h-[1px] mt-3" />
-            <div className="text-[#000000] text-[30px] mt-2">1,100,000</div>
-            <div className="text-[#6A7282] text-[14px]">BTC</div>
+            <div className="text-[#000000] text-[30px] mt-2">1,100,000 BTC</div>
+            <div className="text-[#6A7282] text-[14px]">11,000,000 LBTY</div>
           </div>
           <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
             <div className="text-[#6EB5B1] absolute top-8 right-6 text-[24px]">67.2%</div>
