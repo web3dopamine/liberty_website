@@ -81,7 +81,7 @@ const Treasury = () => {
                 animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
                 transition={{ duration: 0.8, delay: 1 }}
               >
-                {isLoading ? '21M' : `${(circulatingSupply / 1000000).toFixed(1)}M`}
+                {isLoading ? '21M' : `${(Math.floor((circulatingSupply / 1000000) * 2) / 2).toFixed(1)}M`}
               </motion.div>
               <motion.div
                 className="text-[#6A7282] text-[14px] -mt-2"
