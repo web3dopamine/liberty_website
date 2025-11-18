@@ -19,6 +19,7 @@ const Treasury = () => {
   const chartRef = useRef(null);
   const isInView = useInView(chartRef, { once: true, margin: "-100px" });
   const [hoveredSegment, setHoveredSegment] = useState(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Fetch Bitcoin market data from CoinGecko
   const { data: btcData, isLoading } = useQuery({
@@ -64,7 +65,17 @@ const Treasury = () => {
       <div className="flex flex-col relative mt-12 md:mt-20 lg:mt-25 bg-linear-to-b from-[#ffffff] via-black/8 to-white pt-8 md:pt-16 lg:pt-20 px-4 md:px-8 lg:px-13 rounded-3xl md:rounded-4xl pb-8 md:pb-12 lg:pb-15 shadow-[3px_6px_34px_-4px_rgba(0,0,0,0.1)] w-full max-w-7xl">
         <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-20 lg:gap-25 justify-center w-full">
           <div className="flex flex-col">
-            <div ref={chartRef} className="w-full max-w-[220px] sm:max-w-[280px] md:max-w-[380px] lg:max-w-[448px] aspect-square relative flex flex-col items-center justify-center mb-16 md:mb-8">
+            <div 
+              ref={chartRef} 
+              className="w-full max-w-[220px] sm:max-w-[280px] md:max-w-[380px] lg:max-w-[448px] aspect-square relative flex flex-col items-center justify-center mb-16 md:mb-8"
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setMousePosition({
+                  x: e.clientX - rect.left,
+                  y: e.clientY - rect.top
+                });
+              }}
+            >
               <motion.svg
                 className="absolute left-0 top-0 w-full h-full -rotate-90"
                 viewBox="0 0 200 200"
@@ -120,14 +131,7 @@ const Treasury = () => {
               </motion.svg>
 
               {hoveredSegment && (() => {
-                const segmentIndex = segments.findIndex(s => s.id === hoveredSegment);
-                const offset = segments.slice(0, segmentIndex).reduce((sum, s) => sum + s.percentage, 0);
-                const segment = segments[segmentIndex];
-                const midAngle = (offset + segment.percentage / 2) * 3.6;
-                const radians = (midAngle - 90) * (Math.PI / 180);
-                const tooltipDistance = 140;
-                const tooltipX = Math.cos(radians) * tooltipDistance;
-                const tooltipY = Math.sin(radians) * tooltipDistance;
+                const segment = segments.find(s => s.id === hoveredSegment);
                 
                 return (
                   <motion.div
@@ -136,9 +140,9 @@ const Treasury = () => {
                     exit={{ opacity: 0, scale: 0.8 }}
                     className="absolute bg-white rounded-2xl shadow-lg px-4 py-3 border border-gray-200 z-20 pointer-events-none"
                     style={{ 
-                      left: '50%',
-                      top: '50%',
-                      transform: `translate(calc(-50% + ${tooltipX}px), calc(-50% + ${tooltipY}px))`
+                      left: `${mousePosition.x}px`,
+                      top: `${mousePosition.y}px`,
+                      transform: 'translate(15px, -50%)'
                     }}
                   >
                     <div className="text-[#6A7282] text-[11px] text-center whitespace-nowrap">
