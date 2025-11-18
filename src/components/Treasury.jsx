@@ -73,26 +73,26 @@ const Treasury = () => {
 
             <div className="flex flex-col md:flex-row mt-12 md:mt-8 gap-6 md:gap-18 lg:gap-30 ml-0 md:ml-3 items-start">
               <div className="flex flex-col gap-5">
-                <div className="grid grid-cols-[16px_1fr] gap-x-3 gap-y-1">
+                <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl row-span-2" />
-                  <div className="text-[#4A5565] text-[12px]">Active Supply</div>
+                  <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Active Supply</div>
                   <div className="text-[#000000] text-[18px] font-medium">73.7</div>
                 </div>
-                <div className="grid grid-cols-[16px_1fr] gap-x-3 gap-y-1">
+                <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#3A7875] rounded-3xl row-span-2" />
-                  <div className="text-[#4A5565] text-[12px]">Lost BTC</div>
+                  <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Lost BTC</div>
                   <div className="text-[#000000] text-[18px] font-medium">8.6</div>
                 </div>
               </div>
               <div className="flex flex-col gap-5">
-                <div className="grid grid-cols-[16px_1fr] gap-x-3 gap-y-1">
+                <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#2D5F5D] rounded-3xl row-span-2" />
-                  <div className="text-[#4A5565] text-[12px]">Dormant 5-10 years</div>
+                  <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Dormant 5-10 years</div>
                   <div className="text-[#000000] text-[18px] font-medium">12.5</div>
                 </div>
-                <div className="grid grid-cols-[16px_1fr] gap-x-3 gap-y-1">
+                <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl row-span-2" />
-                  <div className="text-[#4A5565] text-[12px]">Satoshi's Coins</div>
+                  <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Satoshi's Coins</div>
                   <div className="text-[#000000] text-[18px] font-medium">5.2</div>
                 </div>
               </div>
