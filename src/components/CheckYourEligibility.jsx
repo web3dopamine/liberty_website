@@ -243,21 +243,12 @@ const CheckYourEligibility = () => {
           </motion.div>
         </motion.div>
       </motion.div>
-      <motion.button
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        whileHover={{
-          scale: 1.07,
-        }}
-        whileTap={{
-          scale: 1.0,
-        }}
-        className="bg-linear-to-b text-[18px] from-[#2D5F5D] to-[#3A7875] mt-16 text-white tracking-widest py-5 rounded-4xl px-10 cursor-pointer shadow-2xl hover:to-[#3A7875]/80 hover:shadow-2xl"
+      <button
+        disabled
+        className="bg-linear-to-b text-[18px] from-[#2D5F5D]/50 to-[#3A7875]/50 mt-16 text-white/60 tracking-widest py-5 rounded-4xl px-10 cursor-not-allowed shadow-lg opacity-60"
       >
         PAIR WALLET TO CLAIM LBTY
-      </motion.button>
+      </button>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
