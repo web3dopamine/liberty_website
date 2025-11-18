@@ -166,7 +166,7 @@ const Treasury = () => {
         <div className="bg-linear-to-b from-[#0A1F20] to-[#105359] pt-8 md:pt-12 lg:pt-15 pb-8 md:pb-12 lg:pb-16 px-6 md:px-10 lg:px-15 rounded-3xl md:rounded-4xl mt-8 md:mt-10 lg:mt-12">
           <div className="text-[#FFFFFF]/80 text-sm md:text-lg lg:text-[20px]">Total Treasury Potential</div>
           <div className="text-4xl md:text-5xl lg:text-[72px] text-white">5,530,000 LBTY</div>
-          <div className="text-base md:text-lg lg:text-[20px] text-[#FFFFFF]/80">55,300,000 LBTY</div>
+          <div className="text-base md:text-lg lg:text-[20px] text-[#FFFFFF]/80">5,530,000 BTC</div>
           <div className="w-full h-[1.4px] bg-white/20 mt-6 md:mt-8 lg:mt-10 mb-4 md:mb-5 lg:mb-6" />
           <div className="flex flex-col md:flex-row justify-center text-[#FFFFFF]/90 text-sm md:text-base lg:text-[16px] gap-3 md:gap-4 items-center">
             <div className="flex flex-row items-center gap-2">
