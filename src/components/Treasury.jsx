@@ -36,7 +36,7 @@ const Treasury = () => {
   // Calculate values based on live data or use defaults
   const circulatingSupply = btcData?.circulatingSupply || 19950000;
   const currentPrice = btcData?.currentPrice || 95000;
-  const activeSupplyBTC = Math.round(circulatingSupply * 0.737); // 73.7% of circulating supply
+  const activeSupplyBTC = Math.round(circulatingSupply * 0.672); // 67.2% of circulating supply
   const totalSupply = 21000000; // Bitcoin's max supply
   const estimatedUsdValue = activeSupplyBTC * currentPrice;
   return (
@@ -98,7 +98,7 @@ const Treasury = () => {
                 <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#6EB5B1] rounded-3xl row-span-2" />
                   <div className="text-[#4A5565] text-[12px] whitespace-nowrap">Active Supply</div>
-                  <div className="text-[#000000] text-[18px] font-medium">73.7</div>
+                  <div className="text-[#000000] text-[18px] font-medium">67.2</div>
                 </div>
                 <div className="grid grid-cols-[16px_auto] gap-x-3 gap-y-1">
                   <div className="w-[16px] h-[16px] shadow-sm bg-[#3A7875] rounded-3xl row-span-2" />
@@ -126,7 +126,7 @@ const Treasury = () => {
               <img src={Lightening2} className="h-16 w-16 md:h-20 md:w-20 lg:h-[100px] lg:w-[100px]" />
               <div className="flex flex-col mb-2 md:mb-4">
                 <div className="text-xs md:text-sm lg:text-[14px] text-start text-[#4A5565]">Active Supply</div>
-                <div className="text-lg md:text-xl lg:text-[24px] text-start text-[#000000]">73.7% of Total Supply</div>
+                <div className="text-lg md:text-xl lg:text-[24px] text-start text-[#000000]">67.2% of Total Supply</div>
               </div>
             </div>
             <div className="px-2 md:px-3 text-4xl md:text-5xl lg:text-[72px] -mt-2 md:-mt-3">
@@ -177,13 +177,13 @@ const Treasury = () => {
             <div className="text-[#6A7282] text-[14px]">BTC</div>
           </div>
           <div className="flex flex-col w-full text-start bg-white shadow-sm rounded-3xl p-7 pb-6 relative hover:bg-gray-200 hover:shadow-2xl transition-all duration-300 delay-200 ease-in-out select-none hover:-translate-y-2">
-            <div className="text-[#6EB5B1] absolute top-8 right-6 text-[24px]">73.7%</div>
+            <div className="text-[#6EB5B1] absolute top-8 right-6 text-[24px]">67.2%</div>
             <img src={Lightening3} className="w-[48px] h-[48px]" />
             <div className="text-[#4A5565] mt-3 text-[14px]">Active Supply</div>
             <div className="text-[#99A1AF] mt-1 text-[12px]">of total supply</div>
             <div className="bg-[#99A1AF]/15 w-full h-[1px] mt-3" />
             <div className="text-[#000000] text-[30px] mt-2">
-              {isLoading ? '15,470,000' : activeSupplyBTC.toLocaleString()}
+              {isLoading ? '14,112,000' : activeSupplyBTC.toLocaleString()}
             </div>
             <div className="text-[#6A7282] text-[14px]">BTC</div>
           </div>
