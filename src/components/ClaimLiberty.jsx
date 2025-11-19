@@ -81,55 +81,7 @@ const ClaimLiberty = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="bg-gray-50 rounded-3xl p-8 md:p-12 mb-12"
-        >
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
-              Select your wallet
-            </h3>
-            <div className="flex items-center gap-2 text-sm text-gray-500">
-              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-              <span>0 available</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: 'XVerse', icon: '✕', bgColor: 'bg-black', textColor: 'text-white' },
-              { name: 'Unisat', icon: '$', bgColor: 'bg-orange-500', textColor: 'text-white' },
-              { name: 'OKX', icon: '▦', bgColor: 'bg-gray-900', textColor: 'text-white' },
-              { name: 'Phantom', icon: '👻', bgColor: 'bg-purple-500', textColor: 'text-white' }
-            ].map((wallet, index) => (
-              <motion.div
-                key={wallet.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                className="bg-white rounded-2xl p-6 border border-gray-200 flex flex-col items-center justify-center text-center hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-              >
-                <div className={`w-12 h-12 ${wallet.bgColor} ${wallet.textColor} rounded-xl flex items-center justify-center text-2xl mb-3`}>
-                  {wallet.icon}
-                </div>
-                <div className="font-semibold text-gray-900 mb-1">
-                  {wallet.name}
-                </div>
-                <div className="text-sm text-orange-500 font-medium">
-                  Not Detected
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <p className="text-center text-sm text-gray-500 mt-6">
-            Install one of these Bitcoin wallets to continue with the claim process
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="text-center"
         >
           <button
