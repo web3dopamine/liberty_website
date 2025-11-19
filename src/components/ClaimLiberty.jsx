@@ -42,21 +42,18 @@ const ClaimLiberty = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-full mb-6">
-            <div className="w-2 h-2 bg-[#2B5A3F] rounded-full"></div>
-            <span className="text-sm text-gray-600 font-medium">Token Claim</span>
+          <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2 w-fit mx-auto mb-6">
+            <div className="text-[#2D5F5D] text-xs md:text-sm lg:text-[14px]">Token Claim</div>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-            Claim your LBTY.
-          </h2>
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2B5A3F] mb-6">
-            It's seamless.
-          </h3>
+          <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
+            Claim your LBTY. <br />
+            <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">It's seamless.</span>
+          </div>
           
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4">
             Connect your Bitcoin wallet to verify ownership and claim your tokens.
-          </p>
+          </div>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
