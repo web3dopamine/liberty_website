@@ -1,7 +1,6 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import CheckYourEligibility from "./components/CheckYourEligibility";
-import ClaimYourLBTC from "./components/ClaimYourLBTC";
 import DeveloperGrantsProgram from "./components/DeveloperGrantsProgram";
 import Footer from "./components/Footer";
 import GrantApplicationProcess from "./components/GrantApplicationProcess";
@@ -56,7 +55,6 @@ function App() {
         <CheckYourEligibility />
         <ProjectPhases />
         <WhyLiberty />
-        <ClaimYourLBTC />
         <Treasury />
         <ClaimLiberty />
         <DeveloperGrantsProgram />
