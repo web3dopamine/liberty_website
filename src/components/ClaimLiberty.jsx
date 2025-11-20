@@ -1,9 +1,17 @@
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { Logo } from "../assets/images";
 
 const ClaimLiberty = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [animateLogo, setAnimateLogo] = useState(0);
+
+  useEffect(() => {
+    if (isInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [isInView]);
 
   const steps = [
     {
@@ -46,11 +54,44 @@ const ClaimLiberty = () => {
             <div className="text-[#2D5F5D] text-xs md:text-sm lg:text-[14px]">Token Claim</div>
           </div>
           
-          <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6">
-            <span className="bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">Claim your </span>
-            <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Liberty</span>
-            <span className="bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">.</span>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-8 overflow-visible"
+            style={{ lineHeight: '1.6' }}
+          >
+            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Claim your </span>
+            <div className="flex items-baseline gap-0">
+              <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Li</span>
+              <motion.img 
+                key={animateLogo}
+                src={Logo} 
+                alt="Bitcoin" 
+                className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
+                style={{ filter: 'invert(47%) sepia(11%) saturate(1428%) hue-rotate(122deg) brightness(91%) contrast(88%)' }}
+                initial={{ rotate: 0 }}
+                animate={{ 
+                  rotate: [0, -30, 30, 0]
+                }}
+                transition={{ 
+                  duration: 0.8,
+                  times: [0, 0.33, 0.66, 1],
+                  ease: "easeInOut"
+                }}
+                whileHover={{ 
+                  rotate: [0, -30, 30, 0],
+                  transition: { 
+                    duration: 0.8,
+                    times: [0, 0.33, 0.66, 1],
+                    ease: "easeInOut"
+                  }
+                }}
+              />
+              <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>erty</span>
+            </div>
+            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>.</span>
+          </motion.div>
           
           <div className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4">
             Connect your Bitcoin wallet to verify ownership and claim your tokens.
