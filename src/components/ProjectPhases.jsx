@@ -1,31 +1,75 @@
-import { GrayCircle, GreenTickCircle, OrangleClockCircle } from "../assets/images";
+import { GrayCircle, GreenTickCircle, OrangleClockCircle, Logo } from "../assets/images";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const ProjectPhases = () => {
+  const titleRef = useRef(null);
   const phase1Ref = useRef(null);
   const phase2Ref = useRef(null);
   const phase3Ref = useRef(null);
   const phase4Ref = useRef(null);
   const footerRef = useRef(null);
 
+  const titleInView = useInView(titleRef, { once: true, amount: 0.3 });
   const phase1InView = useInView(phase1Ref, { once: true, margin: "-50px" });
   const phase2InView = useInView(phase2Ref, { once: true, margin: "-50px" });
   const phase3InView = useInView(phase3Ref, { once: true, margin: "-50px" });
   const phase4InView = useInView(phase4Ref, { once: true, margin: "-50px" });
   const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
+  
+  const [animateLogo, setAnimateLogo] = useState(0);
+
+  useEffect(() => {
+    if (titleInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [titleInView]);
 
   return (
     <div id="phases" className="text-center pt-20 md:pt-30 lg:pt-40 pb-16 md:pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000] px-4">
       <div className="text-[#99A1AF] bg-white/3 tracking-widest border border-gray-400/20 px-3 py-1 rounded-2xl text-xs md:text-sm lg:text-[14px]">
         ROADMAP
       </div>
-      <div className="text-4xl md:text-6xl lg:text-[96px] text-white mt-7">
-        Project{" "}
-        <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
+      <motion.div
+        ref={titleRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 mt-7 pb-4 overflow-visible"
+        style={{ lineHeight: '1.3' }}
+      >
+        <div className="flex items-baseline gap-0">
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
+          <motion.img 
+            key={animateLogo}
+            src={Logo} 
+            alt="Bitcoin" 
+            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
+            style={{ filter: 'brightness(0) invert(1)' }}
+            initial={{ rotate: 0 }}
+            animate={{ 
+              rotate: [0, -30, 30, 0]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.33, 0.66, 1],
+              ease: "easeInOut"
+            }}
+            whileHover={{ 
+              rotate: [0, -30, 30, 0],
+              transition: { 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }
+            }}
+          />
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
+        </div>
+        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.3' }}>
           Phases
         </span>
-      </div>
+      </motion.div>
       <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">Track our progress from formation to global expansion</div>
 
       <div className="flex flex-col lg:flex-row mt-12 md:mt-16 gap-8 md:gap-10 w-full max-w-7xl">
