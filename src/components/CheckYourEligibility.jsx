@@ -96,7 +96,7 @@ const CheckYourEligibility = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12"
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-16"
         style={{ lineHeight: '1.6' }}
       >
         <div className="flex items-baseline gap-0">
