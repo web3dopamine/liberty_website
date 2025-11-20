@@ -106,7 +106,7 @@ const ClaimLiberty = () => {
           </button>
           
           <p className="text-base font-semibold text-gray-800 mt-4">
-            Launching February 10, 2025 at 12:00 AM UTC
+            Launching February 10, 2026 at 12:00 AM UTC
           </p>
           
           <p className="text-sm text-gray-500 mt-2">
