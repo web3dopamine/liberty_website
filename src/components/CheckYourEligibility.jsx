@@ -96,8 +96,8 @@ const CheckYourEligibility = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-16"
-        style={{ lineHeight: '1.6' }}
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-20 overflow-visible"
+        style={{ lineHeight: '1.8' }}
       >
         <div className="flex items-baseline gap-0">
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Li</span>
@@ -127,7 +127,7 @@ const CheckYourEligibility = () => {
           />
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>erty</span>
         </div>
-        <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight">
+        <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.6' }}>
           Eligibility
         </span>
       </motion.div>
