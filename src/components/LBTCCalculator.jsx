@@ -43,11 +43,19 @@ const LBTCCalculator = () => {
       >
         <div className="flex items-baseline gap-0">
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
-          <img 
+          <motion.img 
             src={Logo} 
             alt="Bitcoin" 
             className="h-[50px] md:h-[72px] lg:h-[96px] -mx-1"
             style={{ filter: 'brightness(0) saturate(0)' }}
+            initial={{ rotate: 0 }}
+            animate={isInView ? { rotate: [0, -30, 30, 0] } : { rotate: 0 }}
+            transition={{ 
+              duration: 1.5, 
+              delay: 0.8,
+              times: [0, 0.33, 0.66, 1],
+              ease: "easeInOut"
+            }}
           />
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
         </div>
