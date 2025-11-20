@@ -38,7 +38,7 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-4 leading-tight"
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-8 leading-tight"
       >
         <div className="flex items-baseline gap-0">
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps">Li</span>
