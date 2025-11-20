@@ -85,9 +85,9 @@ const CheckYourEligibility = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
+        className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text pb-4 leading-tight"
       >
-        Check Your{" "}
+        Liberty{" "}
         <span className="bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Eligibility</span>
       </motion.div>
       <motion.div
