@@ -38,12 +38,12 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-4 pb-4"
+        className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 pb-4 leading-tight"
       >
         <img 
           src={FullLogo} 
           alt="Liberty" 
-          className="h-12 md:h-16 lg:h-20 brightness-0"
+          className="h-[60px] md:h-[88px] lg:h-[120px] brightness-0"
           style={{ filter: 'brightness(0)' }}
         />
         <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight">
