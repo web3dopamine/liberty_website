@@ -38,9 +38,9 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text pb-4 leading-tight"
+        className="text-5xl md:text-7xl lg:text-[96px] pb-4 leading-tight"
       >
-        Liberty{" "}
+        <span className="text-black font-bold tracking-wide">L₿BERTY</span>{" "}
         <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
           Calculator
         </span>
