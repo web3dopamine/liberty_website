@@ -56,37 +56,34 @@ const GrantApplicationProcess = () => {
           className="flex flex-wrap items-baseline justify-center gap-2 md:gap-3 pb-4"
           style={{ lineHeight: '1.4' }}
         >
-          <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps whitespace-nowrap" style={{ lineHeight: '1.4' }}>Ready to build</span>
-          <div className="flex items-baseline gap-2 md:gap-3 whitespace-nowrap">
-            <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>with</span>
-            <div className="flex items-baseline gap-0">
-              <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>Li</span>
-              <motion.img 
-                key={animateLogo}
-                src={Logo} 
-                alt="Bitcoin" 
-                className="h-[32px] md:h-[50px] lg:h-[60px] -mx-1 cursor-pointer"
-                style={{ filter: 'brightness(0) invert(1)' }}
-                initial={{ rotate: 0 }}
-                animate={{ 
-                  rotate: [0, -30, 30, 0]
-                }}
-                transition={{ 
+          <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps whitespace-nowrap" style={{ lineHeight: '1.4' }}>Ready to build with</span>
+          <div className="flex items-baseline gap-0 whitespace-nowrap">
+            <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>Li</span>
+            <motion.img 
+              key={animateLogo}
+              src={Logo} 
+              alt="Bitcoin" 
+              className="h-[32px] md:h-[50px] lg:h-[60px] -mx-1 cursor-pointer"
+              style={{ filter: 'brightness(0) invert(1)' }}
+              initial={{ rotate: 0 }}
+              animate={{ 
+                rotate: [0, -30, 30, 0]
+              }}
+              transition={{ 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }}
+              whileHover={{ 
+                rotate: [0, -30, 30, 0],
+                transition: { 
                   duration: 0.8,
                   times: [0, 0.33, 0.66, 1],
                   ease: "easeInOut"
-                }}
-                whileHover={{ 
-                  rotate: [0, -30, 30, 0],
-                  transition: { 
-                    duration: 0.8,
-                    times: [0, 0.33, 0.66, 1],
-                    ease: "easeInOut"
-                  }
-                }}
-              />
-              <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>erty?</span>
-            </div>
+                }
+              }}
+            />
+            <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>erty?</span>
           </div>
         </motion.div>
         <div className="text-white/90 text-base md:text-xl lg:text-[24px] mt-2 font-light">
