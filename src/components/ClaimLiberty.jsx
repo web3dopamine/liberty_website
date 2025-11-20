@@ -86,10 +86,10 @@ const ClaimLiberty = () => {
           className="text-center"
         >
           <button
-            onClick={handleClaimClick}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#2B5A3F] text-white rounded-full font-semibold text-lg hover:bg-[#234a33] transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+            disabled
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gray-300 text-gray-500 rounded-full font-semibold text-lg cursor-not-allowed shadow-lg opacity-60"
           >
-            Start Claiming Now
+            Start Claim Now
             <svg 
               className="w-5 h-5" 
               fill="none" 
@@ -105,7 +105,11 @@ const ClaimLiberty = () => {
             </svg>
           </button>
           
-          <p className="text-sm text-gray-500 mt-4">
+          <p className="text-sm font-medium text-gray-700 mt-4">
+            Feb 10 12am UTC
+          </p>
+          
+          <p className="text-sm text-gray-500 mt-2">
             Minimum 0.003 BTC required to claim
           </p>
         </motion.div>
