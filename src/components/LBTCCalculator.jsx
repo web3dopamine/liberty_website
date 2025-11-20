@@ -41,14 +41,14 @@ const LBTCCalculator = () => {
         className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-4 leading-tight"
       >
         <div className="flex items-baseline gap-0">
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal">LI</span>
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps">LI</span>
           <img 
             src={Logo} 
             alt="Bitcoin" 
             className="h-[50px] md:h-[72px] lg:h-[96px] -mx-1"
             style={{ filter: 'brightness(0) saturate(0)' }}
           />
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal">ERTY</span>
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps">ERTY</span>
         </div>
         <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight">
           Calculator
