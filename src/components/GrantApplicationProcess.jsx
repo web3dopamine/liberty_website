@@ -1,10 +1,19 @@
-import { Handshake, Magnify, Note, NoteGreen, Rocket } from "../assets/images";
-import { motion } from "motion/react";
+import { Handshake, Magnify, Note, NoteGreen, Rocket, Logo } from "../assets/images";
+import { motion, useInView } from "motion/react";
 import GrantApplicationModal from "../modals/GrantApplicationModal";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 const GrantApplicationProcess = () => {
   const grantModalRef = useRef(null);
+  const ctaRef = useRef(null);
+  const ctaInView = useInView(ctaRef, { once: true, amount: 0.3 });
+  const [animateLogo, setAnimateLogo] = useState(0);
+
+  useEffect(() => {
+    if (ctaInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [ctaInView]);
 
   return (
     <div className="text-center pb-20 md:pb-28 lg:pb-35 flex flex-col items-center bg-[#f6f8f8] px-4">
@@ -39,8 +48,44 @@ const GrantApplicationProcess = () => {
         </div>
       </div>
 
-      <div className="flex flex-col bg-linear-to-b from-[#0A1F20] to-[#105359] text-white items-center pt-8 md:pt-10 pb-12 md:pb-14 mt-16 md:mt-20 lg:mt-23 px-6 md:px-20 lg:px-60 rounded-4xl w-full max-w-7xl">
-        <div className="text-3xl md:text-5xl lg:text-[60px]">Ready to build with Liberty?</div>
+      <div ref={ctaRef} className="flex flex-col bg-linear-to-b from-[#0A1F20] to-[#105359] text-white items-center pt-8 md:pt-10 pb-12 md:pb-14 mt-16 md:mt-20 lg:mt-23 px-6 md:px-20 lg:px-60 rounded-4xl w-full max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={ctaInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-3 pb-4 overflow-visible"
+          style={{ lineHeight: '1.4' }}
+        >
+          <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>Ready to build with </span>
+          <div className="flex items-baseline gap-0">
+            <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>Li</span>
+            <motion.img 
+              key={animateLogo}
+              src={Logo} 
+              alt="Bitcoin" 
+              className="h-[32px] md:h-[50px] lg:h-[60px] -mx-1 cursor-pointer"
+              style={{ filter: 'brightness(0) invert(1)' }}
+              initial={{ rotate: 0 }}
+              animate={{ 
+                rotate: [0, -30, 30, 0]
+              }}
+              transition={{ 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }}
+              whileHover={{ 
+                rotate: [0, -30, 30, 0],
+                transition: { 
+                  duration: 0.8,
+                  times: [0, 0.33, 0.66, 1],
+                  ease: "easeInOut"
+                }
+              }}
+            />
+            <span className="text-3xl md:text-5xl lg:text-[60px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.4' }}>erty?</span>
+          </div>
+        </motion.div>
         <div className="text-white/90 text-base md:text-xl lg:text-[24px] mt-2 font-light">
           From proposal to deployment, we support you every step of the way.
         </div>
