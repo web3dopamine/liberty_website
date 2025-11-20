@@ -38,7 +38,7 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 pb-4 leading-tight"
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-4 leading-tight"
       >
         <img 
           src={FullLogo} 
