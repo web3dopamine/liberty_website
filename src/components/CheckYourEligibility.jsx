@@ -1,11 +1,21 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useInView } from "motion/react";
+import { Logo } from "../assets/images";
 
 const CheckYourEligibility = () => {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [balanceData, setBalanceData] = useState(null);
   const [error, setError] = useState("");
+  const [animateLogo, setAnimateLogo] = useState(0);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+
+  useEffect(() => {
+    if (isInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [isInView]);
 
   const handleCheckNow = async () => {
     if (!input.trim()) {
@@ -16,6 +26,7 @@ const CheckYourEligibility = () => {
     setLoading(true);
     setError("");
     setBalanceData(null);
+    setAnimateLogo(prev => prev + 1);
 
     try {
       const response = await fetch('/api/check-btc-balance', {
@@ -79,16 +90,46 @@ const CheckYourEligibility = () => {
   };
 
   return (
-    <div id="eligibility" className="text-center py-16 md:py-25 lg:py-30 flex flex-col items-center bg-[#f6f8f8] px-4">
+    <div ref={sectionRef} id="eligibility" className="text-center py-16 md:py-25 lg:py-30 flex flex-col items-center bg-[#f6f8f8] px-4">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text pb-4 leading-tight"
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12"
+        style={{ lineHeight: '1.3' }}
       >
-        Liberty{" "}
-        <span className="bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Eligibility</span>
+        <div className="flex items-baseline gap-0">
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
+          <motion.img 
+            key={animateLogo}
+            src={Logo} 
+            alt="Bitcoin" 
+            className="h-[50px] md:h-[72px] lg:h-[96px] -mx-1 cursor-pointer"
+            style={{ filter: 'brightness(0) saturate(0)' }}
+            initial={{ rotate: 0 }}
+            animate={{ 
+              rotate: [0, -30, 30, 0]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.33, 0.66, 1],
+              ease: "easeInOut"
+            }}
+            whileHover={{ 
+              rotate: [0, -30, 30, 0],
+              transition: { 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }
+            }}
+          />
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
+        </div>
+        <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight">
+          Eligibility
+        </span>
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
