@@ -62,7 +62,7 @@ const WhyLiberty = () => {
       >
         <span className="text-4xl md:text-6xl lg:text-[96px] text-white tracking-tight" style={{ lineHeight: '1.8' }}>Why </span>
         <div className="flex items-baseline gap-0">
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] via-[#2D5F5D]/90 to-[#2D5F5D]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Li</span>
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Li</span>
           <motion.img 
             key={animateLogo}
             src={Logo} 
@@ -87,9 +87,9 @@ const WhyLiberty = () => {
               }
             }}
           />
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] via-[#2D5F5D]/90 to-[#2D5F5D]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>erty</span>
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>erty</span>
         </div>
-        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.8' }}>
+        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.8' }}>
           ?
         </span>
       </motion.div>
