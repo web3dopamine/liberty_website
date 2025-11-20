@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Calender, GreenTickCircle, Stack } from "../assets/images";
+import { useState, useRef, useEffect } from "react";
+import { Calender, GreenTickCircle, Stack, Logo } from "../assets/images";
 import StackIcon from "./../assets/images/stack_icon.svg?react";
 import CodeIcon from "./../assets/images/code_icon.svg?react";
 import DBIcon from "./../assets/images/db_icon.svg?react";
@@ -7,7 +7,7 @@ import WrenchIcon from "./../assets/images/wrench_icon.svg?react";
 import NoteIcon from "./../assets/images/note_icon.svg?react";
 import BrainIcon from "./../assets/images/brain_icon.svg?react";
 import { GrantsData } from "../utils/GrantsData";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useInView } from "motion/react";
 
 const TABS = {
   ALL_GRANTS: "All Grants",
@@ -20,6 +20,15 @@ const TABS = {
 
 const DeveloperGrantsProgram = () => {
   const [currentTab, setCurrentTab] = useState(TABS.ALL_GRANTS);
+  const titleRef = useRef(null);
+  const titleInView = useInView(titleRef, { once: true, amount: 0.3 });
+  const [animateLogo, setAnimateLogo] = useState(0);
+
+  useEffect(() => {
+    if (titleInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [titleInView]);
 
   const activeTabStyle =
     "flex flex-row items-center gap-2 bg-linear-to-b from-[#2D5F5D] to-[#3A7875] text-white px-5.5 py-3 rounded-3xl shadow-xl cursor-pointer";
@@ -94,13 +103,42 @@ const DeveloperGrantsProgram = () => {
         <div className="text-[#2D5F5D] text-[14px]">Funding Opportunities</div>
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-        className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6 md:mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text"
+        ref={titleRef}
+        initial={{ opacity: 0, y: 50 }}
+        animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 mt-6 md:mt-8 pb-4 overflow-visible"
+        style={{ lineHeight: '1.3' }}
       >
-        <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Grant Program</span>
+        <div className="flex items-baseline gap-0">
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
+          <motion.img 
+            key={animateLogo}
+            src={Logo} 
+            alt="Bitcoin" 
+            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
+            style={{ filter: 'invert(47%) sepia(11%) saturate(1428%) hue-rotate(122deg) brightness(91%) contrast(88%)' }}
+            initial={{ rotate: 0 }}
+            animate={{ 
+              rotate: [0, -30, 30, 0]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.33, 0.66, 1],
+              ease: "easeInOut"
+            }}
+            whileHover={{ 
+              rotate: [0, -30, 30, 0],
+              transition: { 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }
+            }}
+          />
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
+        </div>
+        <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Grants</span>
       </motion.div>
       <motion.div
         initial={{ opacity: 0 }}
