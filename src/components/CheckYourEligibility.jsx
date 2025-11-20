@@ -97,10 +97,10 @@ const CheckYourEligibility = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
         className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12"
-        style={{ lineHeight: '1.3' }}
+        style={{ lineHeight: '1.6' }}
       >
         <div className="flex items-baseline gap-0">
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Li</span>
           <motion.img 
             key={animateLogo}
             src={Logo} 
@@ -125,7 +125,7 @@ const CheckYourEligibility = () => {
               }
             }}
           />
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>erty</span>
         </div>
         <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight">
           Eligibility
