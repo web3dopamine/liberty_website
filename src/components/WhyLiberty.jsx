@@ -1,11 +1,13 @@
-import { useState, useRef } from "react";
-import { Armour, CodeBlock, Globe, Lightening, Lock, People } from "../assets/images";
+import { useState, useEffect, useRef } from "react";
+import { Armour, CodeBlock, Globe, Lightening, Lock, People, Logo } from "../assets/images";
 import { motion, useInView } from "motion/react";
 
 const WhyLiberty = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [animateLogo, setAnimateLogo] = useState(0);
   
+  const sectionRef = useRef(null);
   const card1Ref = useRef(null);
   const card2Ref = useRef(null);
   const card3Ref = useRef(null);
@@ -13,12 +15,19 @@ const WhyLiberty = () => {
   const card5Ref = useRef(null);
   const card6Ref = useRef(null);
 
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const card1InView = useInView(card1Ref, { once: true, margin: "-50px" });
   const card2InView = useInView(card2Ref, { once: true, margin: "-50px" });
   const card3InView = useInView(card3Ref, { once: true, margin: "-50px" });
   const card4InView = useInView(card4Ref, { once: true, margin: "-50px" });
   const card5InView = useInView(card5Ref, { once: true, margin: "-50px" });
   const card6InView = useInView(card6Ref, { once: true, margin: "-50px" });
+
+  useEffect(() => {
+    if (isInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [isInView]);
 
   const handleMouseMove = (e, cardId) => {
     const card = e.currentTarget;
@@ -42,13 +51,48 @@ const WhyLiberty = () => {
   };
 
   return (
-    <div className="text-center pb-20 md:pb-28 lg:pb-35 flex flex-col items-center bg-linear-to-b from-[#000000] via-[#204443] to-[#000000] px-4">
-      <div className="text-4xl md:text-6xl lg:text-[96px] text-white mt-7">
-        Why{" "}
-        <span className="text-center bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text -mt-4 tracking-tight">
-          Liberty?
+    <div ref={sectionRef} className="text-center pb-20 md:pb-28 lg:pb-35 flex flex-col items-center bg-linear-to-b from-[#000000] via-[#204443] to-[#000000] px-4">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12 mt-7 overflow-visible"
+        style={{ lineHeight: '1.8' }}
+      >
+        <span className="text-4xl md:text-6xl lg:text-[96px] text-white tracking-tight" style={{ lineHeight: '1.8' }}>Why </span>
+        <div className="flex items-baseline gap-0">
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] via-[#2D5F5D]/90 to-[#2D5F5D]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Li</span>
+          <motion.img 
+            key={animateLogo}
+            src={Logo} 
+            alt="Bitcoin" 
+            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
+            style={{ filter: 'invert(47%) sepia(11%) saturate(1428%) hue-rotate(122deg) brightness(91%) contrast(88%)' }}
+            initial={{ rotate: 0 }}
+            animate={{ 
+              rotate: [0, -30, 30, 0]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.33, 0.66, 1],
+              ease: "easeInOut"
+            }}
+            whileHover={{ 
+              rotate: [0, -30, 30, 0],
+              transition: { 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }
+            }}
+          />
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] via-[#2D5F5D]/90 to-[#2D5F5D]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>erty</span>
+        </div>
+        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.8' }}>
+          ?
         </span>
-      </div>
+      </motion.div>
       <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">The most advanced decentralized protocol for Bitcoin</div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-6 md:gap-8 w-full max-w-7xl">
         <motion.div
