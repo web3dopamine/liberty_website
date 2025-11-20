@@ -105,8 +105,8 @@ const ClaimLiberty = () => {
             </svg>
           </button>
           
-          <p className="text-sm font-medium text-gray-700 mt-4">
-            Feb 10 12am UTC
+          <p className="text-base font-semibold text-gray-800 mt-4">
+            Launching February 10, 2025 at 12:00 AM UTC
           </p>
           
           <p className="text-sm text-gray-500 mt-2">
