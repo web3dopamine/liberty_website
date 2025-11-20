@@ -5,21 +5,30 @@ import { motion, useInView } from "motion/react";
 const LBTCCalculator = () => {
   const [btcValue, setBtcValue] = useState(1);
   const [lbtyValue, setLbtyValue] = useState(10);
+  const [animateLogo, setAnimateLogo] = useState(0);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const minClaim = 0.003;
 
+  useEffect(() => {
+    if (isInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [isInView]);
+
   const handleBtcChange = (value) => {
     const numValue = parseFloat(value) || 0;
     setBtcValue(numValue);
     setLbtyValue(numValue * 10);
+    setAnimateLogo(prev => prev + 1);
   };
 
   const handleLbtyChange = (value) => {
     const numValue = parseFloat(value) || 0;
     setLbtyValue(numValue);
     setBtcValue(numValue / 10);
+    setAnimateLogo(prev => prev + 1);
   };
 
   const handleQuickSelect = (amount) => {
@@ -44,10 +53,20 @@ const LBTCCalculator = () => {
         <div className="flex items-baseline gap-0">
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
           <motion.img 
+            key={animateLogo}
             src={Logo} 
             alt="Bitcoin" 
             className="h-[50px] md:h-[72px] lg:h-[96px] -mx-1 cursor-pointer"
             style={{ filter: 'brightness(0) saturate(0)' }}
+            initial={{ rotate: 0 }}
+            animate={{ 
+              rotate: [0, -30, 30, 0]
+            }}
+            transition={{ 
+              duration: 0.8,
+              times: [0, 0.33, 0.66, 1],
+              ease: "easeInOut"
+            }}
             whileHover={{ 
               rotate: [0, -30, 30, 0],
               transition: { 
