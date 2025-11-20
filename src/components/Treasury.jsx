@@ -10,16 +10,26 @@ import {
   RoundSegment,
   User,
   WalletGreen,
+  Logo,
 } from "../assets/images";
 import { motion, useInView } from "motion/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 const Treasury = () => {
+  const sectionRef = useRef(null);
   const chartRef = useRef(null);
+  const titleInView = useInView(sectionRef, { once: true, amount: 0.3 });
   const isInView = useInView(chartRef, { once: true, margin: "-100px" });
   const [hoveredSegment, setHoveredSegment] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [animateLogo, setAnimateLogo] = useState(0);
+
+  useEffect(() => {
+    if (titleInView) {
+      setAnimateLogo(prev => prev + 1);
+    }
+  }, [titleInView]);
 
   // Fetch Bitcoin market data from CoinGecko
   const { data: btcData, isLoading } = useQuery({
@@ -50,15 +60,53 @@ const Treasury = () => {
     { name: 'Satoshi\'s Coins', percentage: 5.2, color: '#6EB5B1', btc: 1092000, id: 'satoshi' },
   ];
   return (
-    <div className="text-center py-16 md:py-20 lg:py-30 flex flex-col items-center bg-[#ffffff] px-4">
+    <div ref={sectionRef} className="text-center py-16 md:py-20 lg:py-30 flex flex-col items-center bg-[#ffffff] px-4">
       <div className="flex flex-row gap-1 border rounded-3xl border-[#4A9390]/20 bg-[#2D5F5D]/5 px-4 py-2">
         <img src={CoinClock} className="w-4" />
         <div className="text-[#2D5F5D] text-xs md:text-sm lg:text-[14px]">Treasury Breakdown</div>
       </div>
-      <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6 md:mt-8 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
-        Liberty Bitcoin <br />
-        <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">Treasury</span>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={titleInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="flex flex-col items-center justify-center gap-2 pb-12 mt-6 md:mt-8"
+        style={{ lineHeight: '1.3' }}
+      >
+        <div className="flex flex-col md:flex-row items-baseline gap-2 md:gap-4">
+          <div className="flex items-baseline gap-0">
+            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
+            <motion.img 
+              key={animateLogo}
+              src={Logo} 
+              alt="Bitcoin" 
+              className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
+              style={{ filter: 'brightness(0) saturate(0)' }}
+              initial={{ rotate: 0 }}
+              animate={{ 
+                rotate: [0, -30, 30, 0]
+              }}
+              transition={{ 
+                duration: 0.8,
+                times: [0, 0.33, 0.66, 1],
+                ease: "easeInOut"
+              }}
+              whileHover={{ 
+                rotate: [0, -30, 30, 0],
+                transition: { 
+                  duration: 0.8,
+                  times: [0, 0.33, 0.66, 1],
+                  ease: "easeInOut"
+                }
+              }}
+            />
+            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
+          </div>
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Bitcoin</span>
+        </div>
+        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.3' }}>
+          Treasury
+        </span>
+      </motion.div>
       <div className="text-[#4A5565] text-base md:text-lg lg:text-[24px] mt-6 md:mt-8 px-4">
         Conceptual treasury based on dormant BTC (5-10 years) and unclaimed LBTY tokens
       </div>
