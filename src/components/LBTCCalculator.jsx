@@ -38,17 +38,18 @@ const LBTCCalculator = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12 leading-normal overflow-visible"
+        className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12"
+        style={{ lineHeight: '1.3' }}
       >
-        <div className="flex items-baseline gap-0 overflow-visible">
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps overflow-visible">Li</span>
+        <div className="flex items-baseline gap-0">
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
           <img 
             src={Logo} 
             alt="Bitcoin" 
             className="h-[50px] md:h-[72px] lg:h-[96px] -mx-1"
             style={{ filter: 'brightness(0) saturate(0)' }}
           />
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps overflow-visible">erty</span>
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
         </div>
         <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight">
           Calculator
