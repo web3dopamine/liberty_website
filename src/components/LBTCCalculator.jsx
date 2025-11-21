@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Logo, FullLogo } from "../assets/images";
+import LibertyBGif from "../assets/images/liberty_B.gif";
 import { motion, useInView } from "motion/react";
 
 const LBTCCalculator = () => {
@@ -52,29 +53,10 @@ const LBTCCalculator = () => {
       >
         <div className="flex items-baseline gap-0">
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
-          <motion.img 
-            key={animateLogo}
-            src={Logo} 
+          <img 
+            src={LibertyBGif} 
             alt="Bitcoin" 
             className="h-[50px] md:h-[72px] lg:h-[96px] -mx-1 cursor-pointer"
-            style={{ filter: 'brightness(0) saturate(0)' }}
-            initial={{ rotate: 0 }}
-            animate={{ 
-              rotate: [0, -30, 30, 0]
-            }}
-            transition={{ 
-              duration: 0.8,
-              times: [0, 0.33, 0.66, 1],
-              ease: "easeInOut"
-            }}
-            whileHover={{ 
-              rotate: [0, -30, 30, 0],
-              transition: { 
-                duration: 0.8,
-                times: [0, 0.33, 0.66, 1],
-                ease: "easeInOut"
-              }
-            }}
           />
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
         </div>
