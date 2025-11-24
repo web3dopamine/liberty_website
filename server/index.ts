@@ -88,9 +88,10 @@ app.use((req, res, next) => {
 
   // Proxy documentation requests to Docusaurus dev server running on port 3000
   app.use('/docs', createProxyMiddleware({
-    target: 'http://localhost:3000',
+    target: 'http://localhost:3000/docs',
     changeOrigin: true,
-    ws: true
+    ws: true,
+    pathRewrite: { '^/docs': '' }
   }));
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
