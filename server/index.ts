@@ -1,5 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
-import { createProxyMiddleware } from "http-proxy-middleware";
+import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { storage } from "./storage";
@@ -86,13 +86,8 @@ app.use((req, res, next) => {
 
   const server = await registerRoutes(app);
 
-  // Proxy documentation requests to Docusaurus dev server running on port 3000
-  app.use('/docs', createProxyMiddleware({
-    target: 'http://localhost:3000/docs',
-    changeOrigin: true,
-    ws: true,
-    pathRewrite: { '^/docs': '' }
-  }));
+  // Serve documentation static files from the built Docusaurus site
+  app.use('/docs', express.static(path.join(process.cwd(), 'docs/build')));
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;

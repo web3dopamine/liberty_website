@@ -50,7 +50,7 @@ The project is a full-stack application built with a clear separation of concern
     - **For Developers**: Network setup (testnet chain ID 324705682), quickstart with Hardhat/Foundry, smart contract development (ERC-20, NFT, DEX examples), RPC endpoints and bridging documentation
     - **Resources**: Detailed FAQ covering token economics, claiming process, technical setup, security best practices, and troubleshooting guides
     - **Branding**: Liberty Bitcoin green color scheme (#4A9390), auto-generated sidebar navigation, responsive design
-    - **Deployment**: Runs on port 3000 via separate workflow (`docs`), can be built for static hosting with `npm run build`
+    - **Deployment**: Served as static files from `docs/build` directory. Built with `cd docs && npm run build` and served via Express static middleware at `/docs` route. No separate workflow needed.
 
 ### External Dependencies
 *   **PostgreSQL (Neon-backed Replit database):** Primary database for all application data.
