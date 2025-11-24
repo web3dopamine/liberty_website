@@ -48,7 +48,7 @@ Expected parameters:
 | **Block Gas Limit** | 268,435,455 | ~100x higher |
 | **Contract Size Limit** | 64kb | ~2.7x higher |
 | **Transaction Throughput** | 1000+ TPS | ~70x higher |
-| **Block Time** | <2 seconds | ~6x faster |
+| **Block Time** | &lt;2 seconds | ~6x faster |
 
 ### Smart Contract Limits
 

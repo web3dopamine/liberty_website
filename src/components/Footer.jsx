@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <div className="text-white uppercase text-lg md:text-[20px] font-bold">Resources</div>
             <a 
-              href="http://localhost:3000" 
+              href="/docs" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-[#99A1AF] text-base md:text-[18px] mt-6 md:mt-10 cursor-pointer hover:text-white transition-colors"

@@ -85,6 +85,14 @@ app.use((req, res, next) => {
 
   const server = await registerRoutes(app);
 
+  // Serve documentation at /docs path (from built static files)
+  app.use('/docs', express.static('docs/build', {
+    index: 'index.html',
+    setHeaders: (res) => {
+      res.setHeader('Cache-Control', 'no-cache');
+    }
+  }));
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
