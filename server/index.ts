@@ -90,8 +90,7 @@ app.use((req, res, next) => {
   app.use('/docs', createProxyMiddleware({
     target: 'http://localhost:3000',
     changeOrigin: true,
-    ws: true,
-    logLevel: 'silent'
+    ws: true
   }));
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
