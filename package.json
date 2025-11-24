@@ -27,6 +27,7 @@
     "ethers": "^6.15.0",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
+    "http-proxy-middleware": "^3.0.5",
     "motion": "^12.23.24",
     "nanoid": "^5.1.6",
     "passport": "^0.7.0",

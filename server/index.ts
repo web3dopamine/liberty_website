@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import { createProxyMiddleware } from "http-proxy-middleware";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import { storage } from "./storage";
@@ -85,12 +86,12 @@ app.use((req, res, next) => {
 
   const server = await registerRoutes(app);
 
-  // Serve documentation at /docs path (from built static files)
-  app.use('/docs', express.static('docs/build', {
-    index: 'index.html',
-    setHeaders: (res) => {
-      res.setHeader('Cache-Control', 'no-cache');
-    }
+  // Proxy documentation requests to Docusaurus dev server running on port 3000
+  app.use('/docs', createProxyMiddleware({
+    target: 'http://localhost:3000',
+    changeOrigin: true,
+    ws: true,
+    logLevel: 'silent'
   }));
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {

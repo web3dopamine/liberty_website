@@ -17,6 +17,10 @@ author = "agent"
 task = "workflow.run"
 args = "dev"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "docs"
+
 [[workflows.workflow]]
 name = "dev"
 author = "agent"
@@ -29,21 +33,25 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow]]
+name = "docs"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd docs && npm start -- --port 3000 --host 0.0.0.0 --no-open"
+waitForPort = 3000
+
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[ports]]
 localPort = 3000
 externalPort = 3000
 
 [[ports]]
-localPort = 5000
-externalPort = 80
-
-[[ports]]
 localPort = 32975
 externalPort = 4200
-
-[[ports]]
-localPort = 33537
-externalPort = 5000
 
 [[ports]]
 localPort = 34955

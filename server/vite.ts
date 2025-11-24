@@ -33,7 +33,12 @@ export async function setupVite(app: Express, server: Server) {
 
   app.use(vite.middlewares);
   
-  app.get("{/*path}", async (req, res, next) => {
+  app.use(async (req, res, next) => {
+    // Skip API routes and documentation routes - they're handled separately
+    if (req.path.startsWith('/api') || req.path.startsWith('/docs')) {
+      return next();
+    }
+    
     try {
       const indexPath = path.resolve(import.meta.dirname, "..", "index.html");
       let html = await fs.promises.readFile(indexPath, "utf-8");
@@ -57,7 +62,11 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  app.get("{/*path}", (_req, res) => {
+  app.use((req, res, next) => {
+    // Skip API routes and documentation routes - they're handled separately
+    if (req.path.startsWith('/api') || req.path.startsWith('/docs')) {
+      return next();
+    }
     res.sendFile(path.resolve(distPath, "index.html"));
   });
 }
