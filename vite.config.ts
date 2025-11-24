@@ -20,14 +20,8 @@ export default defineConfig({
     port: 5000,
     strictPort: true,
     allowedHosts: true,
-    // hmr: {
-    //   clientPort: 443,
-    //   protocol: "wss",
-    // },
     hmr: {
-      protocol: "ws", // plain ws for localhost
-      host: "localhost",
-      clientPort: 5000,
+      clientPort: 443,
     },
   },
   preview: {
