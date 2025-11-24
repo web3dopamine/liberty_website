@@ -45,6 +45,12 @@ The project is a full-stack application built with a clear separation of concern
 *   **PSBT Integration:** The system supports creating, finalizing, and broadcasting self-send PSBTs for ownership verification, integrating with various Bitcoin wallets.
 *   **Interactive Treasury Chart:** Dynamic SVG donut chart displaying Bitcoin supply distribution with exact data (Active Supply: 67.2%, Dormant 5-10yr: 13.3%, Lost BTC: 14.3%, Satoshi's Coins: 5.2%). Features cursor-following tooltips, segment hover effects with scale animations, and sequential reveal animations on scroll.
 *   **Token Auction Page (`/auction`):** Frontend UI for LBTY token sale featuring English auction mechanics inspired by MegaETH's successful model. Displays oversubscription metrics (27.8x example), live auction status, top bids leaderboard, clearing price, and FDV calculations. Includes tabbed interface for "My Allocation", "Facts", "How It Works", "Timeline", and "FAQ". Bid placement interface with quick-select amounts ($1K/$5K/$10K/MAX) and wallet integration. Designed for frontend presentation with placeholder data - smart contract integration pending.
+*   **Documentation Site (`/docs`):** Comprehensive Docusaurus-powered documentation website featuring:
+    - **For Users**: Token claiming guide (message signature & PSBT methods), wallet setup (MetaMask, Trust Wallet, 500+ via WalletConnect), token auction participation guide with lock-up discounts
+    - **For Developers**: Network setup (testnet chain ID 324705682), quickstart with Hardhat/Foundry, smart contract development (ERC-20, NFT, DEX examples), RPC endpoints and bridging documentation
+    - **Resources**: Detailed FAQ covering token economics, claiming process, technical setup, security best practices, and troubleshooting guides
+    - **Branding**: Liberty Bitcoin green color scheme (#4A9390), auto-generated sidebar navigation, responsive design
+    - **Deployment**: Runs on port 3000 via separate workflow (`docs`), can be built for static hosting with `npm run build`
 
 ### External Dependencies
 *   **PostgreSQL (Neon-backed Replit database):** Primary database for all application data.
