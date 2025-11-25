@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'Liberty Documentation',
   tagline: 'The Next Chapter of Bitcoin - Gas-Free EVM Chain on SKALE',
-  favicon: 'img/liberty-logo.svg',
+  favicon: 'img/liberty-favicon.svg',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
