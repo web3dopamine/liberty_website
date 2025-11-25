@@ -2,16 +2,16 @@
 sidebar_position: 1
 ---
 
-# Welcome to Liberty Bitcoin
+# Welcome to Liberty
 
 **The Next Chapter of Bitcoin** - A Gas-Free EVM Chain built on SKALE
 
-Liberty Bitcoin is a revolutionary Layer 2 solution that brings programmability to Bitcoin while maintaining zero gas fees. Built on SKALE's BASE chain infrastructure, Liberty enables developers to build scalable decentralized applications without the limitations of traditional blockchain fees.
+Liberty is a revolutionary Layer 2 solution that brings programmability to Bitcoin while maintaining zero gas fees. Built on SKALE's BASE chain infrastructure, Liberty enables developers to build scalable decentralized applications without the limitations of traditional blockchain fees.
 
 ## 🚀 Key Features
 
 ### Zero Gas Fees
-Every transaction on Liberty Bitcoin is completely gas-free. Build and use dApps without worrying about transaction costs.
+Every transaction on Liberty is completely gas-free. Build and use dApps without worrying about transaction costs.
 
 ### Instant Finality
 Transactions are confirmed instantly with single-slot finality, providing a seamless user experience.

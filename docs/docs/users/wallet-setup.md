@@ -4,11 +4,11 @@ sidebar_position: 2
 
 # Wallet Setup Guide
 
-Learn how to set up your wallet to interact with Liberty Bitcoin's gas-free network.
+Learn how to set up your wallet to interact with Liberty's gas-free network.
 
 ## Supported Wallets
 
-Liberty Bitcoin works with **500+ wallets** through Reown (WalletConnect) integration:
+Liberty works with **500+ wallets** through Reown (WalletConnect) integration:
 
 ### Popular Choices
 - 🦊 **MetaMask** - Most popular, browser extension
@@ -31,7 +31,7 @@ Liberty Bitcoin works with **500+ wallets** through Reown (WalletConnect) integr
 ### Step 2: Add Liberty Network
 
 #### Automatic (Recommended)
-1. Visit [Liberty Bitcoin](https://libertybitcoin.com)
+1. Visit [Liberty](https://libertybitcoin.com)
 2. Click **"Connect Wallet"**
 3. Select **MetaMask**
 4. Click **"Add Network"** when prompted
@@ -69,7 +69,7 @@ Block Explorer: https://base-sepolia-testnet-explorer.skalenodes.com/
 Enter Liberty Network details:
 
 ```
-Network Name: Liberty Bitcoin
+Network Name: Liberty
 RPC URL: https://base-sepolia-testnet.skalenodes.com/v1/jubilant-horrible-ancha
 Chain ID: 324705682
 Symbol: Credits
@@ -82,7 +82,7 @@ Block Explorer: https://base-sepolia-testnet-explorer.skalenodes.com/
 
 For wallets without built-in custom network support, use **WalletConnect**:
 
-1. Visit [Liberty Bitcoin](https://libertybitcoin.com)
+1. Visit [Liberty](https://libertybitcoin.com)
 2. Click **"Connect Wallet"**
 3. Select **"WalletConnect"**
 4. Scan QR code with your mobile wallet
@@ -153,7 +153,7 @@ Send yourself 0 Credits to test:
 
 ### Wrong Network Selected
 - Click network dropdown in wallet
-- Select **SKALE Base Sepolia** or **Liberty Bitcoin**
+- Select **SKALE Base Sepolia** or **Liberty**
 - Refresh page
 
 ## Multiple Wallet Strategy

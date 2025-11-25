@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Claiming LBTY Tokens
 
-Liberty Bitcoin offers a **1:10 token claim ratio** for Bitcoin holders. For every 1 BTC you own, you can claim 10 LBTY tokens.
+Liberty offers a **1:10 token claim ratio** for Bitcoin holders. For every 1 BTC you own, you can claim 10 LBTY tokens.
 
 ## Eligibility
 
@@ -24,7 +24,7 @@ Liberty Bitcoin offers a **1:10 token claim ratio** for Bitcoin holders. For eve
 
 ### Step 1: Check Your Eligibility
 
-1. Visit [Liberty Bitcoin Eligibility Checker](https://libertybitcoin.com/#calculator)
+1. Visit [Liberty Eligibility Checker](https://libertybitcoin.com/#calculator)
 2. Enter your Bitcoin address
 3. See your potential LBTY allocation instantly
 
@@ -65,7 +65,7 @@ The PSBT method requires signing but NOT broadcasting. Your Bitcoin stays in you
 
 **Launch Date**: February 10, 2026 at 12:00 AM UTC
 
-1. Return to [Liberty Bitcoin](https://libertybitcoin.com)
+1. Return to [Liberty](https://libertybitcoin.com)
 2. Click **"Claim Now"** button (available after launch)
 3. Your LBTY tokens will be sent to your linked Liberty wallet automatically
 
@@ -129,7 +129,7 @@ A: You must hold BTC in a personal wallet where you control the private keys.
 ---
 
 :::tip Share Your Success
-After verification, share on X (Twitter) to spread the word about Liberty Bitcoin! 🚀
+After verification, share on X (Twitter) to spread the word about Liberty! 🚀
 :::
 
 **Need help?** Join our [Telegram](https://t.me/libertybitcoin) or [Discord](https://discord.gg/libertybitcoin)

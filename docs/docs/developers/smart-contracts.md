@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Smart Contract Development
 
-Learn how to build and deploy smart contracts on Liberty Bitcoin.
+Learn how to build and deploy smart contracts on Liberty.
 
 ## Contract Development
 

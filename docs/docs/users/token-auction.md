@@ -4,12 +4,12 @@ sidebar_position: 3
 
 # Token Auction Guide
 
-Participate in the Liberty Bitcoin token auction to secure LBTY tokens before the mainnet launch.
+Participate in the Liberty token auction to secure LBTY tokens before the mainnet launch.
 
 ## Auction Overview
 
 ### English Auction Model
-Liberty Bitcoin uses an **English auction** mechanism where price increases based on demand:
+Liberty uses an **English auction** mechanism where price increases based on demand:
 
 - **Starting Price**: $0.01 per LBTY
 - **Maximum Price**: $0.50 per LBTY

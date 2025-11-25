@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Network Information
 
-Complete technical details for connecting to and building on Liberty Bitcoin.
+Complete technical details for connecting to and building on Liberty.
 
 ## Testnet (Current)
 

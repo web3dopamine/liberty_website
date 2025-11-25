@@ -237,15 +237,18 @@
 .breadcrumbs__link {
   color: var(--liberty-teal) !important;
   font-weight: 500;
+  background: transparent !important;
 }
 
 .breadcrumbs__link:hover {
   color: #5FAF9F !important;
   text-decoration: none;
+  background: transparent !important;
 }
 
 .breadcrumbs__item--active .breadcrumbs__link {
   color: #ffffff !important;
+  background: transparent !important;
 }
 
 /* Breadcrumb separator */
@@ -253,18 +256,33 @@
   color: var(--liberty-teal) !important;
 }
 
-/* Collapsed breadcrumb dropdown */
+/* Collapsed breadcrumb dropdown button - fix visibility */
+.breadcrumbs__item .dropdown__caret,
+.breadcrumbs__item button.breadcrumbs__link {
+  background: rgba(74, 147, 144, 0.15) !important;
+  border: 1px solid rgba(74, 147, 144, 0.3) !important;
+  color: #ffffff !important;
+  padding: 0.25rem 0.5rem !important;
+  border-radius: 4px !important;
+}
+
+.breadcrumbs__item button.breadcrumbs__link:hover {
+  background: rgba(74, 147, 144, 0.3) !important;
+}
+
+/* Collapsed breadcrumb dropdown menu */
 .breadcrumbs__item .dropdown__menu {
-  background: var(--liberty-dark);
-  border: 1px solid rgba(74, 147, 144, 0.3);
+  background: var(--liberty-dark) !important;
+  border: 1px solid rgba(74, 147, 144, 0.3) !important;
 }
 
 .breadcrumbs__item .dropdown__link {
   color: var(--liberty-text-muted) !important;
+  background: transparent !important;
 }
 
 .breadcrumbs__item .dropdown__link:hover {
-  background: rgba(74, 147, 144, 0.2);
+  background: rgba(74, 147, 144, 0.2) !important;
   color: #ffffff !important;
 }
 

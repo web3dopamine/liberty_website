@@ -4,13 +4,13 @@ sidebar_position: 1
 
 # Frequently Asked Questions
 
-Find answers to common questions about Liberty Bitcoin.
+Find answers to common questions about Liberty.
 
 ## General
 
-### What is Liberty Bitcoin?
+### What is Liberty?
 
-Liberty Bitcoin is a gas-free EVM-compatible Layer 2 blockchain built on SKALE's BASE infrastructure. It offers:
+Liberty is a gas-free EVM-compatible Layer 2 blockchain built on SKALE's BASE infrastructure. It offers:
 - Zero gas fees for all transactions
 - Instant finality (< 2 seconds)
 - 1:10 token claim ratio for BTC holders

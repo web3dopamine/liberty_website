@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Developer Quickstart
 
-Get started building on Liberty Bitcoin in 5 minutes.
+Get started building on Liberty in 5 minutes.
 
 ## Prerequisites
 
@@ -147,7 +147,7 @@ import { publicProvider } from 'wagmi/providers/public';
 
 const libertyChain = {
   id: 324705682,
-  name: 'Liberty Bitcoin',
+  name: 'Liberty',
   network: 'liberty',
   nativeCurrency: {
     decimals: 18,
