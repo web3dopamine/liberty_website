@@ -93,7 +93,7 @@ export default function HomepageFeatures(): ReactNode {
             Everything You Need
           </Heading>
           <p className={styles.sectionSubtitle}>
-            Comprehensive documentation to help you get started with Liberty Bitcoin
+            Comprehensive documentation to help you get started with Liberty
           </p>
         </div>
         <div className="row">

@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'Liberty Bitcoin Documentation',
+  title: 'Liberty Documentation',
   tagline: 'The Next Chapter of Bitcoin - Gas-Free EVM Chain on SKALE',
   favicon: 'img/favicon.ico',
 
@@ -61,9 +61,9 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Liberty Bitcoin',
+      title: 'Liberty',
       logo: {
-        alt: 'Liberty Bitcoin Logo',
+        alt: 'Liberty Logo',
         src: 'img/liberty-logo.svg',
       },
       items: [
@@ -140,7 +140,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Liberty Bitcoin. The Next Chapter of Bitcoin.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Liberty. The Next Chapter of Bitcoin.`,
     },
     prism: {
       theme: prismThemes.github,

@@ -18,7 +18,7 @@ function HomepageHeader() {
         <div className={styles.logoContainer}>
           <img 
             src={logoUrl} 
-            alt="Liberty Bitcoin" 
+            alt="Liberty" 
             className={styles.heroLogo}
           />
         </div>
@@ -53,7 +53,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Documentation"
-      description="Liberty Bitcoin Documentation - The Next Chapter of Bitcoin. Learn how to claim tokens, build on Liberty, and join the ecosystem.">
+      description="Liberty Documentation - The Next Chapter of Bitcoin. Learn how to claim tokens, build on Liberty, and join the ecosystem.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
