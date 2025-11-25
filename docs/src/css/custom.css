@@ -231,59 +231,72 @@
 }
 
 .breadcrumbs__item {
-  color: var(--liberty-teal) !important;
+  color: #2D5F5D !important;
 }
 
+/* All breadcrumb links - teal color for visibility */
 .breadcrumbs__link {
-  color: var(--liberty-teal) !important;
+  color: #2D5F5D !important;
   font-weight: 500;
   background: transparent !important;
 }
 
 .breadcrumbs__link:hover {
-  color: #5FAF9F !important;
+  color: #4A9390 !important;
   text-decoration: none;
   background: transparent !important;
 }
 
-.breadcrumbs__item--active .breadcrumbs__link {
-  color: #ffffff !important;
+/* Active breadcrumb item (current page) - darker color for visibility */
+.breadcrumbs__item--active,
+.breadcrumbs__item--active .breadcrumbs__link,
+.breadcrumbs__item--active span {
+  color: #1F4443 !important;
+  font-weight: 600 !important;
   background: transparent !important;
 }
 
-/* Breadcrumb separator */
+/* Breadcrumb separator arrow */
 .breadcrumbs__item:not(:last-child)::after {
-  color: var(--liberty-teal) !important;
+  color: #4A9390 !important;
 }
 
-/* Collapsed breadcrumb dropdown button - fix visibility */
+/* Home icon in breadcrumb */
+.breadcrumbs svg {
+  color: #2D5F5D !important;
+  fill: #2D5F5D !important;
+}
+
+/* Collapsed breadcrumb dropdown button - make text visible */
 .breadcrumbs__item .dropdown__caret,
 .breadcrumbs__item button.breadcrumbs__link {
-  background: rgba(74, 147, 144, 0.15) !important;
-  border: 1px solid rgba(74, 147, 144, 0.3) !important;
-  color: #ffffff !important;
+  background: #f0f7f7 !important;
+  border: 1px solid #4A9390 !important;
+  color: #2D5F5D !important;
   padding: 0.25rem 0.5rem !important;
   border-radius: 4px !important;
 }
 
 .breadcrumbs__item button.breadcrumbs__link:hover {
-  background: rgba(74, 147, 144, 0.3) !important;
+  background: #e0f0ef !important;
+  color: #1F4443 !important;
 }
 
 /* Collapsed breadcrumb dropdown menu */
 .breadcrumbs__item .dropdown__menu {
-  background: var(--liberty-dark) !important;
+  background: #ffffff !important;
   border: 1px solid rgba(74, 147, 144, 0.3) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
 }
 
 .breadcrumbs__item .dropdown__link {
-  color: var(--liberty-text-muted) !important;
+  color: #2D5F5D !important;
   background: transparent !important;
 }
 
 .breadcrumbs__item .dropdown__link:hover {
-  background: rgba(74, 147, 144, 0.2) !important;
-  color: #ffffff !important;
+  background: rgba(74, 147, 144, 0.15) !important;
+  color: #1F4443 !important;
 }
 
 /* ========== SCROLLBAR ========== */
