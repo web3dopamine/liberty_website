@@ -49,8 +49,9 @@ The project is a full-stack application built with a clear separation of concern
     - **For Users**: Token claiming guide (message signature & PSBT methods), wallet setup (MetaMask, Trust Wallet, 500+ via WalletConnect), token auction participation guide with lock-up discounts
     - **For Developers**: Network setup (testnet chain ID 324705682), quickstart with Hardhat/Foundry, smart contract development (ERC-20, NFT, DEX examples), RPC endpoints and bridging documentation
     - **Resources**: Detailed FAQ covering token economics, claiming process, technical setup, security best practices, and troubleshooting guides
-    - **Branding**: Liberty Bitcoin green color scheme (#4A9390), auto-generated sidebar navigation, responsive design
-    - **Deployment**: Served as static files from `docs/build` directory. Built with `cd docs && npm run build` and served via Express static middleware at `/docs` route. No separate workflow needed.
+    - **Branding**: Fully custom Liberty Bitcoin branding with dark teal gradients (#0d3d3b to #1a5c59), Liberty Bitcoin logo in navbar and hero section, teal accent color (#4A9390), styled feature cards, and matching footer. All Docusaurus default templates and logos removed.
+    - **Custom Homepage**: Hero section with Liberty logo, gradient background, "Get Started"/"For Users"/"For Developers" CTA buttons, and 6 Liberty-centric feature cards (Token Claiming, Gas-Free Transactions, Build on Liberty, Token Auction, Wallet Integration, Developer Grants)
+    - **Deployment**: Served as static files from `docs/build` directory with `baseUrl: '/docs/'`. Built with `cd docs && npm run build` and served via Express static middleware at `/docs` route. No separate workflow needed.
 
 ### External Dependencies
 *   **PostgreSQL (Neon-backed Replit database):** Primary database for all application data.
