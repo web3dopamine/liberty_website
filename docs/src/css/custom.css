@@ -198,12 +198,39 @@
   border-left: 4px solid var(--liberty-teal);
 }
 
-/* ========== TABLE OF CONTENTS ========== */
+/* ========== TABLE OF CONTENTS (Right Sidebar) ========== */
+/* Light mode - dark text on white background */
 .table-of-contents__link {
-  color: var(--liberty-text-muted);
+  color: #3A7875 !important;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.table-of-contents__link:hover {
+  color: #1F4443 !important;
 }
 
 .table-of-contents__link--active {
+  color: #1F4443 !important;
+  font-weight: 600;
+}
+
+/* TOC title */
+.table-of-contents {
+  border-left: 2px solid rgba(74, 147, 144, 0.3);
+  padding-left: 1rem;
+}
+
+/* Dark mode TOC */
+[data-theme='dark'] .table-of-contents__link {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+[data-theme='dark'] .table-of-contents__link:hover {
+  color: #ffffff !important;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
   color: var(--liberty-teal) !important;
 }
 
