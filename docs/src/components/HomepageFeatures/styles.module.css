@@ -1,14 +1,18 @@
 .features {
   display: flex;
   align-items: center;
-  padding: 4rem 0;
+  padding: 5rem 0 4rem;
   width: 100%;
   background: linear-gradient(180deg, #0a2e2c 0%, #0d3d3b 100%);
 }
 
 .sectionHeader {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
+}
+
+.featureRow {
+  row-gap: 2rem;
 }
 
 .sectionTitle {
@@ -30,8 +34,8 @@
   border: 1px solid rgba(74, 147, 144, 0.2);
   border-radius: 16px;
   padding: 2rem;
-  margin-bottom: 1.5rem;
-  height: 100%;
+  margin-bottom: 2.5rem;
+  height: calc(100% - 2.5rem);
   transition: all 0.3s ease;
 }
 
