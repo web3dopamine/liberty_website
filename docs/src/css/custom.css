@@ -1,7 +1,6 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Liberty Bitcoin Documentation - Custom Styling
+ * Matches the main Liberty Bitcoin website branding
  */
 
 /* Liberty Bitcoin Brand Colors */
@@ -15,6 +14,14 @@
   --ifm-color-primary-lightest: #9FD6CE;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(74, 147, 144, 0.1);
+  
+  /* Liberty custom variables */
+  --liberty-gradient-start: #0d3d3b;
+  --liberty-gradient-end: #1a5c59;
+  --liberty-teal: #4A9390;
+  --liberty-dark: #0a2e2c;
+  --liberty-text: #ffffff;
+  --liberty-text-muted: rgba(255, 255, 255, 0.7);
 }
 
 /* Dark mode - Liberty Bitcoin colors */
@@ -27,4 +34,227 @@
   --ifm-color-primary-lighter: #7AC0B5;
   --ifm-color-primary-lightest: #9FD6CE;
   --docusaurus-highlighted-code-line-bg: rgba(74, 147, 144, 0.2);
+  --ifm-background-color: #0a2e2c;
+  --ifm-navbar-background-color: transparent;
+  --ifm-footer-background-color: #0a2e2c;
+}
+
+/* ========== NAVBAR STYLING ========== */
+.navbar {
+  background: linear-gradient(135deg, var(--liberty-gradient-start) 0%, var(--liberty-gradient-end) 100%);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(74, 147, 144, 0.3);
+}
+
+.navbar__title {
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+}
+
+.navbar__link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar__link:hover {
+  color: #ffffff !important;
+}
+
+.navbar__link--active {
+  color: #ffffff !important;
+}
+
+.navbar__logo {
+  height: 2rem;
+}
+
+/* Navbar toggle (mobile) */
+.navbar__toggle {
+  color: #ffffff;
+}
+
+/* ========== FOOTER STYLING ========== */
+.footer {
+  background: linear-gradient(135deg, var(--liberty-dark) 0%, var(--liberty-gradient-start) 100%);
+  border-top: 1px solid rgba(74, 147, 144, 0.3);
+  padding: 3rem 0 2rem;
+}
+
+.footer__title {
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.footer__link-item {
+  color: var(--liberty-text-muted) !important;
+  transition: color 0.3s ease;
+}
+
+.footer__link-item:hover {
+  color: #ffffff !important;
+  text-decoration: none;
+}
+
+.footer__copyright {
+  color: var(--liberty-text-muted);
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(74, 147, 144, 0.2);
+}
+
+/* ========== SIDEBAR STYLING ========== */
+[data-theme='dark'] .menu {
+  background: linear-gradient(180deg, rgba(10, 46, 44, 0.95) 0%, rgba(13, 61, 59, 0.95) 100%);
+}
+
+.menu__link {
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.menu__link--active {
+  background: rgba(74, 147, 144, 0.3) !important;
+  border-left: 3px solid var(--liberty-teal);
+}
+
+.menu__link:hover:not(.menu__link--active) {
+  background: rgba(74, 147, 144, 0.15);
+}
+
+/* ========== MAIN CONTENT ========== */
+[data-theme='dark'] .main-wrapper {
+  background: linear-gradient(180deg, #0a2e2c 0%, #0d3d3b 50%, #0a2e2c 100%);
+}
+
+/* ========== DOC PAGE STYLING ========== */
+.markdown h1 {
+  color: var(--liberty-teal);
+  border-bottom: 2px solid rgba(74, 147, 144, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+.markdown h2 {
+  color: #ffffff;
+  margin-top: 2rem;
+}
+
+.markdown h3, .markdown h4 {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Code blocks */
+[data-theme='dark'] .prism-code {
+  background: rgba(10, 46, 44, 0.8) !important;
+  border: 1px solid rgba(74, 147, 144, 0.3);
+  border-radius: 8px;
+}
+
+/* Inline code */
+[data-theme='dark'] code {
+  background: rgba(74, 147, 144, 0.2);
+  border: 1px solid rgba(74, 147, 144, 0.3);
+  border-radius: 4px;
+  color: var(--liberty-teal);
+}
+
+/* ========== BUTTONS ========== */
+.button--primary {
+  background: linear-gradient(135deg, var(--liberty-teal) 0%, #3A7875 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(74, 147, 144, 0.4);
+  transition: all 0.3s ease;
+}
+
+.button--primary:hover {
+  background: linear-gradient(135deg, #5FAF9F 0%, var(--liberty-teal) 100%);
+  box-shadow: 0 6px 20px rgba(74, 147, 144, 0.6);
+  transform: translateY(-2px);
+}
+
+.button--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.button--secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* ========== CARDS / ADMONITIONS ========== */
+[data-theme='dark'] .alert {
+  background: rgba(74, 147, 144, 0.1);
+  border-left: 4px solid var(--liberty-teal);
+}
+
+/* ========== TABLE OF CONTENTS ========== */
+.table-of-contents__link {
+  color: var(--liberty-text-muted);
+}
+
+.table-of-contents__link--active {
+  color: var(--liberty-teal) !important;
+}
+
+/* ========== SEARCH ========== */
+[data-theme='dark'] .DocSearch-Button {
+  background: rgba(74, 147, 144, 0.2);
+  border: 1px solid rgba(74, 147, 144, 0.3);
+}
+
+/* ========== PAGINATION ========== */
+.pagination-nav__link {
+  border: 1px solid rgba(74, 147, 144, 0.3);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--liberty-teal);
+  background: rgba(74, 147, 144, 0.1);
+}
+
+/* ========== BREADCRUMBS ========== */
+.breadcrumbs__link {
+  color: var(--liberty-text-muted);
+}
+
+.breadcrumbs__link:hover {
+  color: #ffffff;
+}
+
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--liberty-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(74, 147, 144, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--liberty-teal);
+}
+
+/* ========== SELECTION ========== */
+::selection {
+  background: rgba(74, 147, 144, 0.4);
+  color: #ffffff;
 }

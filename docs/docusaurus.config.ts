@@ -18,7 +18,7 @@ const config: Config = {
   url: 'https://libertybitcoin.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/docs/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -64,7 +64,7 @@ const config: Config = {
       title: 'Liberty Bitcoin',
       logo: {
         alt: 'Liberty Bitcoin Logo',
-        src: 'img/logo.svg',
+        src: 'img/liberty-logo.svg',
       },
       items: [
         {
@@ -140,7 +140,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Liberty Bitcoin. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Liberty Bitcoin. The Next Chapter of Bitcoin.`,
     },
     prism: {
       theme: prismThemes.github,
