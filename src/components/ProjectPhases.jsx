@@ -1,6 +1,6 @@
-import { GrayCircle, GreenTickCircle, OrangleClockCircle, Logo } from "../assets/images";
+import { GrayCircle, GreenTickCircle, OrangleClockCircle, LibertyBWhite } from "../assets/images";
 import { motion, useInView } from "motion/react";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 
 const ProjectPhases = () => {
   const titleRef = useRef(null);
@@ -16,14 +16,6 @@ const ProjectPhases = () => {
   const phase3InView = useInView(phase3Ref, { once: true, margin: "-50px" });
   const phase4InView = useInView(phase4Ref, { once: true, margin: "-50px" });
   const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
-  
-  const [animateLogo, setAnimateLogo] = useState(0);
-
-  useEffect(() => {
-    if (titleInView) {
-      setAnimateLogo(prev => prev + 1);
-    }
-  }, [titleInView]);
 
   return (
     <div id="phases" className="text-center pt-20 md:pt-30 lg:pt-40 pb-16 md:pb-20 flex flex-col items-center bg-[#000000] bg-radial from-[#3A7875]/30 via-[#3A7875]/5 to-[#000000] px-4">
@@ -40,29 +32,10 @@ const ProjectPhases = () => {
       >
         <div className="flex items-baseline gap-0">
           <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
-          <motion.img 
-            key={animateLogo}
-            src={Logo} 
-            alt="Bitcoin" 
-            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
-            style={{ filter: 'brightness(0) invert(1)' }}
-            initial={{ rotate: 0 }}
-            animate={{ 
-              rotate: [0, -30, 30, 0]
-            }}
-            transition={{ 
-              duration: 0.8,
-              times: [0, 0.33, 0.66, 1],
-              ease: "easeInOut"
-            }}
-            whileHover={{ 
-              rotate: [0, -30, 30, 0],
-              transition: { 
-                duration: 0.8,
-                times: [0, 0.33, 0.66, 1],
-                ease: "easeInOut"
-              }
-            }}
+          <img 
+            src={LibertyBWhite} 
+            alt="B" 
+            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1"
           />
           <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
         </div>
