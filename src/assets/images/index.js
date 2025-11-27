@@ -1,5 +1,8 @@
 import Logo from "./logo.svg";
 import FullLogo from "./full_logo.svg";
+import LibertyBBlack from "./liberty_B_black.gif";
+import LibertyBTeal from "./liberty_B_teal.gif";
+import LibertyBWhite from "./liberty_B_white.gif";
 import Wallet from "./wallet_white.svg";
 import MainBannerBg from "./mainbanner.svg";
 import Timeline from "./timeline.png";
@@ -63,6 +66,9 @@ import RocketIcon from "./rocket-icon.png";
 import TrophyIcon from "./trophy-icon.png";
 
 export {
+  LibertyBBlack,
+  LibertyBTeal,
+  LibertyBWhite,
   CalendarIcon,
   LightningIcon,
   RocketIcon,

@@ -1,17 +1,10 @@
 import { motion, useInView } from "motion/react";
-import { useRef, useState, useEffect } from "react";
-import { Logo } from "../assets/images";
+import { useRef } from "react";
+import { LibertyBTeal } from "../assets/images";
 
 const ClaimLiberty = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-  const [animateLogo, setAnimateLogo] = useState(0);
-
-  useEffect(() => {
-    if (isInView) {
-      setAnimateLogo(prev => prev + 1);
-    }
-  }, [isInView]);
 
   const steps = [
     {
@@ -64,29 +57,10 @@ const ClaimLiberty = () => {
             <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Claim your </span>
             <div className="flex items-baseline gap-0">
               <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Li</span>
-              <motion.img 
-                key={animateLogo}
-                src={Logo} 
+              <img 
+                src={LibertyBTeal} 
                 alt="Bitcoin" 
                 className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
-                style={{ filter: 'invert(47%) sepia(11%) saturate(1428%) hue-rotate(122deg) brightness(91%) contrast(88%)' }}
-                initial={{ rotate: 0 }}
-                animate={{ 
-                  rotate: [0, -30, 30, 0]
-                }}
-                transition={{ 
-                  duration: 0.8,
-                  times: [0, 0.33, 0.66, 1],
-                  ease: "easeInOut"
-                }}
-                whileHover={{ 
-                  rotate: [0, -30, 30, 0],
-                  transition: { 
-                    duration: 0.8,
-                    times: [0, 0.33, 0.66, 1],
-                    ease: "easeInOut"
-                  }
-                }}
               />
               <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>erty</span>
             </div>

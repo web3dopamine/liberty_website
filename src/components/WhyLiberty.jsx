@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { Armour, CodeBlock, Globe, Lightening, Lock, People, Logo } from "../assets/images";
+import { useState, useRef } from "react";
+import { Armour, CodeBlock, Globe, Lightening, Lock, People, LibertyBTeal } from "../assets/images";
 import { motion, useInView } from "motion/react";
 
 const WhyLiberty = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [animateLogo, setAnimateLogo] = useState(0);
   
   const sectionRef = useRef(null);
   const card1Ref = useRef(null);
@@ -22,12 +21,6 @@ const WhyLiberty = () => {
   const card4InView = useInView(card4Ref, { once: true, margin: "-50px" });
   const card5InView = useInView(card5Ref, { once: true, margin: "-50px" });
   const card6InView = useInView(card6Ref, { once: true, margin: "-50px" });
-
-  useEffect(() => {
-    if (isInView) {
-      setAnimateLogo(prev => prev + 1);
-    }
-  }, [isInView]);
 
   const handleMouseMove = (e, cardId) => {
     const card = e.currentTarget;
@@ -63,29 +56,10 @@ const WhyLiberty = () => {
         <span className="text-4xl md:text-6xl lg:text-[96px] text-white tracking-tight" style={{ lineHeight: '1.8' }}>Why </span>
         <div className="flex items-baseline gap-0">
           <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Li</span>
-          <motion.img 
-            key={animateLogo}
-            src={Logo} 
+          <img 
+            src={LibertyBTeal} 
             alt="Bitcoin" 
             className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
-            style={{ filter: 'invert(47%) sepia(11%) saturate(1428%) hue-rotate(122deg) brightness(91%) contrast(88%)' }}
-            initial={{ rotate: 0 }}
-            animate={{ 
-              rotate: [0, -30, 30, 0]
-            }}
-            transition={{ 
-              duration: 0.8,
-              times: [0, 0.33, 0.66, 1],
-              ease: "easeInOut"
-            }}
-            whileHover={{ 
-              rotate: [0, -30, 30, 0],
-              transition: { 
-                duration: 0.8,
-                times: [0, 0.33, 0.66, 1],
-                ease: "easeInOut"
-              }
-            }}
           />
           <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>erty</span>
         </div>
