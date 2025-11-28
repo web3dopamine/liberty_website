@@ -1,0 +1,58 @@
+
+0|liberty-app  | ❌ Failed to seed development database: DrizzleQueryError: Failed query: select "id", "applicant_name", "email", "organization", "grant_category", "project_title", "funding_amount", "project_description", "technical_details", "timeline", "team_experience", "github_repo", "additional_info", "status", "public_chat_token", "last_admin_viewed_at", "submitted_at" from "grant_applications"
+0|liberty-app  | params: 
+0|liberty-app  |     at NeonPreparedQuery.queryWithCache (/var/www/liberty/liberty_website/node_modules/src/pg-core/session.ts:73:11)
+0|liberty-app  |     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+0|liberty-app  |     at async NeonPreparedQuery.execute (/var/www/liberty/liberty_website/node_modules/src/neon-serverless/session.ts:152:18)
+0|liberty-app  |     at async DatabaseStorage.getGrantApplications (/var/www/liberty/liberty_website/server/storage.ts:357:12)
+0|liberty-app  |     at async <anonymous> (/var/www/liberty/liberty_website/server/index.ts:46:28) {
+0|liberty-app  |   query: 'select "id", "applicant_name", "email", "organization", "grant_category", "project_title", "funding_amount", "project_description", "technical_details", "timeline", "team_experience", "github_repo", "additional_info", "status", "public_chat_token", "last_admin_viewed_at", "submitted_at" from "grant_applications"',
+0|liberty-app  |   params: [],
+0|liberty-app  |   cause: ErrorEvent {
+0|liberty-app  |     [Symbol(kTarget)]: WebSocket {
+0|liberty-app  |       _events: [Object: null prototype],
+0|liberty-app  |       _eventsCount: 4,
+0|liberty-app  |       _maxListeners: undefined,
+0|liberty-app  |       _binaryType: 'arraybuffer',
+0|liberty-app  |       _closeCode: 1006,
+0|liberty-app  |       _closeFrameReceived: false,
+0|liberty-app  |       _closeFrameSent: false,
+0|liberty-app  |       _closeMessage: <Buffer >,
+0|liberty-app  |       _closeTimer: null,
+0|liberty-app  |       _errorEmitted: true,
+0|liberty-app  |       _extensions: {},
+0|liberty-app  |       _paused: false,
+0|liberty-app  |       _protocol: '',
+0|liberty-app  |       _readyState: 3,
+0|liberty-app  |       _receiver: null,
+0|liberty-app  |       _sender: null,
+0|liberty-app  |       _socket: null,
+0|liberty-app  |       _bufferedAmount: 0,
+0|liberty-app  |       _isServer: false,
+0|liberty-app  |       _redirects: 0,
+0|liberty-app  |       _autoPong: true,
+0|liberty-app  |       _url: 'wss://localhost/v2',
+0|liberty-app  |       _req: null,
+0|liberty-app  |       [Symbol(shapeMode)]: false,
+0|liberty-app  |       [Symbol(kCapture)]: false
+0|liberty-app  |     },
+0|liberty-app  |     [Symbol(kType)]: 'error',
+0|liberty-app  |     [Symbol(kError)]: Error [ERR_TLS_CERT_ALTNAME_INVALID]: Hostname/IP does not match certificate's altnames: Host: localhost. is not in the cert's altnames: DNS:claim.libertychain.org
+0|liberty-app  |         at Object.checkServerIdentity (node:tls:316:12)
+0|liberty-app  |         at TLSSocket.onConnectSecure (node:_tls_wrap:1687:27)
+0|liberty-app  |         at TLSSocket.emit (node:events:524:28)
+0|liberty-app  |         at TLSSocket._finishInit (node:_tls_wrap:1076:8)
+0|liberty-app  |         at ssl.onhandshakedone (node:_tls_wrap:862:12) {
+0|liberty-app  |       code: 'ERR_TLS_CERT_ALTNAME_INVALID',
+0|liberty-app  |       reason: "Host: localhost. is not in the cert's altnames: DNS:claim.libertychain.org",
+0|liberty-app  |       host: 'localhost',
+0|liberty-app  |       cert: [Object]
+0|liberty-app  |     },
+0|liberty-app  |     [Symbol(kMessage)]: "Hostname/IP does not match certificate's altnames: Host: localhost. is not in the cert's altnames: DNS:claim.libertychain.org"
+0|liberty-app  |   }
+0|liberty-app  | }
+0|liberty-app  | Environment: development, isDev: true
+0|liberty-app  | Setting up Vite dev server...
+0|liberty-app  | Vite dev server setup completed
+0|liberty-app  | 2:00:24 PM [express] serving on port 5000
+^C
