@@ -55,7 +55,7 @@ const LBTCCalculator = () => {
           <img 
             src={LibertyBBlack} 
             alt="Bitcoin" 
-            className="h-[44px] md:h-[64px] lg:h-[85px] cursor-pointer"
+            className="h-[60px] md:h-[85px] lg:h-[115px] cursor-pointer"
           />
           <span className="text-5xl md:text-7xl lg:text-[96px] tracking-[0.05em] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-bold uppercase" style={{ lineHeight: '1' }}>ERTY</span>
         </div>
