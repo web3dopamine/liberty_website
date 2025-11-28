@@ -17,6 +17,10 @@ author = "agent"
 task = "workflow.run"
 args = "dev"
 
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "docs"
+
 [[workflows.workflow]]
 name = "dev"
 author = "agent"
@@ -28,6 +32,18 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[[workflows.workflow]]
+name = "docs"
+author = "agent"
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd docs && ./node_modules/.bin/serve build -l 3001"
+waitForPort = 3001
 
 [[ports]]
 localPort = 3000
@@ -54,10 +70,6 @@ localPort = 36307
 externalPort = 5173
 
 [[ports]]
-localPort = 37127
-externalPort = 6000
-
-[[ports]]
 localPort = 42023
 externalPort = 3000
 
@@ -68,6 +80,10 @@ externalPort = 3001
 [[ports]]
 localPort = 44759
 externalPort = 3002
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
 
 [deployment]
 deploymentTarget = "autoscale"
