@@ -14,6 +14,67 @@ import { sendApplicantConfirmationEmail, sendApplicantMessageNotificationEmail }
 import { z } from "zod";
 import { setupAuth, requireAuth, requireAdmin } from "./auth";
 
+// CoinGecko API cache - only refresh once per hour
+let btcPriceCache: {
+  price: number;
+  marketCap: number;
+  circulatingSupply: number;
+  priceChange24h: number;
+  lastUpdated: string;
+  cachedAt: number;
+} | null = null;
+
+const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour in milliseconds
+
+async function getCachedBtcPrice(): Promise<typeof btcPriceCache> {
+  const now = Date.now();
+  
+  // Return cached data if still valid
+  if (btcPriceCache && (now - btcPriceCache.cachedAt) < CACHE_DURATION_MS) {
+    console.log("Using cached BTC price (age: " + Math.round((now - btcPriceCache.cachedAt) / 60000) + " minutes)");
+    return btcPriceCache;
+  }
+  
+  // Fetch fresh data from CoinGecko
+  try {
+    console.log("Fetching fresh BTC price from CoinGecko...");
+    const response = await fetch(
+      'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin'
+    );
+    
+    if (!response.ok) {
+      throw new Error(`CoinGecko API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    const bitcoinData = data[0];
+    
+    if (!bitcoinData) {
+      throw new Error("No Bitcoin data returned");
+    }
+    
+    btcPriceCache = {
+      price: bitcoinData.current_price,
+      marketCap: bitcoinData.market_cap,
+      circulatingSupply: bitcoinData.circulating_supply,
+      priceChange24h: bitcoinData.price_change_percentage_24h,
+      lastUpdated: bitcoinData.last_updated,
+      cachedAt: now
+    };
+    
+    console.log("BTC price cached: $" + btcPriceCache.price);
+    return btcPriceCache;
+  } catch (error) {
+    console.error("CoinGecko API error:", error);
+    // Return stale cache if available, otherwise null
+    if (btcPriceCache) {
+      console.log("Returning stale cache due to API error");
+      return btcPriceCache;
+    }
+    return null;
+  }
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Setup authentication first
   await setupAuth(app);
@@ -115,36 +176,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // CoinGecko Bitcoin market data endpoint
+  // CoinGecko Bitcoin market data endpoint (cached - 1 request per hour max)
   app.get("/api/btc-market-data", async (req, res) => {
     try {
-      // Fetch Bitcoin market data from CoinGecko API (free tier, no API key required)
-      const response = await fetch(
-        'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin'
-      );
-
-      if (!response.ok) {
-        throw new Error(`CoinGecko API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const bitcoinData = data[0];
-
-      if (!bitcoinData) {
-        throw new Error('No Bitcoin data returned from CoinGecko');
+      const cachedData = await getCachedBtcPrice();
+      
+      if (!cachedData) {
+        throw new Error('Unable to fetch Bitcoin data');
       }
 
       res.json({
         success: true,
-        currentPrice: bitcoinData.current_price,
-        circulatingSupply: bitcoinData.circulating_supply,
-        marketCap: bitcoinData.market_cap,
-        priceChange24h: bitcoinData.price_change_percentage_24h,
-        lastUpdated: bitcoinData.last_updated
+        currentPrice: cachedData.price,
+        circulatingSupply: cachedData.circulatingSupply,
+        marketCap: cachedData.marketCap,
+        priceChange24h: cachedData.priceChange24h,
+        lastUpdated: cachedData.lastUpdated,
+        cachedAt: new Date(cachedData.cachedAt).toISOString()
       });
 
     } catch (error) {
-      console.error("CoinGecko API error:", error);
+      console.error("BTC market data error:", error);
       res.status(503).json({
         success: false,
         message: "Unable to fetch Bitcoin market data",
@@ -193,16 +245,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (isEligible) {
           const lbtcAmount = balanceBTC * 10; // 1:10 ratio
           
-          // Fetch real Bitcoin price from CoinGecko API
+          // Use cached Bitcoin price (1 request per hour max)
           let btcPrice = 43000; // Fallback price
-          try {
-            const priceResponse = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
-            if (priceResponse.ok) {
-              const priceData = await priceResponse.json();
-              btcPrice = priceData.bitcoin.usd;
-            }
-          } catch (priceError) {
-            console.log("Using fallback BTC price due to API error");
+          const cachedData = await getCachedBtcPrice();
+          if (cachedData) {
+            btcPrice = cachedData.price;
+          } else {
+            console.log("Using fallback BTC price - cache unavailable");
           }
           
           const estimatedValue = balanceBTC * btcPrice;
