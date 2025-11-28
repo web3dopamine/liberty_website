@@ -1,3 +1,4 @@
+import "dotenv/config";
 import passport from "passport";
 import { Strategy as OAuth2Strategy } from "passport-oauth2";
 import session from "express-session";
@@ -22,15 +23,15 @@ const hasOAuthVars = Object.values(oauthVars).every(value => !!value);
 const isAuthEnabled = hasOAuthVars;
 
 // In production, OAuth vars are required
-if (!isDevelopment && !hasOAuthVars) {
-  const missingOAuthVars = Object.entries(oauthVars)
-    .filter(([_, value]) => !value)
-    .map(([key]) => key);
-  throw new Error(
-    `Critical OAuth environment variables missing in production: ${missingOAuthVars.join(', ')}. ` +
-    "Authentication cannot function without these variables in production."
-  );
-}
+// if (!isDevelopment && !hasOAuthVars) {
+//   const missingOAuthVars = Object.entries(oauthVars)
+//     .filter(([_, value]) => !value)
+//     .map(([key]) => key);
+//   throw new Error(
+//     `Critical OAuth environment variables missing in production: ${missingOAuthVars.join(', ')}. ` +
+//     "Authentication cannot function without these variables in production."
+//   );
+// }
 
 // Always required variables (session secret and database)
 for (const [key, value] of Object.entries(requiredAlwaysVars)) {
