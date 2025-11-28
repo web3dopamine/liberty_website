@@ -1,0 +1,25 @@
+# curl http://localhost:3001
+<!DOCTYPE html><head> <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/> <style> body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; cursor: default; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; } main, aside, section { display: flex; justify-content: center; align-items: center; flex-direction: column; } main { height: 100%; } aside { background: #000; flex-shrink: 1; padding: 30px 20px; } aside p { margin: 0; color: #999999; font-size: 14px; line-height: 24px; } aside a { color: #fff; text-decoration: none; } section span { font-size: 24px; font-weight: 500; display: block; border-bottom: 1px solid #EAEAEA; text-align: center; padding-bottom: 20px; width: 100px; } section p { font-size: 14px; font-weight: 400; } section span + p { margin: 20px 0 0 0; } @media (min-width: 768px) { section { height: 40px; flex-direction: row; } section span, section p { height: 100%; line-height: 40px; } section span { border-bottom: 0; border-right: 1px solid #EAEAEA; padding: 0 20px 0 0; width: auto; } section span + p { margin: 0; padding-left: 20px; } aside { padding: 50px 0; } aside p { max-width: 520px; text-align: center; } } </style></head><body> <main> <section> <span>404</span> <p>The requested path could not be found</p> </section> </main></body>
+[root@srv968632 liberty_docs]# sudo systemctl status liberty-docs
+● liberty-docs.service - Liberty Docs
+     Loaded: loaded (/etc/systemd/system/liberty-docs.service; enabled; preset: disabled)
+     Active: active (running) since Fri 2025-11-28 17:20:09 UTC; 1min 34s ago
+ Invocation: 7df05d1a11534c20b02a9ba4a44d1a32
+   Main PID: 1257750 (npm exec serve )
+      Tasks: 22 (limit: 101955)
+     Memory: 90.6M (peak: 158.6M)
+        CPU: 3.059s
+     CGroup: /system.slice/liberty-docs.service
+             ├─1257750 "npm exec serve -s build -l 3001"
+             └─1257813 node /root/.npm/_npx/aab42732f01924e5/node_modules/.bin/serve -s build -l 3001
+
+Nov 28 17:20:22 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:22 PM 127.0.0.1 GET /
+Nov 28 17:20:22 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:22 PM 127.0.0.1 Returned 404 in 2 ms
+Nov 28 17:20:28 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:28 PM 127.0.0.1 GET /docs/
+Nov 28 17:20:28 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:28 PM 127.0.0.1 Returned 404 in 1 ms
+Nov 28 17:20:29 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:29 PM 127.0.0.1 GET /docs/
+Nov 28 17:20:29 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:29 PM 127.0.0.1 Returned 404 in 1 ms
+Nov 28 17:20:30 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:30 PM 127.0.0.1 GET /
+Nov 28 17:20:30 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:20:30 PM 127.0.0.1 Returned 404 in 1 ms
+Nov 28 17:21:33 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:21:33 PM ::1 GET /
+Nov 28 17:21:33 srv968632.hstgr.cloud npx[1257813]:  HTTP  11/28/2025 5:21:33 PM ::1 Returned 404 in 1 ms
