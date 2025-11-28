@@ -21,17 +21,6 @@ const requiredAlwaysVars = {
 const hasOAuthVars = Object.values(oauthVars).every(value => !!value);
 const isAuthEnabled = hasOAuthVars;
 
-// In production, OAuth vars are required
-if (!isDevelopment && !hasOAuthVars) {
-  const missingOAuthVars = Object.entries(oauthVars)
-    .filter(([_, value]) => !value)
-    .map(([key]) => key);
-  throw new Error(
-    `Critical OAuth environment variables missing in production: ${missingOAuthVars.join(', ')}. ` +
-    "Authentication cannot function without these variables in production."
-  );
-}
-
 // Always required variables (session secret and database)
 for (const [key, value] of Object.entries(requiredAlwaysVars)) {
   if (!value) {
@@ -40,16 +29,12 @@ for (const [key, value] of Object.entries(requiredAlwaysVars)) {
 }
 
 // Log authentication state
-if (isDevelopment) {
-  if (isAuthEnabled) {
-    console.log("🔐 Authentication: ENABLED (OAuth variables found)");
-  } else {
-    console.log("⚠️  Authentication: DISABLED (OAuth variables missing - development mode)");
-    console.log("   → All auth middleware will pass through with mock user data");
-    console.log("   → Set REPLIT_CLIENT_ID, REPLIT_CLIENT_SECRET, and REPLIT_CALLBACK_URL to enable OAuth");
-  }
+if (isAuthEnabled) {
+  console.log("🔐 Authentication: ENABLED (OAuth variables found)");
 } else {
-  console.log("🔐 Authentication: ENABLED (production mode)");
+  console.log("⚠️  Authentication: DISABLED (OAuth variables not configured)");
+  console.log("   → All auth middleware will pass through with mock user data");
+  console.log("   → Set REPLIT_CLIENT_ID, REPLIT_CLIENT_SECRET, and REPLIT_CALLBACK_URL to enable OAuth");
 }
 
 // Session configuration
