@@ -18,6 +18,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Setup authentication first
   await setupAuth(app);
 
+  // Redirect /docs to docs.libertychain.org
+  app.use("/docs", (req, res) => {
+    res.redirect(301, "https://docs.libertychain.org");
+  });
+
   // Email subscription endpoint
   app.post("/api/subscribe", async (req, res) => {
     try {
