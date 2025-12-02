@@ -50,14 +50,14 @@ const LBTCCalculator = () => {
         className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12"
         style={{ lineHeight: '1.3' }}
       >
-        <div className="flex items-end gap-0">
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-[0.05em] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-bold uppercase" style={{ lineHeight: '1' }}>LI</span>
+        <div className="flex items-baseline gap-0">
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-[0.05em] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-bold uppercase" style={{ lineHeight: '1.3' }}>LI</span>
           <img 
             src={LibertyBBlack} 
             alt="Bitcoin" 
-            className="h-[60px] md:h-[85px] lg:h-[115px] cursor-pointer mb-[2px] md:mb-[3px] lg:mb-[4px]"
+            className="h-[50px] md:h-[72px] lg:h-[96px] mx-1 cursor-pointer"
           />
-          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-[0.05em] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-bold uppercase" style={{ lineHeight: '1' }}>ERTY</span>
+          <span className="text-5xl md:text-7xl lg:text-[96px] tracking-[0.05em] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-bold uppercase" style={{ lineHeight: '1.3' }}>ERTY</span>
         </div>
         <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-[0.05em] font-bold uppercase" style={{ lineHeight: '1.3' }}>
           CALCULATOR
