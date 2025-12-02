@@ -1,4 +1,4 @@
-import { GrayCircle, GreenTickCircle, OrangleClockCircle, LibertyBWhite } from "../assets/images";
+import { GrayCircle, GreenTickCircle, OrangleClockCircle } from "../assets/images";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 
@@ -30,15 +30,7 @@ const ProjectPhases = () => {
         className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 mt-7 pb-4 overflow-visible"
         style={{ lineHeight: '1.3' }}
       >
-        <div className="flex items-baseline gap-0">
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
-          <img 
-            src={LibertyBWhite} 
-            alt="B" 
-            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1"
-          />
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
-        </div>
+        <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight text-white font-normal small-caps" style={{ lineHeight: '1.3' }}>Liberty</span>
         <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.3' }}>
           Phases
         </span>

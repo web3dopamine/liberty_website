@@ -1,6 +1,5 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { LibertyBTeal } from "../assets/images";
 
 const ClaimLiberty = () => {
   const sectionRef = useRef(null);
@@ -55,15 +54,7 @@ const ClaimLiberty = () => {
             style={{ lineHeight: '1.6' }}
           >
             <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Claim your </span>
-            <div className="flex items-baseline gap-0">
-              <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Li</span>
-              <img 
-                src={LibertyBTeal} 
-                alt="Bitcoin" 
-                className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
-              />
-              <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>erty</span>
-            </div>
+            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>Liberty</span>
             <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.6' }}>.</span>
           </motion.div>
           

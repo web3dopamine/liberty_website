@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Armour, CodeBlock, Globe, Lightening, Lock, People, LibertyBTeal } from "../assets/images";
+import { Armour, CodeBlock, Globe, Lightening, Lock, People } from "../assets/images";
 import { motion, useInView } from "motion/react";
 
 const WhyLiberty = () => {
@@ -54,18 +54,7 @@ const WhyLiberty = () => {
         style={{ lineHeight: '1.8' }}
       >
         <span className="text-4xl md:text-6xl lg:text-[96px] text-white tracking-tight" style={{ lineHeight: '1.8' }}>Why </span>
-        <div className="flex items-baseline gap-0">
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Li</span>
-          <img 
-            src={LibertyBTeal} 
-            alt="Bitcoin" 
-            className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
-          />
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>erty</span>
-        </div>
-        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.8' }}>
-          ?
-        </span>
+        <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Liberty?</span>
       </motion.div>
       <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">The most advanced decentralized protocol for Bitcoin</div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-6 md:gap-8 w-full max-w-7xl">
