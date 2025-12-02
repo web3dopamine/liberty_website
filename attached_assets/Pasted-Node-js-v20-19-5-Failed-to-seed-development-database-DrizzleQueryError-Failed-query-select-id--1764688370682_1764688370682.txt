@@ -1,0 +1,37 @@
+Node.js v20.19.5
+❌ Failed to seed development database: DrizzleQueryError: Failed query: select "id", "applicant_name", "email", "organization", "grant_category", "project_title", "funding_amount", "project_description", "technical_details", "timeline", "team_experience", "github_repo", "additional_info", "status", "public_chat_token", "last_admin_viewed_at", "submitted_at" from "grant_applications"
+params: 
+    at NodePgPreparedQuery.queryWithCache (/var/www/liberty/liberty_website/node_modules/src/pg-core/session.ts:73:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async <anonymous> (/var/www/liberty/liberty_website/node_modules/src/node-postgres/session.ts:154:19)
+    at async DatabaseStorage.getGrantApplications (/var/www/liberty/liberty_website/server/storage.ts:357:12)
+    at async <anonymous> (/var/www/liberty/liberty_website/server/index.ts:46:28) {
+  query: 'select "id", "applicant_name", "email", "organization", "grant_category", "project_title", "funding_amount", "project_description", "technical_details", "timeline", "team_experience", "github_repo", "additional_info", "status", "public_chat_token", "last_admin_viewed_at", "submitted_at" from "grant_applications"',
+  params: [],
+  cause: error: password authentication failed for user "libertyuser"
+      at /var/www/liberty/liberty_website/node_modules/pg-pool/index.js:45:11
+      at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+      at async <anonymous> (/var/www/liberty/liberty_website/node_modules/src/node-postgres/session.ts:161:13)
+      at async NodePgPreparedQuery.queryWithCache (/var/www/liberty/liberty_website/node_modules/src/pg-core/session.ts:71:12)
+      at async <anonymous> (/var/www/liberty/liberty_website/node_modules/src/node-postgres/session.ts:154:19)
+      at async DatabaseStorage.getGrantApplications (/var/www/liberty/liberty_website/server/storage.ts:357:12)
+      at async <anonymous> (/var/www/liberty/liberty_website/server/index.ts:46:28) {
+    length: 107,
+    severity: 'FATAL',
+    code: '28P01',
+    detail: undefined,
+    hint: undefined,
+    position: undefined,
+    internalPosition: undefined,
+    internalQuery: undefined,
+    where: undefined,
+    schema: undefined,
+    table: undefined,
+    column: undefined,
+    dataType: undefined,
+    constraint: undefined,
+    file: 'auth.c',
+    line: '331',
+    routine: 'auth_failed'
+  }
+}
