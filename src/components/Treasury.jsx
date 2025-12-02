@@ -10,10 +10,9 @@ import {
   RoundSegment,
   User,
   WalletGreen,
-  Logo,
 } from "../assets/images";
 import { motion, useInView } from "motion/react";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 const Treasury = () => {
@@ -23,13 +22,6 @@ const Treasury = () => {
   const isInView = useInView(chartRef, { once: true, margin: "-100px" });
   const [hoveredSegment, setHoveredSegment] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [animateLogo, setAnimateLogo] = useState(0);
-
-  useEffect(() => {
-    if (titleInView) {
-      setAnimateLogo(prev => prev + 1);
-    }
-  }, [titleInView]);
 
   // Fetch Bitcoin market data from CoinGecko
   const { data: btcData, isLoading } = useQuery({
@@ -73,35 +65,7 @@ const Treasury = () => {
         style={{ lineHeight: '1.3' }}
       >
         <div className="flex flex-col md:flex-row items-baseline gap-2 md:gap-4">
-          <div className="flex items-baseline gap-0">
-            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Li</span>
-            <motion.img 
-              key={animateLogo}
-              src={Logo} 
-              alt="Bitcoin" 
-              className="h-[42px] md:h-[60px] lg:h-[96px] -mx-1 cursor-pointer"
-              style={{ filter: 'brightness(0) saturate(0)' }}
-              initial={{ rotate: 0 }}
-              animate={{ 
-                rotate: [0, -30, 30, 0]
-              }}
-              transition={{ 
-                duration: 0.8,
-                times: [0, 0.33, 0.66, 1],
-                ease: "easeInOut"
-              }}
-              whileHover={{ 
-                rotate: [0, -30, 30, 0],
-                transition: { 
-                  duration: 0.8,
-                  times: [0, 0.33, 0.66, 1],
-                  ease: "easeInOut"
-                }
-              }}
-            />
-            <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>erty</span>
-          </div>
-          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Bitcoin</span>
+          <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Liberty Bitcoin</span>
         </div>
         <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight" style={{ lineHeight: '1.3' }}>
           Treasury

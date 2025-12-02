@@ -1,34 +1,25 @@
-import { useState, useEffect, useRef } from "react";
-import { Logo, FullLogo } from "../assets/images";
+import { useState, useRef } from "react";
+import { Logo } from "../assets/images";
 import { motion, useInView } from "motion/react";
 
 const LBTCCalculator = () => {
   const [btcValue, setBtcValue] = useState(1);
   const [lbtyValue, setLbtyValue] = useState(10);
-  const [animateLogo, setAnimateLogo] = useState(0);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
   const minClaim = 0.003;
 
-  useEffect(() => {
-    if (isInView) {
-      setAnimateLogo(prev => prev + 1);
-    }
-  }, [isInView]);
-
   const handleBtcChange = (value) => {
     const numValue = parseFloat(value) || 0;
     setBtcValue(numValue);
     setLbtyValue(numValue * 10);
-    setAnimateLogo(prev => prev + 1);
   };
 
   const handleLbtyChange = (value) => {
     const numValue = parseFloat(value) || 0;
     setLbtyValue(numValue);
     setBtcValue(numValue / 10);
-    setAnimateLogo(prev => prev + 1);
   };
 
   const handleQuickSelect = (amount) => {
@@ -50,9 +41,9 @@ const LBTCCalculator = () => {
         className="flex flex-col md:flex-row items-baseline justify-center gap-2 md:gap-4 pb-12"
         style={{ lineHeight: '1.3' }}
       >
-        <span className="text-5xl md:text-7xl lg:text-[96px] tracking-[0.05em] bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-bold uppercase" style={{ lineHeight: '1.3' }}>LIBERTY</span>
-        <span className="text-5xl md:text-7xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-[0.05em] font-bold uppercase" style={{ lineHeight: '1.3' }}>
-          CALCULATOR
+        <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.3' }}>Liberty</span>
+        <span className="text-4xl md:text-6xl lg:text-[96px] bg-linear-to-b from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text tracking-tight font-normal small-caps" style={{ lineHeight: '1.3' }}>
+          Calculator
         </span>
       </motion.div>
       <motion.div 
