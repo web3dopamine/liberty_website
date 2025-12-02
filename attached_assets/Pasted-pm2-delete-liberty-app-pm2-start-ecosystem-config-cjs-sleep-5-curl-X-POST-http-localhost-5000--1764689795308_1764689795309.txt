@@ -1,0 +1,28 @@
+pm2 delete liberty-app; pm2 start ecosystem.config.cjs; sleep 5; curl -X POST http://localhost:5000/api/subscribe -H "Content-Type: application/json" -d '{"email": "test3@example.com"}'
+[PM2] Applying action deleteProcessId on app [liberty-app](ids: [ 0 ])
+[PM2] [liberty-app](0) ✓
+┌────┬─────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name    │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼─────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 1  │ docs    │ default     │ N/A     │ fork    │ 1312744  │ 14m    │ 0    │ online    │ 0%       │ 66.3mb   │ root     │ disabled │
+└────┴─────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[PM2][WARN] Applications liberty-app not running, starting...
+[PM2] App [liberty-app] launched (1 instances)
+┌────┬────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name           │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 1  │ docs           │ default     │ N/A     │ fork    │ 1312744  │ 14m    │ 0    │ online    │ 0%       │ 66.3mb   │ root     │ disabled │
+│ 2  │ liberty-app    │ default     │ N/A     │ fork    │ 1316429  │ 0s     │ 0    │ online    │ 0%       │ 18.9mb   │ root     │ disabled │
+└────┴────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+^C
+[root@srv968632 liberty_website]# pm2 status
+┌────┬────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name           │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 1  │ docs           │ default     │ N/A     │ fork    │ 1312744  │ 14m    │ 0    │ online    │ 0%       │ 66.4mb   │ root     │ disabled │
+│ 2  │ liberty-app    │ default     │ N/A     │ fork    │ 1316429  │ 6s     │ 0    │ online    │ 0%       │ 61.0mb   │ root     │ disabled │
+└────┴────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+[root@srv968632 liberty_website]# 
+[root@srv968632 liberty_website]# 
+[root@srv968632 liberty_website]# 
+[root@srv968632 liberty_website]# 
