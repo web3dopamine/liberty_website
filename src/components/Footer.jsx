@@ -73,10 +73,12 @@ const Footer = () => {
                 className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
               />
             </a>
-            <img
-              src={Cat}
-              className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
-            />
+            <a href="http://discord.gg/libertychain" target="_blank" rel="noopener noreferrer">
+              <img
+                src={Cat}
+                className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
+              />
+            </a>
             <img
               src={Chat}
               className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
