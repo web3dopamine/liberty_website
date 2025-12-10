@@ -67,10 +67,12 @@ const Footer = () => {
             © 2025 LIBERTY. Built for the Bitcoin community. "Not Your Keys, Not Your Liberty"
           </div>
           <div className="flex flex-row gap-4 md:gap-5">
-            <img
-              src={X2}
-              className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
-            />
+            <a href="https://x.com/LibertyChainOrg" target="_blank" rel="noopener noreferrer">
+              <img
+                src={X2}
+                className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
+              />
+            </a>
             <img
               src={Cat}
               className="w-5 h-5 md:w-6 md:h-6 hover:scale-110 cursor-pointer transition-transform duration-300 ease-in-out"
