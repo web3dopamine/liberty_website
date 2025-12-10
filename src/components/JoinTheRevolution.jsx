@@ -24,7 +24,7 @@ const JoinTheRevolution = () => {
             <div className="text-[#4A5565]">12,543 members</div>
           </div>
         </div>
-        <div className="cursor-pointer relative bg-linear-to-b shadow-lg from-[#ffffff] via-black/8 to-white p-6 w-full pt-12 rounded-3xl flex flex-col text-start hover:-translate-y-2 hover:via-white hover:bg-none hover:bg-emerald-100/40 transition-all duration-300 ease-in-out">
+        <a href="https://x.com/LibertyChainOrg" target="_blank" rel="noopener noreferrer" className="cursor-pointer relative bg-linear-to-b shadow-lg from-[#ffffff] via-black/8 to-white p-6 w-full pt-12 rounded-3xl flex flex-col text-start hover:-translate-y-2 hover:via-white hover:bg-none hover:bg-emerald-100/40 transition-all duration-300 ease-in-out">
           <img src={FollowArrow} className="absolute top-8 right-8 w-2.5 h-2.5" />
           <img src={X} className="h-[140px] w-[140px]" />
           <div className="text-[30px] -mt-3 px-5">X (Twitter)</div>
@@ -33,8 +33,8 @@ const JoinTheRevolution = () => {
             <div className="w-1.5 h-1.5 bg-[#000000] rounded-2xl" />
             <div className="text-[#4A5565]">8,921 followers</div>
           </div>
-        </div>
-        <div className="cursor-pointer relative bg-linear-to-b shadow-lg from-[#ffffff] via-black/8 to-white p-6 w-full pt-12 rounded-3xl flex flex-col text-start hover:-translate-y-2 hover:via-white hover:bg-none hover:bg-emerald-100/40 transition-all duration-300 ease-in-out">
+        </a>
+        <a href="http://discord.gg/libertychain" target="_blank" rel="noopener noreferrer" className="cursor-pointer relative bg-linear-to-b shadow-lg from-[#ffffff] via-black/8 to-white p-6 w-full pt-12 rounded-3xl flex flex-col text-start hover:-translate-y-2 hover:via-white hover:bg-none hover:bg-emerald-100/40 transition-all duration-300 ease-in-out">
           <img src={FollowArrow} className="absolute top-8 right-8 w-2.5 h-2.5" />
           <img src={Discord} className="h-[140px] w-[140px]" />
           <div className="text-[30px] -mt-3 px-5">Discord</div>
@@ -43,7 +43,7 @@ const JoinTheRevolution = () => {
             <div className="w-1.5 h-1.5 bg-[#5865F2] rounded-2xl" />
             <div className="text-[#4A5565]">5,234 members</div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   );

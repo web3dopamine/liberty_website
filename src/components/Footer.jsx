@@ -31,17 +31,17 @@ const Footer = () => {
 
           <div className="flex flex-col items-center md:items-start">
             <div className="text-white uppercase text-lg md:text-[20px] font-bold">Community</div>
-            <button className="text-[#99A1AF] text-base md:text-[18px] mt-6 md:mt-10 cursor-pointer hover:text-white transition-colors">
+            <a href="http://discord.gg/libertychain" target="_blank" rel="noopener noreferrer" className="text-[#99A1AF] text-base md:text-[18px] mt-6 md:mt-10 cursor-pointer hover:text-white transition-colors">
               Discord
-            </button>
+            </a>
             <button className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors">
               Telegram
             </button>
+            <a href="https://x.com/LibertyChainOrg" target="_blank" rel="noopener noreferrer" className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors">
+              X (Twitter)
+            </a>
             <button className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors">
               Forum
-            </button>
-            <button className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors">
-              Governance
             </button>
           </div>
 
