@@ -17,10 +17,6 @@ author = "agent"
 task = "workflow.run"
 args = "dev"
 
-[[workflows.workflow.tasks]]
-task = "workflow.run"
-args = "docs"
-
 [[workflows.workflow]]
 name = "dev"
 author = "agent"
@@ -32,18 +28,6 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
-
-[[workflows.workflow]]
-name = "docs"
-author = "agent"
-
-[workflows.workflow.metadata]
-outputType = "console"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "cd docs && ./node_modules/.bin/serve build -l 3001"
-waitForPort = 3001
 
 [[ports]]
 localPort = 3000
