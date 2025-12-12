@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className="bg-linear-to-b from-[#000000] to-[#082A2D] py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-12">
           <div className="flex flex-col items-center md:items-start">
             <img src={FullLogo} className="w-[100px] md:w-[128px]" />
             <div className="text-[#99A1AF] mt-6 md:mt-10 text-center md:text-left text-sm md:text-base">
@@ -57,6 +57,34 @@ const Footer = () => {
             <button className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors">
               Bug Bounty
             </button>
+          </div>
+
+          <div className="flex flex-col items-center md:items-start">
+            <div className="text-white uppercase text-lg md:text-[20px] font-bold">Ecosystem</div>
+            <a 
+              href="https://docs.libertychain.org" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#99A1AF] text-base md:text-[18px] mt-6 md:mt-10 cursor-pointer hover:text-white transition-colors"
+            >
+              Docs <span className="text-[#4A9390] text-xs ml-1">(coming soon)</span>
+            </a>
+            <a 
+              href="https://explorer.libertychain.org" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors"
+            >
+              Explorer <span className="text-[#4A9390] text-xs ml-1">(coming soon)</span>
+            </a>
+            <a 
+              href="https://dev.libertychain.org" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-[#99A1AF] text-base md:text-[18px] mt-4 md:mt-5 cursor-pointer hover:text-white transition-colors"
+            >
+              Developers <span className="text-[#4A9390] text-xs ml-1">(coming soon)</span>
+            </a>
           </div>
         </div>
 
