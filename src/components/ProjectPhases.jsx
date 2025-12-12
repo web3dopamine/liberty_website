@@ -7,14 +7,12 @@ const ProjectPhases = () => {
   const phase1Ref = useRef(null);
   const phase2Ref = useRef(null);
   const phase3Ref = useRef(null);
-  const phase4Ref = useRef(null);
   const footerRef = useRef(null);
 
   const titleInView = useInView(titleRef, { once: true, amount: 0.3 });
   const phase1InView = useInView(phase1Ref, { once: true, margin: "-50px" });
   const phase2InView = useInView(phase2Ref, { once: true, margin: "-50px" });
   const phase3InView = useInView(phase3Ref, { once: true, margin: "-50px" });
-  const phase4InView = useInView(phase4Ref, { once: true, margin: "-50px" });
   const footerInView = useInView(footerRef, { once: true, margin: "-50px" });
 
   return (
@@ -37,159 +35,109 @@ const ProjectPhases = () => {
       </motion.div>
       <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">Track our progress from formation to global expansion</div>
 
-      <div className="flex flex-col lg:flex-row mt-12 md:mt-16 gap-8 md:gap-10 w-full max-w-7xl">
-        {/* Awareness & Anticipation */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12 md:mt-16 gap-6 md:gap-8 w-full max-w-7xl">
         <motion.div
           ref={phase1Ref}
           initial={{ opacity: 0, y: 100 }}
           animate={phase1InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          whileHover={{
-            scale: 1.03,
-          }}
-          className="border group border-[#4A9390]/30 p-6 rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-linear-to-br from-[#2D5F5D]/20 via-[#000000] to-[#3A7875]/10 hover:to-[#3A7875]/20 hover:from-[#2D5F5D]/30  hover:shadow-2xl transition-all duration-300  ease-in-out select-none "
+          whileHover={{ scale: 1.02 }}
+          className="border group border-[#4A9390]/30 p-5 md:p-6 rounded-3xl flex flex-col relative text-start bg-linear-to-br from-[#2D5F5D]/20 via-[#000000] to-[#3A7875]/10 hover:to-[#3A7875]/20 hover:from-[#2D5F5D]/30 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
-          <div className="absolute top-6 right-6 bg-[#376e6d] text-white text-xs md:text-[12px] px-3 md:px-4 py-[4px] rounded-2xl">
+          <div className="absolute top-5 md:top-6 right-5 md:right-6 bg-[#376e6d] text-white text-[10px] md:text-[12px] px-3 py-1 rounded-2xl">
             ACTIVE
           </div>
-          <div className="text-[#3A7875] text-7xl md:text-8xl lg:text-[128px]">1</div>
-          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#3A7875] text-6xl md:text-7xl lg:text-[100px]">1</div>
+          <div className="text-[#ffffff] text-xl md:text-2xl lg:text-[32px] group-hover:text-[#2D5F5D] transition-all duration-300 ease-in-out">
             Foundation
           </div>
-          <div className="text-[#99A1AF] text-base md:text-lg lg:text-[18px] mt-2">
-            
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/8 py-2 px-3 rounded-xl mt-5 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GreenTickCircle} className="h-4 w-4" />
+            <div className="text-white text-sm md:text-[15px]">Testnet deployment</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/8 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GreenTickCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Testnet deployment</div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={OrangleClockCircle} className="h-4 w-4" />
+            <div className="text-white text-sm md:text-[15px]">Mainnet activation</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Mainnet activation</div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={OrangleClockCircle} className="h-4 w-4" />
+            <div className="text-white text-sm md:text-[15px]">Explorer release</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Explorer release</div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={OrangleClockCircle} className="h-4 w-4" />
+            <div className="text-white text-sm md:text-[15px]">Core documentation + SDKs</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Core documentation + SDKs</div>
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Global validator pool activation</div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={OrangleClockCircle} className="h-4 w-4" />
+            <div className="text-white text-sm md:text-[15px]">Global validator pool</div>
           </div>
         </motion.div>
 
-        {/* Snapshot + Claim */}
         <motion.div
           ref={phase2Ref}
           initial={{ opacity: 0, y: 100 }}
           animate={phase2InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-          whileHover={{
-            scale: 1.03,
-          }}
-          className=" p-6 group rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+          whileHover={{ scale: 1.02 }}
+          className="p-5 md:p-6 group rounded-3xl flex flex-col relative text-start bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
         >
-          <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">2</div>
-          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#FFFFFF]/10 text-6xl md:text-7xl lg:text-[100px]">2</div>
+          <div className="text-[#ffffff] text-xl md:text-2xl lg:text-[32px] group-hover:text-[#2D5F5D] transition-all duration-300 ease-in-out">
             Ecosystem Expansion
           </div>
-          <div className="text-[#99A1AF] text-[18px] mt-2">
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-5 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Wallet integrations</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Wallet integrations</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Indexer ecosystem</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Indexer ecosystem</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Token launch infrastructure</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Token launch infrastructure</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Developer grants</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Developer grants</div>
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Community validator expansion</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Community validator expansion</div>
           </div>
         </motion.div>
-      </div>
 
-      <div className="flex flex-col lg:flex-row mt-8 md:mt-10 gap-8 md:gap-10 w-full max-w-7xl">
-        {/* Genesis Launch */}
         <motion.div
           ref={phase3Ref}
           initial={{ opacity: 0, y: 100 }}
           animate={phase3InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          whileHover={{
-            scale: 1.03,
-          }}
-          className=" p-6 group rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          whileHover={{ scale: 1.02 }}
+          className="p-5 md:p-6 group rounded-3xl flex flex-col relative text-start bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none md:col-span-2 lg:col-span-1"
         >
-          <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">3</div>
-          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
+          <div className="text-[#FFFFFF]/10 text-6xl md:text-7xl lg:text-[100px]">3</div>
+          <div className="text-[#ffffff] text-xl md:text-2xl lg:text-[32px] group-hover:text-[#2D5F5D] transition-all duration-300 ease-in-out">
             Mass Adoption
           </div>
-          <div className="text-[#99A1AF] text-[18px] mt-2">
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-5 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">AI frameworks</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">AI frameworks</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Gaming ecosystems</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Gaming ecosystems</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Enterprise integrations</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Enterprise integrations</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Large-scale consumer apps</div>
           </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Large-scale consumer apps</div>
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Cross-chain growth</div>
-          </div>
-        </motion.div>
-
-        {/* Expansion */}
-        <motion.div
-          ref={phase4Ref}
-          initial={{ opacity: 0, y: 100 }}
-          animate={phase4InView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
-          whileHover={{
-            scale: 1.03,
-          }}
-          className=" p-6 group rounded-3xl flex flex-col relative text-start w-full lg:max-w-[612px] bg-white/5 hover:shadow-2xl transition-all duration-300 ease-in-out select-none"
-        >
-          <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">4</div>
-          <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
-            Expansion
-          </div>
-          <div className="text-[#99A1AF] text-[18px] mt-2">
-            Global campaign, cross-chain integration, and mobile wallet launch.
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Cross-Chain Bridge</div>
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Mobile Wallet</div>
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Global Campaign</div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300 ease-in-out">
+            <img src={GrayCircle} className="h-4 w-4" />
+            <div className="text-[#6A7282] text-sm md:text-[15px]">Cross-chain growth</div>
           </div>
         </motion.div>
       </div>
@@ -199,7 +147,7 @@ const ProjectPhases = () => {
         initial={{ opacity: 0, y: 50 }}
         animate={footerInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="text-[#4A5565] text-[24px] mt-26 leading-6"
+        className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-16 md:mt-20 lg:mt-26 leading-6 px-4"
       >
         Follow our journey as we build the future of Bitcoin DeFi. <br />
         <span className="underline cursor-pointer hover:text-[#4A9390]">Join our community</span> to stay updated.
