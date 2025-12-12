@@ -4,8 +4,13 @@ export const GrantsData = [
     tag: "OPEN",
     title: "On-Chain Analytics Agent",
     amount: "$10,000 - $50,000",
-    description: "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
-    requirements: ["Natural language processing capabilities", "Blockchain data indexing expertise", "Visualization and reporting tools"],
+    description:
+      "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
+    requirements: [
+      "Natural language processing capabilities",
+      "Blockchain data indexing expertise",
+      "Visualization and reporting tools",
+    ],
     deadline: "Deadline: June 30, 2026",
     cta: "ACTIVE",
   },
@@ -14,8 +19,13 @@ export const GrantsData = [
     tag: "FEATURED",
     title: "DeFi Trading Agent",
     amount: "$50,000 - $100,000",
-    description: "Build autonomous AI agents that execute DeFi strategies, optimize yields, and manage liquidity on Bitcoin Liberty L2",
-    requirements: ["AI/ML expertise with proven track record", "DeFi protocol integration experience", "Real-time market analysis capabilities"],
+    description:
+      "Build autonomous AI agents that execute DeFi strategies, optimize yields, and manage liquidity on Liberty L1",
+    requirements: [
+      "AI/ML expertise with proven track record",
+      "DeFi protocol integration experience",
+      "Real-time market analysis capabilities",
+    ],
     deadline: "Deadline: March 15, 2026",
     cta: "ACTIVE",
   },
@@ -24,8 +34,13 @@ export const GrantsData = [
     tag: "FEATURED",
     title: "Smart Contract AI Auditor",
     amount: "$30,000 - $75,000",
-    description: "Develop AI-powered agents that automatically audit smart contracts, detect vulnerabilities, and suggest optimizations",
-    requirements: ["Machine learning security models", "Smart contract analysis tools", "Integration with CI/CD pipelines"],
+    description:
+      "Develop AI-powered agents that automatically audit smart contracts, detect vulnerabilities, and suggest optimizations",
+    requirements: [
+      "Machine learning security models",
+      "Smart contract analysis tools",
+      "Integration with CI/CD pipelines",
+    ],
     deadline: "Deadline: April 30, 2026",
     cta: "ACTIVE",
   },
@@ -34,8 +49,13 @@ export const GrantsData = [
     tag: "FEATURED",
     title: "Autonomous Portfolio Manager",
     amount: "$60,000 - $100,000",
-    description: "Create intelligent agents that manage crypto portfolios, rebalance assets, and execute trades based on market conditions and user preferences",
-    requirements: ["Advanced ML algorithms for prediction", "Risk management frameworks", "Real-time blockchain data integration"],
+    description:
+      "Create intelligent agents that manage crypto portfolios, rebalance assets, and execute trades based on market conditions and user preferences",
+    requirements: [
+      "Advanced ML algorithms for prediction",
+      "Risk management frameworks",
+      "Real-time blockchain data integration",
+    ],
     deadline: "Deadline: May 15, 2026",
     cta: "ACTIVE",
   },
