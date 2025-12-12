@@ -54,23 +54,30 @@ const ProjectPhases = () => {
           </div>
           <div className="text-[#3A7875] text-7xl md:text-8xl lg:text-[128px]">1</div>
           <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
-            Awareness & Anticipation
+            Foundation
           </div>
           <div className="text-[#99A1AF] text-base md:text-lg lg:text-[18px] mt-2">
-            Build community, ignite buzz, and set the tone of revolution. Launch campaign and prepare global snapshot
-            hype.
+            
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/8 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GreenTickCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Landing Page Live</div>
-          </div>
-          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
-            <img src={GreenTickCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Community Setup</div>
+            <div className="text-white text-[16px]">Testnet deployment</div>
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
-            <div className="text-white text-[16px]">Influencer Partnerships</div>
+            <div className="text-white text-[16px]">Mainnet activation</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
+            <div className="text-white text-[16px]">Explorer release</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
+            <div className="text-white text-[16px]">Core documentation + SDKs</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#2D5F5D]/6 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={OrangleClockCircle} className="h-[16px] w-[16px]" />
+            <div className="text-white text-[16px]">Global validator pool activation</div>
           </div>
         </motion.div>
 
@@ -87,22 +94,29 @@ const ProjectPhases = () => {
         >
           <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">2</div>
           <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
-            Snapshot + Claim
+            Ecosystem Expansion
           </div>
           <div className="text-[#99A1AF] text-[18px] mt-2">
-            Capture and verify Bitcoin holders at the block snapshot. Provide seamless, secure claim experience.
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Snapshot Taken</div>
+            <div className="text-[#6A7282] text-[16px]">Wallet integrations</div>
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Claim Portal Live</div>
+            <div className="text-[#6A7282] text-[16px]">Indexer ecosystem</div>
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">3-Month Window</div>
+            <div className="text-[#6A7282] text-[16px]">Token launch infrastructure</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={GrayCircle} className="h-[16px] w-[16px]" />
+            <div className="text-[#6A7282] text-[16px]">Developer grants</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={GrayCircle} className="h-[16px] w-[16px]" />
+            <div className="text-[#6A7282] text-[16px]">Community validator expansion</div>
           </div>
         </motion.div>
       </div>
@@ -121,22 +135,29 @@ const ProjectPhases = () => {
         >
           <div className="text-[#FFFFFF]/10 text-7xl md:text-8xl lg:text-[128px] ">3</div>
           <div className="text-[#ffffff] text-2xl md:text-3xl lg:text-[40px] group-hover:text-[#2D5F5D] transition-all duration-300  ease-in-out">
-            Genesis Launch
+            Mass Adoption
           </div>
           <div className="text-[#99A1AF] text-[18px] mt-2">
-            EVM L2 on Celestia goes live. LBTY token launch with full DeFi ecosystem.
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-6 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">L2 Network Live</div>
+            <div className="text-[#6A7282] text-[16px]">AI frameworks</div>
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">Liberty DAO Active</div>
+            <div className="text-[#6A7282] text-[16px]">Gaming ecosystems</div>
           </div>
           <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
             <img src={GrayCircle} className="h-[16px] w-[16px]" />
-            <div className="text-[#6A7282] text-[16px]">DeFi Ecosystem</div>
+            <div className="text-[#6A7282] text-[16px]">Enterprise integrations</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={GrayCircle} className="h-[16px] w-[16px]" />
+            <div className="text-[#6A7282] text-[16px]">Large-scale consumer apps</div>
+          </div>
+          <div className="flex flex-row items-center gap-3 bg-[#FFFFFF]/3 py-2 px-3 rounded-xl mt-2 hover:bg-amber-50/10 transition-all duration-300  ease-in-out">
+            <img src={GrayCircle} className="h-[16px] w-[16px]" />
+            <div className="text-[#6A7282] text-[16px]">Cross-chain growth</div>
           </div>
         </motion.div>
 
