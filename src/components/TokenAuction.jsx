@@ -93,7 +93,7 @@ const TokenAuction = () => {
             LBTY Token <span className="text-[#4A9390]">Auction</span>
           </h1>
           <p className="text-gray-400 text-xl">
-            Participate in the Liberty Bitcoin token sale
+            Participate in the Liberty token sale
           </p>
         </motion.div>
 

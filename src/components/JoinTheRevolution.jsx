@@ -11,7 +11,7 @@ const JoinTheRevolution = () => {
         Join the Revolution
       </div>
       <div className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4">
-        Connect with the Bitcoin Liberty community across all platforms
+        Connect with the Liberty community across all platforms
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 md:mt-12 lg:mt-15 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl">
         <div className="cursor-pointer relative bg-linear-to-b shadow-lg from-[#ffffff] via-black/8 to-white p-6 w-full pt-12 rounded-3xl flex flex-col text-start pb-12 hover:-translate-y-2 hover:via-white hover:bg-none hover:bg-emerald-100/40 transition-all duration-300 ease-in-out">

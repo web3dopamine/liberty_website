@@ -149,7 +149,7 @@ const ProjectPhases = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-16 md:mt-20 lg:mt-26 leading-6 px-4"
       >
-        Follow our journey as we build the future of Bitcoin DeFi. <br />
+        Follow our journey as we build the future of gas-free DeFi. <br />
         <span className="underline cursor-pointer hover:text-[#4A9390]">Join our community</span> to stay updated.
       </motion.div>
     </div>

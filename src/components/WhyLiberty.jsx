@@ -56,7 +56,7 @@ const WhyLiberty = () => {
         <span className="text-4xl md:text-6xl lg:text-[96px] text-white tracking-tight" style={{ lineHeight: '1.8' }}>Why </span>
         <span className="text-4xl md:text-6xl lg:text-[96px] tracking-tight bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text font-normal small-caps" style={{ lineHeight: '1.8' }}>Liberty?</span>
       </motion.div>
-      <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">The most advanced decentralized protocol for Bitcoin</div>
+      <div className="text-[#8092AC] text-lg md:text-xl lg:text-[24px] mt-4 px-4">The gas-free evolution for Bitcoin holders.</div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10 gap-6 md:gap-8 w-full max-w-7xl">
         <motion.div
           ref={card1Ref}
@@ -77,7 +77,7 @@ const WhyLiberty = () => {
           <img src={Armour} className="w-20 md:w-24 lg:w-[125px]" />
           <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Secure & Trustless</div>
           <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">
-            Built on Bitcoin's proven security model
+            Built on proven security model
           </div>
         </motion.div>
         <motion.div
@@ -119,7 +119,7 @@ const WhyLiberty = () => {
           <img src={CodeBlock} className="w-20 md:w-24 lg:w-[125px]" />
           <div className="uppercase text-white text-start text-lg md:text-xl lg:text-[24px] px-6 md:px-8">Programmable</div>
           <div className=" text-[#99A1AF] text-start text-base md:text-lg lg:text-[18px] mt-8 md:mt-10 px-6 md:px-8">
-            Smart contract capabilities on Bitcoin
+            Smart contract capabilities
           </div>
         </motion.div>
       </div>

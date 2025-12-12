@@ -112,7 +112,7 @@ const DeveloperGrantsProgram = () => {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4"
       >
-        Accelerating innovation on Bitcoin Liberty. We fund developers and teams building
+        Accelerating innovation on Liberty. We fund developers and teams building
         <br /> the future of decentralized applications on the LBTY blockchain.
       </motion.div>
       {/* TABS */}

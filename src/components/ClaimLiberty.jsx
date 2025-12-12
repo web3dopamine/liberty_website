@@ -8,22 +8,22 @@ const ClaimLiberty = () => {
   const steps = [
     {
       number: "01",
-      title: "Connect Wallet",
-      description: "Link your Bitcoin wallet (XVerse, Unisat, or OKX) to verify ownership"
+      title: "Connect EVM Wallet",
+      description: "Link your Bitcoin wallet to verify ownership"
     },
     {
       number: "02",
-      title: "Verify Ownership",
+      title: "Verify Bitcoin ownership ",
       description: "Sign a message to prove you control your Bitcoin address"
     },
     {
       number: "03",
-      title: "Link Liberty Address",
+      title: "Link Liberty address to Bitcoin wallet",
       description: "Connect your Liberty wallet address to receive your LBTY tokens"
     },
     {
       number: "04",
-      title: "Claim Tokens",
+      title: "Claim Liberty tokens",
       description: "Receive your LBTY at a 1:10 ratio based on your BTC balance"
     }
   ];

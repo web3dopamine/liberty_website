@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <img src={FullLogo} className="w-[100px] md:w-[128px]" />
             <div className="text-[#99A1AF] mt-6 md:mt-10 text-center md:text-left text-sm md:text-base">
-              Bringing programmable, gas-free transactions to Bitcoin.
+              Bringing programmable, gas-free transactions.
             </div>
           </div>
           
