@@ -90,7 +90,7 @@ const TokenAuction = () => {
           className="text-center mb-12"
         >
           <h1 className="text-6xl font-bold text-white mb-4">
-            LBTY Token <span className="text-[#4A9390]">Auction</span>
+            LIBERTY Token <span className="text-[#4A9390]">Auction</span>
           </h1>
           <p className="text-gray-400 text-xl">
             Participate in the Liberty token sale
@@ -285,11 +285,11 @@ const TokenAuction = () => {
                   <ul className="space-y-3 text-gray-700">
                     <li className="flex items-start gap-3">
                       <span className="text-[#4A9390] font-bold">•</span>
-                      <span><strong>Token Allocation:</strong> 5% of total LBTY supply (500M tokens)</span>
+                      <span><strong>Token Allocation:</strong> 5% of total LIBERTY supply (500M tokens)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-[#4A9390] font-bold">•</span>
-                      <span><strong>Price Range:</strong> $0.01 - $0.50 per LBTY</span>
+                      <span><strong>Price Range:</strong> $0.01 - $0.50 per LIBERTY</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-[#4A9390] font-bold">•</span>
@@ -349,7 +349,7 @@ const TokenAuction = () => {
                     </div>
                     <div>
                       <h4 className="font-bold text-gray-900 mb-2">Claim Tokens</h4>
-                      <p className="text-gray-600">After auction ends, claim your LBTY tokens. Excess funds are automatically refunded.</p>
+                      <p className="text-gray-600">After auction ends, claim your LIBERTY tokens. Excess funds are automatically refunded.</p>
                     </div>
                   </div>
                 </div>
@@ -376,7 +376,7 @@ const TokenAuction = () => {
                     <div className="absolute -left-3 w-6 h-6 bg-gray-300 rounded-full"></div>
                     <div className="text-sm text-gray-500 mb-1">February 10, 2026</div>
                     <h4 className="font-bold text-gray-900 mb-2">Token Distribution</h4>
-                    <p className="text-gray-600">LBTY tokens distributed to participants</p>
+                    <p className="text-gray-600">LIBERTY tokens distributed to participants</p>
                   </div>
                 </div>
               </div>

@@ -52,7 +52,7 @@ const LBTCCalculator = () => {
         transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
         className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-4 px-4"
       >
-        Calculate how many LBTY tokens you'll receive at the 1:10 ratio
+        Calculate how many LIBERTY tokens you'll receive at the 1:10 ratio
       </motion.div>
       <motion.div 
         initial={{ opacity: 0, y: 40 }}
@@ -122,7 +122,7 @@ const LBTCCalculator = () => {
           Conversion Rate: 1 BTC = 10 L-BTC • Minimum Claim: {minClaim} BTC
         </div>
 
-        <div className="text-xs md:text-sm lg:text-[14px] text-[#4A5565] text-start mt-6 md:mt-8 mb-3 md:mb-4 tracking-widest">YOU CAN CLAIM LBTY</div>
+        <div className="text-xs md:text-sm lg:text-[14px] text-[#4A5565] text-start mt-6 md:mt-8 mb-3 md:mb-4 tracking-widest">YOU CAN CLAIM LIBERTY</div>
         <div className="flex flex-col md:flex-row items-center gap-3 md:gap-2">
           <input
             value={lbtyValue}
@@ -138,7 +138,7 @@ const LBTCCalculator = () => {
             <div className="w-8 h-8 md:w-[40px] md:h-[40px] bg-linear-to-b from-[#2D5F5D] to-[#3A7875] rounded-4xl shadow-lg flex items-center justify-center">
               <img src={Logo} className="w-5 h-5 md:w-[24px] md:h-[24px]" alt="Liberty Logo" />
             </div>
-            <div className="min-w-8 text-lg md:text-[20px]">LBTY</div>
+            <div className="min-w-8 text-lg md:text-[20px]">LIBERTY</div>
           </div>
         </div>
         <motion.div 
@@ -154,7 +154,7 @@ const LBTCCalculator = () => {
             className="flex flex-row justify-between"
           >
             <div className="text-[#4A5565]">Exchange Rate</div>
-            <div className="font-medium">1 BTC = 10 LBTY</div>
+            <div className="font-medium">1 BTC = 10 LIBERTY</div>
           </motion.div>
           <motion.div 
             initial={{ opacity: 0, x: -20 }}

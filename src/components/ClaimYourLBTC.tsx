@@ -56,7 +56,7 @@ const ClaimYourLBTC = () => {
       setEligibilityData(data);
       
       if (data.eligible) {
-        setClaimStatus(`${data.lbtcClaimAmount.toFixed(2)} LBTY available`);
+        setClaimStatus(`${data.lbtcClaimAmount.toFixed(2)} LIBERTY available`);
       } else {
         setClaimStatus('Not eligible');
       }
@@ -104,7 +104,7 @@ const ClaimYourLBTC = () => {
         <div className="text-[#2D5F5D] text-xs md:text-sm lg:text-[14px]">Token Claim</div>
       </div>
       <div className="text-4xl md:text-6xl lg:text-[96px] tracking-tight leading-tight md:leading-30 mt-6 bg-linear-to-t from-[#000000] via-[#000000]/90 to-[#000000]/60 text-transparent bg-clip-text">
-        Claim your LBTY. <br />
+        Claim your LIBERTY. <br />
         <span className="bg-linear-to-t from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">It's seamless.</span>
       </div>
       <div className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4">

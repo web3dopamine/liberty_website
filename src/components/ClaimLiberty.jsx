@@ -19,12 +19,12 @@ const ClaimLiberty = () => {
     {
       number: "03",
       title: "Link Liberty address to Bitcoin wallet",
-      description: "Connect your Liberty wallet address to receive your LBTY tokens"
+      description: "Connect your Liberty wallet address to receive your LIBERTY tokens"
     },
     {
       number: "04",
       title: "Claim Liberty tokens",
-      description: "Receive your LBTY at a 1:10 ratio based on your BTC balance"
+      description: "Receive your LIBERTY at a 1:10 ratio based on your BTC balance"
     }
   ];
 

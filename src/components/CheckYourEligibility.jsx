@@ -171,7 +171,7 @@ const CheckYourEligibility = () => {
                   <div className="text-[#4A5565] text-sm md:text-[14px] mt-1">Bitcoin</div>
                 </div>
                 <div className="text-left">
-                  <div className="text-[#6A7282] text-xs md:text-[12px] uppercase tracking-wider mb-2">LBTY Claimable</div>
+                  <div className="text-[#6A7282] text-xs md:text-[12px] uppercase tracking-wider mb-2">LIBERTY Claimable</div>
                   <div className="text-2xl md:text-3xl lg:text-[32px] font-bold bg-linear-to-r from-[#2D5F5D] to-[#4A9390] text-transparent bg-clip-text">
                     {balanceData.lbtyClaimable.toFixed(8)}
                   </div>
@@ -252,7 +252,7 @@ const CheckYourEligibility = () => {
         disabled
         className="bg-linear-to-b text-[18px] from-[#2D5F5D]/50 to-[#3A7875]/50 mt-16 text-white/60 tracking-widest py-5 rounded-4xl px-10 cursor-not-allowed shadow-lg opacity-60"
       >
-        PAIR WALLET TO CLAIM LBTY
+        PAIR WALLET TO CLAIM LIBERTY
       </button>
       <motion.div
         initial={{ opacity: 0 }}

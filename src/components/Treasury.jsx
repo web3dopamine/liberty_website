@@ -68,7 +68,7 @@ const Treasury = () => {
         </span>
       </motion.div>
       <div className="text-[#4A5565] text-base md:text-lg lg:text-[24px] mt-6 md:mt-8 px-4">
-        Conceptual treasury based on dormant BTC (5-10 years) and unclaimed LBTY tokens
+        Conceptual treasury based on dormant BTC (5-10 years) and unclaimed LIBERTY tokens
       </div>
 
       <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 mt-12 md:mt-16 lg:mt-20 w-full max-w-6xl">
@@ -201,7 +201,7 @@ const Treasury = () => {
 
         <div className="bg-linear-to-b from-[#0A1F20] to-[#105359] pt-10 md:pt-12 pb-10 md:pb-12 px-8 md:px-12 rounded-3xl w-full lg:w-auto lg:flex-1 max-w-md lg:max-w-none shadow-xl">
           <div className="text-[#FFFFFF]/70 text-sm md:text-base">Total Treasury Potential</div>
-          <div className="text-4xl md:text-5xl lg:text-6xl text-white font-medium mt-2">68,880,000 LBTY</div>
+          <div className="text-4xl md:text-5xl lg:text-6xl text-white font-medium mt-2">68,880,000 LIBERTY</div>
           <div className="text-lg md:text-xl text-[#FFFFFF]/70 mt-2">6,888,000 BTC</div>
           <div className="w-full h-[1px] bg-white/20 mt-8 mb-5" />
           <div className="text-[#FFFFFF]/60 text-xs text-center mb-3">Calculated from</div>
@@ -289,7 +289,7 @@ const Treasury = () => {
         <div>
           <div className="text-[#6A7282] text-xs">Note</div>
           <div className="text-[#4A5565] text-sm">
-            Treasury represents dormant Bitcoin (5-10 years) and potentially unclaimed LBTY tokens that could
+            Treasury represents dormant Bitcoin (5-10 years) and potentially unclaimed LIBERTY tokens that could
             contribute to the Liberty ecosystem development fund.
           </div>
         </div>

@@ -5,7 +5,7 @@ export const GrantsData = [
     title: "On-Chain Analytics Agent",
     amount: "$10,000 - $50,000",
     description:
-      "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LBTY ecosystem participants",
+      "Build AI agents that analyze blockchain data, identify trends, and provide actionable insights for LIBERTY ecosystem participants",
     requirements: [
       "Natural language processing capabilities",
       "Blockchain data indexing expertise",

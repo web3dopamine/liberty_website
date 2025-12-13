@@ -186,7 +186,7 @@ const BTCOwnership = () => {
             </div>
             <h3 className="text-2xl font-bold text-white mb-3">Step 1: Connect Your Wallet</h3>
             <p className="text-gray-300 mb-6 max-w-md mx-auto">
-              Connect your wallet to see your Liberty address where you'll receive LBTY tokens.
+              Connect your wallet to see your Liberty address where you'll receive LIBERTY tokens.
             </p>
             <button
               onClick={() => connectModalRef.current?.showModal()}
@@ -240,7 +240,7 @@ const BTCOwnership = () => {
             {/* Liberty Address - Connected Wallet */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Liberty Address (Where You'll Receive LBTY)
+                Liberty Address (Where You'll Receive LIBERTY)
               </label>
               <input
                 type="text"
@@ -378,7 +378,7 @@ const BTCOwnership = () => {
               {/* Liberty Address - Connected Wallet */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Liberty Address (Where You'll Receive LBTY)
+                  Liberty Address (Where You'll Receive LIBERTY)
                 </label>
                 <input
                   type="text"
@@ -504,7 +504,7 @@ const BTCOwnership = () => {
                     <div className="mt-4 pt-4 border-t border-green-200">
                       <a
                         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                          `I just verified my Bitcoin ownership and linked it to my Liberty address! 🚀\n\nReady to claim LBTY tokens at 1:10 ratio when Liberty Bitcoin launches! ₿\n\n#LibertyBitcoin #LBTY #Bitcoin`
+                          `I just verified my Bitcoin ownership and linked it to my Liberty address! 🚀\n\nReady to claim LIBERTY tokens at 1:10 ratio when Liberty Bitcoin launches! ₿\n\n#LibertyBitcoin #LIBERTY #Bitcoin`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"

@@ -113,7 +113,7 @@ const DeveloperGrantsProgram = () => {
         className="text-[#4A5565] text-lg md:text-xl lg:text-[24px] mt-6 md:mt-8 px-4"
       >
         Accelerating innovation on Liberty. We fund developers and teams building
-        <br /> the future of decentralized applications on the LBTY blockchain.
+        <br /> the future of decentralized applications on the LIBERTY blockchain.
       </motion.div>
       {/* TABS */}
       <motion.div
