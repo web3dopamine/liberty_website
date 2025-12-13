@@ -203,11 +203,28 @@ const Treasury = () => {
           <div className="text-[#FFFFFF]/70 text-sm md:text-base">Total Treasury Potential</div>
           <div className="text-4xl md:text-5xl lg:text-6xl text-white font-medium mt-2">68,880,000 LBTY</div>
           <div className="text-lg md:text-xl text-[#FFFFFF]/70 mt-2">6,888,000 BTC</div>
-          <div className="w-full h-[1px] bg-white/20 mt-8 mb-6" />
+          <div className="w-full h-[1px] bg-white/20 mt-8 mb-5" />
+          <div className="text-[#FFFFFF]/60 text-xs text-center mb-3">Calculated from</div>
+          <div className="flex flex-row justify-center flex-wrap gap-2 text-xs mb-4">
+            <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
+              <div className="h-2 w-2 bg-[#2D5F5D] rounded-full" />
+              <span className="text-white/80">Dormant 13.3%</span>
+            </div>
+            <div className="text-white/40">+</div>
+            <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
+              <div className="h-2 w-2 bg-[#3A7875] rounded-full" />
+              <span className="text-white/80">Lost BTC 14.3%</span>
+            </div>
+            <div className="text-white/40">+</div>
+            <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
+              <div className="h-2 w-2 bg-[#4A9390] rounded-full" />
+              <span className="text-white/80">Satoshi's 5.2%</span>
+            </div>
+          </div>
           <div className="flex flex-row justify-center text-[#FFFFFF]/80 text-sm gap-6 items-center">
             <div className="flex flex-row items-center gap-2">
               <div className="h-3 w-3 bg-[#FFFFFF]/80 rounded-full" />
-              <div>26.3% of total supply</div>
+              <div>= 32.8% of total supply</div>
             </div>
             <div className="flex flex-row items-center gap-2">
               <div className="h-3 w-3 bg-[#FFFFFF]/80 rounded-full" />
