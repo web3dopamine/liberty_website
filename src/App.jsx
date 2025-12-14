@@ -19,10 +19,12 @@ import ClaimLiberty from "./components/ClaimLiberty";
 import AdminPanel from "./components/AdminPanel";
 import BTCOwnership from "./components/BTCOwnership";
 import TokenAuction from "./components/TokenAuction";
+import PageLoader from "./components/PageLoader";
 import { WalletProvider } from "./contexts/WalletContext";
 
 function App() {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handlePopState = () => {
@@ -31,6 +33,19 @@ function App() {
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      setTimeout(() => setIsLoading(false), 500);
+    };
+
+    if (document.readyState === 'complete') {
+      handleLoad();
+    } else {
+      window.addEventListener('load', handleLoad);
+      return () => window.removeEventListener('load', handleLoad);
+    }
   }, []);
 
   if (currentPath === '/admin') {
@@ -55,7 +70,8 @@ function App() {
 
   return (
     <WalletProvider>
-      <div>
+      <PageLoader isLoading={isLoading} />
+      <div style={{ opacity: isLoading ? 0 : 1, transition: 'opacity 0.5s ease' }}>
         <TopSection />
         <LaunchCountdown />
         <MarqueeText />
