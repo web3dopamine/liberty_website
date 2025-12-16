@@ -71,7 +71,7 @@ const Treasury = () => {
         Conceptual treasury based on dormant BTC (5-10 years) and unclaimed LIBERTY tokens
       </div>
 
-      <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12 mt-12 md:mt-16 lg:mt-20 w-full max-w-6xl">
+      <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 lg:gap-12 mt-12 md:mt-16 lg:mt-20 w-full max-w-6xl">
         <div className="flex flex-col items-center">
           <div 
             ref={chartRef} 
@@ -199,7 +199,7 @@ const Treasury = () => {
           </div>
         </div>
 
-        <div className="bg-linear-to-b from-[#0A1F20] to-[#105359] pt-10 md:pt-12 pb-10 md:pb-12 px-8 md:px-12 rounded-3xl w-full lg:w-auto lg:flex-1 max-w-md lg:max-w-none shadow-xl">
+        <div className="bg-linear-to-b from-[#0A1F20] to-[#105359] pt-10 md:pt-12 pb-10 md:pb-12 px-8 md:px-12 rounded-3xl w-full lg:w-auto lg:flex-1 max-w-md lg:max-w-none shadow-xl flex flex-col justify-center">
           <div className="text-[#FFFFFF]/70 text-sm md:text-base">Total Treasury Potential</div>
           <div className="text-4xl md:text-5xl lg:text-6xl text-white font-medium mt-2">68,880,000 LIBERTY</div>
           <div className="text-lg md:text-xl text-[#FFFFFF]/70 mt-2">6,888,000 BTC</div>
