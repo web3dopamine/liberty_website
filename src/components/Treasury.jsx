@@ -200,12 +200,12 @@ const Treasury = () => {
         </div>
 
         <div className="bg-linear-to-b from-[#0A1F20] to-[#105359] pt-10 md:pt-12 pb-10 md:pb-12 px-8 md:px-12 rounded-3xl w-full lg:w-auto lg:flex-1 max-w-md lg:max-w-none shadow-xl flex flex-col justify-center">
-          <div className="text-[#FFFFFF]/70 text-sm md:text-base">Total Treasury Potential</div>
-          <div className="text-4xl md:text-5xl lg:text-6xl text-white font-medium mt-2">68,880,000 LIBERTY</div>
-          <div className="text-lg md:text-xl text-[#FFFFFF]/70 mt-2">6,888,000 BTC</div>
+          <div className="text-[#FFFFFF]/70 text-base md:text-lg">Total Treasury Potential</div>
+          <div className="text-3xl md:text-4xl lg:text-5xl text-white font-medium mt-2">68,880,000 LIBERTY</div>
+          <div className="text-base md:text-lg text-[#FFFFFF]/70 mt-2">Based on 6,888,000 BTC</div>
           <div className="w-full h-[1px] bg-white/20 mt-8 mb-5" />
-          <div className="text-[#FFFFFF]/60 text-xs text-center mb-3">Calculated from</div>
-          <div className="flex flex-row justify-center flex-wrap gap-2 text-xs mb-4">
+          <div className="text-[#FFFFFF]/60 text-sm text-center mb-3">Calculated from</div>
+          <div className="flex flex-row justify-center flex-wrap gap-2 text-sm mb-4">
             <div className="flex items-center gap-1.5 bg-white/10 px-3 py-1.5 rounded-full">
               <div className="h-2 w-2 bg-[#2D5F5D] rounded-full" />
               <span className="text-white/80">Dormant 13.3%</span>
@@ -221,7 +221,7 @@ const Treasury = () => {
               <span className="text-white/80">Satoshi's 5.2%</span>
             </div>
           </div>
-          <div className="flex flex-row justify-center text-[#FFFFFF]/80 text-sm gap-6 items-center">
+          <div className="flex flex-row justify-center text-[#FFFFFF]/80 text-base gap-6 items-center">
             <div className="flex flex-row items-center gap-2">
               <div className="h-3 w-3 bg-[#FFFFFF]/80 rounded-full" />
               <div>= 32.8% of total supply</div>
