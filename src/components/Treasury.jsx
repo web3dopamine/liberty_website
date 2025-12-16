@@ -236,7 +236,7 @@ const Treasury = () => {
 
       <div className="flex flex-row items-center mt-16 md:mt-20 gap-3 md:gap-4 w-full max-w-6xl">
         <img src={DollarBag} className="h-7 md:h-9" />
-        <div className="text-2xl md:text-3xl lg:text-[36px]">Treasury Summary</div>
+        <div className="text-2xl md:text-3xl lg:text-[36px]">Potential Treasury Summary</div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mt-6 md:mt-8 w-full max-w-6xl">
