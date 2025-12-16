@@ -168,29 +168,29 @@ const Treasury = () => {
           </div>
 
           <div className="grid grid-cols-2 gap-x-12 gap-y-4 mt-8">
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-[#6EB5B1] rounded-full" />
+            <div className="flex items-start gap-3">
+              <div className="w-3 h-3 bg-[#6EB5B1] rounded-full mt-1 shrink-0" />
               <div>
                 <div className="text-[#4A5565] text-[12px]">Active Supply</div>
                 <div className="text-[#000000] text-[18px] font-semibold">67.2%</div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-[#2D5F5D] rounded-full" />
+            <div className="flex items-start gap-3">
+              <div className="w-3 h-3 bg-[#2D5F5D] rounded-full mt-1 shrink-0" />
               <div>
                 <div className="text-[#4A5565] text-[12px]">Dormant 5-10 years</div>
                 <div className="text-[#000000] text-[18px] font-semibold">13.3%</div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-[#3A7875] rounded-full" />
+            <div className="flex items-start gap-3">
+              <div className="w-3 h-3 bg-[#3A7875] rounded-full mt-1 shrink-0" />
               <div>
                 <div className="text-[#4A5565] text-[12px]">Lost BTC</div>
                 <div className="text-[#000000] text-[18px] font-semibold">14.3%</div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="w-3 h-3 bg-[#4A9390] rounded-full" />
+            <div className="flex items-start gap-3">
+              <div className="w-3 h-3 bg-[#4A9390] rounded-full mt-1 shrink-0" />
               <div>
                 <div className="text-[#4A5565] text-[12px]">Satoshi's Coins</div>
                 <div className="text-[#000000] text-[18px] font-semibold">5.2%</div>
