@@ -4,6 +4,21 @@ import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 
 const VideoPlayer = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  if (isMobile) {
+    return (
+      <div className="absolute inset-0 w-full h-full overflow-hidden bg-gradient-to-b from-[#0A1F20] to-[#105359]" />
+    );
+  }
+
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       <video
