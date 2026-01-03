@@ -23,7 +23,7 @@ const VideoPlayer = () => {
 
 const LogoOverlay = () => {
   return (
-    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-[90%] md:w-[80%] lg:w-[70%] max-w-[1200px]">
+    <div className="absolute top-[40%] md:top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 w-[85%] md:w-[80%] lg:w-[70%] max-w-[1200px]">
       <video
         src="/videos/logo-overlay.webm"
         className="w-full h-auto"
@@ -80,12 +80,12 @@ const Typewriter = ({ text, delay = 100, className }) => {
 
 const MainBanner = () => {
   return (
-    <div id="hero" className="relative flex flex-col min-h-screen">
+    <div id="hero" className="relative flex flex-col min-h-[80vh] md:min-h-screen">
       <Header />
 
       <VideoPlayer />
       <LogoOverlay />
-      <div className="absolute bottom-16 md:bottom-32 lg:bottom-48 left-1/2 -translate-x-1/2 z-10 w-full px-6 flex justify-center">
+      <div className="absolute bottom-8 md:bottom-32 lg:bottom-48 left-1/2 -translate-x-1/2 z-10 w-full px-6 flex justify-center">
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
