@@ -1,0 +1,35 @@
+ pm2 logs liberty-app
+[TAILING] Tailing last 15 lines for [liberty-app] process (change the value with --lines option)
+/root/.pm2/logs/liberty-app-error.log last 15 lines:
+1|liberty- | npm notice
+1|liberty- | npm notice New major version of npm available! 10.8.2 -> 11.12.0
+1|liberty- | npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.12.0
+1|liberty- | npm notice To update run: npm install -g npm@11.12.0
+1|liberty- | npm notice
+1|liberty- | [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+1|liberty- | The request id "/var/www/liberty/liberty_website/.env" is outside of Vite serving allow list.
+1|liberty- | 
+1|liberty- | - /var/www/liberty/liberty_website
+1|liberty- | 
+1|liberty- | Refer to docs https://vite.dev/config/server-options.html#server-fs-allow for configurations and more details.
+1|liberty- | 
+1|liberty- | The request id "/var/www/liberty/liberty_website/.env.example" is outside of Vite serving allow list.
+1|liberty- | [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+1|liberty- | [baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+
+/root/.pm2/logs/liberty-app-out.log last 15 lines:
+1|liberty- | Vite dev server setup completed
+1|liberty- | 8:11:41 PM [express] serving on http://localhost:5000
+1|liberty- | 8:12:17 PM [tsx] Previous process hasn't exited yet. Force killing...
+1|liberty- | 
+1|liberty- | > libertybtc@0.0.0 dev
+1|liberty- | > NODE_ENV=development tsx watch server/index.ts
+1|liberty- | 
+1|liberty- | ⚠️  Authentication: DISABLED (OAuth variables not configured)
+1|liberty- |    → All auth middleware will pass through with mock user data
+1|liberty- |    → Set REPLIT_CLIENT_ID, REPLIT_CLIENT_SECRET, and REPLIT_CALLBACK_URL to enable OAuth
+1|liberty- | Environment: development, isDev: true
+1|liberty- | Setting up Vite dev server...
+1|liberty- | Vite dev server setup completed
+1|liberty- | 8:12:18 PM [express] serving on http://localhost:5000
+1|liberty- | 8:12:22 PM [express] GET /api/me 304 in 3ms :: {"id":"dev-user-1","email":"developer@example.com","f…
