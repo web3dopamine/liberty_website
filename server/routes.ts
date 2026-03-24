@@ -1012,8 +1012,8 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
   });
 
   // Simplified endpoint: Create self-send PSBT from address (auto-fetch UTXOs)
-  // SECURITY: This endpoint requires admin authentication
-  app.post("/api/bitcoin/createPsbtFromAddress", requireAdmin, async (req, res) => {
+  // Public endpoint - users need this to prove BTC ownership
+  app.post("/api/bitcoin/createPsbtFromAddress", async (req, res) => {
     try {
       const { address } = req.body || {};
       
