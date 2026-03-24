@@ -3,6 +3,52 @@ import { FullLogo } from "../assets/images";
 import { useWallet } from "../contexts/WalletContext";
 import ConnectWalletModal from "../modals/ConnectWalletModal";
 
+const LibertyAddressModal = ({ isOpen, address, onConfirm, onClose }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div 
+        className="relative bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-in"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex justify-center mb-5">
+          <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center">
+            <svg className="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
+            </svg>
+          </div>
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 text-center mb-3">
+          Confirm Your Liberty Address
+        </h3>
+        <p className="text-gray-600 text-sm text-center mb-5">
+          Please verify that this is the correct address. Your LIBERTY tokens will be sent <strong>only</strong> to this address and this action <strong>cannot be changed</strong> later.
+        </p>
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-6">
+          <div className="text-xs text-gray-500 mb-1">Your Liberty Address</div>
+          <div className="text-sm font-mono text-gray-900 break-all">{address}</div>
+        </div>
+        <div className="flex gap-3">
+          <button
+            onClick={onClose}
+            className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-xl font-semibold hover:bg-gray-50 transition-all"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            className="flex-1 px-4 py-3 bg-[#4A9390] text-white rounded-xl font-semibold hover:bg-[#3A7875] transition-all"
+          >
+            I Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const BTCOwnership = () => {
   const [activeTab, setActiveTab] = useState("psbt");
   const [bitcoinAddress, setBitcoinAddress] = useState("");
@@ -11,14 +57,25 @@ const BTCOwnership = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [utxoInfo, setUtxoInfo] = useState(null);
   
-  // Message signature states
   const [msgAddress, setMsgAddress] = useState("");
   const [signature, setSignature] = useState("");
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationResult, setVerificationResult] = useState(null);
+
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [addressConfirmed, setAddressConfirmed] = useState(false);
   
   const connectModalRef = useRef(null);
   const { account, isConnected, truncateAddress, disconnectWallet } = useWallet();
+
+  useEffect(() => {
+    if (isConnected && account && !addressConfirmed) {
+      setShowAddressModal(true);
+    }
+    if (!isConnected) {
+      setAddressConfirmed(false);
+    }
+  }, [isConnected, account]);
 
   const handleGeneratePsbt = async () => {
     if (!isConnected) {
@@ -596,6 +653,18 @@ const BTCOwnership = () => {
       </div>
 
       <ConnectWalletModal ref={connectModalRef} />
+      <LibertyAddressModal
+        isOpen={showAddressModal}
+        address={account}
+        onConfirm={() => {
+          setAddressConfirmed(true);
+          setShowAddressModal(false);
+        }}
+        onClose={() => {
+          setShowAddressModal(false);
+          disconnectWallet();
+        }}
+      />
     </div>
   );
 };
