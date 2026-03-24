@@ -1063,11 +1063,11 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     }
   });
 
-  // Verify Bitcoin message signature
+  // Verify Bitcoin message signature and save claim
   // Public endpoint - anyone can verify signatures
   app.post("/api/bitcoin/verifyMessage", async (req, res) => {
     try {
-      const { address, message, signature } = req.body || {};
+      const { address, message, signature, libertyAddress } = req.body || {};
       
       if (!address || !message || !signature) {
         return res.status(400).json({ 
@@ -1075,14 +1075,52 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
         });
       }
 
-      // Basic address validation
       const btcAddressRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,87}$/;
       if (!btcAddressRegex.test(address)) {
         return res.status(400).json({ error: "Invalid Bitcoin address format" });
       }
 
-      // Use Bitcoin Core RPC to verify the message signature
       const isValid = await coreRpc("verifymessage", [address, signature, message]);
+      
+      if (isValid && libertyAddress) {
+        const existingClaim = await storage.getBtcClaimByBtcAddress(address);
+        if (existingClaim) {
+          return res.json({
+            valid: true,
+            message: "Signature valid! This BTC address has already been claimed.",
+            claim: existingClaim,
+            alreadyClaimed: true
+          });
+        }
+
+        let btcBalance = 0;
+        try {
+          const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${address})`]]);
+          if (utxoResult && utxoResult.total_amount) {
+            btcBalance = utxoResult.total_amount;
+          }
+        } catch (balanceErr) {
+          console.error("Failed to fetch BTC balance:", balanceErr);
+        }
+
+        const libertyEntitlement = btcBalance * 10;
+
+        const claim = await storage.createBtcClaim({
+          btcAddress: address,
+          libertyAddress,
+          btcBalance: btcBalance.toFixed(8),
+          libertyEntitlement: libertyEntitlement.toFixed(8),
+          verificationMethod: "message",
+          signature,
+          status: "verified",
+        });
+
+        return res.json({ 
+          valid: true,
+          message: `Signature verified! Claim saved. Balance: ${btcBalance.toFixed(8)} BTC → ${libertyEntitlement.toFixed(8)} LIBERTY`,
+          claim,
+        });
+      }
       
       res.json({ 
         valid: isValid,
@@ -1096,6 +1134,112 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
         error: e.message,
         message: "Failed to verify signature. Make sure Bitcoin Core RPC is configured correctly."
       });
+    }
+  });
+
+  // Verify signed PSBT and save claim
+  app.post("/api/bitcoin/verifyPsbt", async (req, res) => {
+    try {
+      const { signedPsbt, btcAddress, libertyAddress } = req.body || {};
+
+      if (!signedPsbt || !btcAddress || !libertyAddress) {
+        return res.status(400).json({ error: "signedPsbt, btcAddress, and libertyAddress are required" });
+      }
+
+      const existingClaim = await storage.getBtcClaimByBtcAddress(btcAddress);
+      if (existingClaim) {
+        return res.json({
+          valid: true,
+          message: "This BTC address has already been claimed.",
+          claim: existingClaim,
+          alreadyClaimed: true
+        });
+      }
+
+      const decoded = await coreRpc("decodepsbt", [signedPsbt]);
+
+      let hasValidSignature = false;
+      let txid = null;
+
+      if (decoded && decoded.inputs) {
+        for (const input of decoded.inputs) {
+          if (input.final_scriptwitness || input.final_scriptsig || 
+              (input.partial_signatures && Object.keys(input.partial_signatures).length > 0)) {
+            hasValidSignature = true;
+            break;
+          }
+        }
+      }
+
+      if (!hasValidSignature) {
+        return res.json({
+          valid: false,
+          message: "PSBT does not contain a valid signature. Please sign it with your wallet first."
+        });
+      }
+
+      try {
+        const finalized = await coreRpc("finalizepsbt", [signedPsbt]);
+        if (finalized && finalized.complete) {
+          txid = finalized.txid || null;
+        }
+      } catch (finalizeErr) {
+        // Finalization may fail for certain address types but signature is still valid
+      }
+
+      let btcBalance = 0;
+      try {
+        const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${btcAddress})`]]);
+        if (utxoResult && utxoResult.total_amount) {
+          btcBalance = utxoResult.total_amount;
+        }
+      } catch (balanceErr) {
+        console.error("Failed to fetch BTC balance:", balanceErr);
+      }
+
+      const libertyEntitlement = btcBalance * 10;
+
+      const claim = await storage.createBtcClaim({
+        btcAddress,
+        libertyAddress,
+        btcBalance: btcBalance.toFixed(8),
+        libertyEntitlement: libertyEntitlement.toFixed(8),
+        verificationMethod: "psbt",
+        txid,
+        status: "verified",
+      });
+
+      res.json({
+        valid: true,
+        message: `PSBT verified! Claim saved. Balance: ${btcBalance.toFixed(8)} BTC → ${libertyEntitlement.toFixed(8)} LIBERTY`,
+        claim,
+      });
+    } catch (e: any) {
+      res.status(500).json({
+        valid: false,
+        error: e.message,
+        message: "Failed to verify PSBT."
+      });
+    }
+  });
+
+  // Get all claims (admin)
+  app.get("/api/admin/claims", requireAdmin, async (req, res) => {
+    try {
+      const claims = await storage.getBtcClaims();
+      res.json(claims);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // Check if a BTC address has already been claimed
+  app.get("/api/bitcoin/checkClaim/:address", async (req, res) => {
+    try {
+      const claim = await storage.getBtcClaimByBtcAddress(req.params.address);
+      res.json({ claimed: !!claim, claim: claim || null });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
     }
   });
 

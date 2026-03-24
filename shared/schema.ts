@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, jsonb, index, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, timestamp, jsonb, index, boolean, numeric } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -107,6 +107,27 @@ export const chatMessagesRelations = relations(chatMessages, ({ one }) => ({
     references: [grantApplications.id],
   }),
 }));
+
+export const btcClaims = pgTable("btc_claims", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  btcAddress: text("btc_address").notNull(),
+  libertyAddress: text("liberty_address").notNull(),
+  btcBalance: numeric("btc_balance", { precision: 20, scale: 8 }).notNull().default("0"),
+  libertyEntitlement: numeric("liberty_entitlement", { precision: 20, scale: 8 }).notNull().default("0"),
+  verificationMethod: text("verification_method").notNull(),
+  txid: text("txid"),
+  signature: text("signature"),
+  status: text("status").notNull().default("verified"),
+  claimedAt: timestamp("claimed_at").defaultNow().notNull(),
+});
+
+export const insertBtcClaimSchema = createInsertSchema(btcClaims).omit({
+  id: true,
+  claimedAt: true,
+});
+
+export type InsertBtcClaim = z.infer<typeof insertBtcClaimSchema>;
+export type BtcClaim = typeof btcClaims.$inferSelect;
 
 export const insertEmailSubscriptionSchema = createInsertSchema(emailSubscriptions).pick({
   email: true,

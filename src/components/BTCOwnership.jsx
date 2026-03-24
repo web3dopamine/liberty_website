@@ -72,13 +72,44 @@ const BTCOwnership = () => {
     }
   };
 
-  const handleVerifySignature = () => {
+  const [psbtResult, setPsbtResult] = useState(null);
+  const [isVerifyingPsbt, setIsVerifyingPsbt] = useState(false);
+
+  const handleVerifySignature = async () => {
     if (!signedPsbt.trim()) {
       alert("Please paste a signed PSBT or raw transaction");
       return;
     }
-    // Verification logic would go here
-    alert("Verification functionality will be implemented");
+    if (!isConnected || !account) {
+      alert("Please connect your wallet first");
+      return;
+    }
+
+    setIsVerifyingPsbt(true);
+    setPsbtResult(null);
+
+    try {
+      const response = await fetch("/api/bitcoin/verifyPsbt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          signedPsbt: signedPsbt,
+          btcAddress: bitcoinAddress,
+          libertyAddress: account,
+        }),
+      });
+
+      const data = await response.json();
+      setPsbtResult(data);
+
+      if (!response.ok) {
+        throw new Error(data.error || "Verification failed");
+      }
+    } catch (error) {
+      setPsbtResult({ valid: false, message: error.message || "Failed to verify PSBT" });
+    } finally {
+      setIsVerifyingPsbt(false);
+    }
   };
 
   const handleVerifyMessage = async () => {
@@ -104,7 +135,8 @@ const BTCOwnership = () => {
         body: JSON.stringify({ 
           address: msgAddress, 
           signature: signature,
-          message: `I claim ${account} for Bitcoin address ${msgAddress}`
+          message: `I claim ${account} for Bitcoin address ${msgAddress}`,
+          libertyAddress: account
         }),
       });
 
@@ -335,14 +367,39 @@ const BTCOwnership = () => {
 
             <button
               onClick={handleVerifySignature}
-              disabled={!isConnected || !signedPsbt.trim()}
+              disabled={!isConnected || !signedPsbt.trim() || isVerifyingPsbt}
               className="w-full inline-flex items-center justify-center gap-2 bg-[#4A9390] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3A7875] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              Verify & Complete Claim
+              {isVerifyingPsbt ? "Verifying..." : "Verify & Complete Claim"}
             </button>
+
+            {psbtResult && (
+              <div className={`rounded-lg p-4 mt-4 ${
+                psbtResult.valid 
+                  ? 'bg-green-50 border border-green-200' 
+                  : 'bg-red-50 border border-red-200'
+              }`}>
+                <div className="flex items-center gap-2">
+                  {psbtResult.valid ? (
+                    <span className="font-semibold text-green-800">Claim Saved Successfully!</span>
+                  ) : (
+                    <span className="font-semibold text-red-800">Verification Failed</span>
+                  )}
+                </div>
+                <p className={`text-sm mt-2 ${psbtResult.valid ? 'text-green-700' : 'text-red-700'}`}>
+                  {psbtResult.message}
+                </p>
+                {psbtResult.claim && (
+                  <div className="mt-3 text-sm text-green-700 space-y-1">
+                    <div>BTC Balance: <strong>{psbtResult.claim.btcBalance} BTC</strong></div>
+                    <div>LIBERTY Entitlement: <strong>{psbtResult.claim.libertyEntitlement} LIBERTY</strong></div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
@@ -498,6 +555,12 @@ const BTCOwnership = () => {
                   <p className={`text-sm mt-2 ${verificationResult.valid ? 'text-green-700' : 'text-red-700'}`}>
                     {verificationResult.message}
                   </p>
+                  {verificationResult.claim && (
+                    <div className="mt-3 text-sm text-green-700 space-y-1">
+                      <div>BTC Balance: <strong>{verificationResult.claim.btcBalance} BTC</strong></div>
+                      <div>LIBERTY Entitlement: <strong>{verificationResult.claim.libertyEntitlement} LIBERTY</strong></div>
+                    </div>
+                  )}
                   
                   {/* Share on X Button - Only show when valid */}
                   {verificationResult.valid && (

@@ -10,11 +10,13 @@ import type {
   InsertChatMessage,
   ChatMessage,
   User,
-  UpsertUser
+  UpsertUser,
+  InsertBtcClaim,
+  BtcClaim
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { db } from "./db";
-import { grants, grantCategories, emailSubscriptions, grantApplications, users, chatMessages } from "@shared/schema";
+import { grants, grantCategories, emailSubscriptions, grantApplications, users, chatMessages, btcClaims } from "@shared/schema";
 import { eq, and, gt, count, sql, or } from "drizzle-orm";
 
 export interface IStorage {
@@ -51,6 +53,12 @@ export interface IStorage {
   // Grant categories
   getGrantCategories(): Promise<GrantCategory[]>;
   createGrantCategory(category: InsertGrantCategory): Promise<GrantCategory>;
+
+  // BTC Claims
+  createBtcClaim(claim: InsertBtcClaim): Promise<BtcClaim>;
+  getBtcClaims(): Promise<BtcClaim[]>;
+  getBtcClaimByBtcAddress(btcAddress: string): Promise<BtcClaim | undefined>;
+  getBtcClaimByLibertyAddress(libertyAddress: string): Promise<BtcClaim[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -298,6 +306,37 @@ export class MemStorage implements IStorage {
     this.grantCategories.push(category);
     return category;
   }
+
+  private btcClaimsList: BtcClaim[] = [];
+
+  async createBtcClaim(claim: InsertBtcClaim): Promise<BtcClaim> {
+    const newClaim: BtcClaim = {
+      id: randomUUID(),
+      btcAddress: claim.btcAddress,
+      libertyAddress: claim.libertyAddress,
+      btcBalance: claim.btcBalance || "0",
+      libertyEntitlement: claim.libertyEntitlement || "0",
+      verificationMethod: claim.verificationMethod,
+      txid: claim.txid || null,
+      signature: claim.signature || null,
+      status: claim.status || "verified",
+      claimedAt: new Date(),
+    };
+    this.btcClaimsList.push(newClaim);
+    return newClaim;
+  }
+
+  async getBtcClaims(): Promise<BtcClaim[]> {
+    return [...this.btcClaimsList];
+  }
+
+  async getBtcClaimByBtcAddress(btcAddress: string): Promise<BtcClaim | undefined> {
+    return this.btcClaimsList.find(c => c.btcAddress === btcAddress);
+  }
+
+  async getBtcClaimByLibertyAddress(libertyAddress: string): Promise<BtcClaim[]> {
+    return this.btcClaimsList.filter(c => c.libertyAddress === libertyAddress);
+  }
 }
 
 export class DatabaseStorage implements IStorage {
@@ -513,6 +552,24 @@ export class DatabaseStorage implements IStorage {
   async createGrantCategory(insertCategory: InsertGrantCategory): Promise<GrantCategory> {
     const [category] = await db.insert(grantCategories).values(insertCategory).returning();
     return category;
+  }
+
+  async createBtcClaim(claim: InsertBtcClaim): Promise<BtcClaim> {
+    const [newClaim] = await db.insert(btcClaims).values(claim).returning();
+    return newClaim;
+  }
+
+  async getBtcClaims(): Promise<BtcClaim[]> {
+    return await db.select().from(btcClaims);
+  }
+
+  async getBtcClaimByBtcAddress(btcAddress: string): Promise<BtcClaim | undefined> {
+    const [claim] = await db.select().from(btcClaims).where(eq(btcClaims.btcAddress, btcAddress));
+    return claim;
+  }
+
+  async getBtcClaimByLibertyAddress(libertyAddress: string): Promise<BtcClaim[]> {
+    return await db.select().from(btcClaims).where(eq(btcClaims.libertyAddress, libertyAddress));
   }
 }
 
