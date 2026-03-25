@@ -90,6 +90,11 @@ app.use((req, res, next) => {
   // Serve documentation static files from the built Docusaurus site
   app.use('/docs', express.static(path.join(process.cwd(), 'docs/build')));
 
+  // Catch-all for unhandled API routes — always return JSON, never HTML
+  app.use('/api', (req: Request, res: Response) => {
+    res.status(404).json({ error: `API endpoint not found: ${req.method} ${req.path}` });
+  });
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";

@@ -952,7 +952,7 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     try {
       json = JSON.parse(text);
     } catch {
-      throw new Error(`HTTP ${res.status} — ${text}`);
+      throw new Error(`Bitcoin Core RPC returned HTTP ${res.status}. Check BITCOIN_RPC_URL, BITCOIN_RPC_USER, and BITCOIN_RPC_PASS configuration.`);
     }
     if (json.error) {
       throw new Error(`RPC ${json.error.code}: ${json.error.message}`);
