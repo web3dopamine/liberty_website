@@ -12,6 +12,7 @@ import {
 import { saveGrantApplicationToFile } from "./file-logger";
 import { sendApplicantConfirmationEmail, sendApplicantMessageNotificationEmail } from "./sendgrid";
 import { z } from "zod";
+import bitcoinMessage from "bitcoinjs-message";
 import { setupAuth, requireAuth, requireAdmin } from "./auth";
 
 // CoinGecko API cache - only refresh once per hour
@@ -1081,7 +1082,20 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
         return res.status(400).json({ error: "Invalid Bitcoin address format" });
       }
 
-      const isValid = await coreRpc("verifymessage", [address, signature, message]);
+      let isValid = false;
+      try {
+        isValid = bitcoinMessage.verify(message, address, signature);
+      } catch (jsErr: any) {
+        try {
+          isValid = bitcoinMessage.verify(message, address, signature, undefined, true);
+        } catch {
+          try {
+            isValid = await coreRpc("verifymessage", [address, signature, message]);
+          } catch {
+            throw new Error("Signature verification failed. Unsupported address type or invalid signature.");
+          }
+        }
+      }
       
       if (isValid && libertyAddress) {
         const existingClaim = await storage.getBtcClaimByBtcAddress(address);
