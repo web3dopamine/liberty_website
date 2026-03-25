@@ -101,6 +101,11 @@ const BTCOwnership = () => {
         body: JSON.stringify({ address: bitcoinAddress }),
       });
 
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned an invalid response. Please check Bitcoin RPC configuration on the server.");
+      }
+
       const data = await response.json();
 
       if (!response.ok) {
@@ -156,6 +161,11 @@ const BTCOwnership = () => {
         }),
       });
 
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned an invalid response. Please check Bitcoin RPC configuration.");
+      }
+
       const data = await response.json();
       setPsbtResult(data);
 
@@ -196,6 +206,11 @@ const BTCOwnership = () => {
           libertyAddress: account
         }),
       });
+
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned an invalid response. Please check server configuration.");
+      }
 
       const data = await response.json();
 
