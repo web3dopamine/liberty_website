@@ -920,7 +920,8 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     'getblockchaininfo',
     'getblockcount',
     'scantxoutset',
-    'sendrawtransaction'
+    'sendrawtransaction',
+    'verifymessage'
   ];
 
   async function coreRpc(method: string, params: any[] = []) {
