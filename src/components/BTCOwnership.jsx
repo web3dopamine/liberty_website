@@ -49,6 +49,21 @@ const LibertyAddressModal = ({ isOpen, address, onConfirm, onClose }) => {
   );
 };
 
+async function safeJsonFetch(url, options) {
+  const response = await fetch(url, options);
+  const text = await response.text();
+  let data;
+  try {
+    data = JSON.parse(text);
+  } catch {
+    throw new Error("Server error: Bitcoin Core RPC is not reachable. Please contact support.");
+  }
+  if (!response.ok) {
+    throw new Error(data.error || data.message || "Request failed");
+  }
+  return data;
+}
+
 const BTCOwnership = () => {
   const [activeTab, setActiveTab] = useState("psbt");
   const [bitcoinAddress, setBitcoinAddress] = useState("");
@@ -56,6 +71,7 @@ const BTCOwnership = () => {
   const [signedPsbt, setSignedPsbt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
   const [utxoInfo, setUtxoInfo] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   
   const [msgAddress, setMsgAddress] = useState("");
   const [signature, setSignature] = useState("");
@@ -79,38 +95,26 @@ const BTCOwnership = () => {
 
   const handleGeneratePsbt = async () => {
     if (!isConnected) {
-      alert("Please connect your wallet first");
+      setErrorMessage("Please connect your wallet first.");
       return;
     }
     
     if (!bitcoinAddress.trim()) {
-      alert("Bitcoin address is required. Please enter your Bitcoin address.");
+      setErrorMessage("Bitcoin address is required. Please enter your Bitcoin address.");
       return;
     }
 
     setIsGenerating(true);
     setUnsignedPsbt("");
     setUtxoInfo(null);
+    setErrorMessage("");
 
     try {
-      const response = await fetch("/api/bitcoin/createPsbtFromAddress", {
+      const data = await safeJsonFetch("/api/bitcoin/createPsbtFromAddress", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ address: bitcoinAddress }),
       });
-
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Server returned an invalid response. Please check Bitcoin RPC configuration on the server.");
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to generate PSBT");
-      }
 
       setUnsignedPsbt(data.psbt);
       setUtxoInfo({
@@ -120,17 +124,19 @@ const BTCOwnership = () => {
         vout: data.vout,
       });
     } catch (error) {
-      alert(error.message || "Failed to generate PSBT. Make sure Bitcoin Core RPC is configured.");
+      setErrorMessage(error.message);
       console.error("PSBT generation error:", error);
     } finally {
       setIsGenerating(false);
     }
   };
 
+  const [copied, setCopied] = useState(false);
   const handleCopy = () => {
     if (unsignedPsbt) {
       navigator.clipboard.writeText(unsignedPsbt);
-      alert("Copied to clipboard!");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     }
   };
 
@@ -139,19 +145,20 @@ const BTCOwnership = () => {
 
   const handleVerifySignature = async () => {
     if (!signedPsbt.trim()) {
-      alert("Please paste a signed PSBT or raw transaction");
+      setErrorMessage("Please paste a signed PSBT or raw transaction.");
       return;
     }
     if (!isConnected || !account) {
-      alert("Please connect your wallet first");
+      setErrorMessage("Please connect your wallet first.");
       return;
     }
 
     setIsVerifyingPsbt(true);
     setPsbtResult(null);
+    setErrorMessage("");
 
     try {
-      const response = await fetch("/api/bitcoin/verifyPsbt", {
+      const data = await safeJsonFetch("/api/bitcoin/verifyPsbt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -160,18 +167,7 @@ const BTCOwnership = () => {
           libertyAddress: account,
         }),
       });
-
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Server returned an invalid response. Please check Bitcoin RPC configuration.");
-      }
-
-      const data = await response.json();
       setPsbtResult(data);
-
-      if (!response.ok) {
-        throw new Error(data.error || "Verification failed");
-      }
     } catch (error) {
       setPsbtResult({ valid: false, message: error.message || "Failed to verify PSBT" });
     } finally {
@@ -181,24 +177,23 @@ const BTCOwnership = () => {
 
   const handleVerifyMessage = async () => {
     if (!isConnected) {
-      alert("Please connect your wallet first");
+      setErrorMessage("Please connect your wallet first.");
       return;
     }
     
     if (!msgAddress.trim() || !signature.trim()) {
-      alert("Please enter both Bitcoin address and signature");
+      setErrorMessage("Please enter both Bitcoin address and signature.");
       return;
     }
 
     setIsVerifying(true);
     setVerificationResult(null);
+    setErrorMessage("");
 
     try {
-      const response = await fetch("/api/bitcoin/verifyMessage", {
+      const data = await safeJsonFetch("/api/bitcoin/verifyMessage", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           address: msgAddress, 
           signature: signature,
@@ -206,17 +201,6 @@ const BTCOwnership = () => {
           libertyAddress: account
         }),
       });
-
-      const contentType = response.headers.get("content-type");
-      if (!contentType || !contentType.includes("application/json")) {
-        throw new Error("Server returned an invalid response. Please check server configuration.");
-      }
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to verify signature");
-      }
 
       setVerificationResult({
         valid: data.valid,
@@ -279,6 +263,30 @@ const BTCOwnership = () => {
             No Broadcast Required
           </div>
         </div>
+
+        {/* Error Banner */}
+        {errorMessage && (
+          <div className="bg-red-900/30 border border-red-500/50 rounded-xl p-4 mb-6 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <svg className="w-5 h-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-red-300 text-sm">{errorMessage}</span>
+            </div>
+            <button onClick={() => setErrorMessage("")} className="text-red-400 hover:text-red-300">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {/* Copied Toast */}
+        {copied && (
+          <div className="fixed top-6 right-6 z-50 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-medium animate-in">
+            Copied to clipboard!
+          </div>
+        )}
 
         {/* Wallet Connection Required Notice */}
         {!isConnected && (
@@ -549,7 +557,8 @@ const BTCOwnership = () => {
                     onClick={() => {
                       if (msgAddress && account) {
                         navigator.clipboard.writeText(`I claim ${account} for Bitcoin address ${msgAddress}`);
-                        alert("Message copied to clipboard!");
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
                       }
                     }}
                     disabled={!isConnected || !msgAddress}
