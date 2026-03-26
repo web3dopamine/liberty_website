@@ -1013,8 +1013,27 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
     }
   });
 
-  // Simplified endpoint: Create self-send PSBT from address (auto-fetch UTXOs)
-  // Public endpoint - users need this to prove BTC ownership
+  async function getUtxosFromPublicApi(address: string) {
+    const res = await fetch(`https://mempool.space/api/address/${address}/utxo`);
+    if (!res.ok) throw new Error(`Mempool API error: ${res.status}`);
+    const utxos = await res.json();
+    return utxos;
+  }
+
+  async function getBtcBalancePublic(address: string): Promise<number> {
+    try {
+      const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${address})`]]);
+      if (utxoResult && utxoResult.total_amount) return utxoResult.total_amount;
+    } catch {}
+    try {
+      const utxos = await getUtxosFromPublicApi(address);
+      let total = 0;
+      for (const u of utxos) total += u.value;
+      return total / 1e8;
+    } catch {}
+    return 0;
+  }
+
   app.post("/api/bitcoin/createPsbtFromAddress", async (req, res) => {
     try {
       const { address } = req.body || {};
@@ -1023,43 +1042,93 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
         return res.status(400).json({ error: "Bitcoin address is required" });
       }
 
-      // Basic address validation
       const btcAddressRegex = /^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,87}$/;
       if (!btcAddressRegex.test(address)) {
         return res.status(400).json({ error: "Invalid Bitcoin address format" });
       }
 
-      // 1) Scan for UTXOs at this address
-      const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${address})`]]);
-      
-      if (!utxoResult || !utxoResult.unspents || utxoResult.unspents.length === 0) {
+      let utxo: any = null;
+      let totalUtxos = 0;
+      let amountBtc = 0;
+
+      try {
+        const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${address})`]]);
+        if (utxoResult && utxoResult.unspents && utxoResult.unspents.length > 0) {
+          utxo = utxoResult.unspents[0];
+          totalUtxos = utxoResult.unspents.length;
+          amountBtc = utxo.amount;
+        }
+      } catch {
+        const publicUtxos = await getUtxosFromPublicApi(address);
+        if (publicUtxos && publicUtxos.length > 0) {
+          const u = publicUtxos[0];
+          utxo = { txid: u.txid, vout: u.vout, amount: u.value / 1e8 };
+          totalUtxos = publicUtxos.length;
+          amountBtc = utxo.amount;
+        }
+      }
+
+      if (!utxo) {
         return res.status(404).json({ 
           error: "No UTXOs found for this address. Address may have no balance or no transaction history." 
         });
       }
 
-      // 2) Use the first UTXO
-      const utxo = utxoResult.unspents[0];
-      const amountBtc = utxo.amount;
-      const feeSats = 1000; // 1000 satoshis fee (0.00001 BTC)
+      const feeSats = 1000;
       const adj = Math.max(0, amountBtc - feeSats / 1e8);
 
-      // 3) Build PSBT: spend UTXO → send back to same address
-      const psbt = await coreRpc("createpsbt", [
-        [{ txid: utxo.txid, vout: utxo.vout }],
-        { [address]: Number(adj.toFixed(8)) },
-      ]);
+      try {
+        const psbt = await coreRpc("createpsbt", [
+          [{ txid: utxo.txid, vout: utxo.vout }],
+          { [address]: Number(adj.toFixed(8)) },
+        ]);
+        const updated = await coreRpc("utxoupdatepsbt", [psbt]);
+        
+        return res.json({ 
+          psbt: updated,
+          utxoCount: totalUtxos,
+          amountBtc,
+          txid: utxo.txid,
+          vout: utxo.vout
+        });
+      } catch {
+        const bitcoin = await import('bitcoinjs-lib');
+        const psbt = new bitcoin.Psbt({ network: bitcoin.networks.bitcoin });
 
-      // 4) Attach UTXO details so hardware/software can sign
-      const updated = await coreRpc("utxoupdatepsbt", [psbt]);
-      
-      res.json({ 
-        psbt: updated,
-        utxoCount: utxoResult.unspents.length,
-        amountBtc: amountBtc,
-        txid: utxo.txid,
-        vout: utxo.vout
-      });
+        const txRes = await fetch(`https://mempool.space/api/tx/${utxo.txid}/hex`);
+        if (!txRes.ok) throw new Error("Failed to fetch transaction hex from mempool.space");
+        const txHex = await txRes.text();
+
+        if (address.startsWith('bc1')) {
+          psbt.addInput({
+            hash: utxo.txid,
+            index: utxo.vout,
+            witnessUtxo: {
+              script: bitcoin.address.toOutputScript(address, bitcoin.networks.bitcoin),
+              value: Math.round(amountBtc * 1e8),
+            },
+          });
+        } else {
+          psbt.addInput({
+            hash: utxo.txid,
+            index: utxo.vout,
+            nonWitnessUtxo: Buffer.from(txHex, 'hex'),
+          });
+        }
+
+        psbt.addOutput({
+          address: address,
+          value: Math.round(adj * 1e8),
+        });
+
+        return res.json({
+          psbt: psbt.toBase64(),
+          utxoCount: totalUtxos,
+          amountBtc,
+          txid: utxo.txid,
+          vout: utxo.vout,
+        });
+      }
     } catch (e: any) {
       res.status(500).json({ error: e.message });
     }
@@ -1108,16 +1177,7 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
           });
         }
 
-        let btcBalance = 0;
-        try {
-          const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${address})`]]);
-          if (utxoResult && utxoResult.total_amount) {
-            btcBalance = utxoResult.total_amount;
-          }
-        } catch (balanceErr) {
-          console.error("Failed to fetch BTC balance:", balanceErr);
-        }
-
+        const btcBalance = await getBtcBalancePublic(address);
         const libertyEntitlement = btcBalance * 10;
 
         const claim = await storage.createBtcClaim({
@@ -1171,7 +1231,22 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
         });
       }
 
-      const decoded = await coreRpc("decodepsbt", [signedPsbt]);
+      let decoded;
+      try {
+        decoded = await coreRpc("decodepsbt", [signedPsbt]);
+      } catch {
+        const bitcoin = await import('bitcoinjs-lib');
+        try {
+          const psbtObj = bitcoin.Psbt.fromBase64(signedPsbt);
+          decoded = { inputs: psbtObj.data.inputs.map((inp: any) => ({
+            final_scriptwitness: inp.finalScriptWitness,
+            final_scriptsig: inp.finalScriptSig,
+            partial_signatures: inp.partialSig ? Object.fromEntries(inp.partialSig.map((ps: any) => [ps.pubkey.toString('hex'), ps.signature.toString('hex')])) : {}
+          }))};
+        } catch {
+          return res.status(400).json({ valid: false, message: "Invalid PSBT format." });
+        }
+      }
 
       let hasValidSignature = false;
       let txid = null;
@@ -1198,19 +1273,10 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
         if (finalized && finalized.complete) {
           txid = finalized.txid || null;
         }
-      } catch (finalizeErr) {
-        // Finalization may fail for certain address types but signature is still valid
+      } catch {
       }
 
-      let btcBalance = 0;
-      try {
-        const utxoResult = await coreRpc("scantxoutset", ["start", [`addr(${btcAddress})`]]);
-        if (utxoResult && utxoResult.total_amount) {
-          btcBalance = utxoResult.total_amount;
-        }
-      } catch (balanceErr) {
-        console.error("Failed to fetch BTC balance:", balanceErr);
-      }
+      const btcBalance = await getBtcBalancePublic(btcAddress);
 
       const libertyEntitlement = btcBalance * 10;
 
