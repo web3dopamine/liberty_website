@@ -1,7 +1,7 @@
-import type { 
-  InsertEmailSubscription, 
-  EmailSubscription, 
-  InsertGrantApplication, 
+import type {
+  InsertEmailSubscription,
+  EmailSubscription,
+  InsertGrantApplication,
   GrantApplication,
   InsertGrant,
   Grant,
@@ -12,11 +12,15 @@ import type {
   User,
   UpsertUser,
   InsertBtcClaim,
-  BtcClaim
+  BtcClaim,
+  InsertAuctionPurchase,
+  AuctionPurchase,
+  InsertAuctionProfile,
+  AuctionProfile
 } from "@shared/schema";
 import { randomUUID } from "crypto";
 import { db } from "./db";
-import { grants, grantCategories, emailSubscriptions, grantApplications, users, chatMessages, btcClaims } from "@shared/schema";
+import { grants, grantCategories, emailSubscriptions, grantApplications, users, chatMessages, btcClaims, auctionPurchases, auctionProfiles } from "@shared/schema";
 import { eq, and, gt, count, sql, or } from "drizzle-orm";
 
 export interface IStorage {
@@ -59,6 +63,19 @@ export interface IStorage {
   getBtcClaims(): Promise<BtcClaim[]>;
   getBtcClaimByBtcAddress(btcAddress: string): Promise<BtcClaim | undefined>;
   getBtcClaimByLibertyAddress(libertyAddress: string): Promise<BtcClaim[]>;
+
+  // Auction profiles
+  getAuctionProfile(walletAddress: string): Promise<AuctionProfile | undefined>;
+  upsertAuctionProfile(profile: InsertAuctionProfile): Promise<AuctionProfile>;
+  updateLibertyAddress(walletAddress: string, libertyAddress: string): Promise<AuctionProfile>;
+
+  // Auction purchases
+  createAuctionPurchase(purchase: InsertAuctionPurchase): Promise<AuctionPurchase>;
+  getAuctionPurchases(): Promise<AuctionPurchase[]>;
+  getAuctionPurchasesByWallet(walletAddress: string): Promise<AuctionPurchase[]>;
+  getTotalLibertySold(): Promise<number>;
+  getTotalUsdRaised(): Promise<number>;
+  updateAuctionPurchaseStatus(id: string, status: string, txHash?: string): Promise<AuctionPurchase>;
 }
 
 export class MemStorage implements IStorage {
@@ -337,6 +354,83 @@ export class MemStorage implements IStorage {
   async getBtcClaimByLibertyAddress(libertyAddress: string): Promise<BtcClaim[]> {
     return this.btcClaimsList.filter(c => c.libertyAddress === libertyAddress);
   }
+
+  private auctionProfilesList: AuctionProfile[] = [];
+  private auctionPurchasesList: AuctionPurchase[] = [];
+
+  async getAuctionProfile(walletAddress: string): Promise<AuctionProfile | undefined> {
+    return this.auctionProfilesList.find(p => p.walletAddress.toLowerCase() === walletAddress.toLowerCase());
+  }
+
+  async upsertAuctionProfile(profile: InsertAuctionProfile): Promise<AuctionProfile> {
+    const existing = await this.getAuctionProfile(profile.walletAddress);
+    if (existing) {
+      existing.libertyAddress = profile.libertyAddress ?? existing.libertyAddress;
+      existing.displayName = profile.displayName ?? existing.displayName;
+      existing.updatedAt = new Date();
+      return existing;
+    }
+    const newProfile: AuctionProfile = {
+      id: randomUUID(),
+      walletAddress: profile.walletAddress,
+      libertyAddress: profile.libertyAddress || null,
+      displayName: profile.displayName || null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.auctionProfilesList.push(newProfile);
+    return newProfile;
+  }
+
+  async updateLibertyAddress(walletAddress: string, libertyAddress: string): Promise<AuctionProfile> {
+    const profile = await this.getAuctionProfile(walletAddress);
+    if (!profile) throw new Error("Profile not found");
+    profile.libertyAddress = libertyAddress;
+    profile.updatedAt = new Date();
+    return profile;
+  }
+
+  async createAuctionPurchase(purchase: InsertAuctionPurchase): Promise<AuctionPurchase> {
+    const newPurchase: AuctionPurchase = {
+      id: randomUUID(),
+      ...purchase,
+      txHash: purchase.txHash || null,
+      status: purchase.status || "pending",
+      purchasedAt: new Date(),
+    };
+    this.auctionPurchasesList.push(newPurchase);
+    return newPurchase;
+  }
+
+  async getAuctionPurchases(): Promise<AuctionPurchase[]> {
+    return [...this.auctionPurchasesList].sort((a, b) => b.purchasedAt.getTime() - a.purchasedAt.getTime());
+  }
+
+  async getAuctionPurchasesByWallet(walletAddress: string): Promise<AuctionPurchase[]> {
+    return this.auctionPurchasesList
+      .filter(p => p.walletAddress.toLowerCase() === walletAddress.toLowerCase())
+      .sort((a, b) => b.purchasedAt.getTime() - a.purchasedAt.getTime());
+  }
+
+  async getTotalLibertySold(): Promise<number> {
+    return this.auctionPurchasesList
+      .filter(p => p.status !== "failed")
+      .reduce((sum, p) => sum + Number(p.libertyAmount), 0);
+  }
+
+  async getTotalUsdRaised(): Promise<number> {
+    return this.auctionPurchasesList
+      .filter(p => p.status !== "failed")
+      .reduce((sum, p) => sum + Number(p.paymentAmountUsd), 0);
+  }
+
+  async updateAuctionPurchaseStatus(id: string, status: string, txHash?: string): Promise<AuctionPurchase> {
+    const idx = this.auctionPurchasesList.findIndex(p => p.id === id);
+    if (idx === -1) throw new Error(`Auction purchase with id ${id} not found`);
+    if (txHash) this.auctionPurchasesList[idx].txHash = txHash;
+    this.auctionPurchasesList[idx].status = status;
+    return this.auctionPurchasesList[idx];
+  }
 }
 
 export class DatabaseStorage implements IStorage {
@@ -570,6 +664,71 @@ export class DatabaseStorage implements IStorage {
 
   async getBtcClaimByLibertyAddress(libertyAddress: string): Promise<BtcClaim[]> {
     return await db.select().from(btcClaims).where(eq(btcClaims.libertyAddress, libertyAddress));
+  }
+
+  async getAuctionProfile(walletAddress: string): Promise<AuctionProfile | undefined> {
+    const [profile] = await db.select().from(auctionProfiles)
+      .where(sql`LOWER(${auctionProfiles.walletAddress}) = LOWER(${walletAddress})`);
+    return profile;
+  }
+
+  async upsertAuctionProfile(profile: InsertAuctionProfile): Promise<AuctionProfile> {
+    const [result] = await db.insert(auctionProfiles).values(profile)
+      .onConflictDoUpdate({
+        target: auctionProfiles.walletAddress,
+        set: {
+          libertyAddress: profile.libertyAddress,
+          displayName: profile.displayName,
+          updatedAt: new Date(),
+        },
+      }).returning();
+    return result;
+  }
+
+  async updateLibertyAddress(walletAddress: string, libertyAddress: string): Promise<AuctionProfile> {
+    const [profile] = await db.update(auctionProfiles)
+      .set({ libertyAddress, updatedAt: new Date() })
+      .where(sql`LOWER(${auctionProfiles.walletAddress}) = LOWER(${walletAddress})`)
+      .returning();
+    if (!profile) throw new Error("Profile not found");
+    return profile;
+  }
+
+  async createAuctionPurchase(purchase: InsertAuctionPurchase): Promise<AuctionPurchase> {
+    const [newPurchase] = await db.insert(auctionPurchases).values(purchase).returning();
+    return newPurchase;
+  }
+
+  async getAuctionPurchases(): Promise<AuctionPurchase[]> {
+    return await db.select().from(auctionPurchases).orderBy(sql`${auctionPurchases.purchasedAt} DESC`);
+  }
+
+  async getAuctionPurchasesByWallet(walletAddress: string): Promise<AuctionPurchase[]> {
+    return await db.select().from(auctionPurchases)
+      .where(sql`LOWER(${auctionPurchases.walletAddress}) = LOWER(${walletAddress})`)
+      .orderBy(sql`${auctionPurchases.purchasedAt} DESC`);
+  }
+
+  async getTotalLibertySold(): Promise<number> {
+    const [result] = await db.select({
+      total: sql<string>`COALESCE(SUM(${auctionPurchases.libertyAmount}), 0)`
+    }).from(auctionPurchases).where(sql`${auctionPurchases.status} != 'failed'`);
+    return Number(result.total);
+  }
+
+  async getTotalUsdRaised(): Promise<number> {
+    const [result] = await db.select({
+      total: sql<string>`COALESCE(SUM(${auctionPurchases.paymentAmountUsd}), 0)`
+    }).from(auctionPurchases).where(sql`${auctionPurchases.status} != 'failed'`);
+    return Number(result.total);
+  }
+
+  async updateAuctionPurchaseStatus(id: string, status: string, txHash?: string): Promise<AuctionPurchase> {
+    const updates: Partial<AuctionPurchase> = { status };
+    if (txHash) updates.txHash = txHash;
+    const [purchase] = await db.update(auctionPurchases).set(updates).where(eq(auctionPurchases.id, id)).returning();
+    if (!purchase) throw new Error(`Auction purchase with id ${id} not found`);
+    return purchase;
   }
 }
 

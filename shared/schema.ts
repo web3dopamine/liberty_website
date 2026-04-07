@@ -108,6 +108,41 @@ export const chatMessagesRelations = relations(chatMessages, ({ one }) => ({
   }),
 }));
 
+// Auction user profiles - wallet-based accounts
+export const auctionProfiles = pgTable("auction_profiles", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  walletAddress: text("wallet_address").notNull().unique(),
+  libertyAddress: text("liberty_address"), // user's preferred Liberty Chain address
+  displayName: text("display_name"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const insertAuctionProfileSchema = createInsertSchema(auctionProfiles).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export type InsertAuctionProfile = z.infer<typeof insertAuctionProfileSchema>;
+export type AuctionProfile = typeof auctionProfiles.$inferSelect;
+
+// Auction purchases - tracks all bonding curve token purchases
+export const auctionPurchases = pgTable("auction_purchases", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  walletAddress: text("wallet_address").notNull(),
+  chain: text("chain").notNull(), // 'btc', 'eth', 'bnb', 'pol', 'sol'
+  paymentCurrency: text("payment_currency").notNull(), // 'BTC', 'ETH', 'USDC', 'BNB', 'POL', 'SOL'
+  paymentAmount: numeric("payment_amount", { precision: 30, scale: 18 }).notNull(),
+  paymentAmountUsd: numeric("payment_amount_usd", { precision: 20, scale: 2 }).notNull(),
+  libertyAmount: numeric("liberty_amount", { precision: 20, scale: 8 }).notNull(),
+  pricePerLiberty: numeric("price_per_liberty", { precision: 10, scale: 8 }).notNull(), // USD price at time of purchase
+  libertyAddress: text("liberty_address"), // EVM address to receive LIBERTY tokens at genesis
+  txHash: text("tx_hash"), // on-chain tx hash (null for BTC until confirmed)
+  status: text("status").notNull().default("pending"), // 'pending', 'confirmed', 'failed'
+  purchasedAt: timestamp("purchased_at").defaultNow().notNull(),
+});
+
 export const btcClaims = pgTable("btc_claims", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   btcAddress: text("btc_address").notNull(),
@@ -120,6 +155,14 @@ export const btcClaims = pgTable("btc_claims", {
   status: text("status").notNull().default("verified"),
   claimedAt: timestamp("claimed_at").defaultNow().notNull(),
 });
+
+export const insertAuctionPurchaseSchema = createInsertSchema(auctionPurchases).omit({
+  id: true,
+  purchasedAt: true,
+});
+
+export type InsertAuctionPurchase = z.infer<typeof insertAuctionPurchaseSchema>;
+export type AuctionPurchase = typeof auctionPurchases.$inferSelect;
 
 export const insertBtcClaimSchema = createInsertSchema(btcClaims).omit({
   id: true,

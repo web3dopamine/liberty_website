@@ -1,8 +1,8 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { 
-  insertEmailSubscriptionSchema, 
+import {
+  insertEmailSubscriptionSchema,
   insertGrantApplicationSchema,
   insertGrantSchema,
   insertGrantCategorySchema,
@@ -1321,6 +1321,278 @@ Verification Status: ${claimRecord.verified ? 'VERIFIED' : 'FAILED'}
       res.json({ claimed: !!claim, claim: claim || null });
     } catch (e: any) {
       res.status(500).json({ error: e.message });
+    }
+  });
+
+  // ===== AUCTION ROUTES =====
+
+  // ===== AUCTION PROFILE ROUTES =====
+
+  // GET /api/auction/profile?wallet=0x... - get user profile
+  app.get("/api/auction/profile", async (req, res) => {
+    try {
+      const wallet = req.query.wallet as string;
+      if (!wallet) return res.status(400).json({ error: "wallet required" });
+      const profile = await storage.getAuctionProfile(wallet);
+      if (!profile) return res.json(null);
+      res.json(profile);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // POST /api/auction/profile - create or update profile (wallet login)
+  app.post("/api/auction/profile", async (req, res) => {
+    try {
+      const { walletAddress, libertyAddress, displayName } = req.body;
+      if (!walletAddress) return res.status(400).json({ error: "walletAddress required" });
+
+      // Validate liberty address format if provided
+      if (libertyAddress && !/^0x[a-fA-F0-9]{40}$/.test(libertyAddress)) {
+        return res.status(400).json({ error: "Invalid Liberty address. Must be a valid EVM address (0x...)" });
+      }
+
+      const profile = await storage.upsertAuctionProfile({
+        walletAddress,
+        libertyAddress: libertyAddress || null,
+        displayName: displayName || null,
+      });
+      res.json(profile);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // PATCH /api/auction/profile/liberty-address - update liberty address
+  app.patch("/api/auction/profile/liberty-address", async (req, res) => {
+    try {
+      const { walletAddress, libertyAddress } = req.body;
+      if (!walletAddress || !libertyAddress) {
+        return res.status(400).json({ error: "walletAddress and libertyAddress required" });
+      }
+      if (!/^0x[a-fA-F0-9]{40}$/.test(libertyAddress)) {
+        return res.status(400).json({ error: "Invalid Liberty address. Must be a valid EVM address (0x...)" });
+      }
+      const profile = await storage.updateLibertyAddress(walletAddress, libertyAddress);
+      res.json(profile);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // GET /api/auction/config - public auction config (deposit address, etc.)
+  app.get("/api/auction/config", (_req, res) => {
+    res.json({
+      depositAddress: process.env.AUCTION_DEPOSIT_ADDRESS || null,
+    });
+  });
+
+  const AUCTION_CONFIG = {
+    totalSupply: 40_950_000,
+    basePrice: 0.80,   // $0.80 USD start
+    maxPrice: 1.20,     // $1.20 USD end
+    durationDays: 7,
+    startDate: null as string | null, // set when auction starts
+  };
+
+  // Bonding curve: price = basePrice + (tokensSold / totalSupply) * (maxPrice - basePrice)
+  function getCurrentPrice(tokensSold: number): number {
+    const { basePrice, maxPrice, totalSupply } = AUCTION_CONFIG;
+    return basePrice + (tokensSold / totalSupply) * (maxPrice - basePrice);
+  }
+
+  // Calculate how many LIBERTY tokens you get for a given USD amount at current supply
+  function calculateTokensForUsd(usdAmount: number, tokensSold: number): { tokens: number; avgPrice: number } {
+    const { basePrice, maxPrice, totalSupply } = AUCTION_CONFIG;
+    const priceRange = maxPrice - basePrice;
+    const remaining = totalSupply - tokensSold;
+
+    // Integral: USD = basePrice*T + priceRange/(2*totalSupply) * ((tokensSold+T)^2 - tokensSold^2)
+    // Solving for T given USD using quadratic formula:
+    // priceRange/(2*totalSupply) * T^2 + (basePrice + priceRange*tokensSold/totalSupply) * T - usdAmount = 0
+    const a = priceRange / (2 * totalSupply);
+    const b = basePrice + (priceRange * tokensSold) / totalSupply;
+    const c = -usdAmount;
+
+    const discriminant = b * b - 4 * a * c;
+    if (discriminant < 0) return { tokens: 0, avgPrice: 0 };
+
+    let tokens = (-b + Math.sqrt(discriminant)) / (2 * a);
+    tokens = Math.min(tokens, remaining);
+    tokens = Math.max(tokens, 0);
+
+    const avgPrice = tokens > 0 ? usdAmount / tokens : getCurrentPrice(tokensSold);
+    return { tokens: Math.floor(tokens * 1e8) / 1e8, avgPrice };
+  }
+
+  // GET /api/auction/state - public auction state
+  app.get("/api/auction/state", async (_req, res) => {
+    try {
+      const totalSold = await storage.getTotalLibertySold();
+      const totalRaised = await storage.getTotalUsdRaised();
+      const currentPrice = getCurrentPrice(totalSold);
+      const percentSold = (totalSold / AUCTION_CONFIG.totalSupply) * 100;
+
+      res.json({
+        totalSupply: AUCTION_CONFIG.totalSupply,
+        totalSold,
+        totalRaised,
+        currentPrice: Math.round(currentPrice * 1e8) / 1e8,
+        basePrice: AUCTION_CONFIG.basePrice,
+        maxPrice: AUCTION_CONFIG.maxPrice,
+        percentSold: Math.round(percentSold * 100) / 100,
+        remaining: AUCTION_CONFIG.totalSupply - totalSold,
+        durationDays: AUCTION_CONFIG.durationDays,
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // GET /api/auction/preview?usd=1000 - preview how many tokens for a USD amount
+  app.get("/api/auction/preview", async (req, res) => {
+    try {
+      const usd = parseFloat(req.query.usd as string);
+      if (!usd || usd <= 0) {
+        return res.status(400).json({ error: "Invalid USD amount" });
+      }
+
+      const totalSold = await storage.getTotalLibertySold();
+      const { tokens, avgPrice } = calculateTokensForUsd(usd, totalSold);
+
+      res.json({
+        usdAmount: usd,
+        libertyTokens: tokens,
+        avgPricePerToken: Math.round(avgPrice * 1e8) / 1e8,
+        currentPrice: Math.round(getCurrentPrice(totalSold) * 1e8) / 1e8,
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // POST /api/auction/buy - record a purchase
+  app.post("/api/auction/buy", async (req, res) => {
+    try {
+      const { walletAddress, chain, paymentCurrency, paymentAmount, paymentAmountUsd, txHash, libertyAddress } = req.body;
+
+      if (!walletAddress || !chain || !paymentCurrency || !paymentAmount || !paymentAmountUsd) {
+        return res.status(400).json({ error: "Missing required fields" });
+      }
+
+      const usd = parseFloat(paymentAmountUsd);
+      if (usd <= 0) {
+        return res.status(400).json({ error: "Invalid payment amount" });
+      }
+
+      const totalSold = await storage.getTotalLibertySold();
+      const remaining = AUCTION_CONFIG.totalSupply - totalSold;
+      if (remaining <= 0) {
+        return res.status(400).json({ error: "Auction sold out" });
+      }
+
+      const { tokens, avgPrice } = calculateTokensForUsd(usd, totalSold);
+      if (tokens <= 0) {
+        return res.status(400).json({ error: "Amount too small" });
+      }
+
+      const purchase = await storage.createAuctionPurchase({
+        walletAddress,
+        chain,
+        paymentCurrency,
+        paymentAmount: paymentAmount.toString(),
+        paymentAmountUsd: usd.toFixed(2),
+        libertyAmount: tokens.toFixed(8),
+        pricePerLiberty: avgPrice.toFixed(8),
+        libertyAddress: libertyAddress || walletAddress,
+        txHash: txHash || null,
+        status: txHash ? "confirmed" : "pending",
+      });
+
+      res.json({
+        purchase,
+        newPrice: Math.round(getCurrentPrice(totalSold + tokens) * 1e8) / 1e8,
+      });
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // GET /api/auction/purchases?wallet=0x... - get purchases for a wallet
+  app.get("/api/auction/purchases", async (req, res) => {
+    try {
+      const wallet = req.query.wallet as string;
+      if (!wallet) {
+        return res.status(400).json({ error: "wallet query parameter required" });
+      }
+      const purchases = await storage.getAuctionPurchasesByWallet(wallet);
+      res.json(purchases);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // GET /api/auction/recent - recent purchases (public feed)
+  app.get("/api/auction/recent", async (_req, res) => {
+    try {
+      const all = await storage.getAuctionPurchases();
+      // Return last 20, mask wallet addresses
+      const recent = all.slice(0, 20).map(p => ({
+        id: p.id,
+        walletAddress: p.walletAddress.slice(0, 6) + "..." + p.walletAddress.slice(-4),
+        chain: p.chain,
+        paymentCurrency: p.paymentCurrency,
+        paymentAmountUsd: p.paymentAmountUsd,
+        libertyAmount: p.libertyAmount,
+        pricePerLiberty: p.pricePerLiberty,
+        status: p.status,
+        purchasedAt: p.purchasedAt,
+      }));
+      res.json(recent);
+    } catch (e: any) {
+      res.status(500).json({ error: e.message });
+    }
+  });
+
+  // Auction price cache
+  let auctionPriceCache: { data: Record<string, number>; cachedAt: number } | null = null;
+  const AUCTION_PRICE_CACHE_MS = 5 * 60 * 1000; // 5 minutes
+
+  const FALLBACK_PRICES: Record<string, number> = {
+    BTC: 84000, ETH: 1800, BNB: 600, POL: 0.40, SOL: 130, USDC: 1, USDT: 1,
+  };
+
+  // GET /api/auction/prices - live crypto prices for conversion
+  app.get("/api/auction/prices", async (_req, res) => {
+    try {
+      const now = Date.now();
+      if (auctionPriceCache && (now - auctionPriceCache.cachedAt) < AUCTION_PRICE_CACHE_MS) {
+        return res.json(auctionPriceCache.data);
+      }
+
+      const response = await fetch(
+        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,binancecoin,matic-network,solana&vs_currencies=usd'
+      );
+      if (!response.ok) throw new Error(`CoinGecko ${response.status}`);
+      const data = await response.json();
+      const prices = {
+        BTC: data.bitcoin?.usd || FALLBACK_PRICES.BTC,
+        ETH: data.ethereum?.usd || FALLBACK_PRICES.ETH,
+        BNB: data.binancecoin?.usd || FALLBACK_PRICES.BNB,
+        POL: data["matic-network"]?.usd || FALLBACK_PRICES.POL,
+        SOL: data.solana?.usd || FALLBACK_PRICES.SOL,
+        USDC: 1,
+        USDT: 1,
+      };
+      auctionPriceCache = { data: prices, cachedAt: now };
+      res.json(prices);
+    } catch (e: any) {
+      console.error("Auction prices fetch error:", e.message);
+      // Return cached or fallback prices instead of 500
+      if (auctionPriceCache) {
+        return res.json(auctionPriceCache.data);
+      }
+      res.json(FALLBACK_PRICES);
     }
   });
 

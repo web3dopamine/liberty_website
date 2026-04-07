@@ -19,6 +19,7 @@ import ClaimLiberty from "./components/ClaimLiberty";
 import AdminPanel from "./components/AdminPanel";
 import BTCOwnership from "./components/BTCOwnership";
 import TokenAuction from "./components/TokenAuction";
+import AuctionProfile from "./components/AuctionProfile";
 import PageLoader from "./components/PageLoader";
 import { WalletProvider } from "./contexts/WalletContext";
 
@@ -64,6 +65,14 @@ function App() {
     return (
       <WalletProvider>
         <TokenAuction />
+      </WalletProvider>
+    );
+  }
+
+  if (currentPath === '/auction/profile') {
+    return (
+      <WalletProvider>
+        <AuctionProfile />
       </WalletProvider>
     );
   }
